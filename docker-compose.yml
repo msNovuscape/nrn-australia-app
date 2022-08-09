@@ -15,7 +15,6 @@ services:
       - ./:/var/www
     ports:
       - 9000:9000
-      - 8001:8001
     networks:
       - nrna
 
