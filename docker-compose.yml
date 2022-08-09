@@ -19,7 +19,8 @@ services:
       - nrna
 
   db:
-    image: mysql:8.0
+    # image: mysql:8.0
+    image: mariadb:10.4.24
     container_name: nrna-db
     restart: unless-stopped
     environment:
