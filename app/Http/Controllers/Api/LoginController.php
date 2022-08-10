@@ -20,7 +20,7 @@ class LoginController extends ApiBaseController
         $credentials = $request->only('email', 'password');
         try {
             if (! $token = JWTAuth::attempt($credentials)) {
-                return $this->sendError('Credentials are not valid','400');
+                return $this->sendError('Credentials are not valid','401');
             }
         } catch (JWTException $e) {
     	return $credentials;
