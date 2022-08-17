@@ -21,6 +21,10 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Login\LoginRepository::class,
             \App\Repositories\Login\LoginEloquent::class
         );
+        $this->app->singleton(
+            \App\Repositories\Member\MemberRepository::class,
+            \App\Repositories\Member\MemberEloquent::class
+        );
     }
 
     /**
