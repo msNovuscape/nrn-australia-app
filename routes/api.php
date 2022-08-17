@@ -25,4 +25,5 @@ Route::group(['namespace' => 'Api' ,'prefix' => 'v1'], function() {
 
 Route::group(['namespace' => 'Api' ,'prefix' => 'v1','middleware' => ['jwt.verify']], function() {
     Route::get('/home', [\App\Http\Controllers\Api\HomeController::class, 'index']);
+    Route::post('/member', [\App\Http\Controllers\Api\MemberController::class, 'store']);
 });

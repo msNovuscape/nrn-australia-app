@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repositories\Customers;
+namespace App\Repositories\Member;
 
-interface CustomerRepository
+interface MemberRepository
 {
     public function all(array $attributes);
 
