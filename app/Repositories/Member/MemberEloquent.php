@@ -41,7 +41,7 @@ class MemberEloquent implements MemberRepository
         $member_id = isset($attributes['id']) ? $attributes['id'] : 0;
         $attributes['first_name'] = ucfirst($attributes['first_name']);
         $attributes['last_name'] = ucfirst($attributes['last_name']);
-        $attributes['middle_name'] = ucfirst($attributes['middle_name']);
+        $attributes['middle_name'] = isset($attributes['middle_name']) ? ucfirst($attributes['middle_name']) : null;
 
         if(isset($attributes['image'])){
             $memberImage = (new Member())->where('id', $member_id)->first();
@@ -61,7 +61,7 @@ class MemberEloquent implements MemberRepository
 
         $identification_image = $this->model->saveImage($attributes['identification_image'],'identification_image');
         $proof_of_residency_image = $this->model->saveImage($attributes['proof_of_residency_image'],'proof_of_residency_image');
-        $this->member_document->create(['member_id' => $data->id, 'identification_image' => $identification_image,'identification_expiry_date' => $attributes['identification_expiry_date'],'proof_of_residency_image' =>$proof_of_residency_image,'proof_of_residency_expiry_date' => $attributes['proof_of_residency_expiry_date']]);
+        $member_document = $this->member_document->create(['member_id' => $data->id, 'identification_image' => $identification_image,'identification_expiry_date' => $attributes['identification_expiry_date'],'proof_of_residency_image' =>$proof_of_residency_image,'proof_of_residency_expiry_date' => $attributes['proof_of_residency_expiry_date']]);
         return $data;
 
     }

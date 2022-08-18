@@ -18,7 +18,7 @@ class Member extends Model
         if (!is_dir($filePath)) {
             mkdir($filePath, 0777, true);
         }
-        $filename = Carbon::now(). '_' . $document->getClientOriginalName();
+        $filename = Carbon::now()->toDateString(). '_' . $document->getClientOriginalName();
         if ($document->move($filePath, $filename)) {
             return $filePath.'/'.$filename;
         }
