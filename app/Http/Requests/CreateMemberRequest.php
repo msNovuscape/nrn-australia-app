@@ -37,7 +37,7 @@ class CreateMemberRequest extends FormRequest
             'gender_id' => 'required',
             'region_id' => 'required',
             'membership_type_id' => 'required',
-            'password' => 'required',
+            // 'password' => 'required',
             // 'image' => 'required',
 
 
