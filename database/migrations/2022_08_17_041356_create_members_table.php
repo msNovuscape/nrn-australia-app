@@ -30,7 +30,6 @@ class CreateMembersTable extends Migration
             $table->string('membership_type_id');
             $table->string('region_id');
             $table->string('occupation')->nullable();
-            $table->string('password');
             $table->string('eligibility_type_id');
             $table->string('image');
             $table->softDeletes();
