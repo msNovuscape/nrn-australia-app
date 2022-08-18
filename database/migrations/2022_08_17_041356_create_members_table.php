@@ -32,6 +32,7 @@ class CreateMembersTable extends Migration
             $table->string('occupation')->nullable();
             $table->string('eligibility_type_id');
             $table->string('image');
+            $table->boolean('status')->default(true);
             $table->softDeletes();
             $table->timestamps();
         });
