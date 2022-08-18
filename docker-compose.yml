@@ -49,6 +49,20 @@ services:
     networks:
       - nrna
 
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: nrna-phpmyadmin
+    restart: unless-stopped
+    ports:
+      - 8001:80
+    environment:
+      PMA_HOST: nrna-db
+      PMA_PASSWORD: ${DB_PASSWORD}
+      PMA_USER: ${DB_USERNAME}
+    networks:
+      - nrna    
+
+
 networks:
   nrna:
     driver: bridge
