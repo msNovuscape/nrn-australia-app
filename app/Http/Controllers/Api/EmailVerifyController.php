@@ -48,8 +48,6 @@ class EmailVerifyController extends Controller
         'success' => $success,
         'msg' => $msg,
        ],$success ? 200 : 401);
-
-
    }
 
 }

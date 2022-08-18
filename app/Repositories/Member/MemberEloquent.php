@@ -50,7 +50,7 @@ class MemberEloquent implements MemberRepository
                 $path = public_path().parse_url($memberImage->image)['path'];
                 unlink($path);
             }
-            $attributes['image'] = $this->model->saveImage($attributes['image'],'profile_image',$member_id);
+            $attributes['image'] = $this->model->saveImage($attributes['image'],'profile_image');
             // return (new EmployeeImage())->create($attributes);
         }
 
