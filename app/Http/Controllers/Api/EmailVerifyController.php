@@ -41,9 +41,10 @@ class EmailVerifyController extends Controller
            }else{
             $verifyUser->is_verified = true;
             $verifyUser->save();
+            $success = true;
             $msg = "Your email is verified";
            }
-           $success = true;
+           
        }
        return response()->json([
         'success' => $success,
