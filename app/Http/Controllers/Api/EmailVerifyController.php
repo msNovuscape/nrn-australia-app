@@ -52,4 +52,19 @@ class EmailVerifyController extends Controller
        ],$success ? 200 : 400);
    }
 
+   public function is_verified(Request $request){
+       $email = $request->email;
+
+       $verifyUser = VerifyUser::where(['email' => $email])->first();
+       $verified = false;
+       if($verifyUser->is_verified == true)
+        {
+                $verified = true;
+        }
+        return response()->json([
+            'is_verified' => $verified,
+           ]);
+       
+   }
+
 }
