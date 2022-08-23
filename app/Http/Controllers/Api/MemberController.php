@@ -19,7 +19,19 @@ class MemberController extends ApiBaseController
         $this->member = $member;
     }
    public function store(CreateMemberRequest $request){
-    return $this->sendResponse($this->member->store($request->all()),'Member Registered Successfully');
+    // GET user token    
+    $currentUser = JWTAuth::parseToken()->authenticate();
+   
+    // Get user id
+    $userId = $currentUser['id'];
+
+    // Get request body
+    $requestBody = $request->all();
+
+    // Add user_id for this member
+    $requestBody['user_id'] = $userId;
+
+    return $this->sendResponse($this->member->store($requestBody),'Member Registered Successfully');
    }
 
    public function index(){
@@ -33,13 +45,10 @@ class MemberController extends ApiBaseController
     $member = Member::where('user_id', $userId)->first();
     
 
-    if(is_null($member) || is_empty($member) ){
+    if(is_null($member) || empty($member) ){
         return response()->json(null, 404);
     }else {
-        return response()->json([$member,]);
+        return response()->json($member, 200);
     }
-
-    
-
    }
 }
