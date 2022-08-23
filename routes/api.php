@@ -26,6 +26,7 @@ Route::group(['namespace' => 'Api' ,'prefix' => 'v1'], function() {
 Route::group(['namespace' => 'Api' ,'prefix' => 'v1','middleware' => ['jwt.verify']], function() {
     Route::get('/home', [\App\Http\Controllers\Api\HomeController::class, 'index']);
     Route::post('/member', [\App\Http\Controllers\Api\MemberController::class, 'store']);
+    Route::get('/member', [\App\Http\Controllers\Api\MemberController::class, 'index']);
     Route::post('/member/send-email/', [\App\Http\Controllers\Api\EmailVerifyController::class, 'send_mail']);
     Route::post('/member/verify-email/', [\App\Http\Controllers\Api\EmailVerifyController::class, 'verify']);
     Route::post('/member/is_verified/', [\App\Http\Controllers\Api\EmailVerifyController::class, 'is_verified']);
