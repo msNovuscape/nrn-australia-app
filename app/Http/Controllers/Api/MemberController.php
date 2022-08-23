@@ -23,12 +23,23 @@ class MemberController extends ApiBaseController
    }
 
    public function index(){
+    // GET user token    
+    $currentUser = JWTAuth::parseToken()->authenticate();
+   
+    // Get user id
+    $userId = $currentUser['id'];
 
+    // Find member using user id
+    $member = Member::where('user_id', $userId)->first();
+    
 
-    $members = Member::all();
+    if(is_null($member) || is_empty($member) ){
+        return response()->json(null, 404);
+    }else {
+        return response()->json([$member,]);
+    }
 
-
-    return response()->json(['user'=> $members,]);
+    
 
    }
 }
