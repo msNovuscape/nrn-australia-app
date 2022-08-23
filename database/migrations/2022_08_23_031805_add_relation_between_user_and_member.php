@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use App\Models\User;
 
 class AddRelationBetweenUserAndMember extends Migration
 {
@@ -14,7 +15,10 @@ class AddRelationBetweenUserAndMember extends Migration
     public function up()
     {
         Schema::table('members', function (Blueprint $table) {
-            $table->integer('user_id')->references('id')->on('users');
+            // $table->bigint('user_id');
+            // $table->index('user_id');
+            $table->foreignIdFor(User::class);
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');           
         });
     }
 
@@ -26,8 +30,12 @@ class AddRelationBetweenUserAndMember extends Migration
     public function down()
     {
         Schema::table('members', function (Blueprint $table) {
-           // $table->dropForeign(['user_id']);
+
+            
+            $table->dropForeign(['user_id']);
+            
             $table->dropColumn('user_id');
+
         });
     }
 }
