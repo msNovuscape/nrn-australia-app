@@ -7,6 +7,7 @@ use App\Repositories\Member\MemberRepository;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateMemberRequest;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use App\Models\Member;
 use JWTAuth;
 
 class MemberController extends ApiBaseController
@@ -19,5 +20,15 @@ class MemberController extends ApiBaseController
     }
    public function store(CreateMemberRequest $request){
     return $this->sendResponse($this->member->store($request->all()),'Member Registered Successfully');
+   }
+
+   public function index(){
+
+
+    $members = Member::all();
+
+
+    return response()->json(['user'=> $members,]);
+
    }
 }
