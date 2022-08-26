@@ -1,0 +1,68 @@
+version: "3.7"
+services:
+  app:
+    build:
+      args:
+        user: expertkid
+        uid: 501
+      context: ./
+      dockerfile: Dockerfile
+    image: nrna
+    container_name: nrna-app
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    ports:
+      - 9000:9000
+    networks:
+      - nrna
+
+  db:
+    # image: mysql:8.0
+    image: mariadb:10.4.24
+    container_name: nrna-db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - ./docker-compose/mysql:/docker-entrypoint-initdb.d
+    ports:
+      - 3306:3306
+    networks:
+      - nrna
+
+  nginx:
+    image: nginx:alpine
+    container_name: nrna-nginx
+    restart: unless-stopped
+    ports:
+      - 8000:80
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    networks:
+      - nrna
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: nrna-phpmyadmin
+    restart: unless-stopped
+    ports:
+      - 8001:80
+    environment:
+      PMA_HOST: nrna-db
+      PMA_PASSWORD: ${DB_PASSWORD}
+      PMA_USER: ${DB_USERNAME}
+    networks:
+      - nrna    
+
+
+networks:
+  nrna:
+    driver: bridge

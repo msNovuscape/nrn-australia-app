@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use App\Repositories\Login\LoginRepository;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Carbon\Carbon;
 use Exception;
+use App\Models\Member;
 
 class HomeController extends Controller
 {
@@ -29,10 +31,109 @@ class HomeController extends Controller
         
      }
    public function index(){
-    $data = ['https://picsum.photos/200/300?q=2','https://picsum.photos/200/300?q=3','https://picsum.photos/200/300?q=4','https://picsum.photos/200/300?q=5','https://picsum.photos/200/300?q=6','https://picsum.photos/200/300?q=7','https://picsum.photos/200/300?q=8','https://picsum.photos/200/300?q=9','https://picsum.photos/200/300?q=10'];
+      // GET user token    
+      $currentUser = JWTAuth::parseToken()->authenticate();
+         
+      // Get user id
+      $userId = $currentUser['id'];
+
+      // Find member using user id
+      $member = Member::where('user_id', $userId)->first();
+
+
+      $isMember = !(is_null($member) || empty($member));
+
+    
+
+
        return response()->json([
-            'success' => true,
-            'data' => $data,
+            'sliders' => [
+               url('/Carousal.png'),
+           url('/Carousal.png'),
+           url('/Carousal.png'),
+           url('/Carousal.png'),
+           url('/Carousal.png'),
+           url('/Carousal.png') 
+               ],
+            'news' => [
+                
+                     [
+                        'id' => 1,
+                        'title' => 'Cultural Parade - Nepal Festival Brisbane 2018',
+                        'slug' => 'asdf-asdf',
+                        'excerpt' => 'Exceprt here',
+                        'description' => 'Some description here',
+                        'imageUrl' => 'https://api.lorem.space/image?w=375&h=170&q=1',
+                        'publishedAt' => Carbon::now()
+                     ],
+                     [
+                        'id' => 2,
+                        'title' => 'Cultural Parade - Nepal Festival Brisbane 2018',
+                        'slug' => 'asdf-asdf',
+                        'excerpt' => 'Exceprt here',
+                        'description' => 'Some description here',
+                        'imageUrl' => 'https://api.lorem.space/image?w=375&h=170&q=2',
+                        'publishedAt' => Carbon::now()
+                     ],
+                     [
+                        'id' => 3,
+                        'title' => 'Cultural Parade - Nepal Festival Brisbane 2018',
+                        'slug' => 'asdf-asdf',
+                        'excerpt' => 'Exceprt here',
+                        'description' => 'Some description here',
+                        'imageUrl' => 'https://api.lorem.space/image?w=375&h=170&q=3',
+                        'publishedAt' => Carbon::now()
+                     ],
+                     [
+                        'id' => 4,
+                        'title' => 'Cultural Parade - Nepal Festival Brisbane 2018',
+                        'slug' => 'asdf-asdf',
+                        'excerpt' => 'Exceprt here',
+                        'description' => 'Some description here',
+                        'imageUrl' => 'https://api.lorem.space/image?w=375&h=170&q=4',
+                        'publishedAt' => Carbon::now()
+                     ],
+                     [
+                        'id' => 5,
+                        'title' => 'Cultural Parade - Nepal Festival Brisbane 2018',
+                        'slug' => 'asdf-asdf',
+                        'excerpt' => 'Exceprt here',
+                        'description' => 'Some description here',
+                        'imageUrl' => 'https://api.lorem.space/image?w=375&h=170&q=5',
+                        'publishedAt' => Carbon::now()
+                     ],
+                     [
+                        'id' => 6,
+                        'title' => 'Cultural Parade - Nepal Festival Brisbane 2018',
+                        'slug' => 'asdf-asdf',
+                        'excerpt' => 'Exceprt here',
+                        'description' => 'Some description here',
+                        'imageUrl' => 'https://api.lorem.space/image?w=375&h=170&q=6',
+                        'publishedAt' => Carbon::now()
+                     ],
+                     [
+                        'id' => 7,
+                        'title' => 'Cultural Parade - Nepal Festival Brisbane 2018',
+                        'slug' => 'asdf-asdf',
+                        'excerpt' => 'Exceprt here',
+                        'description' => 'Some description here',
+                        'imageUrl' => 'https://api.lorem.space/image?w=375&h=170&q=7',
+                        'publishedAt' => Carbon::now()
+                     ],
+                     [
+                        'id' => 8,
+                        'title' => 'Cultural Parade - Nepal Festival Brisbane 2018',
+                        'slug' => 'asdf-asdf',
+                        'excerpt' => 'Exceprt here',
+                        'description' => 'Some description here',
+                        'imageUrl' => 'https://api.lorem.space/image?w=375&h=170&q=8',
+                        'publishedAt' => Carbon::now()
+                     ],
+                
+                                
+            ],
+            'notices' => null,
+            'isMember'=> $isMember,
         ], 200);
     }
 }

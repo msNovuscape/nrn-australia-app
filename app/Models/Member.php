@@ -28,4 +28,8 @@ class Member extends Model
     {
         return $this->hasOne(MemberDocument::class);
     }
+
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }
