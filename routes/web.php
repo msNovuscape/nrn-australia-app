@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HomeController as HomeAdminController;
+use App\Http\Controllers\Admin\NewsAndUpdateController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,14 @@ Route::group(['middleware'=>['auth']],function (){
     Route::group(['prefix'=>'admin'],function (){
 
         Route::get('/index', [HomeAdminController::class,'indexAdmin']);
+
+        Route::get('news',[NewsAndUpdateController::class,'index']);
+        Route::get('news/create',[NewsAndUpdateController::class,'create']);
+        Route::post('news',[NewsAndUpdateController::class,'store']);
+        Route::get('news/{id}',[NewsAndUpdateController::class,'show']);
+        Route::get('news/{id}/edit',[NewsAndUpdateController::class,'edit']);
+        Route::post('news/{id}',[NewsAndUpdateController::class,'update']);
+        Route::get('news/delete/{id}',[NewsAndUpdateController::class,'delete']);
 
     });
 });
