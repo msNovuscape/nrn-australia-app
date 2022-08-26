@@ -30,6 +30,6 @@ Route::group(['namespace' => 'Api' ,'prefix' => 'v1','middleware' => ['jwt.verif
     Route::post('/member/send-email/', [\App\Http\Controllers\Api\EmailVerifyController::class, 'send_mail']);
     Route::post('/member/verify-email/', [\App\Http\Controllers\Api\EmailVerifyController::class, 'verify']);
     Route::post('/member/is_verified/', [\App\Http\Controllers\Api\EmailVerifyController::class, 'is_verified']);
-    Route::get('/news', [\App\Http\Controllers\Api\HomeController::class, 'news']);
+    Route::get('/news', [\App\Http\Controllers\Api\NewsController::class, 'index']);
 
 });
