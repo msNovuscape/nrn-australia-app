@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repositories\Vendors;
+namespace App\Repositories\News;
 
-interface VendorRepository
+interface NewsRepository
 {
     public function all(array $attributes);
 

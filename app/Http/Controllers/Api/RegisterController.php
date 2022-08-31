@@ -20,7 +20,7 @@ class RegisterController extends ApiBaseController
     public function register(CreateRegisterRequest $request){
         
         $response = $this->sendResponse($this->register->store($request->all()),'Registered Successfully');
-        $data = $response->getData('data')['data'];
+        $data = $response->getData('data')['success'];
         $credentials = $request->only('email', 'password');
         if($data){
             try {

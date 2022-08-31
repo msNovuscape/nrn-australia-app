@@ -25,6 +25,10 @@ class AppServiceProvider extends ServiceProvider
             \App\Repositories\Member\MemberRepository::class,
             \App\Repositories\Member\MemberEloquent::class
         );
+        $this->app->singleton(
+            \App\Repositories\News\NewsRepository::class,
+            \App\Repositories\News\NewsEloquent::class
+        );
     }
 
     /**
