@@ -5,16 +5,19 @@ namespace App\Repositories\Member;
 
 use App\Models\Member;
 use App\Models\MemberDocument;
+use App\Models\MemberPayment;
 
 class MemberEloquent implements MemberRepository
 {
     private $model;
     private $member_document;
+    private $member_payment;
 
-    public function __construct(Member $model,MemberDocument $member_document)
+    public function __construct(Member $model,MemberDocument $member_document,MemberPayment $member_payment)
     {
         $this->model = $model;
         $this->member_document = $member_document;
+        $this->member_payment = $member_payment;
     }
 
     public function all(array $attributes)
@@ -61,7 +64,9 @@ class MemberEloquent implements MemberRepository
 
         $identification_image = $this->model->saveImage($attributes['identification_image'],'identification_image');
         $proof_of_residency_image = $this->model->saveImage($attributes['proof_of_residency_image'],'proof_of_residency_image');
+        $payment_slip = $this->model->saveImage($attributes['payment_slip'],'payment_slip');
         $member_document = $this->member_document->create(['member_id' => $data->id, 'identification_image' => $identification_image,'identification_expiry_date' => $attributes['identification_expiry_date'],'proof_of_residency_image' =>$proof_of_residency_image,'proof_of_residency_expiry_date' => $attributes['proof_of_residency_expiry_date']]);
+        $member_payment = $this->member_payment->create(['member_id' => $data->id, 'payment_date' => $attributes['payment_date'],'account_name' => $attributes['account_name'],'amount' =>$attributes['amount'],'bank_name' => $attributes['bank_name'],'payment_slip' => $payment_slip]);
         return $data;
 
     }

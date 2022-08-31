@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HomeController as HomeAdminController;
 use App\Http\Controllers\Admin\NewsAndUpdateController;
+use App\Http\Controllers\Admin\MembershipTypeController;
+use App\Http\Controllers\Admin\MemberController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,6 +36,17 @@ Route::group(['middleware'=>['auth']],function (){
         Route::get('news/{id}/edit',[NewsAndUpdateController::class,'edit']);
         Route::post('news/{id}',[NewsAndUpdateController::class,'update']);
         Route::get('news/delete/{id}',[NewsAndUpdateController::class,'delete']);
+
+        Route::get('membership_types',[MembershipTypeController::class,'index']);
+        Route::get('membership_types/create',[MembershipTypeController::class,'create']);
+        Route::post('membership_types',[MembershipTypeController::class,'store']);
+        Route::get('membership_types/{id}',[MembershipTypeController::class,'show']);
+        Route::get('membership_types/{id}/edit',[MembershipTypeController::class,'edit']);
+        Route::post('membership_types/{id}',[MembershipTypeController::class,'update']);
+        Route::get('membership_types/delete/{id}',[MembershipTypeController::class,'delete']);
+
+        Route::get('members',[MemberController::class,'index']);
+        Route::get('members/{id}',[MemberController::class,'show']);
 
     });
 });

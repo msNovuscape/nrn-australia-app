@@ -72,6 +72,24 @@
                         </a>
                     </li>
 
+                    <li class="nav-item">
+                        <a href="{{url('admin/membership_types')}}" class="nav-link {{(Request::segment(2) == 'membership_types') ? 'active' : ''}}">
+                            <i class="fas fa-sliders-h"></i>
+                            <p>
+                                Membership Type
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{url('admin/members')}}" class="nav-link {{(Request::segment(2) == 'members') ? 'active' : ''}}">
+                            <i class="fas fa-sliders-h"></i>
+                            <p>
+                                Members
+                            </p>
+                        </a>
+                    </li>
+
                     
 
                    

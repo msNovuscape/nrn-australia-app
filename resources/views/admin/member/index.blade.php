@@ -8,7 +8,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Departments</h1>
+                        <h1>Members</h1>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -21,11 +21,11 @@
                     <div class="col-md-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Department Table</h3>
+                                <h3 class="card-title">Members Table</h3>
 
-                                    <div class="card-tools">
-                                        <a class="btn btn-primary" href="{{url('admin/departments/create')}}" role="button">Create</a>
-                                    </div>
+                                    <!-- <div class="card-tools">
+                                        <a class="btn btn-primary" href="{{url('admin/members/create')}}" role="button">Create</a>
+                                    </div> -->
                                 </div>
                             <!-- /.card-header -->
                             <div class="card-body">
@@ -50,9 +50,10 @@
                                     <thead>
                                     <tr>
                                         <th style="width: 10px">S.N.</th>
-                                        <th class="text-center">Department Name</th>
-                                        <th class="text-center">Office</th>
-                                        <th class="text-center">Status</th>
+                                        <th class="text-center">Full Name</th>
+                                        <th class="text-center">DOB</th>
+                                        <th class="text-center">Mobile Number</th>
+                                        <th class="text-center">Membership Status</th>
                                         <th class="text-center">Action</th>
                                     </tr>
                                     </thead>
@@ -60,21 +61,19 @@
                                     @foreach($settings as $setting)
                                         <tr>
                                             <th scope="row">{{$loop->iteration}}</th>
-                                            <td class="text-center">{{$setting->name}}</td>
-                                            <td class="text-center">{{$setting->sub_office->name}}</td>
-                                            <td class="text-center">{{config('custom.status')[$setting->status]}}</td>
-                                            <td class="text-center">
-                                                <a class="btn btn-primary btn-sm" href="{{url('admin/departments/'.$setting->id)}}">
-                                                    <i class="fas fa-folder">
-                                                    </i>
-                                                    View
+                                            <td class="text-center">{{$setting->first_name. ($setting->middle_name ? ' '.$setting->middle_name.' '.$setting->last_name : ' '.$setting->last_name)}}</td>
+                                            <td class="text-center">{{$setting->dob}}</td>
+                                            <td class="text-center">{{$setting->mobile_number}}</td>
+                                            <td class="text-center">{{config('custom.membership_status')[$setting->membership_status_id]}}</td>
+                                            <td class="d-flex justify-content-center action-icons">
+                                                <a href="{{url('admin/membership_types/'.$setting->id.'/edit')}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="edit">
+                                                    <i class="fas fa-pencil-alt"></i>
                                                 </a>
-                                                <a class="btn btn-info btn-sm" href="{{url('admin/departments/'.$setting->id.'/edit')}}">
-                                                    <i class="fas fa-pencil-alt">
-                                                    </i>
-                                                    Edit
+                                                <a href="{{url('admin/membership_types/delete/'.$setting->id)}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="delete" onclick="return confirm('Are you sure want to delete?')">
+                                                    <i class="fas fa-trash"></i>
                                                 </a>
                                             </td>
+
                                         </tr>
 
                                     @endforeach

@@ -37,6 +37,14 @@ class CreateMemberRequest extends FormRequest
             'gender_id' => 'required',
             'region_id' => 'required',
             'membership_type_id' => 'required',
+            'payment_slip' => 'required',
+            'bank_name' => 'required',
+            'payment_date' => 'required',
+            'account_name' => 'required',
+            'amount' => 'required',
+
+
+
             // 'password' => 'required',
             // 'image' => 'required',
 

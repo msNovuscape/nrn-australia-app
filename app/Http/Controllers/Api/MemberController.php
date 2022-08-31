@@ -53,13 +53,34 @@ class MemberController extends ApiBaseController
         $member['image'] = str_replace(public_path(), url('/'), $member['image']);
 
         $memberDocument = $member->member_document;
+        $memberPayment = $member->member_payment;
 
         $member['identification_image'] = str_replace(public_path(), url('/'), $memberDocument['identification_image']);
         $member['identification_expiry_date'] = $memberDocument['identification_expiry_date'];
         $member['proof_of_residency_image'] = str_replace(public_path(), url('/'), $memberDocument['proof_of_residency_image']);
         $member['proof_of_residency_expiry_date'] = $memberDocument['proof_of_residency_expiry_date'];
 
+        $member['payment_date'] = $memberPayment['payment_date'];
+        $member['account_name'] = $memberPayment['account_name'];
+        $member['bank_name'] = $memberPayment['bank_name'];
+        $member['amount'] = $memberPayment['amount'];
+        $member['payment_slip'] = str_replace(public_path(), url('/'), $memberPayment['payment_slip']);
+
         return response()->json($member, 200);
     }
+
+   }
+
+   public function check_phone($phone)
+   {
+
+    $checkPhone = Member::where(['mobile_number' => $phone])->get()->first();
+    if(is_null($checkPhone))
+     {
+             $is_unique = true;
+     }
+     return response()->json([
+         'is_unique' => $is_unique ?? false,
+        ]);
    }
 }

@@ -19,29 +19,26 @@
                 <!-- SELECT2 EXAMPLE -->
                 <div class="card card-default">
                     <div class="card-header">
-                        <h3 class="card-title">Create Departments</h3>
+                        <h3 class="card-title">View Departments</h3>
                         <a href="{{url('admin/departments')}}" class="back-button">back</a>
                     </div>
                     <div class="card-body">
-                        @include('success.success')
-                        @include('errors.error')
-                        {!! Form::open(['url' => '/admin/departments/store', 'class' => 'form-horizontal', 'method'=> 'POST','files' => true]) !!}
                         <div class="row">
 
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Department Name <span style="color: red">*</span> </label>
-                                    <input type="text" class="form-control"  id="inputPassword3" name="name" value="{{old('name')}}" required>
+                                    <input type="text" class="form-control"  id="inputPassword3" name="name" value="{{$settings->name}}"disabled>
                                 </div>
                             </div>
 
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Office <span style="color: red">*</span> </label>
-                                    <select name="sub_office_id" class="form-control" id="type" required >
+                                    <select name="sub_office_id" class="form-control" id="type" required disabled>
                                         <option value="" selected disabled>Please select office</option>
-                                        @foreach($settings as $setting)
-                                            <option value="{{$setting->id}}" @if($setting->id == old('sub_office_id')) selected @endif>{{$setting->name}}</option>
+                                        @foreach($sub_offices as $sub_office)
+                                            <option value="{{$sub_office->id}}" {{($sub_office->id==$settings->sub_office_id) ? 'selected':'' }}>{{$sub_office->name}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -49,11 +46,11 @@
 
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Staus <span style="color: red">*</span> </label>
-                                    <select name="status" class="form-control" id="type" required>
+                                    <label>Status <span style="color: red">*</span> </label>
+                                    <select name="status" class="form-control" id="type" required disabled>
                                         <option value="" selected disabled>Please select Status</option>
                                         @foreach(config('custom.status') as $in => $val)
-                                            <option value="{{$in}}" @if(old('status') == $in) selected @endif >{{$val}}</option>
+                                            <option value="{{$in}}"{{($settings->status == $in) ? 'selected' :  '' }}>{{$val}}</option>
                                         @endforeach
 
                                     </select>
@@ -69,12 +66,7 @@
                             </div>
 
                         </div>
-                        <div class="form-group row create-button">
-                            <div class="col-sm-10 col-md-12">
-                                <button type="submit" class="btn btn-primary">Create</button>
-                            </div>
-                        </div>
-                        {!! Form::close() !!}
+
                     </div>
                 </div>
             </div>
@@ -90,4 +82,5 @@
 
     </script>
 @endsection
+
 

@@ -28,6 +28,10 @@ class Member extends Model
     {
         return $this->hasOne(MemberDocument::class);
     }
+    public function member_payment()
+    {
+        return $this->hasOne(MemberPayment::class);
+    }
 
     public function user(){
         return $this->belongsTo(User::class);
