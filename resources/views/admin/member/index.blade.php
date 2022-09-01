@@ -66,10 +66,10 @@
                                             <td class="text-center">{{$setting->mobile_number}}</td>
                                             <td class="text-center">{{config('custom.membership_status')[$setting->membership_status_id]}}</td>
                                             <td class="d-flex justify-content-center action-icons">
-                                                <a href="{{url('admin/membership_types/'.$setting->id.'/edit')}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="edit">
+                                                <a href="{{url('admin/members/'.$setting->id.'/show')}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="edit">
                                                     <i class="fas fa-pencil-alt"></i>
                                                 </a>
-                                                <a href="{{url('admin/membership_types/delete/'.$setting->id)}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="delete" onclick="return confirm('Are you sure want to delete?')">
+                                                <a href="{{url('admin/members/delete/'.$setting->id)}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="delete" onclick="return confirm('Are you sure want to delete?')">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
                                             </td>

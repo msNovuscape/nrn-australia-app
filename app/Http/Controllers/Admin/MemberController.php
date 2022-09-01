@@ -23,7 +23,7 @@ class MemberController extends Controller
 
         if(\request('name')){
             $key = \request('name');
-            $settings = $settings->where('title','like','%'.$key.'%');
+            $settings = $settings->where('first_name','like','%'.$key.'%');
         }
         if(\request('status')){
             $key = \request('status');
@@ -37,60 +37,17 @@ class MemberController extends Controller
     {
         return view($this->view . 'create');
     }
-
-    public function store(Request $request)
-    {       
-        
-   
-            $this->validate(\request(), [
-                'name' => 'required',
-                'amount' => 'nullable',
-                'status' => 'required',
-            ]);
-        $requestData = $request->all();
-        $setting = MembershipType::create($requestData);
-        Session::flash('success','Membership Type successfully created');
-        return redirect($this->redirect);
-    }
-
     public function show($id)
     {
-        $setting =MembershipType::findorfail($id);
+        $setting =Member::findorfail($id);
         return view($this->view.'show',compact('setting'));
     }
 
-    public function edit($id){
-        $setting =MembershipType::findorfail($id);
-        return view($this->view.'edit',compact('setting'));
-    }
-
-    public function update(Request $request, $id){
-
-//        dd(\request()->all());
-        $setting =MembershipType::findorfail($id);
-        $this->validate(\request(), [
-            'name' => 'required',
-            'amount' => 'nullable',
-            'status' => 'required',
-        ]);
-
-        
-
-
-        $requestData = $request->all();
-        $setting->fill($requestData);
-        $setting->save();
-        
-        Session::flash('success','Membership Type succesffuly edited.');
-        return redirect($this->redirect);
-
-    }
-
     public function delete($id){
-        $setting=MembershipType::findorfail($id);
+        $setting=Member::findorfail($id);
         
         if($setting->delete()){
-            Session::flash('success','Membership Type is deleted !');
+            Session::flash('success','Member successfully deleted !');
             return redirect($this->redirect);
         }
         

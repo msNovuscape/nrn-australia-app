@@ -27,7 +27,7 @@ class CreateMemberRequest extends FormRequest
             'first_name' => 'required',
             'last_name' => 'required',
             'dob' => 'required',
-            'residental_address' => 'required',
+            'residential_address' => 'required',
             'suburb' => 'required',
             'state_id' => 'required',
             'country_id' => 'required',
@@ -42,11 +42,6 @@ class CreateMemberRequest extends FormRequest
             'payment_date' => 'required',
             'account_name' => 'required',
             'amount' => 'required',
-
-
-
-            // 'password' => 'required',
-            // 'image' => 'required',
 
 
         ];

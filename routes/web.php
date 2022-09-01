@@ -46,7 +46,7 @@ Route::group(['middleware'=>['auth']],function (){
         Route::get('membership_types/delete/{id}',[MembershipTypeController::class,'delete']);
 
         Route::get('members',[MemberController::class,'index']);
-        Route::get('members/{id}',[MemberController::class,'show']);
+        Route::get('members/{id}/show',[MemberController::class,'show']);
 
     });
 });

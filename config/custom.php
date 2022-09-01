@@ -7,8 +7,14 @@ return [
     'membership_status' =>[
         '1'=> 'Pending',
         '2'=> 'Verified',
-        '3'=>'Rejected'
+        '3'=>'Rejected',
+        '4' => 'Reapply',
     ],
+    'payment_status' =>[
+        '1'=> 'Pending',
+        '2'=> 'Verified',
+        '3'=>'Rejected',
+    ],  
     'setting_types'=>[
         '1'=>'Sentence',
         '2'=>'Paragraph',
