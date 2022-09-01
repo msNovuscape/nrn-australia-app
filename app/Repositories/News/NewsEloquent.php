@@ -28,7 +28,7 @@ class NewsEloquent implements NewsRepository
             ->when(isset($attributes['search']), function ($q) use ($attributes) {
                 $q->where('title', 'like', '%' . $attributes['search'] . '%');
             })
-            ->orderBy('updated_at', 'desc')->paginate(10);
+            ->orderBy('updated_at', 'desc');
     }
 
     public function find($id)
