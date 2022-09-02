@@ -34,6 +34,16 @@
                                     <input type="text" class="form-control"  id="inputPassword3" name="name" value="{{$setting->name}}">
                                 </div>
                             </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Select Eligibility Type <span style="color: red">*</span> </label>
+                                    <select  class="form-control"  id="inputPassword3" name="eligibility_type_ids[]" multiple required>
+                                        @foreach($eligibility_types as $eligibility_type)
+                                            <option {{$setting->eligibility_types->contains($eligibility_type->id) ? 'selected' : ''}} value = "{{$eligibility_type->id}}">{{$eligibility_type->title}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
 
                             <div class="col-md-6">
                                 <div class="form-group">

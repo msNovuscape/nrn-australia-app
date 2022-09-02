@@ -48,10 +48,10 @@ class MembershipTypeController extends Controller
                 'status' => 'required',
             ]);
         $requestData = $request->all();
-        foreach($request['eligibility_types_ids'] as $eligibility_type){
-            
-        }
+        
         $setting = MembershipType::create($requestData);
+        $eligibility_type_ids = $request['eligibility_type_ids'] ;
+        $setting->eligibility_types()->attach($eligibility_type_ids);
         Session::flash('success','Membership Type successfully created');
         return redirect($this->redirect);
     }
@@ -64,7 +64,9 @@ class MembershipTypeController extends Controller
 
     public function edit($id){
         $setting =MembershipType::findorfail($id);
-        return view($this->view.'edit',compact('setting'));
+        $eligibility_types = EligibilityType::where('status',1)->get();
+
+        return view($this->view.'edit',compact('setting','eligibility_types'));
     }
 
     public function update(Request $request, $id){
@@ -83,7 +85,8 @@ class MembershipTypeController extends Controller
         $requestData = $request->all();
         $setting->fill($requestData);
         $setting->save();
-        
+        $eligibility_type_ids = $request['eligibility_type_ids'] ;
+        $setting->eligibility_types()->sync($eligibility_type_ids);
         Session::flash('success','Membership Type succesffuly edited.');
         return redirect($this->redirect);
 

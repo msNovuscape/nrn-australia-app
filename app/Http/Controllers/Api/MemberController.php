@@ -6,8 +6,10 @@ use App\Http\Controllers\ApiBaseController;
 use App\Repositories\Member\MemberRepository;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateMemberRequest;
+use App\Models\EligibilityType;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use App\Models\Member;
+use App\Models\MembershipType;
 use JWTAuth;
 
 class MemberController extends ApiBaseController
@@ -17,6 +19,18 @@ class MemberController extends ApiBaseController
     public function __construct(MemberRepository $member)
     {
         $this->member = $member;
+        try{
+            $this->user = JWTAuth::parseToken()->authenticate();
+          
+           }catch (Exception $e) {
+               if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){
+                   return response()->json(['status' => 'Token is Invalid'],401);
+               }else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException){
+                   return response()->json(['status' => 'Token is Expired'],401);
+               }else{
+                   return response()->json(['status' => 'Authorization Token not found'],401);
+               }
+           }
     }
    public function store(CreateMemberRequest $request){
     // GET user token    
@@ -82,5 +96,27 @@ class MemberController extends ApiBaseController
      return response()->json([
          'is_unique' => $is_unique ?? false,
         ]);
+   }
+
+   public function member_config(){
+
+        $eligibility_types = EligibilityType::where('status',1)->get();
+        $membership_types = MembershipType::where('status',1)->get();
+  
+        foreach($membership_types as $membership_type){
+        $eligibilities = [];
+
+            $eligibilitess = $membership_type->eligibility_types;
+            foreach($eligibilitess as $eligibility){
+              array_push($eligibilities,$eligibility->pivot->eligibility_type_id);
+            }
+         $membership_type['eligibilities'] = $eligibilities;
+
+
+        }
+        return response()->json(['eligibility_types' => $eligibility_types,'membership_types' => $membership_types,],200);
+
+
+
    }
 }

@@ -11,4 +11,9 @@ class EligibilityType extends Model
     protected $guarded = ['id'];
 
     // protected $fillable = ['member_id','identification_image','identification_expiry_date','proof_of_residency_image','proof_of_residency_expiry_date'];
+
+    public function membership_types()
+    {
+        return $this->belongsToMany(MembershipType::class, 'eligibility_type_membership_type');
+    }
 }
