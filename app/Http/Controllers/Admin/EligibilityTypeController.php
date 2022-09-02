@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+
 use App\Models\EligibilityType;
-use App\Models\MembershipType;
 use App\Models\Setting;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -12,17 +12,17 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
  use function GuzzleHttp\Promise\all;
 
-class MembershipTypeController extends Controller
+class EligibilityTypeController extends Controller
 {
-    protected $view = 'admin.membership_type.';
-    protected $redirect = 'admin/membership_types';
+    protected $view = 'admin.eligibility_type.';
+    protected $redirect = 'admin/eligibility_types';
 
     public function index()
     {
-        $settings = MembershipType::orderBy('id','DESC');
+        $settings = EligibilityType::orderBy('id','DESC');
 
-        if(\request('name')){
-            $key = \request('name');
+        if(\request('title')){
+            $key = \request('title');
             $settings = $settings->where('title','like','%'.$key.'%');
         }
         if(\request('status')){
@@ -35,45 +35,42 @@ class MembershipTypeController extends Controller
 
     public function create()
     {
-        $eligibility_types = EligibilityType::where('status',1)->get();
-        return view($this->view . 'create',compact('eligibility_types'));
+        return view($this->view . 'create');
     }
 
     public function store(Request $request)
     {       
-
+        
+   
             $this->validate(\request(), [
-                'name' => 'required',
-                'amount' => 'required',
+                'title' => 'required',
                 'status' => 'required',
             ]);
         $requestData = $request->all();
-        foreach($request['eligibility_types_ids'] as $eligibility_type){
-            
-        }
-        $setting = MembershipType::create($requestData);
-        Session::flash('success','Membership Type successfully created');
+        $requestData['title'] = strip_tags($request['title']);
+        $setting = EligibilityType::create($requestData);
+        Session::flash('success','Eligibility Type successfully created');
         return redirect($this->redirect);
     }
 
     public function show($id)
     {
-        $setting =MembershipType::findorfail($id);
+        $setting =EligibilityType::findorfail($id);
         return view($this->view.'show',compact('setting'));
     }
 
     public function edit($id){
-        $setting =MembershipType::findorfail($id);
+        $setting =EligibilityType::findorfail($id);
         return view($this->view.'edit',compact('setting'));
     }
 
     public function update(Request $request, $id){
 
 //        dd(\request()->all());
-        $setting =MembershipType::findorfail($id);
+        $setting =EligibilityType::findorfail($id);
+        
         $this->validate(\request(), [
-            'name' => 'required',
-            'amount' => 'nullable',
+            'title' => 'required',
             'status' => 'required',
         ]);
 
@@ -81,19 +78,20 @@ class MembershipTypeController extends Controller
 
 
         $requestData = $request->all();
+        $requestData['title'] = strip_tags($request['title']);
         $setting->fill($requestData);
         $setting->save();
         
-        Session::flash('success','Membership Type succesffuly edited.');
+        Session::flash('success','Eligibility Type succesffuly edited.');
         return redirect($this->redirect);
 
     }
 
     public function delete($id){
-        $setting=MembershipType::findorfail($id);
+        $setting=EligibilityType::findorfail($id);
         
         if($setting->delete()){
-            Session::flash('success','Membership Type is deleted !');
+            Session::flash('success','Eligibility Type is deleted !');
             return redirect($this->redirect);
         }
         

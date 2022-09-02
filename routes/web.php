@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HomeController as HomeAdminController;
 use App\Http\Controllers\Admin\NewsAndUpdateController;
 use App\Http\Controllers\Admin\MembershipTypeController;
+use App\Http\Controllers\Admin\EligibilityTypeController;
 use App\Http\Controllers\Admin\MemberController;
 
 /*
@@ -23,9 +24,10 @@ Route::get('/', function () {
 Route::get('login', [HomeAdminController::class,'getLogin'])->name('login');
 Route::post('login', [HomeAdminController::class,'postLogin']);
 Route::group(['middleware'=>['auth']],function (){
-    Route::get('logout', [HomeController::class,'getLogout']);
+    Route::get('logout', [HomeAdminController::class,'getLogout']);
+
     //routes for admin
-    Route::group(['prefix'=>'admin'],function (){
+    Route::group(['prefix'=>'admin','middleware' => ['auth']],function (){
 
         Route::get('/index', [HomeAdminController::class,'indexAdmin']);
 
@@ -44,6 +46,14 @@ Route::group(['middleware'=>['auth']],function (){
         Route::get('membership_types/{id}/edit',[MembershipTypeController::class,'edit']);
         Route::post('membership_types/{id}',[MembershipTypeController::class,'update']);
         Route::get('membership_types/delete/{id}',[MembershipTypeController::class,'delete']);
+
+        Route::get('eligibility_types',[EligibilityTypeController::class,'index']);
+        Route::get('eligibility_types/create',[EligibilityTypeController::class,'create']);
+        Route::post('eligibility_types',[EligibilityTypeController::class,'store']);
+        Route::get('eligibility_types/{id}',[EligibilityTypeController::class,'show']);
+        Route::get('eligibility_types/{id}/edit',[EligibilityTypeController::class,'edit']);
+        Route::post('eligibility_types/{id}',[EligibilityTypeController::class,'update']);
+        Route::get('eligibility_types/delete/{id}',[EligibilityTypeController::class,'delete']);
 
         Route::get('members',[MemberController::class,'index']);
         Route::get('members/{id}/show',[MemberController::class,'show']);

@@ -7,7 +7,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Membership Type</h1>
+                        <h1>Eligibility Type</h1>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -19,44 +19,19 @@
                 <!-- SELECT2 EXAMPLE -->
                 <div class="card card-default">
                     <div class="card-header">
-                        <h3 class="card-title">Create Membership Type</h3>
-                        <a href="{{url('admin/membership_types')}}" class="back-button">back</a>
+                        <h3 class="card-title">Create Eligibility Type</h3>
+                        <a href="{{url('admin/eligibility_types')}}" class="back-button">List</a>
                     </div>
                     <div class="card-body">
                         @include('success.success')
                         @include('errors.error')
-                        {!! Form::open(['url' => '/admin/membership_types', 'class' => 'form-horizontal', 'method'=> 'POST','files' => true]) !!}
+                        {!! Form::open(['url' => '/admin/eligibility_types', 'class' => 'form-horizontal', 'method'=> 'POST','files' => true]) !!}
                         <div class="row">
 
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Membership Type Name <span style="color: red">*</span> </label>
-                                    <input type="text" class="form-control"  id="inputPassword3" name="name" value="{{old('name')}}" required>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Select Eligibility Type <span style="color: red">*</span> </label>
-                                    <select  class="form-control"  id="inputPassword3" name="eligibility_type_ids[]" multiple required>
-                                        @foreach($eligibility_types as $eligibility_type)
-                                            <option value = "{{$eligibility_type->id}}">{{$eligibility_type->title}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Expiration Years</label>
-                                    <input type="text" class="form-control"  id="inputPassword3" name="expiration_years" value="{{old('expiration_years')}}">
-                                </div>
-                            </div>
-
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label>Amount<span style="color: red">*</span> </label>
-                                    <input type="text" class="form-control"  id="inputPassword3" name="amount" value="{{old('amount')}}">
+                        <div class="col-md-12" >
+                                <div class="form-group" >
+                                    <label>Title <span style="color: red";> * </span></label>
+                                    <textarea name="title" class="summernote_class" rows="5" required style="height: 658px;" >{{old('title')}}</textarea>
                                 </div>
                             </div>
 
@@ -93,6 +68,15 @@
             </div>
         </section>
     </div>
+@endsection
+@section('script')
+    <script>
+        $(document).ready(function() {
+            $('.summernote_class').summernote()
+
+        })
+
+    </script>
 @endsection
 
 

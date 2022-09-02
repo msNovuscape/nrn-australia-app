@@ -21,6 +21,7 @@ class HomeController extends ApiBaseController
      {
         try{
          $this->user = JWTAuth::parseToken()->authenticate();
+       
         }catch (Exception $e) {
             if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){
                 return response()->json(['status' => 'Token is Invalid'],401);
@@ -39,6 +40,7 @@ class HomeController extends ApiBaseController
          
       // Get user id
       $userId = $currentUser['id'];
+      
 
       // Find member using user id
       $member = Member::where('user_id', $userId)->first();
