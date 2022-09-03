@@ -39,78 +39,113 @@
         <!-- Sidebar -->
         <div class="sidebar sb">
             <!-- Sidebar user panel (optional) -->
-            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <!-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <div class="image">
                     <img src="{{url('admin/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
                     <a href="#" class="d-block">{{Auth::user()->name}}</a>
                 </div>
-            </div>
+            </div> -->
 
 
             <!-- Sidebar Menu -->
             <nav class="mt-2">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                    <!-- Add icons to the links using the .nav-icon class
-                         with font-awesome or any other icon font library -->
-                    <li class="nav-item">
-                        <a href="{{url('admin/settings')}}" class="nav-link {{(Request::segment(2) == 'settings') ? 'active' : ''}}">
-                            <i class="fa fa-cog" aria-hidden="true"></i>
-                            <p>
-                                Settings
+                    <li class="nav-item sidebar-nav-item">
+                        <a href="{{url('admin/settings')}}" class="nav-link {{(Request::segment(2) == 'settings') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link">
+                            <i class="fa fa-cog pl-2" aria-hidden="true"></i>
+                            <p id="accordion">
+                                <button class="btn btn-link p-2 w-80">
+                                 Settings
+                                </button>
                             </p>
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{url('admin/sliders')}}" class="nav-link {{(Request::segment(2) == 'sliders') ? 'active' : ''}}">
-                            <i class="fas fa-sliders-h"></i>
-                            <p>
+                        <a href="{{url('admin/sliders')}}" class="nav-link {{(Request::segment(2) == 'sliders') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link">
+                            <i class="fas fa-sliders-h pl-2" aria-hidden="true"></i>
+                            <p id="accordion">
+                                <button class="btn btn-link p-2 w-80">
                                 Sliders
+                                </button>
                             </p>
                         </a>
                     </li>
 
-                    <li class="nav-item">
+                    <li class="nav-item sidebar-nav-item">
                         <a href="{{url('admin/eligibility_types')}}" class="nav-link {{(Request::segment(2) == 'eligibility_types') ? 'active' : ''}}">
                             <i class="fas fa-sliders-h"></i>
-                            <p>
+                            <p id="accordion">
+                            <button class="btn btn-link p-2 w-80">
                                 Eligibility Type
+                                </button>
+
                             </p>
                         </a>
                     </li>
 
-                    <li class="nav-item">
-                        <a href="{{url('admin/membership_types')}}" class="nav-link {{(Request::segment(2) == 'membership_types') ? 'active' : ''}}">
-                            <i class="fas fa-sliders-h"></i>
-                            <p>
+                
+                    <li class="nav-item sidebar-nav-item">
+                        <a href="{{url('admin/membership_types')}}" class="nav-link {{(Request::segment(2) == 'membership_types') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link">
+                            <i class="fa fa-cog pl-2" aria-hidden="true"></i>
+                            <p id="accordion">
+                                <button class="btn btn-link p-2 w-80">
                                 Membership Type
+                                </button>
                             </p>
                         </a>
                     </li>
 
-                    <li class="nav-item">
-                        <a href="{{url('admin/members')}}" class="nav-link {{(Request::segment(2) == 'members') ? 'active' : ''}}">
-                            <i class="fas fa-sliders-h"></i>
-                            <p>
-                                Members
-                            </p>
-                        </a>
-                    </li>
-
-                    
-
-                   
-
-                    <li class="nav-item">
-                        <a href="{{url('admin/news')}}" class="nav-link  {{(Request::segment(2) == 'news') ? 'active' : ''}}">
-                            <i class="fas fa-blog"></i>
-                            <p>
+                    <li class="nav-item sidebar-nav-item">
+                        <a href="{{url('admin/news')}}" class="nav-link {{(Request::segment(2) == 'settings') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link">
+                            <i class="fas fa-blog pl-2" aria-hidden="true"></i>
+                            <p id="accordion">
+                                <button class="btn btn-link p-2 w-80">
                                 News
+                                </button>
                             </p>
                         </a>
                     </li>
+
+                    <li class="nav-item sidebar-nav-item">
+                        <a href="#" class="nav-link {{(Request::segment(2) == 'settings') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link">
+                            <i class="fa fa-cog pl-2" aria-hidden="true"></i>
+                            <p id="accordion">
+                                <button class="btn btn-link p-2 w-80" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" id="headingOne">
+                                 Members
+                                </button>
+                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div class="mt-2">
+                                        <ul>
+                                            <li><a href="{{url('admin/members')}}">Pending Members</a></li>
+                                            <li><a href="{{url('admin/members')}}">Approved Members</a></li>
+                                            <li><a href="{{url('admin/members')}}">Rejected Members</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </p>
+                        </a>
+                    </li>
+
+                    <!-- <div id="accordion">
+                        <div class="card">
+                            <div class="card-header" id="headingOne">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Collapsible Group Item #1
+                                </button>
+                            </h5>
+                            </div>
+
+                            <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+                            <div class="card-body">
+                                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+                            </div>
+                            </div>
+                        </div>
+                    </div> -->
 
                     <!-- <li class="nav-item">
                         <a href="{{url('admin/projects')}}" class="nav-link {{(Request::segment(2) == 'projects') ? 'active' : ''}}">
@@ -259,8 +294,7 @@
                             </p>
                         </a>
                     </li> -->
-
-
+                    
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->

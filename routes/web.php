@@ -58,6 +58,9 @@ Route::group(['middleware'=>['auth']],function (){
         Route::get('members',[MemberController::class,'index']);
         Route::get('members/{id}/show',[MemberController::class,'show']);
         Route::get('members/{id}/{status}',[MemberController::class,'update_status']);
+        Route::get('members/{id}',[MemberController::class,'show']);
+        Route::get('members',[MemberController::class,'index']);
+        Route::get('members/members_info',[MemberController::class,'members_info']);
 
     });
 });

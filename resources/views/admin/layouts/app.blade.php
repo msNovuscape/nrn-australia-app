@@ -8,31 +8,31 @@
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
-{{--    {{ Html::favicon(\App\Models\Setting::where('slug','favicon')->first()->value) }}--}}
-{!! Html::style('admin/plugins/fontawesome-free/css/all.min.css') !!}
-<!-- Ionicons -->
-    {!! Html::style('admin/css/ionicons/2.0.1/css/ionicons.min.css') !!}
-    <!-- Tempusdominus Bootstrap 4 -->
-{{--    <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">--}}
-{!! Html::style('admin/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') !!}
+    {{--    {{ Html::favicon(\App\Models\Setting::where('slug','favicon')->first()->value) }}--}}
+    {!! Html::style('admin/plugins/fontawesome-free/css/all.min.css') !!}
+    <!-- Ionicons -->
+        {!! Html::style('admin/css/ionicons/2.0.1/css/ionicons.min.css') !!}
+        <!-- Tempusdominus Bootstrap 4 -->
+    {{--    <link rel="stylesheet" href="plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">--}}
+    {!! Html::style('admin/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') !!}
 
-<!-- iCheck -->
-{{--    <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">--}}
-{!! Html::style('admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css') !!}
+    <!-- iCheck -->
+    {{--    <link rel="stylesheet" href="plugins/icheck-bootstrap/icheck-bootstrap.min.css">--}}
+    {!! Html::style('admin/plugins/icheck-bootstrap/icheck-bootstrap.min.css') !!}
 
-<!-- JQVMap -->
-{{--    <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">--}}
-{!! Html::style('admin/plugins/jqvmap/jqvmap.min.css') !!}
-<!-- Theme style -->
-{{--    <link rel="stylesheet" href="dist/css/adminlte.min.css">--}}
-{!! Html::style('admin/dist/css/adminlte.min.css') !!}
-<!-- overlayScrollbars -->
-{{--    <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">--}}
-{!! Html::style('admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') !!}
-<!-- Daterange picker -->
-{{--    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">--}}
-{!! Html::style('admin/plugins/daterangepicker/daterangepicker.css') !!}
-<!-- summernote -->
+    <!-- JQVMap -->
+    {{--    <link rel="stylesheet" href="plugins/jqvmap/jqvmap.min.css">--}}
+    {!! Html::style('admin/plugins/jqvmap/jqvmap.min.css') !!}
+    <!-- Theme style -->
+    {{--    <link rel="stylesheet" href="dist/css/adminlte.min.css">--}}
+    {!! Html::style('admin/dist/css/adminlte.min.css') !!}
+    <!-- overlayScrollbars -->
+    {{--    <link rel="stylesheet" href="plugins/overlayScrollbars/css/OverlayScrollbars.min.css">--}}
+    {!! Html::style('admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css') !!}
+    <!-- Daterange picker -->
+    {{--    <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">--}}
+    {!! Html::style('admin/plugins/daterangepicker/daterangepicker.css') !!}
+    <!-- summernote -->
     {{--    <link rel="stylesheet" href="plugins/summernote/summernote-bs4.min.css">--}}
     {!! Html::style('admin/plugins/summernote/summernote-bs4.min.css') !!}
     {!! Html::style('admin/flatpickr/dist/flatpickr.min.css') !!}

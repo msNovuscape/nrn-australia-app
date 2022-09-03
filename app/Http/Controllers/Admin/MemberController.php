@@ -39,8 +39,8 @@ class MemberController extends Controller
     }
     public function show($id)
     {
-        $setting =Member::findorfail($id);
-        return view($this->view.'show',compact('setting'));
+        // $setting =MembershipType::findorfail($id);
+        return view($this->view.'members_info');
     }
 
     public function delete($id){

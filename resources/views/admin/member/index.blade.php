@@ -1,7 +1,6 @@
 @extends('admin.layouts.app')
 @section('content')
 
-
     <div class="content-wrapper">
         <!-- Content Header (Page header) -->
         <section class="content-header">
@@ -22,12 +21,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Members Table</h3>
-
-                                    <!-- <div class="card-tools">
-                                        <a class="btn btn-primary" href="{{url('admin/members/create')}}" role="button">Create</a>
-                                    </div> -->
-                                </div>
-                            <!-- /.card-header -->
+                            </div>
                             <div class="card-body">
                                 @include('success.success')
                                 @include('errors.error')
@@ -73,16 +67,31 @@
                                                     <i class="fas fa-trash"></i>
                                                 </a>
                                             </td>
-
                                         </tr>
-
                                     @endforeach
+                                    <tr>
+                                            <th scope="row">1</th>
+                                            <td class="text-center">Mahesh Sharma</td>
+                                            <td class="text-center">2022-09-02</td>
+                                            <td class="text-center">0987654321</td>
+                                            <td class="text-center">Verified</td>
+                                            <td class="d-flex justify-content-center action-icons">
+                                                <a href="members/1/" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="show">
+                                                    <i class="fas fa-eye"></i>
+                                                </a>
+                                                <a href="" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="edit">
+                                                    <i class="fas fa-pencil-alt"></i>
+                                                </a>
+                                                <a href="" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="delete" onclick="return confirm('Are you sure want to delete?')">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
-                                    <div style="margin-top: 10px;">
-                                        {!! $settings->links() !!}
-                                    </div>
-
+                                <div style="margin-top: 10px;">
+                                    {!! $settings->links() !!}
+                                </div>
                             </div>
 
                         </div>

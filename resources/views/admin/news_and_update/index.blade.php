@@ -23,7 +23,7 @@
                             <div class="card-header">
                                 <h3 class="card-title">News Table</h3>
                                 <div class="card-tools">
-                                    <a class="btn btn-green" href="{{url('admin/news/create')}}" role="button">Create</a>
+                                    <a class="btn btn-create" href="{{url('admin/news/create')}}" role="button">Create</a>
                                 </div>
                             </div>
 
@@ -61,7 +61,7 @@
                                         <th class="text-center">Image</th>
                                         <th class="text-center">Slug</th>
                                         <th class="text-center">Status</th>
-{{--                                        <th class="text-center">Description</th>--}}
+{{--                                       <th class="text-center">Description</th>--}}
                                         <th class="text-center">Action</th>
                                     </tr>
                                     </thead>

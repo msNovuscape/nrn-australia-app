@@ -22,9 +22,8 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Membership Type Table</h3>
-
                                     <div class="card-tools">
-                                        <a class="btn btn-primary" href="{{url('admin/membership_types/create')}}" role="button">Create</a>
+                                        <a class="btn btn-create" href="{{url('admin/membership_types/create')}}" role="button">Create</a>
                                     </div>
                                 </div>
                             <!-- /.card-header -->
