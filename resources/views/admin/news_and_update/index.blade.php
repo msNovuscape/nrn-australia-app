@@ -35,7 +35,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="input-group input-group-sm mb-3 table-search w-100">
-                                                <input type="search"  name="name" class="form-control ds-input" placeholder="Name" aria-label="Small" aria-describedby="inputGroup-sizing-sm" onchange="filterList()">
+                                                <input type="search"  name="name" class="form-control ds-input" placeholder="Search by news title" aria-label="Small" aria-describedby="inputGroup-sizing-sm" onchange="filterList()">
                                             </div>
                                         </div>
                                         <div class="col-md-4">
