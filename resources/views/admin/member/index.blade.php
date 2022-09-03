@@ -60,33 +60,19 @@
                                             <td class="text-center">{{$setting->mobile_number}}</td>
                                             <td class="text-center">{{config('custom.membership_status')[$setting->membership_status_id]}}</td>
                                             <td class="d-flex justify-content-center action-icons">
-                                                <a href="{{url('admin/members/'.$setting->id.'/show')}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="edit">
-                                                    <i class="fas fa-pencil-alt"></i>
+                                            <a href="{{url('admin/members/'.$setting->id)}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="show">
+                                                    <i class="fas fa-eye"></i>
                                                 </a>
+                                                <!-- <a href="{{url('admin/members/'.$setting->id.'/show')}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="edit">
+                                                    <i class="fas fa-pencil-alt"></i>
+                                                </a> -->
                                                 <a href="{{url('admin/members/delete/'.$setting->id)}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="delete" onclick="return confirm('Are you sure want to delete?')">
                                                     <i class="fas fa-trash"></i>
                                                 </a>
                                             </td>
                                         </tr>
                                     @endforeach
-                                    <tr>
-                                            <th scope="row">1</th>
-                                            <td class="text-center">Mahesh Sharma</td>
-                                            <td class="text-center">2022-09-02</td>
-                                            <td class="text-center">0987654321</td>
-                                            <td class="text-center">Verified</td>
-                                            <td class="d-flex justify-content-center action-icons">
-                                                <a href="members/1/" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="show">
-                                                    <i class="fas fa-eye"></i>
-                                                </a>
-                                                <a href="" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="edit">
-                                                    <i class="fas fa-pencil-alt"></i>
-                                                </a>
-                                                <a href="" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="delete" onclick="return confirm('Are you sure want to delete?')">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
+                                    
                                     </tbody>
                                 </table>
                                 <div style="margin-top: 10px;">

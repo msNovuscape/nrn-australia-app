@@ -4,13 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
-use App\Models\Member;
 use App\Models\Setting;
-use App\Models\User;
+use App\Models\Member;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
  use function GuzzleHttp\Promise\all;
+ use Carbon\Carbon;
 
 class MemberController extends Controller
 {
@@ -39,8 +39,8 @@ class MemberController extends Controller
     }
     public function show($id)
     {
-        // $setting =MembershipType::findorfail($id);
-        return view($this->view.'members_info');
+        $member = Member::findorfail($id);
+        return view($this->view.'members_info',compact('member'));
     }
 
     public function delete($id){
@@ -56,10 +56,18 @@ class MemberController extends Controller
     public function update_status($id,$status){
 
         $setting = Member::findorfail($id);
+        $previous_status = $setting->membership_status_id;
+        
         $setting->membership_status_id = $status;
-        $setting->update();
-        Session::flash('success','Member status successfully updated !');
-        return redirect($this->redirect);
+        if($setting->update()){
+            if($previous_status == 1 && $status == 2){
+                
+                $setting->membership_issued_date = Carbon::now();
+                $setting->update();
+            }
+            return response()->json(['msg' => 'Membership status updated successfully!'],200);
+        }
+        
 
     }
 }

@@ -20,6 +20,21 @@ return [
         '2'=>'Paragraph',
         '3'=>'Image'
     ],
+    'gender' =>[
+        '1'=> 'Male',
+        '2'=> 'Female',
+        '3' => 'Not mentioned'
+    ],
+    'states' =>[
+        '1'=> 'Male',
+        '2'=> 'Female',
+        '3' => 'Not mentioned'
+    ],
+    'countries' =>[
+        '1'=> 'Australia',
+        // '2'=> 'Female',
+        // '3' => 'Not mentioned'
+    ],
     'blog_types'=>[
 
         '1'=>'News',

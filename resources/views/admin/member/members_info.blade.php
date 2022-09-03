@@ -16,11 +16,11 @@
                     <div class="card p-4 mr-1">
                         <div class="info-profile d-flex">
                             <div class="profile-image mr-4">
-                                <img src="{{url('admin/images/image-profile.png')}}" alt="">
+                                <img src="{{str_replace(public_path(), url('/'), $member->images ?? '')}}" alt="">
                             </div>
                             <div class="profile-name d-flex flex-column">
-                                <p>Samir Bhandari</p>
-                                <p>NRNA-20220601</p>
+                                <p>{{$member->first_name. ($member->middle_name ? ' '.$member->middle_name.' '.$member->last_name : ' '.$member->last_name)}}</p>
+                                <!-- <p>NRNA-20220601</p> -->
                                 <div class="d-flex">
                                     <div class="profile-icon mr-2">
                                         <img src="{{url('admin/images/life-icon.png')}}" alt="">
@@ -32,7 +32,7 @@
                                 <div class="profile-icon mr-1">
                                     <img src="{{url('admin/images/pending-icon.png')}}" alt="">
                                 </div>
-                                <p>Pending</p>
+                                <p>{{config('custom.membership_status')[$member->membership_status_id]}}</p>
                             </div>
                         </div>
                         <div class="profile-detail mt-4">
@@ -44,7 +44,7 @@
                                     <p>Occupation</p>
                                 </div>
                                 <div class="col-md-7 detail-right">
-                                    <p>Manager</p>
+                                    <p>{{$member->occupation ?? 'Not mentioned'}}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -55,7 +55,7 @@
                                     <p>Gender</p>
                                 </div>
                                 <div class="col-md-7 detail-right">
-                                    <p>Male</p>
+                                    <p>{{config('custom.gender')[$member->gender_id]}}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -66,7 +66,7 @@
                                     <p>Phone</p>
                                 </div>
                                 <div class="col-md-7 detail-right">
-                                    <p>9841882877</p>
+                                    <p>{{$member->mobile_number}}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -77,7 +77,7 @@
                                     <p>Email</p>
                                 </div>
                                 <div class="col-md-7 detail-right">
-                                    <p>bhandari@extratechs.com.au</p>
+                                    <p>{{$member->email}}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -88,7 +88,7 @@
                                     <p>Date of Birth</p>
                                 </div>
                                 <div class="col-md-7 detail-right">
-                                    <p>01/06/2004</p>
+                                    <p>{{$member->dob}}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -99,7 +99,7 @@
                                     <p>Postal Code</p>
                                 </div>
                                 <div class="col-md-7 detail-right">
-                                    <p>446600</p>
+                                    <p>{{$member->postcode}}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -110,7 +110,7 @@
                                     <p>Residental Address</p>
                                 </div>
                                 <div class="col-md-7 detail-right">
-                                    <p>Suite 132 & 133, Level 3, 10 Park Road, Hurstville NSW 2220, Australia</p>
+                                    <p>{{$member->residential_address}}</p>
                                 </div>
                             </div>
                             <div class="row">
@@ -120,7 +120,7 @@
                                             <p>State</p>
                                         </div>
                                         <div class="col-md-8 detail-right">
-                                            <p>NSW</p>
+                                            <p>{{config('custom.states')[$member->state_id]}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -130,7 +130,7 @@
                                             <p>Suburb</p>
                                         </div>
                                         <div class="col-md-8 detail-right">
-                                            <p>Sydney</p>
+                                            <p>{{$member->suburb}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -140,7 +140,7 @@
                                             <p>Country</p>
                                         </div>
                                         <div class="col-md-8 detail-right">
-                                            <p>Australia</p>
+                                            <p>{{config('custom.countries')[$member->country_id]}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -153,19 +153,19 @@
                     </div>
                     <div class="d-flex">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                            <input class="form-check-input" type="radio" name="membership_status_id" id="exampleRadios1" value="2" {{$member->membership_status_id == 2 ? 'checked' : ''}}>
                             <label class="form-check-label" for="exampleRadios1">
                                 Verify
                             </label>
                         </div>
                         <div class="form-check mx-4">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                            <input class="form-check-input" type="radio" name="membership_status_id" id="exampleRadios2" value="1" {{$member->membership_status_id == 1 ? 'checked' : ''}}>
                             <label class="form-check-label" for="exampleRadios2">
                                 Pending
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios3" value="option3">
+                            <input class="form-check-input" type="radio" name="membership_status_id" id="exampleRadios3" value="3" {{$member->membership_status_id == 3 ? 'checked' : ''}}>
                             <label class="form-check-label" for="exampleRadios3">
                                 Rejected
                             </label>
@@ -189,13 +189,13 @@
                                         <p>Expiry date of ID</p>
                                     </div>
                                     <div class="col-md-3">
-                                        <p>01/06/2024</p>
+                                        <p>{{$member->member_document->identification_expiry_date}}</p>
                                     </div>
                                     <div class="col-md-4 d-flex detail-left">
                                         <div class="profile-icon mr-4">
                                             <img src="{{url('admin/images/view-icon.png')}}" alt="">
                                         </div>
-                                        <p>View Documents</p>
+                                        <a target = "_blank" href="{{str_replace(public_path(), url('/'), $member->member_document->identification_image)}}"><p>View Documents</p></a>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -206,13 +206,13 @@
                                         <p>Expiry date of Residency</p>
                                     </div>
                                     <div class="col-md-3">
-                                        <p>01/06/2026</p>
+                                        <p>{{$member->member_document->proof_of_residency_expiry_date}}</p>
                                     </div>
                                     <div class="col-md-4 d-flex detail-left">
                                         <div class="profile-icon mr-4">
                                             <img src="{{url('admin/images/view-icon.png')}}" alt="">
                                         </div>
-                                        <p>View Documents</p>
+                                        <a target = "_blank" href="{{str_replace(public_path(), url('/'), $member->member_document->proof_of_residency_image)}}"><p>View Documents</p></a>
                                     </div>
                                 </div>
                                 </div>
@@ -231,7 +231,7 @@
                                             <p>Account Name</p>
                                         </div>
                                         <div class="col-md-8 detail-right">
-                                            <p>Samir Bhandari</p>
+                                            <p>{{$member->member_payment->account_name}}</p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -239,7 +239,7 @@
                                             <p>Payment Date</p>
                                         </div>
                                         <div class="col-md-8 detail-right">
-                                            <p>01/06/2026</p>
+                                            <p>{{$member->member_payment->payment_date}}</p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -247,7 +247,7 @@
                                             <p>Bank Name</p>
                                         </div>
                                         <div class="col-md-8 detail-right">
-                                            <p>National Australian Bank (NAB)</p>
+                                            <p>{{$member->member_payment->bank_name}}</p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -255,7 +255,7 @@
                                             <p>Total Amount</p>
                                         </div>
                                         <div class="col-md-8 detail-right">
-                                            <p>$150 AUD</p>
+                                            <p>{{$member->member_payment->amount}}</p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -263,7 +263,7 @@
                                             <p>Payment Slip</p>
                                         </div>
                                         <div class="col-md-8 detail-right">
-                                            <img src="" alt="">
+                                            <img src="{{str_replace(public_path(), url('/'), $member->member_payment->payment_slip)}}" alt="">
                                         </div>
                                     </div>
                                 </div>
@@ -276,4 +276,31 @@
     </section>
 </div>
 
+@endsection
+
+@section('script')
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+
+$('input[type=radio][name=membership_status_id]').change(function() {
+    var isOk = confirm('Are u sure want to change the member status?');
+    var membership_status_id = this.value;
+    var id = "<?php echo $member->id; ?>";
+    if (isOk) {
+        $.ajax({
+         url: "/admin/members/"+id+'/'+membership_status_id,
+         type: "GET",
+         
+         success: function (response) {
+            Swal.fire({
+                  title: 'Success!!',
+                  text: (response.msg),
+                  icon: 'success'
+              }).then(function (){
+              })
+         }
+       })  ;  
+     }    
+});
+</script>
 @endsection

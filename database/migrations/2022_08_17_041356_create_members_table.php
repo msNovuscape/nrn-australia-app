@@ -34,7 +34,7 @@ class CreateMembersTable extends Migration
             $table->integer('payment_status_id')->default(1);
             $table->dateTime('membership_issued_date')->nullable();
             $table->dateTime('membership_expiry_date')->nullable();
-            $table->string('region_id');
+            $table->integer('region_id');
             $table->string('occupation')->nullable();
             $table->integer('eligibility_type_id');
             $table->string('image');
