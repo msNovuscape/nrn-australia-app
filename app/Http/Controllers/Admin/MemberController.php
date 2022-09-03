@@ -52,4 +52,14 @@ class MemberController extends Controller
         }
         
     }
+
+    public function update_status($id,$status){
+
+        $setting = Member::findorfail($id);
+        $setting->membership_status_id = $status;
+        $setting->update();
+        Session::flash('success','Member status successfully updated !');
+        return redirect($this->redirect);
+
+    }
 }
