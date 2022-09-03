@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNewsPointsTable extends Migration
+class CreateThirdPartyNewsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateNewsPointsTable extends Migration
      */
     public function up()
     {
-        Schema::create('news_points', function (Blueprint $table) {
+        Schema::create('third_party_news', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('news_id')->unsigned();
-            $table->foreign('news_id')->references('id')->on('news')->onDelete('cascade');
-            $table->string('point');
+            $table->foreign('news_id')->references('id')->on('news');
+            $table->string('url');
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateNewsPointsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('news_points');
+        Schema::dropIfExists('third_party_news');
     }
 }

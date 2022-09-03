@@ -3,16 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Request;
 
 class HomeController extends Controller
 {
     public function indexAdmin()
     {
-      
+
         if(Auth::check()){
             return view('admin.index');
         }

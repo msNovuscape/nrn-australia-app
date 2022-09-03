@@ -20,7 +20,7 @@
     {!! Html::style('admin/css/custom-admin.css') !!}
 
     <link rel="stylesheet" href="">
-    
+
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">

@@ -33,9 +33,11 @@ Route::group(['middleware'=>['auth']],function (){
 
         Route::get('news',[NewsAndUpdateController::class,'index']);
         Route::get('news/create',[NewsAndUpdateController::class,'create']);
+        Route::get('news_type/{news_type}',[NewsAndUpdateController::class,'getNewsDom']);
         Route::post('news',[NewsAndUpdateController::class,'store']);
         Route::get('news/{id}',[NewsAndUpdateController::class,'show']);
         Route::get('news/{id}/edit',[NewsAndUpdateController::class,'edit']);
+        Route::get('news_type/{news_type}/{news_id}',[NewsAndUpdateController::class,'getNewsDomEdit']);
         Route::post('news/{id}',[NewsAndUpdateController::class,'update']);
         Route::get('news/delete/{id}',[NewsAndUpdateController::class,'delete']);
 

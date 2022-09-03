@@ -56,12 +56,10 @@
                                     <tr>
                                         <th style="width: 10px">S.N.</th>
                                         <th class="text-center">Title</th>
-                                        <th class="text-center">Author</th>
                                         <th class="text-center">Publish Date</th>
                                         <th class="text-center">Image</th>
                                         <th class="text-center">Slug</th>
                                         <th class="text-center">Status</th>
-{{--                                       <th class="text-center">Description</th>--}}
                                         <th class="text-center">Action</th>
                                     </tr>
                                     </thead>
@@ -70,7 +68,6 @@
                                         <tr>
                                             <th scope="row">{{$loop->iteration}}</th>
                                             <th scope="row" class="text-center">{{strip_tags($setting->title)}}</th>
-                                            <td class="text-center">{{$setting->author}}</td>
                                             <td class="text-center">{{$setting->publish_date}}</td>
 
                                             <td class="text-center">
@@ -82,33 +79,13 @@
                                             <td class="text-center">{{$setting->slug}}</td>
                                             <td class="text-center"> {{config('custom.status')[$setting->status]}}</td>
 
-                                            <!-- <td class="text-center">
-                                                <a class="btn btn-primary btn-sm" href="{{url('admin/blogs/'.$setting->id)}}">
-                                                    <i class="fas fa-folder">
-                                                    </i>
-                                                    View
-                                                </a>
-                                                <a class="btn btn-info btn-sm" href="{{url('admin/blogs/'.$setting->id.'/edit')}}">
-                                                    <i class="fas fa-pencil-alt">
-                                                    </i>
-                                                    Edit
-                                                </a>
-                                                <a class="btn btn-info btn-danger" href="{{url('admin/blogs/delete/'.$setting->id)}}" onclick="return confirm('Are you sure want to delete?')">
-                                                    <i class="fas fa-pencil-alt">
-                                                    </i>
-                                                   Delete
-                                                </a>
-                                            </td> -->
 
                                             <td class="d-flex justify-content-center action-icons">
-                                                <a href="{{url('admin/blogs/'.$setting->id)}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="view">
+                                                <a href="{{url('admin/news/'.$setting->id)}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="view">
                                                     <i class="fas fa-folder"></i>
                                                 </a>
-                                                <a href="{{url('admin/blogs/'.$setting->id.'/edit')}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="edit">
+                                                <a href="{{url('admin/news/'.$setting->id.'/edit')}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="edit">
                                                     <i class="fas fa-pencil-alt"></i>
-                                                </a>
-                                                <a href="{{url('admin/blogs/delete/'.$setting->id)}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="delete" onclick="return confirm('Are you sure want to delete?')">
-                                                    <i class="fas fa-trash"></i>
                                                 </a>
                                             </td>
                                         </tr>
@@ -132,15 +109,4 @@
         </section>
         <!-- /.content -->
     </div>
-
-    <script>
-        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
-        const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
-    </script>
-
-    <script>
-        const exampleEl = document.getElementById('example')
-        const tooltip = new bootstrap.Tooltip(exampleEl, options)
-    </script>
-
 @endsection

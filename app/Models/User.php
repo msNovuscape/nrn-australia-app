@@ -52,6 +52,8 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
+
+
     public static function makeDirectory($image_folder_type)
     {
 //        $image_folder_type = 1;
@@ -101,19 +103,11 @@ class User extends Authenticatable implements JWTSubject
             }
             return $directory = 'images/blog/'.$year.'/'.$month.'/'.$day.'/';
         }
-
-            if(config('custom.image_folders')[$image_folder_type] == 'academy_course'){
-                if (!is_dir(public_path().'/images/academy_course/'.$year.'/'.$month.'/'.$day)) {
-                    mkdir(public_path().'/images/academy_course/'.$year.'/'.$month.'/'.$day, 0755, true);
-                }
-                return $directory = 'images/academy_course/'.$year.'/'.$month.'/'.$day.'/';
+        if(config('custom.image_folders')[$image_folder_type] == 'news'){
+            if (!is_dir(public_path().'/images/news/'.$year.'/'.$month.'/'.$day)) {
+                mkdir(public_path().'/images/news/'.$year.'/'.$month.'/'.$day, 0755, true);
             }
-
-        if(config('custom.image_folders')[$image_folder_type] == 'sub_office'){
-            if (!is_dir(public_path().'/images/sub_office/'.$year.'/'.$month.'/'.$day)) {
-                mkdir(public_path().'/images/sub_office/'.$year.'/'.$month.'/'.$day, 0755, true);
-            }
-            return $directory = 'images/sub_office/'.$year.'/'.$month.'/'.$day.'/';
+            return $directory = 'images/news/'.$year.'/'.$month.'/'.$day.'/';
         }
         if(config('custom.image_folders')[$image_folder_type] == 'testimonial'){
             if (!is_dir(public_path().'/images/testimonial/'.$year.'/'.$month.'/'.$day)) {
@@ -134,25 +128,8 @@ class User extends Authenticatable implements JWTSubject
             return $directory = 'images/slider/' . $year . '/' . $month . '/' . $day . '/';
         }
 
-        if(config('custom.image_folders')[$image_folder_type] == 'add_section') {
-            if (!is_dir(public_path() . '/images/add_section/' . $year . '/' . $month . '/' . $day)) {
-                mkdir(public_path() . '/images/add_section/' . $year . '/' . $month . '/' . $day, 0755, true);
-            }
-            return $directory = 'images/add_section/' . $year . '/' . $month . '/' . $day . '/';
-        }
 
-        if(config('custom.image_folders')[$image_folder_type] == 'placement') {
-            if (!is_dir(public_path() . '/images/placement/' . $year . '/' . $month . '/' . $day)) {
-                mkdir(public_path() . '/images/placement/' . $year . '/' . $month . '/' . $day, 0755, true);
-            }
-            return $directory = 'images/placement/' . $year . '/' . $month . '/' . $day . '/';
-        }
-        if(config('custom.image_folders')[$image_folder_type] == 'accomodation') {
-            if (!is_dir(public_path() . '/images/accomodation/' . $year . '/' . $month . '/' . $day)) {
-                mkdir(public_path() . '/images/accomodation/' . $year . '/' . $month . '/' . $day, 0755, true);
-            }
-            return $directory = 'images/accomodation/' . $year . '/' . $month . '/' . $day . '/';
-        }
+
 
     }
 
@@ -163,17 +140,17 @@ class User extends Authenticatable implements JWTSubject
         $uploaded_ext = $requestData->getClientOriginalExtension();
         $uploaded_type = $requestData->getClientMimeType();
         $uploaded_tmp = $requestData->getPathname();
-        
+
 
 
         // Where are we going to be writing to?
         $target_path   = $directory;
-       
+
         //$target_file   = basename( $uploaded_name, '.' . $uploaded_ext ) . '-';
         $target_file   =  md5( uniqid() . $uploaded_name ) . '.' . $uploaded_ext;
         $temp_file     = ( ( ini_get( 'upload_tmp_dir' ) == '' ) ? ( sys_get_temp_dir() ) : ( ini_get( 'upload_tmp_dir' ) ) );
         $temp_file    .= DIRECTORY_SEPARATOR . md5( uniqid() . $uploaded_name ) . '.' . $uploaded_ext;
-        
+
 
         // Is it an image?
         if( ( strtolower( $uploaded_ext ) == 'jpg' || strtolower( $uploaded_ext ) == 'jpeg' || strtolower( $uploaded_ext ) == 'png' ) &&
@@ -198,7 +175,7 @@ class User extends Authenticatable implements JWTSubject
                 imagealphablending($img , false);
                 imagesavealpha($img , true);
                 imagepng ( $img, $temp_file);
-              
+
 //                imagepng( $img, $temp_file, 100);
             }
             imagedestroy( $img);

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\ApiBaseController;
 use Illuminate\Http\Request;
 use App\Repositories\Login\LoginRepository;
+use Illuminate\Support\Facades\Auth;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Carbon\Carbon;
@@ -16,12 +17,12 @@ class HomeController extends ApiBaseController
 {
     protected $user;
     private $news;
-   
+
     public function __construct(NewsRepository $news)
      {
         try{
          $this->user = JWTAuth::parseToken()->authenticate();
-       
+
         }catch (Exception $e) {
             if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){
                 return response()->json(['status' => 'Token is Invalid'],401);
@@ -32,15 +33,15 @@ class HomeController extends ApiBaseController
             }
         }
         $this->news = $news;
-        
+
      }
    public function index(Request $request){
-      // GET user token    
+      // GET user token
       $currentUser = JWTAuth::parseToken()->authenticate();
-         
+
       // Get user id
       $userId = $currentUser['id'];
-      
+
 
       // Find member using user id
       $member = Member::where('user_id', $userId)->first();
@@ -48,7 +49,7 @@ class HomeController extends ApiBaseController
 
       $isMember = !(is_null($member) || empty($member));
 
-    
+
       $news = $this->sendResponse($this->news->all($request->all()), 'News fetched successfully');
        return response()->json([
             'sliders' => [
@@ -57,11 +58,14 @@ class HomeController extends ApiBaseController
            url('/Carousal.png'),
            url('/Carousal.png'),
            url('/Carousal.png'),
-           url('/Carousal.png') 
+           url('/Carousal.png')
                ],
             'news' => $news->getData('data')['data'],
             'notices' => null,
+            'user' => $currentUser,
             'isMember'=> $isMember,
+            'member_image' => $member->image,
+
         ], 200);
     }
 }

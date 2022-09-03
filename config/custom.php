@@ -14,7 +14,15 @@ return [
         '1'=> 'Pending',
         '2'=> 'Verified',
         '3'=>'Rejected',
-    ],  
+    ],
+    'news_types' =>[
+        '1'=> 'NRNA',
+        '2'=> 'Third Party',
+    ],
+    'featured_types'=>[
+        '1' => 'Yes',
+        '2' => 'No'
+    ],
     'setting_types'=>[
         '1'=>'Sentence',
         '2'=>'Paragraph',
@@ -39,7 +47,7 @@ return [
 
         '1'=>'News',
         '2'=>'Notice',
-        
+
     ],
     'testimonial_types'=>[
         '1'=>'Service',
@@ -56,12 +64,8 @@ return [
         '4'=>'slider',
         '5' => 'team',
         '6' => 'blog',
-        '7'=>'gallery',
-        '8'=>'ndis_plan',
-        '9' => 'testimonial',
-        '10' => 'accomodation',
-        '11'=>'add_section',
-        '12'=>'placement'
+        '7' => 'news',
+
 
     ],
     'course_types'=>[

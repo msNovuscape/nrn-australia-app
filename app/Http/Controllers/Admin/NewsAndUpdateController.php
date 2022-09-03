@@ -7,10 +7,13 @@ use App\Models\Academy;
 use App\Models\NewsPoint;
 use App\Models\BlogPoint;
 use App\Models\News;
+use App\Models\NrnaNews;
 use App\Models\Setting;
+use App\Models\ThirdPartyNews;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use function GuzzleHttp\Promise\all;
 
@@ -40,24 +43,52 @@ class NewsAndUpdateController extends Controller
         return view($this->view . 'create');
     }
 
+    public function getNewsDom($news_type)
+    {
+        if('NRNA' == config('custom.news_types')[$news_type]){
+            $returnHTML = view($this->view.'nrna_news')->render();// or method that you prefere to return data + RENDER is the key here
+        }else{
+            $returnHTML = view($this->view.'third_party_news')->render();// or method that you prefere to return data + RENDER is the key here
+        }
+        return response()->json( array('success' => true, 'html'=>$returnHTML) );
+    }
+    public function getNewsDomEdit($news_type,$news_id)
+    {
+        $setting = News::findOrFail($news_id);
+        if($setting->news_type == $news_type){
+            if('NRNA' == config('custom.news_types')[$news_type]){
+                $returnHTML = view($this->view.'nrna_news',['setting' => $setting])->render();// or method that you prefere to return data + RENDER is the key here
+            }else{
+                $returnHTML = view($this->view.'third_party_news',['setting' => $setting])->render();// or method that you prefere to return data + RENDER is the key here
+            }
+        }else{
+            if('NRNA' == config('custom.news_types')[$news_type]){
+                $returnHTML = view($this->view.'nrna_news')->render();// or method that you prefere to return data + RENDER is the key here
+            }else{
+                $returnHTML = view($this->view.'third_party_news')->render();// or method that you prefere to return data + RENDER is the key here
+            }
+        }
+
+        return response()->json( array('success' => true, 'html'=>$returnHTML) );
+    }
+
     public function store(Request $request)
-    {       
-        
-   
+    {
+
             $this->validate(\request(), [
-                'description' => 'required',
-                // 'bottom_description' => 'required',
-                'seo_title' => 'nullable',
-                'seo_description' => 'nullable',
-                'publish_date' =>'required',
-                'keyword' => 'required',
-                'meta-keyword' => 'nullable',
-                'status' => 'required',
-                'image' => 'required|file|mimes:jpeg,png,jpg,pdf'
+                'title' => 'required|string',
+                'news_type' => 'required|numeric',
+                'image' => 'required|file|mimes:jpeg,png,jpg',
+                'status' => 'required|numeric',
+                'publish_date' => 'required|date',
+                'type' => 'required|numeric',
+                'description' => 'required_if:news_type,==,1',
+                'url' => 'required_if:news_type,==,2',
             ]);
-            if($request->hasFile('image')){
+
+        if($request->hasFile('image')){
                 $extension = \request()->file('image')->getClientOriginalExtension();
-                $image_folder_type = array_search('blog',config('custom.image_folders')); //for image saved in folder
+                $image_folder_type = array_search('news',config('custom.image_folders')); //for image saved in folder
                 $count = rand(100,999);
                 $out_put_path = User::save_image(\request('image'),$extension,$count,$image_folder_type);
                 $image_path1 = $out_put_path[0];
@@ -68,17 +99,49 @@ class NewsAndUpdateController extends Controller
             $requestData['image'] = $image_path1;
         }
 
-        $requestData['slug'] = Setting::create_slug($requestData['keyword']);
-        $setting = News::create($requestData);
-        if(\request('point_title')){
-            foreach (\request('point') as $index => $value){
-                $setting_point = new NewsPoint();
-                $setting_point->news_id = $setting->id;
-                $setting_point->point = $value;
-                $setting_point->save();
+        $requestData['slug'] = Setting::create_slug($requestData['title']);
+
+        try{
+            DB::beginTransaction();
+            //create news
+            $setting = new News();
+            $setting->news_type = $requestData['news_type'];
+            $setting->image = $requestData['image'];
+            $setting->slug = $requestData['slug'];
+            $setting->status = $requestData['status'];
+            $setting->publish_date = $requestData['publish_date'];
+            $setting->title = $requestData['title'];
+            $setting->type = $requestData['type'];
+            $setting->save();
+            if($setting->news_type == array_search('NRNA',config('custom.news_types'))){
+                $nrna_news = new NrnaNews();
+                $nrna_news->news_id  = $setting->id;
+                $nrna_news->description  = $requestData['description'];
+                $nrna_news->seo_title  = $requestData['seo_title'];
+                $nrna_news->seo_description  = $requestData['seo_description'];
+                $nrna_news->keyword  = $requestData['keyword'];
+                $nrna_news->meta_keyword  = $requestData['meta_keyword'];
+                $nrna_news->image_alt  = $requestData['image_alt'];
+                $nrna_news->image_caption  = $requestData['image_caption'];
+                $nrna_news->image_credit  = $requestData['image_credit'];
+                $nrna_news->save();
+            }else{
+                $third_party_news = new ThirdPartyNews();
+                $third_party_news->news_id = $setting->id;
+                $third_party_news->url = $requestData['url'];
+                $third_party_news->save();
             }
+
+            DB::commit();
         }
-        Session::flash('success','Blog successfully created');
+        catch(\Exception $e){
+            DB::rollback();
+            throw $e;
+        }
+
+
+
+        Session::flash('success','News successfully created!');
         return redirect($this->redirect);
     }
 
@@ -89,31 +152,28 @@ class NewsAndUpdateController extends Controller
     }
 
     public function edit($id){
-        $setting =News::findorfail($id);
+        $setting = News::findorfail($id);
         return view($this->view.'edit',compact('setting'));
     }
 
-    public function update(Request $request, $id){
-
-//        dd(\request()->all());
+    public function update(Request $request, $id)
+    {
         $setting =News::findorfail($id);
         $this->validate(\request(), [
-            'description' => 'required',
-            'seo_title' => 'nullable',
-            'seo_description' => 'nullable',
-            'keyword' => 'required',
-            'meta-keyword' => 'nullable',
-            'status' => 'required',
-            'publish_date'=>'required',
+            'title' => 'required|string',
+            'news_type' => 'required|numeric',
+            'image' => 'sometimes|file|mimes:jpeg,png,jpg',
+            'status' => 'required|numeric',
+            'publish_date' => 'required|date',
+            'type' => 'required|numeric',
+            'description' => 'required_if:news_type,==,1',
+            'url' => 'required_if:news_type,==,2',
         ]);
 
         if(\request('image')){
-            $this->validate(\request(),[
-                'image' => 'file|mimes:jpeg,png,jpg,pdf'
-            ]);
             if($request->hasFile('image')){
                 $extension = \request()->file('image')->getClientOriginalExtension();
-                $image_folder_type = array_search('blog',config('custom.image_folders')); //for image saved in folder
+                $image_folder_type = array_search('news',config('custom.image_folders')); //for image saved in folder
                 $count = rand(100,999);
                 $out_put_path = User::save_image(\request('image'),$extension,$count,$image_folder_type);
                 $image_path1 = $out_put_path[0];
@@ -125,32 +185,81 @@ class NewsAndUpdateController extends Controller
 
 
         $requestData = $request->all();
-        $requestData['slug'] = Setting::create_slug($requestData['keyword']);
         if(isset($image_path1)){
             $requestData['image'] = $image_path1;
         }
-        $setting->fill($requestData);
-        $setting->save();
-        if(\request('point_title') ){
-            if(\request('point')){
-                foreach (\request('point') as $index => $value){
-                    $setting_point = new NewsPoint();
-                    $setting_point->news_and_update_id = $setting->id;
-                    $setting_point->point = $value;
-                    $setting_point->save();
+
+        try{
+            DB::beginTransaction();
+            //update news
+            if($setting->news_type == $requestData['news_type']){
+                $setting->news_type = $requestData['news_type'];
+                if(isset($requestData['image'])){
+                    $setting->image = $requestData['image'];
                 }
-            }
-            if(\request('point_old_id')){
-                foreach (\request('point_old_id') as $in => $value1){
-                    $setting_point_update = NewsPoint::findOrFail($value1);
-                    $setting_point_update->news_and_update_id = $setting->id;
-                    $setting_point_update->point = \request('point_old')[$in];
-                    $setting_point_update->save();
+                $setting->status = $requestData['status'];
+                $setting->publish_date = $requestData['publish_date'];
+                $setting->title = $requestData['title'];
+                $setting->type = $requestData['type'];
+                $setting->save();
+                if($setting->news_type == array_search('NRNA',config('custom.news_types'))){
+                    $nrna_news = $setting->nrn_news;
+                    $nrna_news->description  = $requestData['description'];
+                    $nrna_news->seo_title  = $requestData['seo_title'];
+                    $nrna_news->seo_description  = $requestData['seo_description'];
+                    $nrna_news->keyword  = $requestData['keyword'];
+                    $nrna_news->meta_keyword  = $requestData['meta_keyword'];
+                    $nrna_news->image_alt  = $requestData['image_alt'];
+                    $nrna_news->image_caption  = $requestData['image_caption'];
+                    $nrna_news->image_credit  = $requestData['image_credit'];
+                    $nrna_news->save();
+                }else{
+                    $third_party_news = $setting->third_party_news;
+                    $third_party_news->url = $requestData['url'];
+                    $third_party_news->save();
+                }
+            }else{
+                if($setting->nrn_news){
+                    $setting->nrn_news->delete();
+                }
+                if($setting->third_party_news){
+                    $setting->third_party_news->delete();
+                }
+                $setting->news_type = $requestData['news_type'];
+                $setting->image = $requestData['image'];
+                $setting->status = $requestData['status'];
+                $setting->publish_date = $requestData['publish_date'];
+                $setting->title = $requestData['title'];
+                $setting->type = $requestData['type'];
+                $setting->save();
+                if($setting->news_type == array_search('NRNA',config('custom.news_types'))){
+                    $nrna_news = new NrnaNews();
+                    $nrna_news->news_id  = $setting->id;
+                    $nrna_news->description  = $requestData['description'];
+                    $nrna_news->seo_title  = $requestData['seo_title'];
+                    $nrna_news->seo_description  = $requestData['seo_description'];
+                    $nrna_news->keyword  = $requestData['keyword'];
+                    $nrna_news->image_alt  = $requestData['image_alt'];
+                    $nrna_news->image_caption  = $requestData['image_caption'];
+                    $nrna_news->image_credit  = $requestData['image_credit'];
+                    $nrna_news->save();
+                }else{
+                    $third_party_news = new ThirdPartyNews();
+                    $third_party_news->news_id = $setting->id;
+                    $third_party_news->url = $requestData['url'];
+                    $third_party_news->save();
                 }
             }
 
+
+
+            DB::commit();
         }
-        Session::flash('success','Blog succesffuly edited.');
+        catch(\Exception $e){
+            DB::rollback();
+            throw $e;
+        }
+        Session::flash('success','News successfully updated!');
         return redirect($this->redirect);
 
     }
