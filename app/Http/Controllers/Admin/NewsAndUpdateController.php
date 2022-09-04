@@ -90,9 +90,11 @@ class NewsAndUpdateController extends Controller
         if($request->hasFile('image')){
                 $extension = \request()->file('image')->getClientOriginalExtension();
                 $image_folder_type = array_search('news',config('custom.image_folders')); //for image saved in folder
-                $count = rand(100,999);
-                $out_put_path = User::save_image(\request('image'),$extension,$count,$image_folder_type);
-                $image_path1 = $out_put_path[0];
+                $count = rand(1000,9999).date('YYYY-mm-dd');
+                $directory = User::makeDirectory($image_folder_type);
+                $file_name = $count.'news.'.$extension;
+                \request()->file('image')->move($directory,$file_name);
+                $image_path1 = $directory.$file_name;
             }
 
         $requestData = $request->all();
@@ -172,17 +174,14 @@ class NewsAndUpdateController extends Controller
             'url' => 'required_if:news_type,==,2',
         ]);
 
-        if(\request('image')){
-            if($request->hasFile('image')){
-                $extension = \request()->file('image')->getClientOriginalExtension();
-                $image_folder_type = array_search('news',config('custom.image_folders')); //for image saved in folder
-                $count = rand(100,999);
-                $out_put_path = User::save_image(\request('image'),$extension,$count,$image_folder_type);
-                $image_path1 = $out_put_path[0];
-                if (is_file(public_path().'/'.$setting->image) && file_exists(public_path().'/'.$setting->image)){
-                    unlink(public_path().'/'.$setting->image);
-                }
-            }
+        if($request->hasFile('image')){
+            $extension = \request()->file('image')->getClientOriginalExtension();
+            $image_folder_type = array_search('news',config('custom.image_folders')); //for image saved in folder
+            $count = rand(1000,9999).date('YYYY-mm-dd');
+            $directory = User::makeDirectory($image_folder_type);
+            $file_name = $count.'news.'.$extension;
+            \request()->file('image')->move($directory,$file_name);
+            $image_path1 = $directory.$file_name;
         }
 
 

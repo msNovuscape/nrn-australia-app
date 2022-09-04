@@ -32,7 +32,8 @@ class NewsController extends ApiBaseController
 
      }
     public function index(Request $request){
-        return $this->sendResponse($this->news->all($request->all()), 'News fetched successfully');
+        $settings = News::where('status',1)->get();
+        return NewsResource::collection($settings);
 
     }
     public function show($id)

@@ -3,7 +3,10 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\NewsController;
-use App\Http\Controllers\TestController;
+use App\Http\Controllers\Api\HomeController;
+use App\Http\Controllers\Api\MembershipTypeController;
+use App\Http\Controllers\Api\MemberController;
+use App\Http\Controllers\Api\EmailVerifyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,16 +30,16 @@ Route::group(['namespace' => 'Api' ,'prefix' => 'v1'], function() {
 });
 
 Route::group(['namespace' => 'Api' ,'prefix' => 'v1','middleware' => ['jwt.verify']], function() {
-    Route::get('/home', [\App\Http\Controllers\Api\HomeController::class, 'index']);
-    Route::get('/membership_type', [\App\Http\Controllers\Api\MembershipTypeController::class, 'index']);
-    Route::post('/member', [\App\Http\Controllers\Api\MemberController::class, 'store']);
-    Route::get('/member', [\App\Http\Controllers\Api\MemberController::class, 'index']);
-    Route::get('/member/config', [\App\Http\Controllers\Api\MemberController::class, 'member_config']);
-    Route::get('/member/{phone}', [\App\Http\Controllers\Api\MemberController::class, 'check_phone']);
-    Route::post('/member/send-email/', [\App\Http\Controllers\Api\EmailVerifyController::class, 'send_mail']);
-    Route::post('/member/verify-email/', [\App\Http\Controllers\Api\EmailVerifyController::class, 'verify']);
-    Route::post('/member/is_verified/', [\App\Http\Controllers\Api\EmailVerifyController::class, 'is_verified']);
-    Route::get('/news', [\App\Http\Controllers\Api\NewsController::class, 'index']);
-    Route::get('/news/{id}', [\App\Http\Controllers\Api\NewsController::class, 'show']);
+    Route::get('home',[HomeController::class, 'index']);
+    Route::get('/membership_type', [MembershipTypeController::class, 'index']);
+    Route::post('/member', [MemberController::class, 'store']);
+    Route::get('/member', [MemberController::class, 'index']);
+    Route::get('/member/config', [MemberController::class, 'member_config']);
+    Route::get('/member/{phone}', [MemberController::class, 'check_phone']);
+    Route::post('/member/send-email/', [EmailVerifyController::class, 'send_mail']);
+    Route::post('/member/verify-email/', [EmailVerifyController::class, 'verify']);
+    Route::post('/member/is_verified/', [EmailVerifyController::class, 'is_verified']);
+    Route::get('/news', [NewsController::class, 'index']);
+    Route::get('news/{id}', [NewsController::class,'show']);
 
 });
