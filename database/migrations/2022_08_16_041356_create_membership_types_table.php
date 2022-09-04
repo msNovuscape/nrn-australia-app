@@ -14,7 +14,6 @@ class CreateMembershipTypesTable extends Migration
     {
         Schema::create('membership_types', function (Blueprint $table) {
             $table->id();
-            
             $table->string('name');
             $table->string('expiration_years')->nullable();
             $table->enum('status',['1','2']); // 1 for active , 2 for de-active

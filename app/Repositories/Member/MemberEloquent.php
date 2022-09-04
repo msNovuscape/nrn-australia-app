@@ -41,13 +41,13 @@ class MemberEloquent implements MemberRepository
 
     public function store($attributes)
     {
-        $member_id = isset($attributes['id']) ? $attributes['id'] : 0;
+        $member_id = isset($attributes['user_id']) ? $attributes['user_id'] : 0;
         $attributes['first_name'] = ucfirst($attributes['first_name']);
         $attributes['last_name'] = ucfirst($attributes['last_name']);
         $attributes['middle_name'] = isset($attributes['middle_name']) ? ucfirst($attributes['middle_name']) : null;
 
         if(isset($attributes['image'])){
-            $memberImage = (new Member())->where('id', $member_id)->first();
+            $memberImage = (new Member())->where('user_id', $member_id)->first();
             if(!empty($memberImage)){
                 $memberImage->delete();
                 $path = public_path().parse_url($memberImage->image)['path'];
@@ -59,7 +59,7 @@ class MemberEloquent implements MemberRepository
 
 
         $data = $this->model->updateOrCreate([
-            'id' => $member_id
+            'user_id' => $member_id
         ],$attributes);
 
         $identification_image = $this->model->saveImage($attributes['identification_image'],'identification_image');
