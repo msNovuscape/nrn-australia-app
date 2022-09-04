@@ -37,6 +37,10 @@ class MemberController extends Controller
     {
         return view($this->view . 'create');
     }
+    public function edit()
+    {
+        return view($this->view . 'edit');
+    }
     public function show($id)
     {
         $member = Member::findorfail($id);
