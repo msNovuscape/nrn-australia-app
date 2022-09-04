@@ -53,8 +53,10 @@ class MemberController extends Controller
         
     }
 
-    public function update_status($id,$status){
+    public function update_status(Request $request){
 
+        $id = $request->id;
+        $status = $request->membership_status_id;
         $setting = Member::findorfail($id);
         $previous_status = $setting->membership_status_id;
         
@@ -65,7 +67,7 @@ class MemberController extends Controller
                 $setting->membership_issued_date = Carbon::now();
                 $setting->update();
             }
-            return response()->json(['msg' => 'Membership status updated successfully!'],200);
+            return response()->json(['msg' => 'Membership status updated successfully!','membership_status_id' => $setting->membership_status_id],200);
         }
         
 

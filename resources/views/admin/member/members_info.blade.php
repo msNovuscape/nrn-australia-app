@@ -25,14 +25,14 @@
                                     <div class="profile-icon mr-2">
                                         <img src="{{url('admin/images/life-icon.png')}}" alt="">
                                     </div>
-                                    <p>Life Membership</p>
+                                    <p>{{$member->membership_type->name}}</p>
                                 </div>
                             </div>
                             <div class="d-flex ml-4">
                                 <div class="profile-icon mr-1">
                                     <img src="{{url('admin/images/pending-icon.png')}}" alt="">
                                 </div>
-                                <p>{{config('custom.membership_status')[$member->membership_status_id]}}</p>
+                                <p id = "member_status">{{config('custom.membership_status')[$member->membership_status_id]}}</p>
                             </div>
                         </div>
                         <div class="profile-detail mt-4">
@@ -279,26 +279,47 @@
 @endsection
 
 @section('script')
+
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-
+$.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
 $('input[type=radio][name=membership_status_id]').change(function() {
-    var isOk = confirm('Are u sure want to change the member status?');
+    var isOk = confirm('Are u sure want to change the status?');
     var membership_status_id = this.value;
     var id = "<?php echo $member->id; ?>";
     if (isOk) {
         $.ajax({
-         url: "/admin/members/"+id+'/'+membership_status_id,
-         type: "GET",
-         
+         url: "/admin/members/update_status",
+         type: "POST",
+         data: {
+            membership_status_id: membership_status_id,
+             id: id
+         },
          success: function (response) {
-            Swal.fire({
-                  title: 'Success!!',
-                  text: (response.msg),
-                  icon: 'success'
-              }).then(function (){
-              })
+                var element = document.getElementById("member_status");
+                if(response.membership_status_id == 1){
+                    element.innerHTML = 'Pending';
+                }
+                if(response.membership_status_id == 2)
+                {
+                    element.innerHTML = 'Verfiied';
+                }
+                if(response.membership_status_id == 3){
+                    element.innerHTML = 'Rejected';
+                }
+                Swal.fire({
+                    title: 'Success!!',
+                    text: (response.msg),
+                    icon: 'success'
+                })
          }
+
+
+         
        })  ;  
      }    
 });

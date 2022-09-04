@@ -33,6 +33,10 @@ class Member extends Model
         return $this->hasOne(MemberPayment::class);
     }
 
+    public function membership_type(){
+        return $this->belongsTo(MembershipType::class);
+    }
+
     public function user(){
         return $this->belongsTo(User::class);
     }
