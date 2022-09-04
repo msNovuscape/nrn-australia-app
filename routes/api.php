@@ -7,6 +7,8 @@ use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\MembershipTypeController;
 use App\Http\Controllers\Api\MemberController;
 use App\Http\Controllers\Api\EmailVerifyController;
+use App\Http\Controllers\Api\RegisterController;
+use \App\Http\Controllers\Api\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,8 +27,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['namespace' => 'Api' ,'prefix' => 'v1'], function() {
-    Route::post('/register', [\App\Http\Controllers\Api\RegisterController::class, 'register']);
-    Route::post('/login', [\App\Http\Controllers\Api\LoginController::class, 'login']);
+    Route::post('/register', [RegisterController::class, 'register']);
+    Route::post('/login', [LoginController::class, 'login']);
 });
 
 Route::group(['namespace' => 'Api' ,'prefix' => 'v1','middleware' => ['jwt.verify']], function() {

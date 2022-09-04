@@ -32,14 +32,26 @@ class NewsController extends ApiBaseController
 
      }
     public function index(Request $request){
-        $settings = News::where('status',1)->get();
+
+        if(\request('per_page')){
+            $perpage = request('per_page');
+        }else{
+            $perpage = config('custom.per_page');
+        }
+        $settings = News::where('status',1)->orderBy('id','desc')->paginate($perpage);
         return NewsResource::collection($settings);
 
     }
+
     public function show($id)
     {
-        return $this->sendResponse($this->news->find($id), 'Single News retrieved successfully');
+        $setting = News::findOrFail($id);
+        return new NewsResource($setting);
     }
+//    public function show($id)
+//    {
+//        return $this->sendResponse($this->news->find($id), 'Single News retrieved successfully');
+//    }
 
 
 }
