@@ -3,7 +3,7 @@
 
 <div class="content-wrapper p-4 content-wrapper-mi">
     <div class="d-flex justify-content-end">
-        <img src="{{url('admin/images/edit-icon.png')}}" href="#" alt="">
+        <img src="{{url('admin/images/edit-icon.png')}}" href="{{url('admin/members/edit')}}" alt="">
     </div>
     <section class="content p-0">
         <div class="container-fluid">
@@ -14,7 +14,7 @@
                         <h6>Member personal details</h6>
                     </div>
                     <div class="card p-4 mr-1">
-                        <div class="info-profile d-flex">
+                        <div class="d-flex">
                             <div class="profile-image mr-4">
                                 <img src="{{str_replace(public_path(), url('/'), $member->images ?? '')}}" alt="">
                             </div>
@@ -191,11 +191,14 @@
                                     <div class="col-md-3">
                                         <p>{{$member->member_document->identification_expiry_date}}</p>
                                     </div>
-                                    <div class="col-md-4 d-flex detail-left">
-                                        <div class="profile-icon mr-4">
-                                            <img src="{{url('admin/images/view-icon.png')}}" alt="">
-                                        </div>
-                                        <a target = "_blank" href="{{str_replace(public_path(), url('/'), $member->member_document->identification_image)}}"><p>View Documents</p></a>
+
+                                    <div class="col-md-4 detail-left">
+                                        <a href="{{str_replace(public_path(), url('/'), $member->member_document->identification_image)}}" class="d-flex">
+                                            <div class="profile-icon mr-2">
+                                                <img src="{{url('admin/images/view-icon.png')}}" alt="">
+                                            </div>
+                                            <p>View Documents</p>
+                                        </a>
                                     </div>
                                 </div>
                                 <div class="row">
@@ -208,11 +211,14 @@
                                     <div class="col-md-3">
                                         <p>{{$member->member_document->proof_of_residency_expiry_date}}</p>
                                     </div>
-                                    <div class="col-md-4 d-flex detail-left">
-                                        <div class="profile-icon mr-4">
-                                            <img src="{{url('admin/images/view-icon.png')}}" alt="">
-                                        </div>
-                                        <a target = "_blank" href="{{str_replace(public_path(), url('/'), $member->member_document->proof_of_residency_image)}}"><p>View Documents</p></a>
+
+                                    <div class="col-md-4 detail-left">
+                                        <a href="{{str_replace(public_path(), url('/'), $member->member_document->proof_of_residency_image)}}" class="d-flex">
+                                            <div class="profile-icon mr-2">
+                                                <img src="{{url('admin/images/view-icon.png')}}" alt="">
+                                            </div>
+                                            <p>View Documents</p>
+                                        </a>
                                     </div>
                                 </div>
                                 </div>

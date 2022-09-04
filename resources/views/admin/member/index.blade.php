@@ -77,7 +77,7 @@
                                                 <a href="members/1/" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="show">
                                                     <i class="fas fa-eye"></i>
                                                 </a>
-                                                <a href="" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="edit">
+                                                <a href="{{url('admin/members/edit/')}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="edit">
                                                     <i class="fas fa-pencil-alt"></i>
                                                 </a>
                                                 <a href="" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="delete" onclick="return confirm('Are you sure want to delete?')">
@@ -293,7 +293,7 @@
                                                                 <td class="action-icons">
                                                                     <ul class="icon-button d-flex">
                                                                         <li>
-                                                                            <a href="members/1/edit/" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="edit">
+                                                                            <a href="members/edit/" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="edit">
                                                                                 <i class="fas fa-pencil-alt"></i>
                                                                             </a>
                                                                         </li>
@@ -310,12 +310,8 @@
                                                                     </ul>
                                                                 </td>
                                                             </tr>
-                                                            <tr>
-                                                                <!-- <td>
-                                                                    <div class="tblform-check ml-1">
-                                                                        <input class="checkbox" type="checkbox" value="5" id="form-check-input1">
-                                                                    </div>
-                                                                </td> -->
+                                                            <!-- <tr>
+                                                              
                                                                 <td class="pl-2">2</td>
                                                                 <td class="d-flex">
                                                                     <img src="{{url('admin/images/image-profile.png')}}" alt="">
@@ -349,11 +345,7 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <!-- <td>
-                                                                    <div class="tblform-check ml-1">
-                                                                        <input class="checkbox-input" type="checkbox" value="5" id="form-check-input1">
-                                                                    </div>
-                                                                </td> -->
+                                                              
                                                                 <td class="pl-2">3</td>
                                                                 <td class="d-flex">
                                                                     <img src="{{url('admin/images/image-profile.png')}}" alt="">
@@ -385,7 +377,7 @@
                                                                         </li>
                                                                     </ul>
                                                                 </td>
-                                                            </tr>
+                                                            </tr> -->
                                                         </tbody>
                                                     </table>
                                                 </div>

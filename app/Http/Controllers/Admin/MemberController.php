@@ -47,6 +47,30 @@ class MemberController extends Controller
         return view($this->view.'members_info',compact('member'));
     }
 
+   
+
+    public function update(Request $request, $id){
+
+//        dd(\request()->all());
+        $setting =MembershipType::findorfail($id);
+        $this->validate(\request(), [
+            'name' => 'required',
+            'amount' => 'nullable',
+            'status' => 'required',
+        ]);
+
+        
+
+
+        $requestData = $request->all();
+        $setting->fill($requestData);
+        $setting->save();
+        
+        Session::flash('success','Membership Type succesffuly edited.');
+        return redirect($this->redirect);
+
+    }
+
     public function delete($id){
         $setting=Member::findorfail($id);
         
