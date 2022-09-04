@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\ApiBaseController;
+use App\Http\Resources\NewsResource;
+use App\Models\News;
 use Illuminate\Http\Request;
 use App\Repositories\Login\LoginRepository;
 use Illuminate\Support\Facades\Auth;
@@ -50,7 +52,8 @@ class HomeController extends ApiBaseController
       $isMember = !(is_null($member) || empty($member));
 
 
-      $news = $this->sendResponse($this->news->all($request->all()), 'News fetched successfully');
+//      $news = $this->sendResponse($this->news->all($request->all()), 'News fetched successfully');
+      $news = News::where('status',1)->get();
        return response()->json([
             'sliders' => [
                url('/Carousal.png'),
@@ -60,7 +63,7 @@ class HomeController extends ApiBaseController
            url('/Carousal.png'),
            url('/Carousal.png')
                ],
-            'news' => $news->getData('data')['data'],
+            'news' => NewsResource::collection($news),
             'notices' => null,
             'user' => $currentUser,
             'isMember'=> $isMember,
