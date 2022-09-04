@@ -77,6 +77,7 @@ class NewsAndUpdateController extends Controller
 
             $this->validate(\request(), [
                 'title' => 'required|string',
+                'excerpt' => 'required|string',
                 'news_type' => 'required|numeric',
                 'image' => 'required|file|mimes:jpeg,png,jpg',
                 'status' => 'required|numeric',
@@ -106,6 +107,7 @@ class NewsAndUpdateController extends Controller
             //create news
             $setting = new News();
             $setting->news_type = $requestData['news_type'];
+            $setting->excerpt = $requestData['excerpt'];
             $setting->image = $requestData['image'];
             $setting->slug = $requestData['slug'];
             $setting->status = $requestData['status'];
@@ -194,6 +196,7 @@ class NewsAndUpdateController extends Controller
             //update news
             if($setting->news_type == $requestData['news_type']){
                 $setting->news_type = $requestData['news_type'];
+                $setting->excerpt = $requestData['excerpt'];
                 if(isset($requestData['image'])){
                     $setting->image = $requestData['image'];
                 }
@@ -226,6 +229,7 @@ class NewsAndUpdateController extends Controller
                     $setting->third_party_news->delete();
                 }
                 $setting->news_type = $requestData['news_type'];
+                $setting->excerpt = $requestData['excerpt'];
                 $setting->image = $requestData['image'];
                 $setting->status = $requestData['status'];
                 $setting->publish_date = $requestData['publish_date'];
@@ -250,9 +254,6 @@ class NewsAndUpdateController extends Controller
                     $third_party_news->save();
                 }
             }
-
-
-
             DB::commit();
         }
         catch(\Exception $e){

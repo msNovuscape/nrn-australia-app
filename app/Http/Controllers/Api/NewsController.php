@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\ApiBaseController;
+use App\Http\Resources\NewsResource;
+use App\Models\News;
 use Illuminate\Http\Request;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -27,7 +29,7 @@ class NewsController extends ApiBaseController
             }
         }
         $this->news = $news;
-        
+
      }
     public function index(Request $request){
         return $this->sendResponse($this->news->all($request->all()), 'News fetched successfully');
@@ -37,4 +39,6 @@ class NewsController extends ApiBaseController
     {
         return $this->sendResponse($this->news->find($id), 'Single News retrieved successfully');
     }
+
+
 }

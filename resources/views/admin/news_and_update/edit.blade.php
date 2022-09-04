@@ -48,6 +48,12 @@
                                     </span>
                                 </div>
                             </div>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label> Excerpt <span style="color: red";> * </span></label>
+                                    <input type="text" class="form-control"   name="excerpt" value="{{$setting->excerpt}}" required>
+                                </div>
+                            </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Featured News<span style="color: red";> * </span> </label>

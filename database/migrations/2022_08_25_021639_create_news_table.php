@@ -22,7 +22,8 @@ class CreateNewsTable extends Migration
             $table->enum('status',['1','2']); // 1 for active , 2 for de-active
             $table->date('publish_date');
             $table->string('title');
-            $table->enum('type',['1','2'])->default(1); //2 for feature types
+            $table->string('excerpt'); //short seo description
+            $table->enum('type',['1','2'])->default(1); //1 for feature types
             $table->timestamps();
         });
     }

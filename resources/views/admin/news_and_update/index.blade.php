@@ -56,6 +56,7 @@
                                     <tr>
                                         <th style="width: 10px">S.N.</th>
                                         <th class="text-center">Title</th>
+                                        <th class="text-center">News Type</th>
                                         <th class="text-center">Publish Date</th>
                                         <th class="text-center">Image</th>
                                         <th class="text-center">Slug</th>
@@ -68,8 +69,8 @@
                                         <tr>
                                             <th scope="row">{{$loop->iteration}}</th>
                                             <th scope="row" class="text-center">{{strip_tags($setting->title)}}</th>
+                                            <th scope="row" class="text-center">{{config('custom.news_types')[$setting->news_type]}}</th>
                                             <td class="text-center">{{$setting->publish_date}}</td>
-
                                             <td class="text-center">
                                                 <a href="{{url($setting->image)}}" target="_blank">
                                                     <img src="{{url($setting->image)}}" alt="" style="width: 100px;">
