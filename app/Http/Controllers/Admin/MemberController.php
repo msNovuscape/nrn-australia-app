@@ -63,8 +63,10 @@ class MemberController extends Controller
         $setting->membership_status_id = $status;
         if($setting->update()){
             if($previous_status == 1 && $status == 2){
-                
+                $dt = Carbon::now();
+                $year = $setting->membership_type->expiration_years;
                 $setting->membership_issued_date = Carbon::now();
+                $setting->membership_expiry_date = $dt->addYears($year);
                 $setting->update();
             }
             return response()->json(['msg' => 'Membership status updated successfully!','membership_status_id' => $setting->membership_status_id],200);

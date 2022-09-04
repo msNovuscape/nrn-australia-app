@@ -65,7 +65,7 @@ class MemberController extends ApiBaseController
 
         // TODO: Fixing profile image url with url
         $member['image'] = str_replace(public_path(), url('/'), $member['image']);
-
+        $member['membership_type_name'] = $member->membership_type->name;
         $memberDocument = $member->member_document;
         $memberPayment = $member->member_payment;
 
