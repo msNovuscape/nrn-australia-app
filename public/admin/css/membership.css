@@ -179,7 +179,6 @@
     line-height: 2rem;
     margin-top: 20px;
     color: #030E1E;
-    text-align: center;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -202,7 +201,6 @@
 /*    height: 180px;*/
 /*}*/
 .news-right-primary{
-    text-align: center;
     background: #FFFFFF;
     box-shadow: 0 4px 24px rgba(130, 130, 130, 0.08);
     border-radius: 8px;
