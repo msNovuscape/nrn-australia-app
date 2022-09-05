@@ -157,7 +157,7 @@
         </section>
         <section class="news-section">
             <div class="row gx-5">
-                <div class="col-md-7">
+                <div class="col-md-7 col-sm-12">
                     <div class="news-section-left">
                         <div class="team-header">
                             <div class="team-desc">
@@ -193,13 +193,37 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-5">
+                <div class="col-md-5 col-sm-12">
                     <div class="news-section-right">
                         <div class="notice-title">
                             <h1>Notices</h1>
                             <p>Notice and updates from NRNA - Australia</p>
                         </div>
                         <div class="notice-cards">
+                            <a href="/" class="notice-card">
+                                <div class="notice-img">
+                                    <img src="{{url('admin/images/notice-one.jpg')}}" class="w-100"/>
+                                </div>
+                                <div class="notice-card-title">
+                                    <h2>Cultural Parade - Nepal Festival Brisbane 2018</h2>
+                                    <div class="notice-card-bottom">
+                                        <h5>News</h5>
+                                        <h5>8 Aug 2022</h5>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="/" class="notice-card">
+                                <div class="notice-img">
+                                    <img src="{{url('admin/images/notice-one.jpg')}}" class="w-100"/>
+                                </div>
+                                <div class="notice-card-title">
+                                    <h2>Cultural Parade - Nepal Festival Brisbane 2018</h2>
+                                    <div class="notice-card-bottom">
+                                        <h5>News</h5>
+                                        <h5>8 Aug 2022</h5>
+                                    </div>
+                                </div>
+                            </a>
                             <a href="/" class="notice-card">
                                 <div class="notice-img">
                                     <img src="{{url('admin/images/notice-one.jpg')}}" class="w-100"/>
@@ -264,6 +288,31 @@
             autoplay: true,
             arrows: false,
             autoplaySpeed: 2000,
+            responsive: [
+                {
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 8,
+                        slidesToScroll: 3,
+                        infinite: true,
+                        dots: false
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 6,
+                        slidesToScroll: 2
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 4,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
         });
     </script>
 @endsection
