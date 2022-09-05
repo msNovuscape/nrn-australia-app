@@ -35,11 +35,6 @@ class MemberController extends Controller
         return view($this->view.'index',compact('settings','membership_types'));
     }
 
-    public function membership()
-    {
-        return view($this->view . 'membership');
-    }
-
     public function create()
     {
         return view($this->view . 'create');
@@ -54,7 +49,7 @@ class MemberController extends Controller
         return view($this->view.'members_info',compact('member'));
     }
 
-   
+
 
     public function update(Request $request, $id){
 
@@ -66,13 +61,13 @@ class MemberController extends Controller
             'status' => 'required',
         ]);
 
-        
+
 
 
         $requestData = $request->all();
         $setting->fill($requestData);
         $setting->save();
-        
+
         Session::flash('success','Membership Type succesffuly edited.');
         return redirect($this->redirect);
 

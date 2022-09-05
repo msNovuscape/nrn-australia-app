@@ -31,6 +31,7 @@ Route::group(['middleware'=>['auth']],function (){
 
         Route::get('/index', [HomeAdminController::class,'indexAdmin']);
 
+
         Route::get('news',[NewsAndUpdateController::class,'index']);
         Route::get('news/create',[NewsAndUpdateController::class,'create']);
         Route::get('news_type/{news_type}',[NewsAndUpdateController::class,'getNewsDom']);
@@ -57,7 +58,6 @@ Route::group(['middleware'=>['auth']],function (){
         Route::post('eligibility_types/{id}',[EligibilityTypeController::class,'update']);
         Route::get('eligibility_types/delete/{id}',[EligibilityTypeController::class,'delete']);
 
-        Route::get('membership',[MemberController::class,'membership']);
         Route::get('members',[MemberController::class,'index']);
         Route::get('members/show/{id}/',[MemberController::class,'show']);
         Route::post('members/update_status',[MemberController::class,'update_status']);

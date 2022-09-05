@@ -31,6 +31,7 @@
                                         <h4>Pending</h4>
                                     </div>
                                 </div>
+                                <hr>
                                 <p>Total numbers of pending member</p>
                             </a>
                         </div>
@@ -47,6 +48,7 @@
                                         <h4>Verified</h4>
                                     </div>
                                 </div>
+                                <hr>
                                 <p>Total numbers of Verified member</p>
                             </a>
                         </div>
@@ -63,6 +65,7 @@
                                         <h4>Rejected</h4>
                                     </div>
                                 </div>
+                                <hr>
                                 <p>Total numbers of Rejected members</p>
                             </a>
                         </div>
@@ -79,6 +82,7 @@
                                         <h4>Associate</h4>
                                     </div>
                                 </div>
+                                <hr>
                                 <p>Total numbers of Associate members</p>
                             </a>
                         </div>
@@ -97,62 +101,62 @@
                 </div>
             </div>
             <div class="members-display d-flex justify-content-between mt-2">
-                <div class="teams-image">
+                <a href="/" class="teams-image">
                     <img src="{{url('admin/images/nanda-gurung.jpg')}}" class="img-fluid"/>
                     <h5>Nanda</h5>
-                </div>
-                <div class="teams-image">
+                </a>
+                <a href="/"  class="teams-image">
                     <img src="{{url('admin/images/deb.jpg')}}" class="img-fluid"/>
                     <h5>Deb</h5>
-                </div>
-                <div class="teams-image">
+                </a>
+                <a href="/"  class="teams-image">
                     <img src="{{url('admin/images/ashok.jpg')}}" class="img-fluid"/>
                     <h5>Ashok</h5>
-                </div>
-                <div class="teams-image">
+                </a>
+                <a href="/"  class="teams-image">
                     <img src="{{url('admin/images/bishnu.jpg')}}" class="img-fluid"/>
                     <h5>Bishnu</h5>
-                </div>
-                <div class="teams-image">
+                </a>
+                <a href="/"  class="teams-image">
                     <img src="{{url('admin/images/binod.jpg')}}" class="img-fluid"/>
                     <h5>Binod</h5>
-                </div>
-                <div class="teams-image">
+                </a>
+                <a href="/"  class="teams-image">
                     <img src="{{url('admin/images/renuka.jpg')}}" class="img-fluid"/>
                     <h5>Renuka</h5>
-                </div>
-                <div class="teams-image">
+                </a>
+                <a href="/"  class="teams-image">
                     <img src="{{url('admin/images/ramhari.jpg')}}" class="img-fluid"/>
                     <h5>Ramhari</h5>
-                </div>
-                <div class="teams-image">
+                </a>
+                <a href="/"  class="teams-image">
                     <img src="{{url('admin/images/dipak.jpg')}}" class="img-fluid"/>
                     <h5>Ashok</h5>
-                </div>
-                <div class="teams-image">
+                </a>
+                <a href="/"  class="teams-image">
                     <img src="{{url('admin/images/rakesh-shakya.jpg')}}" class="img-fluid"/>
                     <h5>Bishnu</h5>
-                </div>
-                <div class="teams-image">
+                </a>
+                <a href="/"  class="teams-image">
                     <img src="{{url('admin/images/raju-babu-adhikari.jpg')}}" class="img-fluid"/>
                     <h5>Raju</h5>
-                </div>
-                <div class="teams-image">
+                </a>
+                <a href="/"  class="teams-image">
                     <img src="{{url('admin/images/sandhaya-shah.jpg')}}" class="img-fluid"/>
                     <h5>Sandhya</h5>
-                </div>
-                <div class="teams-image">
+                </a>
+                <a href="/"  class="teams-image">
                     <img src="{{url('admin/images/anil-pokhrel.jpg')}}" class="img-fluid"/>
                     <h5>Anil</h5>
-                </div>
-                <div class="teams-image">
+                </a>
+                <a href="/"  class="teams-image">
                     <img src="{{url('admin/images/raj-kumar-nagarkoti.jpg')}}" class="img-fluid"/>
                     <h5>Raju</h5>
-                </div>
-                <div class="teams-image">
+                </a>
+                <a href="/"  class="teams-image">
                     <img src="{{url('admin/images/manu-khadka.jpg')}}" class="img-fluid"/>
                     <h5>Sandhya</h5>
-                </div>
+                </a>
             </div>
         </section>
         <section class="news-section">
@@ -195,9 +199,14 @@
                 </div>
                 <div class="col-md-5 col-sm-12">
                     <div class="news-section-right">
-                        <div class="notice-title">
-                            <h1>Notices</h1>
-                            <p>Notice and updates from NRNA - Australia</p>
+                        <div class="notices-header">
+                            <div class="notice-title">
+                                <h1>Notices</h1>
+                                <p>Notice and updates from NRNA - Australia</p>
+                            </div>
+                            <div class="team-breadcrum">
+                                <a href="/view-all">View all</a>
+                            </div>
                         </div>
                         <div class="notice-cards">
                             <a href="/" class="notice-card">

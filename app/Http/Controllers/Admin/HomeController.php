@@ -14,7 +14,7 @@ class HomeController extends Controller
     {
 
         if(Auth::check()){
-            return view('admin.index');
+            return view('admin.member.membership');
         }
 
         return view('admin.login');

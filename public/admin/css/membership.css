@@ -52,19 +52,20 @@
     border: 1px solid #E8EBFA;
     border-radius: 10px;
     padding: 12px;
+    cursor: pointer;
 }
 .pending-card:hover p{
     color: #444791;
 }
-.pending-card:hover p::before{
-    border-top: 2px solid #444791;
+.pending-card:hover hr{
+    border-top: 1px solid #444791;
 }
-.pending-card p::before{
-    content: "";
-    border-top: 2px solid #E8EBFA;
-    display: block;
-    margin: 12px 0;
-}
+/*.pending-card p::before{*/
+/*    content: "";*/
+/*    border-top: 2px solid #E8EBFA;*/
+/*    display: block;*/
+/*    margin: 12px 0;*/
+/*}*/
 .pending-card p{
     font-weight: 500;
     font-size: 16px;
@@ -97,6 +98,9 @@
     width: 80px;
     height: 100px;
 }
+.teams-image:hover h5{
+    color: #444791;
+}
 .teams-image img{
     border-radius: 50%;
 }
@@ -123,6 +127,10 @@
     height: 380px;
     overflow: auto;
     text-align:justify;
+    overflow-y: scroll;
+    scrollbar-width: 4px;
+    scrollbar-track-color:#F2F2F2;
+    scrollbar-face-color: #FAFBFF;
 }
 .notice-cards::-webkit-scrollbar {
     width: 4px;
@@ -130,6 +138,10 @@
     border-radius: 14px;
 }
 
+.notices-header{
+    display: flex;
+    justify-content: space-between;
+}
 /* Track */
 .notice-cards::-webkit-scrollbar-track {
     background: #F2F2F2;
@@ -142,10 +154,6 @@
     border-radius: 14px;
 }
 
-/* Handle on hover */
-.notice-cards::-webkit-scrollbar-thumb:hover {
-    background: #b30000;
-}
 .left-news-image img{
     border-radius: 8px;
 }
@@ -274,6 +282,12 @@
         color: #9B9B9B;
     }
     .team-header {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+        justify-content: space-between;
+    }
+    .notices-header{
         display: flex;
         flex-direction: column;
         margin-bottom: 20px;
