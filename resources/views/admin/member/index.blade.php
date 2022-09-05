@@ -155,10 +155,10 @@
                                             <div class="col-md-10">
                                                 <select class="form-select w-100" aria-label="Default select example" name="course_id">
                                                     <option selected="" disabled="">Select State</option>
-                                                    <option value="1">State 1</option>
-                                                    <option value="2">State 2</option>
-                                                    <option value="3">State 3</option>
-                                                    <option value="4">State 4</option>
+                                        @foreach(config('custom.states') as $in => $val)
+                                            <option value="{{$in}}" @if(old('states') == $in) selected @endif >{{$val}}</option>
+                                        @endforeach
+
                                                 </select>
                                             </div>
                                             <div class="col-md-1">
