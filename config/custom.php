@@ -34,9 +34,13 @@ return [
         '3' => 'Not mentioned'
     ],
     'states' =>[
-        '1'=> 'Male',
-        '2'=> 'Female',
-        '3' => 'Not mentioned'
+        '1'=> 'Queensland',
+        '2'=> 'South Australia',
+        '3' => 'Tasmania',
+        '4' => 'Victoria',
+        '5' => 'Western Australia',
+        '6' => 'Northern Territory',
+        '7' => 'Australian Capital Territory'
     ],
     'countries' =>[
         '1'=> 'Australia',
