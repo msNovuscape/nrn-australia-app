@@ -131,9 +131,9 @@
                                             <div class="col-md-10">
                                                 <select class="form-select w-100" aria-label="Default select example" name="course_id">
                                                     <option selected="" disabled="">Search member type</option>
-                                                    <option value="1">Member 1</option>
-                                                    <option value="2">Member 2</option>
-                                                    <option value="2">Member 3</option>
+                                                    @foreach($membership_types as $membership_type)
+                                                        <option value="{{$membership_type->id}}">{{$membership_type->name}}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                             <div class="col-md-1">
@@ -272,6 +272,7 @@
                                                             </tr>
                                                         </thead>
                                                         <tbody id="student_list">
+                                                            @foreach($settings as $member)
                                                             <tr>
                                                                 <!-- <td>
                                                                     <div class="tblform-check ml-1">
@@ -282,23 +283,23 @@
                                                                 <td class="d-flex">
                                                                     <img src="{{url('admin/images/image-profile.png')}}" alt="">
                                                                     <div class="d-flex flex-column name-table">
-                                                                        <p>Suman Tamang</p>
+                                                                        <p>{{$member->first_name. ($member->middle_name ? ' '.$member->middle_name.' '.$member->last_name : ' '.$member->last_name)}}</p>
                                                                         <p>NRNA-2022601</p>
                                                                     </div>
                                                                 </td>
-                                                                <td>suman@extratechs.com.au</td>
-                                                                <td>Sydney, NSW</td>
-                                                                <td>Associate Member</td>
-                                                                <td class="verified status"><i class="fas fa-check"></i>Verified</td>
+                                                                <td>{{$member->email}}</td>
+                                                                <td>{{config('custom.states')[$setting->state_id]}}</td>
+                                                                <td>{{$member->membership_type->name}}</td>
+                                                                <td class="verified status"><i class="fas fa-check"></i>{{config('custom.membership_status')[$setting->membership_status_id]}}</td>
                                                                 <td class="action-icons">
                                                                     <ul class="icon-button d-flex">
                                                                         <li>
-                                                                            <a href="members/edit/" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="edit">
+                                                                            <a href="{{url('admin/members/edit/'.$member->id)}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="edit">
                                                                                 <i class="fas fa-pencil-alt"></i>
                                                                             </a>
                                                                         </li>
                                                                         <li>
-                                                                            <a href="members/1/show" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="show">
+                                                                            <a href="{{url('admin/members/show/'.$member->id)}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="show">
                                                                                 <i class="fas fa-eye"></i>
                                                                             </a>
                                                                         </li>
@@ -310,6 +311,7 @@
                                                                     </ul>
                                                                 </td>
                                                             </tr>
+                                                            @endforeach
                                                             <!-- <tr>
                                                               
                                                                 <td class="pl-2">2</td>

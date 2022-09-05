@@ -58,10 +58,10 @@ Route::group(['middleware'=>['auth']],function (){
         Route::get('eligibility_types/delete/{id}',[EligibilityTypeController::class,'delete']);
 
         Route::get('members',[MemberController::class,'index']);
-        // Route::get('members/{id}/',[MemberController::class,'show']);
+        Route::get('members/show/{id}/',[MemberController::class,'show']);
         Route::post('members/update_status',[MemberController::class,'update_status']);
         // Route::get('members/{id}',[MemberController::class,'show']);
-        Route::get('members/{id}',[MemberController::class,'edit']);
+        Route::get('members/edit/{id}',[MemberController::class,'edit']);
         Route::get('members/members_info',[MemberController::class,'members_info']);
 
     });

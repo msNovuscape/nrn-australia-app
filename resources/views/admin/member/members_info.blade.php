@@ -16,7 +16,7 @@
                     <div class="card p-4 mr-1">
                         <div class="d-flex">
                             <div class="profile-image mr-4">
-                                <img src="{{str_replace(public_path(), url('/'), $member->images ?? '')}}" alt="">
+                                <img src="{{str_replace(public_path(), url('/'), $member->image ?? '')}}" alt="">
                             </div>
                             <div class="profile-name d-flex flex-column">
                                 <p>{{$member->first_name. ($member->middle_name ? ' '.$member->middle_name.' '.$member->last_name : ' '.$member->last_name)}}</p>
@@ -164,10 +164,18 @@
                                 Pending
                             </label>
                         </div>
+                        
                         <div class="form-check">
                             <input class="form-check-input" type="radio" name="membership_status_id" id="exampleRadios3" value="3" {{$member->membership_status_id == 3 ? 'checked' : ''}}>
                             <label class="form-check-label" for="exampleRadios3">
                                 Rejected
+                            </label>
+                        </div>
+
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="membership_status_id" id="exampleRadios3" value="4" {{$member->membership_status_id == 4 ? 'checked' : ''}}>
+                            <label class="form-check-label" for="exampleRadios3">
+                                Reapply
                             </label>
                         </div>
                     </div>
@@ -316,6 +324,10 @@ $('input[type=radio][name=membership_status_id]').change(function() {
                 }
                 if(response.membership_status_id == 3){
                     element.innerHTML = 'Rejected';
+                }
+
+                if(response.membership_status_id == 4){
+                    element.innerHTML = 'Reapply';
                 }
                 Swal.fire({
                     title: 'Success!!',

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 
 use App\Models\Setting;
 use App\Models\Member;
+use App\Models\MembershipType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -29,8 +30,9 @@ class MemberController extends Controller
             $key = \request('status');
             $settings = $settings->where('status',$key);
         }
+        $membership_types = MembershipType::where('status',1)->get();
         $settings = $settings->paginate(config('custom.per_page'));
-        return view($this->view.'index',compact('settings'));
+        return view($this->view.'index',compact('settings','membership_types'));
     }
 
     public function create()
