@@ -1,0 +1,282 @@
+.pending-card h2{
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 20px;
+}
+.pending-card h4{
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 19px;
+    color: #444791;
+}
+.membership-desc h1, .team-desc h1{
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 38px;
+    color: #000000;
+}
+.membership-desc p, .team-desc p{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 17px;
+    color: #9B9B9B;
+}
+.membership-breadcrum a{
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 28px;
+    color: #7D7D7D;
+}
+.membership-breadcrum a:hover{
+    color: #444791;
+}
+.pending-top{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+.verified-desc h2{
+ color: #1AAC4C;
+}
+.associate-desc h2{
+    color: #030E1E;
+}
+.rejected-desc h2{
+    color: #E71E1E;
+}
+.pending-desc h2{
+    color: #E7A11A;
+}
+.pending-card{
+    background: #FFFFFF;
+    border: 1px solid #E8EBFA;
+    border-radius: 10px;
+    padding: 12px;
+}
+.pending-card:hover p{
+    color: #444791;
+}
+.pending-card:hover p::before{
+    border-top: 2px solid #444791;
+}
+.pending-card p::before{
+    content: "";
+    border-top: 2px solid #E8EBFA;
+    display: block;
+    margin: 12px 0;
+}
+.pending-card p{
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 23px;
+    color: #D0D1E9;
+    display: inline-block;
+}
+.team-header{
+    display: flex;
+    justify-content: space-between;
+}
+.team-breadcrum a{
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 17px;
+    text-decoration-line: underline;
+    color: #030E1E;
+}
+.team-breadcrum a:hover{
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 17px;
+    text-decoration-line: underline;
+    color: #444791;
+}
+.teams-image{
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    width: 80px;
+    height: 100px;
+}
+.teams-image img{
+    border-radius: 50%;
+}
+.teams-image h5{
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 32px;
+    color: #000000;
+}
+.left-news{
+    width: 64%;
+}
+.left-news:hover p{
+    color: #444791;
+}
+.news-right-primary:hover p{
+    color: #444791;
+}
+.notice-card:hover h2{
+    color: #444791;
+}
+.notice-cards{
+    width: 100%;
+    height: 380px;
+    overflow: auto;
+    text-align:justify;
+}
+.notice-cards::-webkit-scrollbar {
+    width: 4px;
+    background: #F2F2F2;
+    border-radius: 14px;
+}
+
+/* Track */
+.notice-cards::-webkit-scrollbar-track {
+    background: #F2F2F2;
+    border-radius: 10px;
+}
+
+/* Handle */
+.notice-cards::-webkit-scrollbar-thumb {
+    background: #FAFBFF;
+    border-radius: 14px;
+}
+
+/* Handle on hover */
+.notice-cards::-webkit-scrollbar-thumb:hover {
+    background: #b30000;
+}
+.left-news-image img{
+    border-radius: 8px;
+}
+.news-section{
+    padding: 0 1.5rem 1.5rem 1.5rem;
+}
+/*.news-section .row{*/
+/*    display: flex;*/
+/*    justify-content: space-between;*/
+/*    gap: 20px;*/
+/*}*/
+.news-section .news-section-left, .news-section .news-section-right{
+    background: #FFFFFF;
+    border-radius: 12px;
+    padding: 18px;
+}
+/*.content-team .slick-slider{*/
+/*    margin-bottom: 0 !important;*/
+/*}*/
+.left-news p{
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 2rem;
+    margin-top: 20px;
+    color: #030E1E;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.left-news h5{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.6rem;
+    color: #A4A4A4;
+    float: right;
+}
+.news-right{
+    width: 32%;
+}
+.news-right-img img{
+    border-radius: 8px 8px 0 0;
+}
+/*.news-right-img{*/
+/*    width: 100%;*/
+/*    height: 180px;*/
+/*}*/
+.news-right-primary{
+    text-align: center;
+    background: #FFFFFF;
+    box-shadow: 0 4px 24px rgba(130, 130, 130, 0.08);
+    border-radius: 8px;
+}
+.news-right-primary p{
+    padding: 2px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 2rem;
+    color: #030E1E;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.notice-title h1{
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 38px;
+    color: #000000;
+}
+.notice-title p{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 17px;
+    color: #9B9B9B;
+}
+.notice-card{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 5px;
+    margin-top: 20px;
+    background: #FFFFFF;
+    border: 1px solid #FDFDFD;
+    box-shadow: 0 4px 24px rgba(130, 130, 130, 0.08);
+    border-radius: 8px;
+}
+.notice-card-bottom{
+    display: flex;
+    justify-content: space-between;
+}
+.notice-card-bottom h5{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 2rem;
+    color: #A4A4A4;
+}
+.notice-img{
+    width: 100px;
+    height: 100px;
+}
+.notice-img img{
+    border-radius: 8px;
+}
+.notice-card-title h2{
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 2rem;
+    color: #1C1C1E;
+}
+
+/* media query */
+@media only screen and (min-width: 320px) and (max-width: 480px) {
+    .membership-desc{
+        padding-right: 20px;
+    }
+    .membership-desc h1, .team-desc h1 {
+        font-weight: 700;
+        font-size: 24px;
+        line-height: 38px;
+        color: #000000;
+    }
+    .membership-desc p, .team-desc p {
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 20px;
+        color: #9B9B9B;
+    }
+    .team-header {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 20px;
+        justify-content: space-between;
+    }
+}

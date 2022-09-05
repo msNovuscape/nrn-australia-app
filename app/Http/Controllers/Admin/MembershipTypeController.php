@@ -40,7 +40,7 @@ class MembershipTypeController extends Controller
     }
 
     public function store(Request $request)
-    {       
+    {
 
             $this->validate(\request(), [
                 'name' => 'required',
@@ -48,7 +48,7 @@ class MembershipTypeController extends Controller
                 'status' => 'required',
             ]);
         $requestData = $request->all();
-        
+
         $setting = MembershipType::create($requestData);
         $eligibility_type_ids = $request['eligibility_type_ids'] ;
         $setting->eligibility_types()->attach($eligibility_type_ids);
@@ -79,7 +79,7 @@ class MembershipTypeController extends Controller
             'status' => 'required',
         ]);
 
-        
+
 
 
         $requestData = $request->all();
@@ -94,11 +94,11 @@ class MembershipTypeController extends Controller
 
     public function delete($id){
         $setting=MembershipType::findorfail($id);
-        
+
         if($setting->delete()){
             Session::flash('success','Membership Type is deleted !');
             return redirect($this->redirect);
         }
-        
+
     }
 }

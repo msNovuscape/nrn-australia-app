@@ -57,6 +57,7 @@ Route::group(['middleware'=>['auth']],function (){
         Route::post('eligibility_types/{id}',[EligibilityTypeController::class,'update']);
         Route::get('eligibility_types/delete/{id}',[EligibilityTypeController::class,'delete']);
 
+        Route::get('membership',[MemberController::class,'membership']);
         Route::get('members',[MemberController::class,'index']);
         Route::get('members/show/{id}/',[MemberController::class,'show']);
         Route::post('members/update_status',[MemberController::class,'update_status']);

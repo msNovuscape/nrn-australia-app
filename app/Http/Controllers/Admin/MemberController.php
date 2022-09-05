@@ -35,6 +35,11 @@ class MemberController extends Controller
         return view($this->view.'index',compact('settings','membership_types'));
     }
 
+    public function membership()
+    {
+        return view($this->view . 'membership');
+    }
+
     public function create()
     {
         return view($this->view . 'create');
@@ -75,12 +80,12 @@ class MemberController extends Controller
 
     public function delete($id){
         $setting=Member::findorfail($id);
-        
+
         if($setting->delete()){
             Session::flash('success','Member successfully deleted !');
             return redirect($this->redirect);
         }
-        
+
     }
 
     public function update_status(Request $request){
@@ -89,7 +94,7 @@ class MemberController extends Controller
         $status = $request->membership_status_id;
         $setting = Member::findorfail($id);
         $previous_status = $setting->membership_status_id;
-        
+
         $setting->membership_status_id = $status;
         if($setting->update()){
             if($previous_status == 1 && $status == 2){
@@ -103,7 +108,7 @@ class MemberController extends Controller
             }
             return response()->json(['msg' => 'Membership status updated successfully!','membership_status_id' => $setting->membership_status_id],200);
         }
-        
+
 
     }
 }
