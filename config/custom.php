@@ -64,13 +64,14 @@ return [
     'image_folders'=>[
         '1' =>'setting',
         '2' =>'about_us',
-        '3'=>'service',
-        '4'=>'slider',
-        '5' => 'team',
-        '6' => 'blog',
-        '7' => 'news',
-
-
+        '3'=>'slider',
+        '4' => 'team',
+        '5' => 'blog',
+        '6' => 'news',
+        '7' => 'profile_image',
+        '8' => 'identification_image',
+        '9' => 'proof_of_residency_image',
+        '10' => 'payment_slip',
     ],
     'course_types'=>[
         '1' =>'Upcoming Courses',

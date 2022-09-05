@@ -127,6 +127,30 @@ class User extends Authenticatable implements JWTSubject
             }
             return $directory = 'images/slider/' . $year . '/' . $month . '/' . $day . '/';
         }
+        if(config('custom.image_folders')[$image_folder_type] == 'profile_image') {
+            if (!is_dir(public_path() . '/images/profile_image/' . $year . '/' . $month . '/' . $day)) {
+                mkdir(public_path() . '/images/profile_image/' . $year . '/' . $month . '/' . $day, 0755, true);
+            }
+            return $directory = 'images/profile_image/' . $year . '/' . $month . '/' . $day . '/';
+        }
+        if(config('custom.image_folders')[$image_folder_type] == 'identification_image') {
+            if (!is_dir(public_path() . '/images/identification_image/' . $year . '/' . $month . '/' . $day)) {
+                mkdir(public_path() . '/images/identification_image/' . $year . '/' . $month . '/' . $day, 0755, true);
+            }
+            return $directory = 'images/identification_image/' . $year . '/' . $month . '/' . $day . '/';
+        }
+        if(config('custom.image_folders')[$image_folder_type] == 'proof_of_residency_image') {
+            if (!is_dir(public_path() . '/images/proof_of_residency_image/' . $year . '/' . $month . '/' . $day)) {
+                mkdir(public_path() . '/images/proof_of_residency_image/' . $year . '/' . $month . '/' . $day, 0755, true);
+            }
+            return $directory = 'images/proof_of_residency_image/' . $year . '/' . $month . '/' . $day . '/';
+        }
+        if(config('custom.image_folders')[$image_folder_type] == 'payment_slip') {
+            if (!is_dir(public_path() . '/images/payment_slip/' . $year . '/' . $month . '/' . $day)) {
+                mkdir(public_path() . '/images/payment_slip/' . $year . '/' . $month . '/' . $day, 0755, true);
+            }
+            return $directory = 'images/payment_slip/' . $year . '/' . $month . '/' . $day . '/';
+        }
 
 
 

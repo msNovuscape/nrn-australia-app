@@ -67,7 +67,7 @@ class HomeController extends ApiBaseController
             'notices' => null,
             'user' => $currentUser,
             'isMember'=> $isMember,
-            'member_image' => $member->image,
+            'member_image' => $isMember ? url($member->image) : '',
 
         ], 200);
     }

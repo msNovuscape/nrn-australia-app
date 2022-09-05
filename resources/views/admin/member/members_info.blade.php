@@ -3,7 +3,7 @@
 
 <div class="content-wrapper p-4 content-wrapper-mi">
     <div class="d-flex justify-content-end">
-        <img src="{{url('admin/images/edit-icon.png')}}" href="{{url('admin/members/edit')}}" alt="">
+        <img src="{{url('admin/images/edit-icon.png')}}" href="{{url('admin/members/edit/'.$member->id)}}" alt="">
     </div>
     <section class="content p-0">
         <div class="container-fluid">
@@ -16,7 +16,7 @@
                     <div class="card p-4 mr-1">
                         <div class="d-flex">
                             <div class="profile-image mr-4">
-                                <img src="{{str_replace(public_path(), url('/'), $member->image ?? '')}}" alt="">
+                                <img src="{{url($member->image)}}" alt="">
                             </div>
                             <div class="profile-name d-flex flex-column">
                                 <p>{{$member->first_name. ($member->middle_name ? ' '.$member->middle_name.' '.$member->last_name : ' '.$member->last_name)}}</p>
@@ -201,7 +201,7 @@
                                     </div>
 
                                     <div class="col-md-4 detail-left">
-                                        <a href="{{str_replace(public_path(), url('/'), $member->member_document->identification_image)}}" class="d-flex">
+                                        <a target = "_blank" href="{{url($member->member_document->identification_image)}}" class="d-flex">
                                             <div class="profile-icon mr-2">
                                                 <img src="{{url('admin/images/view-icon.png')}}" alt="">
                                             </div>
@@ -221,7 +221,7 @@
                                     </div>
 
                                     <div class="col-md-4 detail-left">
-                                        <a href="{{str_replace(public_path(), url('/'), $member->member_document->proof_of_residency_image)}}" class="d-flex">
+                                        <a target = "_blank" href="{{url($member->member_document->proof_of_residency_image)}}" class="d-flex">
                                             <div class="profile-icon mr-2">
                                                 <img src="{{url('admin/images/view-icon.png')}}" alt="">
                                             </div>
@@ -277,7 +277,7 @@
                                             <p>Payment Slip</p>
                                         </div>
                                         <div class="col-md-8 detail-right">
-                                            <img src="{{str_replace(public_path(), url('/'), $member->member_payment->payment_slip)}}" alt="">
+                                            <img src="{{url($member->member_payment->payment_slip)}}" alt="">
                                         </div>
                                     </div>
                                 </div>

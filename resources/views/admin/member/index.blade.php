@@ -281,7 +281,7 @@
                                                                 </td> -->
                                                                 <td class="pl-2">1</td>
                                                                 <td class="d-flex">
-                                                                    <img src="{{url('admin/images/image-profile.png')}}" alt="">
+                                                                    <img src="{{url($setting->image)}}" alt="">
                                                                     <div class="d-flex flex-column name-table">
                                                                         <p>{{$member->first_name. ($member->middle_name ? ' '.$member->middle_name.' '.$member->last_name : ' '.$member->last_name)}}</p>
                                                                         <p>NRNA-2022601</p>
