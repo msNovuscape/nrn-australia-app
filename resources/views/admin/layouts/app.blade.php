@@ -20,6 +20,10 @@
     {{--css for loader--}}
     {!! Html::style('admin/css/css-loader.css') !!}
 
+    <!-- slick slider link -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick-theme.min.css"/>
+
     <script>
         Laravel = {
             'url': '{{url("")}}'
@@ -50,6 +54,14 @@
 {!! Html::script('admin/dist/js/demo.js') !!}
 {!! Html::script('admin/flatpickr/dist/flatpickr.js') !!}
 <script src="https://cdn.ckeditor.com/ckeditor5/23.0.0/classic/ckeditor.js"></script>
+{!! Html::style('admin/css/custom-admin.css') !!}
+
+
+<!-- slick slider link -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+
+
 <script>
     $(".getDate").flatpickr({
         dateFormat: "Y-m-d"

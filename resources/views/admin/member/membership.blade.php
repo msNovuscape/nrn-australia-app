@@ -19,59 +19,68 @@
                 </div>
                 <div class="row g-4">
                     <div class="col-md-3">
+
                         <div class="pending-card">
-                            <div class="pending-top">
-                                <div class="pending-icon">
-                                    <img src="{{url('admin/icons/pending-user-icon.svg')}}" class="img-fluid">
+                            <a href="/">
+                                <div class="pending-top">
+                                    <div class="pending-icon">
+                                        <img src="{{url('admin/icons/pending-user-icon.svg')}}" class="img-fluid">
+                                    </div>
+                                    <div class="pending-desc">
+                                        <h2>373</h2>
+                                        <h4>Pending</h4>
+                                    </div>
                                 </div>
-                                <div class="pending-desc">
-                                    <h2>373</h2>
-                                    <h4>Pending</h4>
-                                </div>
-                            </div>
-                            <p>Total numbers of pending member</p>
+                                <p>Total numbers of pending member</p>
+                            </a>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="pending-card">
-                            <div class="pending-top">
-                                <div class="pending-icon">
-                                    <img src="{{url('admin/icons/verified-icon.svg')}}" class="img-fluid">
+                            <a href="/">
+                                <div class="pending-top">
+                                    <div class="pending-icon">
+                                        <img src="{{url('admin/icons/verified-icon.svg')}}" class="img-fluid">
+                                    </div>
+                                    <div class="verified-desc">
+                                        <h2>1500</h2>
+                                        <h4>Verified</h4>
+                                    </div>
                                 </div>
-                                <div class="verified-desc">
-                                    <h2>1500</h2>
-                                    <h4>Verified</h4>
-                                </div>
-                            </div>
-                            <p>Total numbers of Verified member</p>
+                                <p>Total numbers of Verified member</p>
+                            </a>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="pending-card">
-                            <div class="pending-top">
-                                <div class="pending-icon">
-                                    <img src="{{url('admin/icons/rejected-icon.svg')}}" class="img-fluid">
+                            <a href="/">
+                                <div class="pending-top">
+                                    <div class="pending-icon">
+                                        <img src="{{url('admin/icons/rejected-icon.svg')}}" class="img-fluid">
+                                    </div>
+                                    <div class="rejected-desc">
+                                        <h2>200</h2>
+                                        <h4>Rejected</h4>
+                                    </div>
                                 </div>
-                                <div class="rejected-desc">
-                                    <h2>200</h2>
-                                    <h4>Rejected</h4>
-                                </div>
-                            </div>
-                            <p>Total numbers of Rejected members</p>
+                                <p>Total numbers of Rejected members</p>
+                            </a>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="pending-card">
-                            <div class="pending-top">
-                                <div class="pending-icon">
-                                    <img src="{{url('admin/icons/associate-icon.svg')}}" class="img-fluid">
+                            <a href="/">
+                                <div class="pending-top">
+                                    <div class="pending-icon">
+                                        <img src="{{url('admin/icons/associate-icon.svg')}}" class="img-fluid">
+                                    </div>
+                                    <div class="associate-desc">
+                                        <h2>253</h2>
+                                        <h4>Associate</h4>
+                                    </div>
                                 </div>
-                                <div class="associate-desc">
-                                    <h2>253</h2>
-                                    <h4>Associate</h4>
-                                </div>
-                            </div>
-                            <p>Total numbers of Associate members</p>
+                                <p>Total numbers of Associate members</p>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -87,7 +96,7 @@
                     <a href="/view-all">View all</a>
                 </div>
             </div>
-            <div class="d-flex justify-content-between mt-2">
+            <div class="members-display d-flex justify-content-between mt-2">
                 <div class="teams-image">
                     <img src="{{url('admin/images/nanda-gurung.jpg')}}" class="img-fluid"/>
                     <h5>Nanda</h5>
@@ -146,7 +155,7 @@
                 </div>
             </div>
         </section>
-        <section class="news-section p-4">
+        <section class="news-section">
             <div class="row gx-5">
                 <div class="col-md-7">
                     <div class="news-section-left">
@@ -160,26 +169,26 @@
                             </div>
                         </div>
                         <div class="news-content d-flex justify-content-between">
-                            <div class="left-news">
+                            <a href="/" class="left-news">
                                 <div class="left-news-image">
                                     <img src="{{url('admin/images/left-news.jpg')}}" class="w-100"/>
                                 </div>
                                 <p>Seminar on citizenship, voting rights,  and investment..</p>
                                 <h5>8 Aug 2022</h5>
-                            </div>
+                            </a>
                             <div class="news-right">
-                                <div class="news-right-primary">
+                                <a href="/" class="news-right-primary">
                                     <div class="news-right-img">
                                         <img src="{{url('admin/images/right-news.jpg')}}" class="w-100"/>
                                     </div>
                                     <p>Regional conference 2022</p>
-                                </div>
-                                <div class="news-right-primary">
+                                </a>
+                                <a href="/" class="news-right-primary">
                                     <div class="news-right-img">
                                         <img src="{{url('admin/images/job-placement.jpg')}}" class="w-100"/>
                                     </div>
                                     <p>Regional conference 2022</p>
-                                </div>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -191,7 +200,7 @@
                             <p>Notice and updates from NRNA - Australia</p>
                         </div>
                         <div class="notice-cards">
-                            <div class="notice-card">
+                            <a href="/" class="notice-card">
                                 <div class="notice-img">
                                     <img src="{{url('admin/images/notice-one.jpg')}}" class="w-100"/>
                                 </div>
@@ -202,11 +211,59 @@
                                         <h5>8 Aug 2022</h5>
                                     </div>
                                 </div>
-                            </div>
+                            </a>
+                            <a href="/" class="notice-card">
+                                <div class="notice-img">
+                                    <img src="{{url('admin/images/notice-one.jpg')}}" class="w-100"/>
+                                </div>
+                                <div class="notice-card-title">
+                                    <h2>Cultural Parade - Nepal Festival Brisbane 2018</h2>
+                                    <div class="notice-card-bottom">
+                                        <h5>News</h5>
+                                        <h5>8 Aug 2022</h5>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="/" class="notice-card">
+                                <div class="notice-img">
+                                    <img src="{{url('admin/images/notice-one.jpg')}}" class="w-100"/>
+                                </div>
+                                <div class="notice-card-title">
+                                    <h2>Cultural Parade - Nepal Festival Brisbane 2018</h2>
+                                    <div class="notice-card-bottom">
+                                        <h5>News</h5>
+                                        <h5>8 Aug 2022</h5>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="/" class="notice-card">
+                                <div class="notice-img">
+                                    <img src="{{url('admin/images/notice-one.jpg')}}" class="w-100"/>
+                                </div>
+                                <div class="notice-card-title">
+                                    <h2>Cultural Parade - Nepal Festival Brisbane 2018</h2>
+                                    <div class="notice-card-bottom">
+                                        <h5>News</h5>
+                                        <h5>8 Aug 2022</h5>
+                                    </div>
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
     </div>
+@endsection
+@section('script')
+    <script>
+        var $slider = $('.members-display');
+        $slider.slick({
+            slidesToShow: 10,
+            slidesToScroll: 1,
+            autoplay: true,
+            arrows: false,
+            autoplaySpeed: 2000,
+        });
+    </script>
 @endsection
