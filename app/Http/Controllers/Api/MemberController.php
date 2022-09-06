@@ -105,10 +105,9 @@ class MemberController extends ApiBaseController
   
         foreach($membership_types as $membership_type){
         $eligibilities = [];
-
             $eligibilitess = $membership_type->eligibility_types;
             foreach($eligibilitess as $eligibility){
-              array_push($eligibilities,$eligibility->pivot->eligibility_type_id);
+              array_push($eligibilities,intval($eligibility->pivot->eligibility_type_id));
             }
          $membership_type['eligibilities'] = $eligibilities;
 
