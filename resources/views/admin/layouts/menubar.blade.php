@@ -6,7 +6,7 @@
     </div>
 
     <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light d-flex justify-content-between">
         <!-- Left navbar links -->
         <ul class="navbar-nav">
             <li class="nav-item">
@@ -17,44 +17,80 @@
         </ul>
 
         <!-- Right navbar links -->
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" data-widget="control-sidebar" data-controlsidebar-slide="true" href="#" role="button">
-                    <i class="fas fa-th-large"></i>
-                </a>
-            </li>
-        </ul>
+        <div class="navbar-right d-flex">
+            <ul class="navbar-nav d-flex align-items-center">
+                <li class="dropdown-export-menu">
+                    <div class="dropdown">
+                        <a class="btn dropdown-toggle"  href="#" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="{{url('admin/images/bell-icon.png')}}" alt="image-notification">
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="#">Notification 1</a>
+                            <a class="dropdown-item" href="#">Notification 2</a>
+                            <a class="dropdown-item" href="#">Notification 3</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-profile d-flex dropdown-export-menu mx-3">
+                    <a class="d-flex" href="#">
+                        <div class="nav-profile-img">
+                            <img src="http://localhost/ams/public/images/profile.jpg" alt="image">
+                        </div>
+                        <div class="nav-profile-text">
+                            <p class="mb-1">Admin</p>
+                        </div>
+                    </a>
+                    <div class="">
+                        <a class="" href="#">
+                            <button>
+                                <i class="fas fa-sort-down"></i>
+                            </button>
+                        </a>
+                        <div class="dropdown-content-export-menu">
+                            <a class="" href="#"></a>
+                            <ul>
+                                <a class="" href="#"></a>
+                                <li>
+                                    <a class="" href="#"></a>
+                                    <a href="http://localhost/ams/public/logout">Logout</a>
+                                </li>
+                                <li>
+                                    <a href="#">Change Password</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </nav>
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <aside class="main-sidebar sidebar-dark-primary">
         <!-- Brand Logo -->
-        <a href="{{url('admin/index')}}" class="brand-link">
-            <span class="brand-text font-weight-light">
-{{--                <img class="extratech-logo" src="{{url(\App\Models\Setting::where('slug','logo')->first()->value)}}" alt="">--}}
-            </span>
+        <a href="{{url('admin/index')}}" class="brand-link w-100">
+            <div class="nrna-logo d-flex">
+                <div>
+                    <img class="" src="{{url('admin/images/logo-nrna.png')}}" alt="">
+                </div>
+                <span class="brand-text font-weight-light">
+                    <p>NRNA - Australia </p>
+                    <p>Non-Resident Nepali Association</p>
+                </span>
+            </div>
+            
         </a>
 
         <!-- Sidebar -->
         <div class="sidebar sb">
-            <!-- Sidebar user panel (optional) -->
-            <!-- <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-                <div class="image">
-                    <img src="{{url('admin/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
-                </div>
-                <div class="info">
-                    <a href="#" class="d-block">{{Auth::user()->name}}</a>
-                </div>
-            </div> -->
-
 
             <!-- Sidebar Menu -->
-            <nav class="mt-2">
+            <nav class="">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                     <li class="nav-item sidebar-nav-item">
-                        <a href="{{url('admin/settings')}}" class="nav-link {{(Request::segment(2) == 'settings') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link">
-                            <i class="fa fa-cog pl-2" aria-hidden="true"></i>
+                        <a href="{{url('admin/settings')}}" class="nav-link {{(Request::segment(2) == 'settings') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
+                            <i class="fa fa-cog pl-4" aria-hidden="true"></i>
                             <p id="accordion">
                                 <button class="btn btn-link p-2 w-80">
                                  Settings
@@ -64,8 +100,8 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{url('admin/sliders')}}" class="nav-link {{(Request::segment(2) == 'sliders') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link">
-                            <i class="fas fa-sliders-h pl-2" aria-hidden="true"></i>
+                        <a href="{{url('admin/sliders')}}" class="nav-link {{(Request::segment(2) == 'sliders') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
+                            <i class="fas fa-sliders-h pl-4" aria-hidden="true"></i>
                             <p id="accordion">
                                 <button class="btn btn-link p-2 w-80">
                                 Sliders
@@ -75,53 +111,64 @@
                     </li>
 
                     <li class="nav-item sidebar-nav-item">
-                        <a href="{{url('admin/eligibility_types')}}" class="nav-link {{(Request::segment(2) == 'eligibility_types') ? 'active' : ''}}">
-                            <i class="fas fa-sliders-h"></i>
+                        <a href="{{url('admin/eligibility_types')}}" class="nav-link {{(Request::segment(2) == 'eligibility_types') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
+                            <i class="fas fa-user-check pl-4" aria-hidden="true"></i>
+                            <!-- <i class="bi bi-speedometer"></i> -->
                             <p id="accordion">
-                            <button class="btn btn-link p-2 w-80">
-                                Eligibility Type
+                                <button class="btn btn-link p-2 w-80">
+                                    Eligibility Type
                                 </button>
-
                             </p>
                         </a>
                     </li>
-
                 
                     <li class="nav-item sidebar-nav-item">
-                        <a href="{{url('admin/membership_types')}}" class="nav-link {{(Request::segment(2) == 'membership_types') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link">
-                            <i class="fa fa-cog pl-2" aria-hidden="true"></i>
+                        <a href="{{url('admin/membership_types')}}" class="nav-link {{(Request::segment(2) == 'membership_types') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
+                            <i class="fas fa-user-tag pl-4" aria-hidden="true"></i>
                             <p id="accordion">
                                 <button class="btn btn-link p-2 w-80">
-                                Membership Type
+                                    Membership Type
                                 </button>
                             </p>
                         </a>
                     </li>
 
                     <li class="nav-item sidebar-nav-item">
-                        <a href="{{url('admin/news')}}" class="nav-link {{(Request::segment(2) == 'settings') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link">
-                            <i class="fas fa-blog pl-2" aria-hidden="true"></i>
+                        <a href="{{url('admin/news')}}" class="nav-link {{(Request::segment(2) == 'news') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
+                            <i class="fas fa-newspaper pl-4" aria-hidden="true"></i>
                             <p id="accordion">
+                                <!-- <button class="btn btn-link p-2 w-80" data-toggle="collapse" data-target="#collapseNews" aria-expanded="true" aria-controls="collapseNews" id="headingNews">
+                                    News
+                                </button> -->
                                 <button class="btn btn-link p-2 w-80">
-                                News
+                                    News
                                 </button>
                             </p>
+                            <!-- <div id="collapseNews" class="collapse collapse-sidebar mt-2" aria-labelledby="headingNews" data-parent="#accordion">
+                                <div>
+                                    <ul>
+                                        <li><a href="{{url('admin/members')}}"><i class="fas fa-ellipsis-h collapse-icon"></i>Pending Members</a></li>
+                                        <li><a href="{{url('admin/members')}}"><i class="fas fa-check collapse-icon"></i>Approved Members</a></li>
+                                        <li><a href="{{url('admin/members')}}"><i class="fas fa-times collapse-icon"></i>Rejected Members</a></li>
+                                    </ul>
+                                </div>
+                            </div> -->
                         </a>
                     </li>
 
-                    <li class="nav-item sidebar-nav-item">
-                        <a href="#" class="nav-link {{(Request::segment(2) == 'settings') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link">
-                            <i class="fa fa-cog pl-2" aria-hidden="true"></i>
+                    <li class="nav-item sidebar-nav-item" >
+                        <a href="#" class="nav-link {{(Request::segment(2) == 'members') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100" id="mySettingsBtn" onclick=iconClick()>
+                            <i class="fas fa-users pl-4" aria-hidden="true"></i>
                             <p id="accordion">
                                 <button class="btn btn-link p-2 w-80" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne" id="headingOne">
-                                 Members
+                                    Members<i class="fas fa-angle-down float-right" id="icon-toggle-settings"></i>
                                 </button>
-                                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordion">
-                                    <div class="mt-2">
+                                <div id="collapseOne" class="collapse collapse-sidebar" aria-labelledby="headingOne" data-parent="#accordion">
+                                    <div>
                                         <ul>
-                                            <li><a href="{{url('admin/members')}}">Pending Members</a></li>
-                                            <li><a href="{{url('admin/members')}}">Approved Members</a></li>
-                                            <li><a href="{{url('admin/members')}}">Rejected Members</a></li>
+                                            <li><a href="{{url('admin/members')}}"><i class="fas fa-ellipsis-h collapse-icon"></i>Pending Members</a></li>
+                                            <li><a href="{{url('admin/members')}}"><i class="fas fa-check collapse-icon"></i>Approved Members</a></li>
+                                            <li><a href="{{url('admin/members')}}"><i class="fas fa-times collapse-icon"></i>Rejected Members</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -173,8 +220,6 @@
                             </p>
                         </a>
                     </li> -->
-
-
 
                     <!-- <li class="nav-item nav-item-dropdown">
                         <div class="dropdown">
@@ -302,6 +347,18 @@
         <!-- /.sidebar -->
     </aside>
 
+    <script>
+        $(document).ready(function(){
+            $("#mySettingsBtn").click(function(){
+                console.log('clicked');
+            });
+        });
+        function iconClick() {
+            console.log('click')
+             var x = document.getElementById('icon-toggle-settings');    
+            x.classList.toggle("fa-angle-right");
+        }
+    </script>
 
     <!-- /.content-wrapper -->
 
@@ -312,3 +369,9 @@
     <!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
+
+
+    
+
+
+

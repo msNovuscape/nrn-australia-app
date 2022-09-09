@@ -38,7 +38,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Select Eligibility Type <span style="color: red">*</span> </label>
-                                    <select  class="form-control"  id="inputPassword3" name="eligibility_type_ids[]" multiple required>
+                                    <select  class="form-control selectpicker"  id="inputPassword3" name="eligibility_type_ids[]" multiple required>
                                         @foreach($eligibility_types as $eligibility_type)
                                             <option value = "{{$eligibility_type->id}}">{{$eligibility_type->title}}</option>
                                         @endforeach
@@ -93,6 +93,13 @@
             </div>
         </section>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $('.mdb-select').materialSelect();
+        });
+    </script>
+
 @endsection
 
 

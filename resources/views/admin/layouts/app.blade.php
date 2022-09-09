@@ -24,12 +24,20 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick.min.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.5.9/slick-theme.min.css"/>
 
+
+    <!-- for multiselect -->
+    {!! Html::style('plugins/multiple-select-1.5.2/dist/multiple-select.min.css') !!}
+
+    <!-- for multiselect -->
+    {!! Html::style('css/bootstrap-multiselect.css') !!}
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <script>
         Laravel = {
             'url': '{{url("")}}'
         }
     </script>
-    {!! Html::style('admin/css/custom-admin.css') !!}
+    
 
 @yield('style')
 </head>
@@ -52,6 +60,14 @@
 {!! Html::script('admin/plugins/summernote/summernote-bs4.min.js') !!}
 {!! Html::script('admin/dist/js/adminlte.js') !!}
 {!! Html::script('admin/dist/js/demo.js') !!}
+
+<!-- for multiselect -->
+{!! Html::script('plugins/multiple-select-1.5.2/dist/multiple-select.min.js') !!}
+
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+{{--<script src="dist/js/pages/dashboard.js"></script>--}}
+{!! Html::script('admin/dist/js/pages/dashboard.js') !!}
+{!! Html::script('admintheme/tinymce/tinymce.min.js') !!}
 {!! Html::script('admin/flatpickr/dist/flatpickr.js') !!}
 <script src="https://cdn.ckeditor.com/ckeditor5/23.0.0/classic/ckeditor.js"></script>
 {!! Html::style('admin/css/custom-admin.css') !!}
