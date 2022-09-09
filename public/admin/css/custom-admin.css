@@ -250,13 +250,50 @@ body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .main-head
     border-bottom: 1px solid #eaf3ff !important;
 }
 
+.form-group label {
+    color: #555555;
+}
+
+.form-group textarea {
+    border-radius: 0.25rem;
+    border: 1px solid #eaebfa;
+    color: grey;
+}
+
+.form-group textarea:focus-visible {
+    outline: none;
+}
+
+.form-group select {
+    color: grey;
+}
+
 .form-control {
     height: 45px;
-    padding-left: 7px;
+    border: 1px solid #eaebfa;
+    color: grey;
+}
+
+.form-control:focus {
+    border-color: #ced4da;
+}
+
+.card {
+    border: 1px solid #eaebfa;
+    box-shadow: none;
 }
 
 .card-header {
-    padding-right: 30px;
+    background: #f1f7ff;
+    border-bottom: none;
+}
+
+.card-body {
+    background: #f1f7ff;
+}
+
+.main-footer {
+    border-top: none;
 }
 
 svg {
@@ -438,7 +475,7 @@ i {
 }
 
 .create-button {
-    margin-top: 10px;
+    /* margin-top: 10px; */
 }
 
 .create-button .col-md-12 {
@@ -775,10 +812,12 @@ label:not(.form-check-label):not(.custom-file-label) {
 .profile-detail .detail-left p {
     font-size: 16px;
     font-weight: 600;
+   
 }
 
 .profile-detail .detail-left a {
     color: #000;
+  
 }
 
 .profile-detail .detail-right p {
@@ -1158,4 +1197,16 @@ label:not(.form-check-label):not(.custom-file-label) {
 
 .image-upload img {
     cursor: pointer;
+}
+
+.select-block {
+    border: 1px solid #e8ebfa;
+    padding: 7px;
+    border-radius: 0.25rem;
+    padding-left: 30px;
+    background: #fff;
+}
+
+.select-block p {
+    margin-bottom: 0;
 }

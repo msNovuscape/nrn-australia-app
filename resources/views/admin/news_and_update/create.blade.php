@@ -1,14 +1,14 @@
 @extends('admin.layouts.app')
 @section('content')
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper content-wrapper-bg">
         {{--start loader--}}
         <div class="loader loader-default" id="loader"></div>
         {{--end loader--}}
 
         <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <div class="container-fluid">
+        <section class="content-header p-0">
+            <div class="container-fluid p-0">
                 <div class="row mb-2">
                     <div class="col-sm-6">
                         <h1>News</h1>
@@ -18,16 +18,18 @@
         </section>
 
         <!-- Main content -->
-        <section class="content">
-            <div class="container-fluid">
-                <!-- SELECT2 EXAMPLE -->
-                <div class="card card-default">
+        <section class="content p-0">
+
+            <div class="container-fluid p-0">
+
+                <div class="card mb-0">
+
                     <div class="card-header">
                         <h3 class="card-title">Create News</h3>
-                        <a href="{{url('admin/news')}}" class="back-button btn-green">Back</a>
-
+                        <a href="{{url('admin/news')}}" class="back-button btn-create">Back</a>
                     </div>
-                    <div class="card-body">
+
+                    <div class="card-body pt-0">
                         @include('success.success')
                         @include('errors.error')
                         {!! Form::open(['url' => '/admin/news', 'class' => 'form-horizontal', 'method'=> 'POST','files' => true]) !!}
@@ -90,15 +92,17 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="row" id="news_section">
 
+                        <div class="row" id="news_section">
                         </div>
-                        <div class="form-group row create-button">
+
+                        <div class="row create-button">
                             <div class="col-sm-10 col-md-12">
-                                <button type="submit" class="btn btn-green" onclick="validateForm()">Create</button>
+                                <button type="submit" class="btn btn-create" onclick="validateForm()">Create</button>
                             </div>
                         </div>
                         {!! Form::close() !!}
+                        
                     </div>
                 </div>
             </div>
