@@ -106,5 +106,5 @@ return [
     ],
     'file_dir'=>'storage_new',
     'domain_suffix' =>'np',
-    'per_page' =>2,
+    'per_page' =>10,
 ];

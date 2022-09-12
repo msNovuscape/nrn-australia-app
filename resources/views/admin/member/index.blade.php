@@ -1,102 +1,7 @@
 @extends('admin.layouts.app')
 @section('content')
 
-    <!-- <div class="content-wrapper">
-        <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1>Members</h1>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="content">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title">Members Table</h3>
-                            </div>
-                            <div class="card-body">
-                                @include('success.success')
-                                @include('errors.error')
-                                <form id="search" class="search-form">
-                                    <div class="row">
-                                        <div class="input-group input-group-sm mb-3 table-search col-md-3">
-                                            <input type="search"  name="name" class="form-control ds-input" placeholder="Author name / Heading " aria-label="Small" aria-describedby="inputGroup-sizing-sm" onchange="filterList()">
-                                        </div>
-                                        <div class="input-group input-group-sm mb-3 table-search col-md-3">
-                                            <select name="status" class="form-control ds-input" onchange="filterList()">
-                                                <option value="" disabled selected>Search By Status</option>
-                                                @foreach(config('custom.status') as $in => $val)
-                                                    <option value="{{$in}}">{{$val}}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                    </div>
-                                </form>
-                                <table class="table table-bordered">
-                                    <thead>
-                                    <tr>
-                                        <th style="width: 10px">S.N.</th>
-                                        <th class="text-center">Full Name</th>
-                                        <th class="text-center">DOB</th>
-                                        <th class="text-center">Mobile Number</th>
-                                        <th class="text-center">Membership Status</th>
-                                        <th class="text-center">Action</th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    @foreach($settings as $setting)
-                                        <tr>
-                                            <th scope="row">{{$loop->iteration}}</th>
-                                            <td class="text-center">{{$setting->first_name. ($setting->middle_name ? ' '.$setting->middle_name.' '.$setting->last_name : ' '.$setting->last_name)}}</td>
-                                            <td class="text-center">{{$setting->dob}}</td>
-                                            <td class="text-center">{{$setting->mobile_number}}</td>
-                                            <td class="text-center">{{config('custom.membership_status')[$setting->membership_status_id]}}</td>
-                                            <td class="d-flex justify-content-center action-icons">
-                                                <a href="{{url('admin/members/'.$setting->id.'/show')}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="edit">
-                                                    <i class="fas fa-pencil-alt"></i>
-                                                </a>
-                                                <a href="{{url('admin/members/delete/'.$setting->id)}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="delete" onclick="return confirm('Are you sure want to delete?')">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    <tr>
-                                            <th scope="row">1</th>
-                                            <td class="text-center">Mahesh Sharma</td>
-                                            <td class="text-center">2022-09-02</td>
-                                            <td class="text-center">0987654321</td>
-                                            <td class="text-center">Verified</td>
-                                            <td class="d-flex justify-content-center action-icons">
-                                                <a href="members/1/" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="show">
-                                                    <i class="fas fa-eye"></i>
-                                                </a>
-                                                <a href="{{url('admin/members/edit/')}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="edit">
-                                                    <i class="fas fa-pencil-alt"></i>
-                                                </a>
-                                                <a href="" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="delete" onclick="return confirm('Are you sure want to delete?')">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                                <div style="margin-top: 10px;">
-                                    {!! $settings->links() !!}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </div> -->
+   
     <div class="main-panel">
         <div class="content-wrapper content-wrapper-bg">
             <div class="row">
@@ -105,8 +10,8 @@
                         <div class="col-md-12">
                             <div>
                                 <div class="card-heading">
-                                    <h4>Members</h4>
-                                    <p class="mb-0">All members list. Please, select from filters to see membership type  and state.</p>
+                                    <h4>{{ucfirst($membership_status)}} Members</h4>
+                                    <p class="mb-0">All {{($membership_status)}} members list. Please, select from filters from membership type  and state.</p>
                                 </div>
                             </div>
                         </div>
@@ -117,7 +22,7 @@
                                         <span>
                                             <i class="fas fa-search"></i>
                                         </span>
-                                        <input type="text" class="form-control" id="inputText" placeholder="Search" name="name">
+                                        <input type="text" class="form-control" id="search" placeholder="Search" name="first_name" onchange="filterList()">
                                     </div>
                                 </div>
                                 <div class="col-md-3 w-100">
@@ -128,9 +33,10 @@
                                                     <i class="far fa-user"></i>
                                                 </span>
                                             </div>
+
                                             <div class="col-md-10">
-                                                <select class="form-select w-100" aria-label="Default select example" name="course_id">
-                                                    <option selected="" disabled="">Search member type</option>
+                                                <select class="form-select w-100" aria-label="Default select example" id="membership_type" name="membership_type_id">
+                                                    <option selected="" value = "" disabled="">Search member type</option>
                                                     @foreach($membership_types as $membership_type)
                                                         <option value="{{$membership_type->id}}">{{$membership_type->name}}</option>
                                                     @endforeach
@@ -153,12 +59,11 @@
                                                 </span>
                                             </div>
                                             <div class="col-md-10">
-                                                <select class="form-select w-100" aria-label="Default select example" name="course_id">
-                                                    <option selected="" disabled="">Select State</option>
-                                        @foreach(config('custom.states') as $in => $val)
-                                            <option value="{{$in}}" @if(old('states') == $in) selected @endif >{{$val}}</option>
-                                        @endforeach
-
+                                                <select class="form-select w-100" aria-label="Default select example" id="state">
+                                                    <option selected="" value = "" disabled="">Select State</option>
+                                                    @foreach(config('custom.states') as $in => $val)
+                                                        <option value="{{$in}}" @if(old('states') == $in) selected @endif >{{$val}}</option>
+                                                    @endforeach
                                                 </select>
                                             </div>
                                             <div class="col-md-1">
@@ -169,23 +74,8 @@
                                         </div> 
                                     </div>
                                 </div>
-                                <div class="col-md-1 d-flex">
-                                    <!-- <div class="d-flex align-items-center">
-                                        <p class="m-0">
-                                            Show
-                                        </p>
-                                        <div class="d-flex input-field-show">
-                                            <select class="form-select ml-1 show-select" aria-label="Default select example">
-                                                <option selected="">10</option>
-                                                <option value="1">10</option>
-                                                <option value="2">20</option>
-                                                <option value="3">30</option>
-                                            </select>
-                                            <span class="d-flex justify-content-end">
-                                                <i class="fas fa-sort-down"></i>
-                                            </span>
-                                        </div>
-                                    </div> -->
+                                <!-- <div class="col-md-1 d-flex">
+       
                                     <div class="d-flex align-items-center">
                                         <p class="m-0">
                                             Show
@@ -202,11 +92,11 @@
                                             </span>
                                         </div>
                                     </div>
-                                </div>
+                                </div> -->
                                 <div class="col-md-1">
                                     <div class="export-button">
                                         <div class="dropdown-export">
-                                            <button type="submit" name="submit" onclick="submit;" class="student-btn d-flex">
+                                            <button type="submit" onclick="submitFilter();" class="student-btn d-flex">
                                                 Filter<img src="{{url('admin/images/filter-icon.png')}}" alt="" class="ml-1 mt-1">
                                             </button>
                                         </div>
@@ -263,16 +153,16 @@
                                                                     </div>
                                                                 </th> -->
                                                                 <th>S.N.</th>
-                                                                <th>Name</th>
+                                                                <th>Full Name</th>
                                                                 <th>Email</th>
                                                                 <th>State</th>
-                                                                <th>Type</th>
+                                                                <th>Membership Type</th>
                                                                 <th>Status</th>
                                                                 <th>Actions</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody id="student_list">
-                                                            @foreach($settings as $member)
+                                                            @forelse($settings as $member)
                                                             <tr>
                                                                 <!-- <td>
                                                                     <div class="tblform-check ml-1">
@@ -281,16 +171,16 @@
                                                                 </td> -->
                                                                 <td class="pl-2">1</td>
                                                                 <td class="d-flex">
-                                                                    <img src="{{url($setting->image)}}" alt="">
+                                                                    <img src="{{url($member->image)}}" alt="">
                                                                     <div class="d-flex flex-column name-table">
                                                                         <p>{{$member->first_name. ($member->middle_name ? ' '.$member->middle_name.' '.$member->last_name : ' '.$member->last_name)}}</p>
-                                                                        <p>NRNA-2022601</p>
+                                                                        <p>{{$member->nrna_code}}</p>
                                                                     </div>
                                                                 </td>
                                                                 <td>{{$member->email}}</td>
-                                                                <td>{{config('custom.states')[$setting->state_id]}}</td>
+                                                                <td>{{config('custom.states')[$member->state_id]}}</td>
                                                                 <td>{{$member->membership_type->name}}</td>
-                                                                <td class="verified status"><i class="fas fa-check"></i>{{config('custom.membership_status')[$setting->membership_status_id]}}</td>
+                                                                <td class="{{$membership_status}} status"><i class="fas fa-@if($membership_status == 'verified')check @elseif ($membership_status == 'rejected')times @elseif($membership_status == 'pending')ellipsis-h @elsereapply  @endif  "></i>{{config('custom.membership_status')[$member->membership_status_id]}}</td>
                                                                 <td class="action-icons">
                                                                     <ul class="icon-button d-flex">
                                                                         <li>
@@ -311,7 +201,11 @@
                                                                     </ul>
                                                                 </td>
                                                             </tr>
-                                                            @endforeach
+                                                            @empty
+                                                            <tr>
+                                                                <td>No any {{($membership_status)}} members as per request.</td>
+                                                            </tr>
+                                                            @endforelse
                                                             <!-- <tr>
                                                               
                                                                 <td class="pl-2">2</td>
@@ -395,4 +289,28 @@
         </div>
     </div>
 
+@endsection
+
+@section('script')
+    <script>
+        function submitFilter(){
+
+        
+        var state = document.getElementById("state");
+        var state_id = state.value ;
+
+        var membership_type = document.getElementById("membership_type");
+        var membership_type_id = membership_type.value ;
+        // var text = e.options[e.selectedIndex].text;
+
+        debugger;
+
+        var baseurl = window.location.origin+window.location.pathname;
+        // var data = $('state').serialize();
+        // alert(data);
+        window.location = baseurl+'?state_id='+state_id+'&membership_type_id='+membership_type_id;
+
+        }
+
+    </script>
 @endsection

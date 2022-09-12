@@ -20,7 +20,7 @@ class NewsResource extends JsonResource
             'image' => url($this->image),
             'mobile_image' => $this->mobile_image,
             'slug' => $this->slug,
-            'type' => $this->type,
+            'featured_type' => intval($this->type),
             'publish_date' => $this->publish_date,
             'title' => $this->title,
             'excerpt' => $this->excerpt,

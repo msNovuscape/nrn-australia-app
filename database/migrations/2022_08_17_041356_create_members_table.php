@@ -27,6 +27,7 @@ class CreateMembersTable extends Migration
             $table->string('postcode');
             $table->string('mobile_number');
             $table->string('email');
+            $table->string('nrna_code')->default('N/A');
             $table->integer('gender_id');
             $table->foreignIdFor(MembershipType::class);
             $table->foreign('membership_type_id')->references('id')->on('membership_types')->onDelete('cascade');

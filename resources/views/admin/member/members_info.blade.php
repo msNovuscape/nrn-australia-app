@@ -20,7 +20,7 @@
                             </div>
                             <div class="profile-name d-flex flex-column">
                                 <p>{{$member->first_name. ($member->middle_name ? ' '.$member->middle_name.' '.$member->last_name : ' '.$member->last_name)}}</p>
-                                <!-- <p>NRNA-20220601</p> -->
+                                <p>{{$member->nrna_code}}</p>
                                 <div class="d-flex">
                                     <div class="profile-icon mr-2">
                                         <img src="{{url('admin/images/life-icon.png')}}" alt="">
@@ -277,7 +277,9 @@
                                             <p>Payment Slip</p>
                                         </div>
                                         <div class="col-md-8 detail-right">
-                                            <img src="{{url($member->member_payment->payment_slip)}}" alt="">
+                                            <div class="slip-image mr-4">
+                                                <img src="{{url($member->member_payment->payment_slip)}}" alt="">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

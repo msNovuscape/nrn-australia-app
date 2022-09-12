@@ -66,23 +66,23 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Select Eligibility Type <span style="color: red">*</span> </label>
-                                    <!-- <select  class="form-control"  id="inputPassword3" name="eligibility_type_ids[]" multiple required>
+                                    <select  class="form-control"  id="inputPassword3" name="eligibility_type_ids[]" multiple required>
                                         @foreach($eligibility_types as $eligibility_type)
                                             <option value = "{{$eligibility_type->id}}">{{$eligibility_type->title}}</option>
                                         @endforeach
-                                    </select> -->
-                                    <div class="select-block">
+                                    </select>
+                                    <!-- <div class="select-block">
                                         <table>
                                             <tbody>
                                                 @foreach($eligibility_types as $eligibility_type)
                                                 <tr class="d-flex">
-                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                                                    <input class="form-check-input" type="checkbox" name="eligibility_type_ids[]" id="flexCheckDefault">
                                                     <p value="{{$eligibility_type->id}}">{{$eligibility_type->title}}</p>
                                                 </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
 

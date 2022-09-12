@@ -166,9 +166,9 @@
                                 <div id="collapseOne" class="collapse collapse-sidebar" aria-labelledby="headingOne" data-parent="#accordion">
                                     <div>
                                         <ul>
-                                            <li><a href="{{url('admin/members')}}"><i class="fas fa-ellipsis-h collapse-icon"></i>Pending Members</a></li>
-                                            <li><a href="{{url('admin/members')}}"><i class="fas fa-check collapse-icon"></i>Approved Members</a></li>
-                                            <li><a href="{{url('admin/members')}}"><i class="fas fa-times collapse-icon"></i>Rejected Members</a></li>
+                                            <li><a href="{{url('admin/members/pending')}}"><i class="fas fa-ellipsis-h collapse-icon"></i>Pending Members</a></li>
+                                            <li><a href="{{url('admin/members/verified')}}"><i class="fas fa-check collapse-icon"></i>Verified Members</a></li>
+                                            <li><a href="{{url('admin/members/rejected')}}"><i class="fas fa-times collapse-icon"></i>Rejected Members</a></li>
                                         </ul>
                                     </div>
                                 </div>
