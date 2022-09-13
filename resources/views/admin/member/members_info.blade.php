@@ -165,7 +165,7 @@
                             </label>
                         </div>
                         
-                        <div class="form-check">
+                        <div class="form-check mx-4">
                             <input class="form-check-input" type="radio" name="membership_status_id" id="exampleRadios3" value="3" {{$member->membership_status_id == 3 ? 'checked' : ''}}>
                             <label class="form-check-label" for="exampleRadios3">
                                 Rejected

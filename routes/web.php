@@ -61,8 +61,9 @@ Route::group(['middleware'=>['auth']],function (){
         Route::get('members/{membership_status}',[MemberController::class,'index']);
         Route::get('members/show/{id}/',[MemberController::class,'show']);
         Route::post('members/update_status',[MemberController::class,'update_status']);
-        // Route::get('members/{id}',[MemberController::class,'show']);
+        Route::post('members/{id}',[MemberController::class,'update']);
         Route::get('members/edit/{id}',[MemberController::class,'edit']);
+        Route::get('members/delete/{id}',[MemberController::class,'delete']);
         Route::get('members/members_info',[MemberController::class,'members_info']);
 
     });

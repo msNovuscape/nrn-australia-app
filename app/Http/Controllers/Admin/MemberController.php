@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Session;
 class MemberController extends Controller
 {
     protected $view = 'admin.member.';
-    protected $redirect = 'admin/members';
+    protected $redirect = 'admin/members/';
 
     public function index($membership_status)
     {
@@ -30,9 +30,9 @@ class MemberController extends Controller
 
         $setting = Member::orderBy('id','desc')->where('membership_status_id',$index);
 
-        if(isset($_GET['first_name'])){
-            $key = \request('first_name');
-            $settings = $setting->where('first_name','like','%'.$key.'%');
+        if(isset($_GET['search_key'])){
+            $key = \request('search_key');
+            $settings = $setting->where('first_name','like','%'.$key.'%')->orWhere('middle_name','LIKE','%'.$key.'%')->orWhere('last_name','LIKE','%'.$key.'%');
         }
 
         if(isset($_GET['membership_type_id']) && $_GET['membership_type_id'] !=''){
@@ -54,9 +54,10 @@ class MemberController extends Controller
     {
         return view($this->view . 'create');
     }
-    public function edit()
+    public function edit($id)
     {
-        return view($this->view . 'edit');
+        $member = Member::findorfail($id);
+        return view($this->view . 'edit',compact('member'));
     }
     public function show($id)
     {
@@ -68,35 +69,84 @@ class MemberController extends Controller
 
     public function update(Request $request, $id){
 
-//        dd(\request()->all());
-        $setting =MembershipType::findorfail($id);
+        
+        $setting =Member::findorfail($id);
+
+        //validation
         $this->validate(\request(), [
             'name' => 'required',
-            'amount' => 'nullable',
-            'status' => 'required',
+            'membership_status_id' => 'required',
+            'mobile_number' => 'required',
+            'gender_id' => 'required',
+            'occupation' => 'required',
+            'dob' => 'required',
+            'postcode' => 'required',
+            'residential_address' => 'required',
+            'state_id' => 'required',
+            'suburb' => 'required',
+            'country_id' => 'required',
+            'identification_expiry_date' => 'required',
+            'proof_of_residency_expiry_date' => 'required'
         ]);
 
-
-
-
         $requestData = $request->all();
+
+        $splitName = explode(' ', $requestData['name'], 3);
+        $requestData['first_name'] = $splitName['0'];
+        if(count($splitName) > 2){
+            $requestData['middle_name'] = $splitName['1'];
+           $requestData['last_name'] = $splitName['2'];
+        }else{
+            $requestData['last_name'] = $splitName['1'];
+        }
+        
+        
+        //check for verififed status and update issued and expiry date accordingly
+        if($setting->membership_status_id !== 2 && $requestData['membership_status_id'] == 2){
+            $dt = Carbon::now();
+            if (isset($_POST['membership_type_id'])){
+                $expiration_years = MembershipType::findorfail($_POST['membership_type_id'])->expiration_years;
+            }
+            $year = $expiration_years ?? $setting->membership_type->expiration_years;
+
+            $requestData['membership_issued_date'] = Carbon::now();
+            $year_join = Carbon::parse($requestData['membership_issued_date'])->format('y');
+            $month = Carbon::parse($requestData['membership_issued_date'])->format('m');
+            $date = Carbon::parse($requestData['membership_issued_date'])->format('d');
+            $first = strtoupper($requestData['first_name'][0]);
+            $last = strtoupper($requestData['last_name'][0]);
+            $requestData['nrna_code'] = 'NRNA-'.$month . $year_join . $date . str_pad($setting->id, 4, '0', STR_PAD_LEFT) . $first . $last;
+            if($year != null){
+                $requestData['membership_expiry_date'] = $dt->addYears($year);
+            }
+        }
+        //check for previous image remove if present and add and new
+        if(isset($requestData['image'])){
+            $previous_image = $setting->image;
+            if(!empty($previous_image)){
+                $path = public_path().'/'.parse_url($previous_image)['path'];
+                unlink($path);
+            }
+            $member = new Member();
+            $requestData['image'] = $member->saveImage($requestData['image'],'profile_image');
+        }
+        $requestData['country_id'] = 1;
         $setting->fill($requestData);
-        $setting->save();
 
-        Session::flash('success','Membership Type succesffuly edited.');
-        return redirect($this->redirect);
-
-    }
-
-    public function delete($id){
-        $setting=Member::findorfail($id);
-
-        if($setting->delete()){
-            Session::flash('success','Member successfully deleted !');
-            return redirect($this->redirect);
+        //update child table member_document and member_payment
+        if($setting->save()){
+          
+            $setting->member_document->update(['identification_expiry_date' => $requestData['identification_expiry_date'],'proof_of_residency_expiry_date' => $requestData['proof_of_residency_expiry_date']]);
+            // $setting->member_document->update($requestData);
+            $setting->member_payment->update($requestData);
         }
 
+        Session::flash('success','Member succesffuly updated.');
+        return redirect($this->redirect.lcfirst(config('custom.membership_status')[$requestData['membership_status_id']]));
+
     }
+
+    
 
     public function update_status(Request $request){
 
@@ -107,7 +157,7 @@ class MemberController extends Controller
 
         $setting->membership_status_id = $status;
         if($setting->update()){
-            if($previous_status == 1 && $status == 2){
+            if($previous_status !== 2 && $status == 2){
                 $dt = Carbon::now();
                 $year = $setting->membership_type->expiration_years;
 
@@ -126,6 +176,36 @@ class MemberController extends Controller
             return response()->json(['msg' => 'Membership status updated successfully!','membership_status_id' => $setting->membership_status_id],200);
         }
 
+
+    }
+
+    public function delete($id){
+        $setting=Member::findorfail($id);
+        $image = $setting->image;
+        if(!empty($image)){
+            $path = public_path().'/'.parse_url($image)['path'];
+            unlink($path);
+        }
+        $identification_image = $setting->member_document->identification_image;
+        if(!empty($identification_image)){
+            $path = public_path().'/'.parse_url($identification_image)['path'];
+            unlink($path);
+        }
+        $proof_of_residency_image = $setting->member_document->proof_of_residency_image;
+        if(!empty($proof_of_residency_image)){
+            $path = public_path().'/'.parse_url($proof_of_residency_image)['path'];
+            unlink($path);
+        }
+        $payment_slip = $setting->member_payment->payment_slip;
+        if(!empty($payment_slip)){
+            $path = public_path().'/'.parse_url($payment_slip)['path'];
+            unlink($path);
+        }
+        if($setting->delete()){
+            
+            Session::flash('success','Member successfully deleted !');
+            return redirect()->back();
+        }
 
     }
 }

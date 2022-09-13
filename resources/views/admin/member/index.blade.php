@@ -15,14 +15,17 @@
                                 </div>
                             </div>
                         </div>
+                        
                         <div class="col-md-12 filter-btnwrap mt-4">
+                        @include('success.success')
+                                @include('errors.error')
                             <div class="row align-items-center">
                                 <div class="col-md-3">
                                     <div class="input-group">
                                         <span>
                                             <i class="fas fa-search"></i>
                                         </span>
-                                        <input type="text" class="form-control" id="search" placeholder="Search" name="first_name" onchange="filterList()">
+                                        <input type="text" class="form-control" id="search" placeholder="Search" name="search_key" onchange="filterList()">
                                     </div>
                                 </div>
                                 <div class="col-md-3 w-100">
@@ -169,7 +172,7 @@
                                                                         <input class="checkbox" type="checkbox" value="5" id="form-check-input1">
                                                                     </div>
                                                                 </td> -->
-                                                                <td class="pl-2">1</td>
+                                                                <td class="pl-2">{{$loop->iteration}}</td>
                                                                 <td class="d-flex">
                                                                     <img src="{{url($member->image)}}" alt="">
                                                                     <div class="d-flex flex-column name-table">
@@ -194,7 +197,7 @@
                                                                             </a>
                                                                         </li>
                                                                         <li>
-                                                                            <a href="#" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="delete">
+                                                                            <a href="{{url('admin/members/delete/'.$member->id)}}" onclick = "confirm('Are you sure want to delete the member permanently?')" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="delete">
                                                                                 <i class="fas fa-trash"></i>
                                                                             </a>
                                                                         </li>

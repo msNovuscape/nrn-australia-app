@@ -4,6 +4,10 @@
 <div class="content-wrapper p-4 content-wrapper-mi">
     <section class="content p-0">
         <div class="container-fluid">
+        @include('success.success')
+                        @include('errors.error')
+        {!! Form::open(['url' => '/admin/members/'.$member->id, 'class' => 'form-horizontal', 'method'=> 'POST','files' => true]) !!}
+            @csrf
             <div class="row members-info-row">
                 <div class="col-md-6">
                     <div>
@@ -15,26 +19,24 @@
                             <div class="col-md-12">
                                 <div class="row">
                                     <div class="col-md-3">
-                                        <form>
                                             <div class="image-upload d-flex">
                                                 <div id="img-preview" class="profile-image">
-                                                    <img src="{{url('admin/images/image-profile.png')}}" alt="">
+                                                    <img src="{{url($member->image)}}" alt="">
                                                 </div>
-                                                <input type="file" accept="image/*" id="choose-file" name="choose-file" />
+                                                <input type="file" accept="image/*" id="choose-file" name="image" />
                                                 <label for="choose-file" class="profile-icon ml-2">
                                                     <img src="{{url('admin/images/edit-icon.png')}}" href="{{url('admin/members/edit')}}" alt="">
                                                 </label>
                                             </div>
-                                        </form>
                                     </div>
                                     <div class="col-md-5 profile-name d-flex flex-column">
-                                        <input type="text" class="form-control" id="name" value ="Samir Bhandari" placeholder="Enter Name">
-                                        <input type="text" class="form-control" id="code" value ="NRNA-20220601" placeholder="Enter NRNA Code">
+                                        <input type="text" class="form-control" name = "name" id="name" value ="{{$member->first_name. ($member->middle_name ? ' '.$member->middle_name.' '.$member->last_name : ' '.$member->last_name)}}" placeholder="Enter Name">
+                                        <input type="text" class="form-control" name="nrna_code" value ="{{$member->nrna_code}}" readonly>
                                         <div class="d-flex">
                                             <div class="profile-icon mr-2">
                                                 <img src="{{url('admin/images/life-icon.png')}}" alt="">
                                             </div>
-                                            <p>Life Membership</p>
+                                            <p>{{$member->membership_type->name}}</p>
                                         </div>
                                     </div>
                                     <!-- <div class="col-md-4 d-flex">
@@ -60,7 +62,7 @@
                                             <p>Occupation</p>
                                         </div>
                                         <div class="col-md-7 detail-right">
-                                            <input type="text" class="form-control" id="occupation" value ="Manager" placeholder="Enter Occupation">
+                                            <input type="text" class="form-control" name="occupation" value ="{{$member->occupation}}" placeholder="Enter Occupation">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -73,19 +75,19 @@
                                         <div class="col-md-7 detail-right">
                                             <div class="d-flex">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="exampleRadios" id="male" value="option1" checked>
+                                                    <input class="form-check-input" type="radio" name="gender_id" id="male" value="1" {{($member->gender_id == 1) ? 'checked' : ''}}>
                                                     <label class="form-check-label" for="exampleRadios1">
                                                         Male
                                                     </label>
                                                 </div>
                                                 <div class="form-check mx-4">
-                                                    <input class="form-check-input" type="radio" name="exampleRadios" id="female" value="option2" checked>
+                                                    <input class="form-check-input" type="radio" name="gender_id" id="female" value="2" {{($member->gender_id == 2) ? 'checked' : ''}}>
                                                     <label class="form-check-label" for="exampleRadios2">
                                                         Female
                                                     </label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="exampleRadios" id="other" value="option3">
+                                                    <input class="form-check-input" type="radio" name="gender_id" id="other" value="3" {{($member->gender_id == 3) ? 'checked' : ''}}>
                                                     <label class="form-check-label" for="exampleRadios3">
                                                         Other
                                                     </label>
@@ -98,10 +100,10 @@
                                             <div class="profile-icon mr-4">
                                                 <img src="{{url('admin/images/phone-icon.png')}}" alt="">
                                             </div>
-                                            <p>Phone</p>
+                                            <p>Mobile</p>
                                         </div>
                                         <div class="col-md-7 detail-right">
-                                            <input type="number" class="form-control" id="phone" aria-describedby="emailHelp" value="9841882877" placeholder="Enter Phone Number">
+                                            <input type="text" class="form-control" name="mobile_number" value="{{$member->mobile_number}}" placeholder="Enter Phone Number">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -112,7 +114,7 @@
                                             <p>Email</p>
                                         </div>
                                         <div class="col-md-7 detail-right">
-                                            <input type="email" class="form-control" id="exampleInputEmail1" value="bhandari@extratechs.com.au" placeholder="Enter Email Address">
+                                            <input type="email" class="form-control" name="email" value="{{$member->email}}" placeholder="Enter Email Address">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -123,7 +125,7 @@
                                             <p>Date of Birth</p>
                                         </div>
                                         <div class="col-md-7 detail-right">
-                                            <input type="date" id="dob" name="birthday" class="w-100 form-control birthday-input" value="01/06/2004" placeholder="Enter Date of Birth">
+                                            <input type="date" id="dob" name="dob" class="w-100 form-control birthday-input" value="{{$member->dob}}" placeholder="Enter Date of Birth">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -131,10 +133,10 @@
                                             <div class="profile-icon mr-4">
                                                 <img src="{{url('admin/images/postal-icon.png')}}" alt="">
                                             </div>
-                                            <p>Postal Code</p>
+                                            <p>Post Code</p>
                                         </div>
                                         <div class="col-md-7 detail-right">
-                                            <input type="number" class="form-control" id="postal-code"  value="446600" placeholder="Enter Postal Code">
+                                            <input type="number" class="form-control" name="postcode"  value="{{$member->postcode}}" placeholder="Enter Postal Code">
                                         </div>
                                     </div>
                                     <div class="row">
@@ -142,10 +144,10 @@
                                             <div class="profile-icon mr-4">
                                                 <img src="{{url('admin/images/residential-icon.png')}}" alt="">
                                             </div>
-                                            <p>Residental Address</p>
+                                            <p>Residential Address</p>
                                         </div>
                                         <div class="col-md-7 detail-right">
-                                            <input type="text" class="form-control" id="res-address" value="Suite 132 & 133, Level 3, 10 Park Road, Hurstville NSW 2220, Australia" placeholder="Enter Redidential Address">
+                                            <input type="text" class="form-control" name="residential_address" value="{{$member->residential_address}}" placeholder="Enter Redidential Address">
                                         </div>
                                     </div>
                                     <div class="row mt-4">
@@ -154,9 +156,11 @@
                                                 <div class="col-md-4 d-flex detail-left">
                                                     <p>State</p>
                                                 </div>
-                                                <div class="col-md-8 detail-right">
-                                                    <input type="text" class="form-control" id="state" value="NSW" placeholder="State">
-                                                </div>
+                                                <select name="state_id" class="form-control" id="type" required>
+                                                    @foreach(config('custom.states') as $in => $val)
+                                                    <option value="{{$in}}" @if($member->state_id == $in)selected @endif >{{$val}}</option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                         </div>
                                         <div class="col-md-4">
@@ -165,7 +169,7 @@
                                                     <p>Suburb</p>
                                                 </div>
                                                 <div class="col-md-8 detail-right">
-                                                    <input type="text" class="form-control" id="suburb" value="Sydney" placeholder="Suburb">
+                                                    <input type="text" class="form-control" name="suburb" value="{{$member->suburb}}" placeholder="Suburb">
                                                 </div>
                                             </div>
                                         </div>
@@ -175,7 +179,7 @@
                                                     <p>Country</p>
                                                 </div>
                                                 <div class="col-md-8 detail-right">
-                                                    <input type="text" class="form-control" id="country" value="Australia" placeholder="Country">
+                                                    <input type="text" class="form-control" name="country_id" value="{{config('custom.countries')[$member->country_id]}}" placeholder="Country">
                                                 </div>
                                             </div>
                                         </div>
@@ -190,21 +194,27 @@
                     </div>
                     <div class="d-flex">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="verify" value="option1" checked>
+                            <input class="form-check-input" type="radio" name="membership_status_id" id="verify" value="2" {{($member->membership_status_id == 2) ? 'checked' : ''}}>
                             <label class="form-check-label" for="exampleRadios1">
                                 Verify
                             </label>
                         </div>
                         <div class="form-check mx-4">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="pending" value="option2">
+                            <input class="form-check-input" type="radio" name="membership_status_id" id="pending" value="1" {{($member->membership_status_id == 1) ? 'checked' : ''}}>
                             <label class="form-check-label" for="exampleRadios2">
                                 Pending
                             </label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="exampleRadios" id="rejected" value="option3">
+                        <div class="form-check mx-4">
+                            <input class="form-check-input" type="radio" name="membership_status_id" id="rejected" value="3" {{($member->membership_status_id == 3) ? 'checked' : ''}}>
                             <label class="form-check-label" for="exampleRadios3">
                                 Rejected
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="membership_status_id" id="reapply" value="4" {{($member->membership_status_id == 4) ? 'checked' : ''}}>
+                            <label class="form-check-label" for="exampleRadios3">
+                                Reapply
                             </label>
                         </div>
                     </div>
@@ -226,12 +236,12 @@
                                         <p>Expiry date of ID</p>
                                     </div>
                                     <div class="col-md-3">
-                                        <input type="date" id="dob" name="birthday" class="w-100 form-control birthday-input">
+                                        <input type="date" id="dob" name="identification_expiry_date" class="w-100 form-control birthday-input" value = "{{$member->member_document->identification_expiry_date}}">
                                     </div>
                                     <div class="col-md-4 detail-left">
-                                        <a href="#" class="d-flex">
+                                        <a target = "_blank" href="{{url($member->member_document->identification_image)}}" class="d-flex">
                                             <div class="profile-icon mr-2">
-                                                <img src="{{url('admin/images/view-icon.png')}}" alt="">
+                                                <img src="{{url($member->member_document->identification_image)}}" alt="">
                                             </div>
                                             <p>View Documents</p>
                                         </a>
@@ -245,12 +255,12 @@
                                         <p>Expiry date of Residency</p>
                                     </div>
                                     <div class="col-md-3">
-                                        <input type="date" id="dob" name="birthday" class="w-100 form-control birthday-input">
+                                        <input type="date" id="dob" name="proof_of_residency_expiry_date" class="w-100 form-control birthday-input" value = "{{$member->member_document->proof_of_residency_expiry_date}}">
                                     </div>
                                     <div class="col-md-4 detail-left">
-                                        <a href="#" class="d-flex">
+                                        <a target = "_blank" href="{{url($member->member_document->proof_of_residency_image)}}" class="d-flex">
                                             <div class="profile-icon mr-2">
-                                                <img src="{{url('admin/images/view-icon.png')}}" alt="">
+                                                <img src="{{url($member->member_document->proof_of_residency_image)}}" alt="">
                                             </div>
                                             <p>View Documents</p>
                                         </a>
@@ -315,7 +325,7 @@
                                             <p>Account Name</p>
                                         </div>
                                         <div class="col-md-8 detail-right">
-                                            <p>Samir Bhandari</p>
+                                            <p>{{$member->member_payment->account_name}}</p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -323,7 +333,7 @@
                                             <p>Payment Date</p>
                                         </div>
                                         <div class="col-md-8 detail-right">
-                                            <p>01/06/2026</p>
+                                            <p>{{$member->member_payment->payment_date}}</p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -331,7 +341,7 @@
                                             <p>Bank Name</p>
                                         </div>
                                         <div class="col-md-8 detail-right">
-                                            <p>National Australian Bank (NAB)</p>
+                                            <p>{{$member->member_payment->bank_name}}</p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -339,7 +349,7 @@
                                             <p>Total Amount</p>
                                         </div>
                                         <div class="col-md-8 detail-right">
-                                            <p>$150 AUD</p>
+                                            <p>{{$member->member_payment->amount}}</p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -348,7 +358,7 @@
                                         </div>
                                         <div class="col-md-8 detail-right">
                                             <div class="slip-image mr-4">
-                                                <img src="{{url('admin/images/payment-slip.png')}}" alt="">
+                                                <img src="{{url($member->member_payment->payment_slip)}}" alt="">
                                             </div>
                                         </div>
                                     </div>
@@ -362,7 +372,8 @@
                         <button>Submit</button>
                     </div>
                 </div>
-            </div>
+            </div> 
+            {!! Form::close() !!}    
         </div>
     </section>
 </div>
@@ -384,6 +395,7 @@
             });    
         }
     }
+    
 </script>
 
 @endsection
