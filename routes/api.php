@@ -8,7 +8,8 @@ use App\Http\Controllers\Api\MembershipTypeController;
 use App\Http\Controllers\Api\MemberController;
 use App\Http\Controllers\Api\EmailVerifyController;
 use App\Http\Controllers\Api\RegisterController;
-use \App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\LoginController;
+use App\Http\Controllers\Api\ResetPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +30,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['namespace' => 'Api' ,'prefix' => 'v1'], function() {
     Route::post('/register', [RegisterController::class, 'register']);
     Route::post('/login', [LoginController::class, 'login']);
+    Route::post('send-reset-link', [ResetPasswordController::class,'send_link']);
+
 });
 
 Route::group(['namespace' => 'Api' ,'prefix' => 'v1','middleware' => ['jwt.verify']], function() {
@@ -43,5 +46,6 @@ Route::group(['namespace' => 'Api' ,'prefix' => 'v1','middleware' => ['jwt.verif
     Route::post('/member/is_verified/', [EmailVerifyController::class, 'is_verified']);
     Route::get('/news', [NewsController::class, 'index']);
     Route::get('news/{id}', [NewsController::class,'show']);
+
 
 });

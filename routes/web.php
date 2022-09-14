@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\NewsAndUpdateController;
 use App\Http\Controllers\Admin\MembershipTypeController;
 use App\Http\Controllers\Admin\EligibilityTypeController;
 use App\Http\Controllers\Admin\MemberController;
+use App\Http\Controllers\ResetPasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,10 @@ Route::get('/', function () {
 });
 Route::get('login', [HomeAdminController::class,'getLogin'])->name('login');
 Route::post('login', [HomeAdminController::class,'postLogin']);
+
+Route::get('reset-password/{token}/{email}',[ResetPasswordController::class, 'reset_form'])->name('password.reset');
+Route::post('reset-password',[ResetPasswordController::class, 'reset_password']);
+
 Route::group(['middleware'=>['auth']],function (){
     Route::get('logout', [HomeAdminController::class,'getLogout']);
 
