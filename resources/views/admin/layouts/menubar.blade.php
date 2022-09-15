@@ -52,10 +52,10 @@
                                 <a class="" href="#"></a>
                                 <li>
                                     <a class="" href="#"></a>
-                                    <a href="http://localhost/ams/public/logout">Logout</a>
+                                    <a href="logout">Logout</a>
                                 </li>
                                 <li>
-                                    <a href="#">Change Password</a>
+                                    <a href="{{url('admin/change_password')}}">Change Password</a>
                                 </li>
                             </ul>
                         </div>
