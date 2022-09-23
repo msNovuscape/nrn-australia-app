@@ -10,6 +10,7 @@ use App\Http\Controllers\Api\EmailVerifyController;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\ResetPasswordController;
+use App\Http\Controllers\Api\GalleryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,7 @@ Route::group(['namespace' => 'Api' ,'prefix' => 'v1','middleware' => ['jwt.verif
     Route::post('/member/is_verified/', [EmailVerifyController::class, 'is_verified']);
     Route::get('/news', [NewsController::class, 'index']);
     Route::get('news/{id}', [NewsController::class,'show']);
+    Route::get('/gallery', [GalleryController::class, 'index']);
 
 
 });

@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\MembershipTypeController;
 use App\Http\Controllers\Admin\EligibilityTypeController;
 use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\AccountController;
+use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\ResetPasswordController;
 
 /*
@@ -71,6 +72,14 @@ Route::group(['middleware'=>['auth']],function (){
         Route::get('members/edit/{id}',[MemberController::class,'edit']);
         Route::get('members/delete/{id}',[MemberController::class,'delete']);
         Route::get('members/members_info',[MemberController::class,'members_info']);
+
+        Route::get('gallery',[GalleryController::class,'index']);
+        Route::get('gallery/create',[GalleryController::class,'create']);
+        Route::post('gallery',[GalleryController::class,'store']);
+        Route::get('gallery/{id}',[GalleryController::class,'show']);
+        Route::get('gallery/{id}/edit',[GalleryController::class,'edit']);
+        Route::post('gallery/{id}',[GalleryController::class,'update']);
+        Route::get('gallery/delete/{id}',[GalleryController::class,'delete']);
 
         Route::get('change_password',[AccountController::class,'change_password_form']);
         Route::post('change_password',[AccountController::class,'update_password']);

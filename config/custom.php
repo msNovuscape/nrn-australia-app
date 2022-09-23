@@ -63,7 +63,7 @@ return [
     ],
     'image_folders'=>[
         '1' =>'setting',
-        '2' =>'about_us',
+        '2' =>'gallery',
         '3'=>'slider',
         '4' => 'team',
         '5' => 'blog',
