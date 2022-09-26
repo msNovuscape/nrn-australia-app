@@ -49,5 +49,4 @@ Route::group(['namespace' => 'Api' ,'prefix' => 'v1','middleware' => ['jwt.verif
     Route::get('news/{id}', [NewsController::class,'show']);
     Route::get('/gallery', [GalleryController::class, 'index']);
 
-
 });
