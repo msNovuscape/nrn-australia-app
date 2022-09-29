@@ -66,7 +66,7 @@
                     </div>
                     <!-- /.col -->
                     <div class="col-4">
-                        <button type="submit" class="btn btn-green btn-block">Sign In</button>
+                        <button type="submit" class="btn btn-create btn-block">Sign In</button>
                     </div>
                     <!-- /.col -->
                 </div>
