@@ -11,6 +11,8 @@ use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\ResetPasswordController;
 use App\Http\Controllers\Api\GalleryController;
+use App\Http\Controllers\Api\NoticeController;
+use App\Http\Controllers\Api\GuidelineController;
 
 /*
 |--------------------------------------------------------------------------
@@ -48,5 +50,8 @@ Route::group(['namespace' => 'Api' ,'prefix' => 'v1','middleware' => ['jwt.verif
     Route::get('/news', [NewsController::class, 'index']);
     Route::get('news/{id}', [NewsController::class,'show']);
     Route::get('/gallery', [GalleryController::class, 'index']);
+    Route::get('/notice', [NoticeController::class, 'index']);
+    Route::get('notice/{id}', [NoticeController::class,'show']);
+    Route::get('/guidelines', [GuidelineController::class, 'index']);
 
 });

@@ -109,6 +109,12 @@ class User extends Authenticatable implements JWTSubject
             }
             return $directory = 'images/news/'.$year.'/'.$month.'/'.$day.'/';
         }
+        if(config('custom.image_folders')[$image_folder_type] == 'notice'){
+            if (!is_dir(public_path().'/images/notice/'.$year.'/'.$month.'/'.$day)) {
+                mkdir(public_path().'/images/notice/'.$year.'/'.$month.'/'.$day, 0755, true);
+            }
+            return $directory = 'images/notice/'.$year.'/'.$month.'/'.$day.'/';
+        }
         if(config('custom.image_folders')[$image_folder_type] == 'testimonial'){
             if (!is_dir(public_path().'/images/testimonial/'.$year.'/'.$month.'/'.$day)) {
                 mkdir(public_path().'/images/testimonial/'.$year.'/'.$month.'/'.$day, 0755, true);

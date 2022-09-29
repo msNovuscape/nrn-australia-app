@@ -8,6 +8,9 @@ use App\Http\Controllers\Admin\EligibilityTypeController;
 use App\Http\Controllers\Admin\MemberController;
 use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\GalleryController;
+use App\Http\Controllers\Admin\NoticeController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\GuidelineController;
 use App\Http\Controllers\ResetPasswordController;
 
 /*
@@ -38,6 +41,13 @@ Route::group(['middleware'=>['auth']],function (){
         Route::get('/index', [HomeAdminController::class,'indexAdmin']);
         Route::get('logout', [HomeAdminController::class,'getLogout']);
 
+        Route::get('settings',[SettingController::class,'index']);
+        Route::get('settings/create',[SettingController::class,'create']);
+        Route::post('settings',[SettingController::class,'store']);
+        Route::get('settings/{id}',[SettingController::class,'show']);
+        Route::get('settings/{id}/edit',[SettingController::class,'edit']);
+        Route::post('settings/{id}',[SettingController::class,'update']);
+        Route::get('settings/{id}/delete',[SettingController::class,'delete']);
 
         Route::get('news',[NewsAndUpdateController::class,'index']);
         Route::get('news/create',[NewsAndUpdateController::class,'create']);
@@ -80,6 +90,22 @@ Route::group(['middleware'=>['auth']],function (){
         Route::get('gallery/{id}/edit',[GalleryController::class,'edit']);
         Route::post('gallery/{id}',[GalleryController::class,'update']);
         Route::get('gallery/delete/{id}',[GalleryController::class,'delete']);
+
+        Route::get('notices',[NoticeController::class,'index']);
+        Route::get('notices/create',[NoticeController::class,'create']);
+        Route::post('notices',[NoticeController::class,'store']);
+        Route::get('notices/{id}',[NoticeController::class,'show']);
+        Route::get('notices/{id}/edit',[NoticeController::class,'edit']);
+        Route::post('notices/{id}',[NoticeController::class,'update']);
+        Route::get('notices/delete/{id}',[NoticeController::class,'delete']);
+
+        Route::get('guidelines',[GuidelineController::class,'index']);
+        Route::get('guidelines/create',[GuidelineController::class,'create']);
+        Route::post('guidelines',[GuidelineController::class,'store']);
+        Route::get('guidelines/{id}',[GuidelineController::class,'show']);
+        Route::get('guidelines/{id}/edit',[GuidelineController::class,'edit']);
+        Route::post('guidelines/{id}',[GuidelineController::class,'update']);
+        Route::get('guidelines/delete/{id}',[GuidelineController::class,'delete']);
 
         Route::get('change_password',[AccountController::class,'change_password_form']);
         Route::post('change_password',[AccountController::class,'update_password']);
