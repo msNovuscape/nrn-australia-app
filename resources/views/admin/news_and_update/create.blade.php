@@ -21,7 +21,6 @@
         <section class="content p-0">
 
             <div class="container-fluid p-0">
-
                 <div class="card mb-0">
 
                     <div class="card-header">

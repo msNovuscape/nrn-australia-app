@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\ApiBaseController;
 use App\Http\Resources\NewsResource;
+use App\Http\Resources\NoticeResource;
+use App\Http\Resources\SettingResource;
 use App\Models\News;
+use App\Models\Notice;
 use Illuminate\Http\Request;
 use App\Repositories\Login\LoginRepository;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +16,7 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 use Carbon\Carbon;
 use Exception;
 use App\Models\Member;
+use App\Models\Setting;
 use App\Repositories\News\NewsRepository;
 
 class HomeController extends ApiBaseController
@@ -54,6 +58,8 @@ class HomeController extends ApiBaseController
 
 //      $news = $this->sendResponse($this->news->all($request->all()), 'News fetched successfully');
       $news = News::where('status',1)->get();
+      $notice = Notice::where('status',1)->get();
+      $settings = Setting::where('status',1)->get();
        return response()->json([
             'sliders' => [
                url('/Carousal.png'),
@@ -67,6 +73,8 @@ class HomeController extends ApiBaseController
             'notices' => null,
             'user' => $currentUser,
             'isMember'=> $isMember,
+            'notice' => NoticeResource::collection($notice),
+            'settings' => SettingResource::collection($settings),
             'member_image' => $isMember ? url($member->image) : '',
 
         ], 200);

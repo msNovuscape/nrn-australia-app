@@ -19,6 +19,10 @@ return [
         '1'=> 'NRNA',
         '2'=> 'Third Party',
     ],
+    'notice_types' =>[
+        '1'=> 'NRNA',
+        '2'=> 'Third Party',
+    ],
     'featured_types'=>[
         '1' => 'Yes',
         '2' => 'No'
@@ -72,6 +76,7 @@ return [
         '8' => 'identification_image',
         '9' => 'proof_of_residency_image',
         '10' => 'payment_slip',
+        '11' => 'notice'
     ],
     'course_types'=>[
         '1' =>'Upcoming Courses',

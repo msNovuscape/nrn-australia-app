@@ -24,7 +24,7 @@
                 <div class="card card-default">
                     <div class="card-header">
                         <h3 class="card-title">Show News</h3>
-                        <a href="{{url('admin/news')}}" class="back-button btn-green">Back</a>
+                        <a href="{{url('admin/news')}}" class="back-button btn-create">Back</a>
 
                     </div>
                     <div class="card-body">

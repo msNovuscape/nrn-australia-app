@@ -99,7 +99,7 @@
                         </a>
                     </li>
 
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a href="{{url('admin/sliders')}}" class="nav-link {{(Request::segment(2) == 'sliders') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
                             <i class="fas fa-sliders-h pl-4" aria-hidden="true"></i>
                             <p id="accordion">
@@ -108,7 +108,7 @@
                                 </button>
                             </p>
                         </a>
-                    </li>
+                    </li> -->
 
                     <li class="nav-item sidebar-nav-item">
                         <a href="{{url('admin/eligibility_types')}}" class="nav-link {{(Request::segment(2) == 'eligibility_types') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
@@ -179,6 +179,29 @@
                         </a>
                     </li>
 
+                    <li class="nav-item sidebar-nav-item">
+                        <a href="{{url('admin/notices')}}" class="nav-link {{(Request::segment(2) == 'notices') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
+                            <i class="fas fa-newspaper pl-4" aria-hidden="true"></i>
+                            <p id="accordion">
+                                <!-- <button class="btn btn-link p-2 w-80" data-toggle="collapse" data-target="#collapseNews" aria-expanded="true" aria-controls="collapseNews" id="headingNews">
+                                    News
+                                </button> -->
+                                <button class="btn btn-link p-2 w-80">
+                                    Notice
+                                </button>
+                            </p>
+                            <!-- <div id="collapseNews" class="collapse collapse-sidebar mt-2" aria-labelledby="headingNews" data-parent="#accordion">
+                                <div>
+                                    <ul>
+                                        <li><a href="{{url('admin/members')}}"><i class="fas fa-ellipsis-h collapse-icon"></i>Pending Members</a></li>
+                                        <li><a href="{{url('admin/members')}}"><i class="fas fa-check collapse-icon"></i>Approved Members</a></li>
+                                        <li><a href="{{url('admin/members')}}"><i class="fas fa-times collapse-icon"></i>Rejected Members</a></li>
+                                    </ul>
+                                </div>
+                            </div> -->
+                        </a>
+                    </li>
+
                     <li class="nav-item sidebar-nav-item" >
                         <a href="#" class="nav-link {{(Request::segment(2) == 'members') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100" id="mySettingsBtn" onclick=iconClick()>
                             <i class="fas fa-users pl-4" aria-hidden="true"></i>
@@ -196,6 +219,29 @@
                                     </div>
                                 </div>
                             </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item sidebar-nav-item">
+                        <a href="{{url('admin/guidelines')}}" class="nav-link {{(Request::segment(2) == 'guidelines') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
+                            <i class="fas fa-newspaper pl-4" aria-hidden="true"></i>
+                            <p id="accordion">
+                                <!-- <button class="btn btn-link p-2 w-80" data-toggle="collapse" data-target="#collapseNews" aria-expanded="true" aria-controls="collapseNews" id="headingNews">
+                                    News
+                                </button> -->
+                                <button class="btn btn-link p-2 w-80">
+                                    Guidelines
+                                </button>
+                            </p>
+                            <!-- <div id="collapseNews" class="collapse collapse-sidebar mt-2" aria-labelledby="headingNews" data-parent="#accordion">
+                                <div>
+                                    <ul>
+                                        <li><a href="{{url('admin/members')}}"><i class="fas fa-ellipsis-h collapse-icon"></i>Pending Members</a></li>
+                                        <li><a href="{{url('admin/members')}}"><i class="fas fa-check collapse-icon"></i>Approved Members</a></li>
+                                        <li><a href="{{url('admin/members')}}"><i class="fas fa-times collapse-icon"></i>Rejected Members</a></li>
+                                    </ul>
+                                </div>
+                            </div> -->
                         </a>
                     </li>
 
