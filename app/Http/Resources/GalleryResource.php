@@ -18,7 +18,7 @@ class GalleryResource extends JsonResource
             'id' => $this->id,
             'date' => $this->date,
             'title' => $this->title,
-            'images' => GalleryImageResource::collection($this->whenLoaded('gallery_images')->slice(0,3)),
+            'images' => GalleryImageResource::collection($this->whenLoaded('gallery_images')->slice(0,50)),
 
             // 'images' =>  new GalleryImageResource($this->gallery_images),
             // 'third_party_news' => new ThirdPartyNewsResource($this->third_party_news)
