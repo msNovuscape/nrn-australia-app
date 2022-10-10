@@ -11,7 +11,7 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1>Notice</h1>
+                        <h1>Project</h1>
                     </div>
                 </div>
             </div><!-- /.container-fluid -->
@@ -23,14 +23,14 @@
                 <!-- SELECT2 EXAMPLE -->
                 <div class="card card-default">
                     <div class="card-header">
-                        <h3 class="card-title">Edit Notice</h3>
-                        <a href="{{url('admin/notices')}}" class="back-button btn-green">List</a>
+                        <h3 class="card-title">Edit Project</h3>
+                        <a href="{{url('admin/projects')}}" class="back-button btn-green">List</a>
 
                     </div>
                     <div class="card-body">
                         @include('success.success')
                         @include('errors.error')
-                        {!! Form::open(['url' => '/admin/notices/'.$setting->id, 'class' => 'form-horizontal', 'method'=> 'POST','files' => true]) !!}
+                        {!! Form::open(['url' => '/admin/projects/'.$setting->id, 'class' => 'form-horizontal', 'method'=> 'POST','files' => true]) !!}
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
@@ -68,11 +68,11 @@
                             </div> -->
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label>Notice Type<span style="color: red";> * </span> </label>
-                                    <select name="notice_type" id="notice_type" class="form-control" required onchange="getNoticeType()">
-                                        <option value="" selected disabled>Please select notice type</option>
-                                        @foreach(config('custom.notice_types') as $index => $value)
-                                            <option value="{{$index}}" @if($setting->notice_type == $index) selected @endif>{{$value}}</option>
+                                    <label>Project Type<span style="color: red";> * </span> </label>
+                                    <select name="project_type" id="project_type" class="form-control" required onchange="getProjectType()">
+                                        <option value="" selected disabled>Please select project type</option>
+                                        @foreach(config('custom.project_types') as $index => $value)
+                                            <option value="{{$index}}" @if($setting->project_type == $index) selected @endif>{{$value}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -96,11 +96,11 @@
                             </div>
                         </div>
                         <div class="row" id="news_section">
-                            @if($setting->nrn_notice)
-                                @include('admin.notice.nrna_notice')
+                            @if($setting->nrn_project)
+                                @include('admin.project.nrna_project')
                             @endif
-                            @if($setting->third_party_notice)
-                                @include('admin.notice.third_party_notice')
+                            @if($setting->third_party_project)
+                                @include('admin.project.third_party_project')
                             @endif
                         </div>
                         <div class="form-group row create-button">
@@ -118,13 +118,14 @@
 @section('script')
     <script>
 
-        function getNoticeType() {
-            var notice_type = $('#notice_type').val();
-            var notice_id = '<?php echo $setting->id ; ?>';
+        function getProjectType() {
+            var project_type = $('#project_type').val();
+           
+            var project_id = '<?php echo $setting->id ; ?>';
             start_loader();
             $.ajax({
                 type: 'GET',
-                url:Laravel.url+'/admin/notice_type/'+notice_type+'/'+notice_id,
+                url:Laravel.url+'/admin/project_type/'+project_type+'/'+project_id,
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 processData: false,  // tell jQuery not to process the data
                 contentType: false,

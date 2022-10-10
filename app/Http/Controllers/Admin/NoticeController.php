@@ -230,7 +230,7 @@ class NoticeController extends Controller
     }
 
             public function delete($id){
-                $setting=Gallery::findorfail($id);
+                $setting=Notice::findorfail($id);
                 if($setting->gallery_images->count() > 0){
                     $setting->gallery_images()->delete();
                 }
@@ -239,7 +239,36 @@ class NoticeController extends Controller
                         unlink(public_path().'/'.$setting->image);
                     }
                 }
-                Session::flash('success','Gallery is deleted !');
+                Session::flash('success','Notice is deleted !');
                 return redirect($this->redirect);
+            }
+
+            public function getNoticeDom($notice_type)
+            {
+                if('NRNA' == config('custom.notice_types')[$notice_type]){
+                    $returnHTML = view($this->view.'nrna_notice')->render();// or method that you prefere to return data + RENDER is the key here
+                }else{
+                    $returnHTML = view($this->view.'third_party_notice')->render();// or method that you prefere to return data + RENDER is the key here
+                }
+                return response()->json( array('success' => true, 'html'=>$returnHTML) );
+            }
+            public function getNoticeDomEdit($notice_type,$notice_id)
+            {
+                $setting = Notice::findOrFail($notice_id);
+                if($setting->notice_type == $notice_type){
+                    if('NRNA' == config('custom.notice_types')[$notice_type]){
+                        $returnHTML = view($this->view.'nrna_notice',['setting' => $setting])->render();// or method that you prefere to return data + RENDER is the key here
+                    }else{
+                        $returnHTML = view($this->view.'third_party_notice',['setting' => $setting])->render();// or method that you prefere to return data + RENDER is the key here
+                    }
+                }else{
+                    if('NRNA' == config('custom.notice_types')[$notice_type]){
+                        $returnHTML = view($this->view.'nrna_notice')->render();// or method that you prefere to return data + RENDER is the key here
+                    }else{
+                        $returnHTML = view($this->view.'third_party_notice')->render();// or method that you prefere to return data + RENDER is the key here
+                    }
+                }
+        
+                return response()->json( array('success' => true, 'html'=>$returnHTML) );
             }
 }

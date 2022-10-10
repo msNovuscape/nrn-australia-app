@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\NoticeController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\GuidelineController;
+use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\ResetPasswordController;
 
 /*
@@ -98,6 +99,19 @@ Route::group(['middleware'=>['auth']],function (){
         Route::get('notices/{id}/edit',[NoticeController::class,'edit']);
         Route::post('notices/{id}',[NoticeController::class,'update']);
         Route::get('notices/delete/{id}',[NoticeController::class,'delete']);
+        Route::get('notice_type/{notice_type}',[NoticeController::class,'getNoticeDom']);
+        Route::get('notice_type/{notice_type}/{notice_id}',[NoticeController::class,'getNoticeDomEdit']);
+
+
+        Route::get('projects',[ProjectController::class,'index']);
+        Route::get('projects/create',[ProjectController::class,'create']);
+        Route::post('projects',[ProjectController::class,'store']);
+        Route::get('projects/{id}',[ProjectController::class,'show']);
+        Route::get('projects/{id}/edit',[ProjectController::class,'edit']);
+        Route::post('projects/{id}',[ProjectController::class,'update']);
+        Route::get('projects/delete/{id}',[ProjectController::class,'delete']);
+        Route::get('project_type/{project_type}',[ProjectController::class,'getProjectDom']);
+        Route::get('project_type/{project_type}/{project_id}',[ProjectController::class,'getProjectDomEdit']);
 
         Route::get('guidelines',[GuidelineController::class,'index']);
         Route::get('guidelines/create',[GuidelineController::class,'create']);

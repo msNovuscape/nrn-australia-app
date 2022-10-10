@@ -23,6 +23,10 @@ return [
         '1'=> 'NRNA',
         '2'=> 'Third Party',
     ],
+    'project_types' =>[
+        '1'=> 'NRNA',
+        '2'=> 'Third Party',
+    ],
     'featured_types'=>[
         '1' => 'Yes',
         '2' => 'No'
@@ -76,7 +80,8 @@ return [
         '8' => 'identification_image',
         '9' => 'proof_of_residency_image',
         '10' => 'payment_slip',
-        '11' => 'notice'
+        '11' => 'notice',
+        '12' => 'project'
     ],
     'course_types'=>[
         '1' =>'Upcoming Courses',
