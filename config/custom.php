@@ -48,7 +48,8 @@ return [
         '4' => 'Victoria',
         '5' => 'Western Australia',
         '6' => 'Northern Territory',
-        '7' => 'Australian Capital Territory'
+        '7' => 'Australian Capital Territory',
+        '8' => 'New South Wales'
     ],
     'countries' =>[
         '1'=> 'Australia',
@@ -61,6 +62,14 @@ return [
         '2'=>'Notice',
 
     ],
+
+    'regions'=>[
+
+        '1'=>'Metro',
+        '2'=>'Regional',
+
+    ],
+
     'testimonial_types'=>[
         '1'=>'Service',
         '2'=>'Academy',
