@@ -236,6 +236,50 @@
                     </li>
 
                     <li class="nav-item sidebar-nav-item">
+                        <a href="{{url('admin/document_category')}}" class="nav-link {{(Request::segment(2) == 'document_category') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
+                            <i class="fas fa-newspaper pl-4" aria-hidden="true"></i>
+                            <p id="accordion">
+                                <!-- <button class="btn btn-link p-2 w-80" data-toggle="collapse" data-target="#collapseNews" aria-expanded="true" aria-controls="collapseNews" id="headingNews">
+                                    News
+                                </button> -->
+                                <button class="btn btn-link p-2 w-80">
+                                    Document Category
+                                </button>
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item sidebar-nav-item">
+                        <a href="{{url('admin/period')}}" class="nav-link {{(Request::segment(2) == 'period') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
+                            <i class="fas fa-newspaper pl-4" aria-hidden="true"></i>
+                            <p id="accordion">
+                                <!-- <button class="btn btn-link p-2 w-80" data-toggle="collapse" data-target="#collapseNews" aria-expanded="true" aria-controls="collapseNews" id="headingNews">
+                                    News
+                                </button> -->
+                                <button class="btn btn-link p-2 w-80">
+                                    Period
+                                </button>
+                            </p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item sidebar-nav-item">
+                        <a href="{{url('admin/document')}}" class="nav-link {{(Request::segment(2) == 'document') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
+                            <i class="fas fa-newspaper pl-4" aria-hidden="true"></i>
+                            <p id="accordion">
+                                <!-- <button class="btn btn-link p-2 w-80" data-toggle="collapse" data-target="#collapseNews" aria-expanded="true" aria-controls="collapseNews" id="headingNews">
+                                    News
+                                </button> -->
+                                <button class="btn btn-link p-2 w-80">
+                                    Documents
+                                </button>
+                            </p>
+                        </a>
+                    </li>
+
+                    
+
+                    <li class="nav-item sidebar-nav-item">
                         <a href="{{url('admin/guidelines')}}" class="nav-link {{(Request::segment(2) == 'guidelines') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
                             <i class="fas fa-newspaper pl-4" aria-hidden="true"></i>
                             <p id="accordion">

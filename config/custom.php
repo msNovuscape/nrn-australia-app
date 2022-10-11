@@ -90,7 +90,8 @@ return [
         '9' => 'proof_of_residency_image',
         '10' => 'payment_slip',
         '11' => 'notice',
-        '12' => 'project'
+        '12' => 'project',
+        '13' => 'document'
     ],
     'course_types'=>[
         '1' =>'Upcoming Courses',

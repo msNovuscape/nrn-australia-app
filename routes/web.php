@@ -12,7 +12,11 @@ use App\Http\Controllers\Admin\NoticeController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\GuidelineController;
 use App\Http\Controllers\Admin\ProjectController;
+use App\Http\Controllers\Admin\DocumentCategoryController;
+use App\Http\Controllers\Admin\PeriodController;
+use App\Http\Controllers\Admin\DocumentController;
 use App\Http\Controllers\ResetPasswordController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -120,6 +124,30 @@ Route::group(['middleware'=>['auth']],function (){
         Route::get('guidelines/{id}/edit',[GuidelineController::class,'edit']);
         Route::post('guidelines/{id}',[GuidelineController::class,'update']);
         Route::get('guidelines/delete/{id}',[GuidelineController::class,'delete']);
+
+        Route::get('document_category',[DocumentCategoryController::class,'index']);
+        Route::get('document_category/create',[DocumentCategoryController::class,'create']);
+        Route::post('document_category',[DocumentCategoryController::class,'store']);
+        Route::get('document_category/{id}',[DocumentCategoryController::class,'show']);
+        Route::get('document_category/{id}/edit',[DocumentCategoryController::class,'edit']);
+        Route::post('document_category/{id}',[DocumentCategoryController::class,'update']);
+        Route::get('document_category/delete/{id}',[DocumentCategoryController::class,'delete']);
+
+        Route::get('period',[PeriodController::class,'index']);
+        Route::get('period/create',[PeriodController::class,'create']);
+        Route::post('period',[PeriodController::class,'store']);
+        Route::get('period/{id}',[PeriodController::class,'show']);
+        Route::get('period/{id}/edit',[PeriodController::class,'edit']);
+        Route::post('period/{id}',[PeriodController::class,'update']);
+        Route::get('period/delete/{id}',[PeriodController::class,'delete']);
+
+        Route::get('document',[DocumentController::class,'index']);
+        Route::get('document/create',[DocumentController::class,'create']);
+        Route::post('document',[DocumentController::class,'store']);
+        Route::get('document/{id}',[DocumentController::class,'show']);
+        Route::get('document/{id}/edit',[DocumentController::class,'edit']);
+        Route::post('document/{id}',[DocumentController::class,'update']);
+        Route::get('document/delete/{id}',[DocumentController::class,'delete']);
 
         Route::get('change_password',[AccountController::class,'change_password_form']);
         Route::post('change_password',[AccountController::class,'update_password']);
