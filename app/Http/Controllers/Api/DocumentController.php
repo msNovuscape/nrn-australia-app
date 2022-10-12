@@ -12,12 +12,13 @@ class DocumentController extends ApiBaseController
     
     public function index(Request $request){
 
-        if(\request('per_page')){
-            $perpage = request('per_page');
-        }else{
-            $perpage = config('custom.per_page');
-        }
-        $settings = Document::where('status',1)->orderBy('id','desc')->paginate($perpage);
+        // if(\request('per_page')){
+        //     $perpage = request('per_page');
+        // }
+        // else{
+        //     $perpage = config('custom.per_page');
+        // }
+        $settings = Document::where('status',1)->orderBy('id','desc')->get();
         return DocumentResource::collection($settings);
 
     }
