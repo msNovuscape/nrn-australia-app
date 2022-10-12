@@ -16,8 +16,8 @@ class DocumentResource extends JsonResource
      */
     public function toArray($request)
     {
-        $categories = DocumentCategory::has('documents','>' ,'0')->get();
-        $periods = Period::has('documents','>' ,'0')->get();
+        $categories = DocumentCategory::has('documents')->get();
+        $periods = Period::has('documents')->get();
         return [
             'id' => $this->id,
             'file' => url($this->file),
