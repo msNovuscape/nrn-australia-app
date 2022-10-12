@@ -16,7 +16,7 @@ class PeriodController extends Controller
 
     public function index()
     {
-        $settings = Period::orderBy('id','DESC');
+        $settings = Period::orderBy('from_date');
 
         if(\request('title')){
             $key = \request('title');

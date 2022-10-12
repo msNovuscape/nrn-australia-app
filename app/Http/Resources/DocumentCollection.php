@@ -18,7 +18,7 @@ class DocumentCollection extends ResourceCollection
     public function toArray($request)
     {
         $categories = DocumentCategory::has('documents')->get();
-        $periods = Period::has('documents')->get();
+        $periods = Period::has('documents')->orderBy('from_date')->get();
         return [
             'documents' => $this->collection,
             'categories' => DocumentCategoryResource::collection($categories),
