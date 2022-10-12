@@ -14,12 +14,13 @@ class DocumentCollection extends ResourceCollection
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
+     public static $wrap = '';
     public function toArray($request)
     {
         $categories = DocumentCategory::has('documents')->get();
         $periods = Period::has('documents')->get();
         return [
-            'data' => $this->collection,
+            'documents' => $this->collection,
             'categories' => DocumentCategoryResource::collection($categories),
             'periods' => PeriodResource::collection($periods),
         ];

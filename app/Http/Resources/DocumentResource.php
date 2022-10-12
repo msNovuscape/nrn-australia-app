@@ -13,6 +13,7 @@ class DocumentResource extends JsonResource
      * @param  \Illuminate\Http\Request  $request
      * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
      */
+    
     public function toArray($request)
     {
         
@@ -23,6 +24,7 @@ class DocumentResource extends JsonResource
             'title' => $this->title,
             'document_category' =>  new DocumentCategoryResource($this->document_category),
             'period' => new PeriodResource($this->period),
+            
           
         ];
     }
