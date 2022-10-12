@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\ApiBaseController;
 use Illuminate\Http\Request;
 use App\Models\Document;
-use App\Http\Resources\DocumentResource;
+use App\Http\Resources\DocumentCollection;
 
 class DocumentController extends ApiBaseController
 {
@@ -18,7 +18,7 @@ class DocumentController extends ApiBaseController
         //     $perpage = config('custom.per_page');
         // }
         $settings = Document::where('status',1)->orderBy('id','desc')->get();
-        return DocumentResource::collection($settings);
+        return new DocumentCollection($settings);
     }
 
     // public function show($id)
