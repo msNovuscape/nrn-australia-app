@@ -10,4 +10,8 @@ class Period extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
+
+    public function documents(){
+        return $this->hasMany(Document::class);
+    }
 }

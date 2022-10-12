@@ -11,7 +11,6 @@ class DocumentController extends ApiBaseController
 {
     
     public function index(Request $request){
-
         // if(\request('per_page')){
         //     $perpage = request('per_page');
         // }
@@ -20,7 +19,6 @@ class DocumentController extends ApiBaseController
         // }
         $settings = Document::where('status',1)->orderBy('id','desc')->get();
         return DocumentResource::collection($settings);
-
     }
 
     // public function show($id)
