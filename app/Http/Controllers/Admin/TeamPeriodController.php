@@ -4,19 +4,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 
-use App\Models\Period;
+use App\Models\TeamPeriod;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-class PeriodController extends Controller
+class TeamPeriodController extends Controller
 {
-    protected $view = 'admin.period.';
-    protected $redirect = 'admin/period';
+    protected $view = 'admin.team_period.';
+    protected $redirect = 'admin/team_period';
 
     public function index()
     {
-        $settings = Period::orderBy('from_date','desc');
+        $settings = TeamPeriod::orderBy('from_date','desc');
 
         if(\request('title')){
             $key = \request('title');
@@ -55,26 +55,26 @@ class PeriodController extends Controller
         $title = $from_year .'-'.$to_year;
         $requestData['title'] = $title;
 
-        $setting = Period::create($requestData);
-        Session::flash('success','Period successfully created');
+        $setting = TeamPeriod::create($requestData);
+        Session::flash('success','Team Period successfully created');
         return redirect($this->redirect);
     }
 
     public function show($id)
     {
-        $setting =Period::findorfail($id);
+        $setting =TeamPeriod::findorfail($id);
         return view($this->view.'show',compact('setting'));
     }
 
     public function edit($id){
-        $setting =Period::findorfail($id);
+        $setting =TeamPeriod::findorfail($id);
         return view($this->view.'edit',compact('setting'));
     }
 
     public function update(Request $request, $id){
 
 //        dd(\request()->all());
-        $setting =Period::findorfail($id);
+        $setting =TeamPeriod::findorfail($id);
         
         $this->validate(\request(), [
             'from_date' => 'required',
@@ -99,16 +99,16 @@ class PeriodController extends Controller
         $setting->fill($requestData);
         $setting->save();
         
-        Session::flash('success','Period succesffuly edited.');
+        Session::flash('success','Team Period successfully edited.');
         return redirect($this->redirect);
 
     }
 
     public function delete($id){
-        $setting=Period::findorfail($id);
+        $setting=TeamPeriod::findorfail($id);
         
         if($setting->delete()){
-            Session::flash('success','Period is deleted !');
+            Session::flash('success','Team Period is successfully deleted !');
             return redirect($this->redirect);
         }
         

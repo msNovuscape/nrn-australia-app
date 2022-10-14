@@ -163,6 +163,12 @@ class User extends Authenticatable implements JWTSubject
             }
             return $directory = 'images/document/' . $year . '/' . $month . '/' . $day . '/';
         }
+        if (config('custom.image_folders')[$image_folder_type] == 'team') {
+            if (!is_dir(public_path() . '/images/team/' . $year . '/' . $month . '/' . $day)) {
+                mkdir(public_path() . '/images/team/' . $year . '/' . $month . '/' . $day, 0755, true);
+            }
+            return $directory = 'images/team/' . $year . '/' . $month . '/' . $day . '/';
+        }
 
 
 
@@ -237,6 +243,7 @@ class User extends Authenticatable implements JWTSubject
                 return($target_path.$target_file);
             }
         }
+        
     }
 
     public function member(){

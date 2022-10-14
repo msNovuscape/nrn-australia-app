@@ -3,10 +3,10 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
-use App\Models\DocumentCategory;
+use App\Models\Designation;
 use App\Models\Period;
 
-class DocumentCollection extends ResourceCollection
+class TeamCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.
@@ -17,12 +17,14 @@ class DocumentCollection extends ResourceCollection
      public static $wrap = '';
     public function toArray($request)
     {
-        $categories = DocumentCategory::has('documents')->get();
-        $periods = Period::has('documents')->orderBy('from_date','desc')->get();
+        $categories = Designation::has('teams')->get();
+        $periods = Period::has('teams')->orderBy('from_date','desc')->get();
         return [
-            'documents' => $this->collection,
-            'categories' => DocumentCategoryResource::collection($categories),
+            'teams' => $this->collection,
+            'designations' => DesignationResource::collection($categories),
             'periods' => PeriodResource::collection($periods),
+            // 'states' => config('custom.states')
+            
         ];
     }
 }

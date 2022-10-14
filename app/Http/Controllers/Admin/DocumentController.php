@@ -116,7 +116,7 @@ class DocumentController extends Controller
         $setting->fill($requestData);
         $setting->save();
         
-        Session::flash('success','Document succesffuly updated.');
+        Session::flash('success', 'Document succesffuly updated.');
         return redirect($this->redirect);
 
     }

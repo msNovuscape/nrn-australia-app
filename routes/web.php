@@ -15,6 +15,9 @@ use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\DocumentCategoryController;
 use App\Http\Controllers\Admin\PeriodController;
 use App\Http\Controllers\Admin\DocumentController;
+use App\Http\Controllers\Admin\DesignationController;
+use App\Http\Controllers\Admin\TeamPeriodController;
+use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\ResetPasswordController;
 
 
@@ -148,6 +151,30 @@ Route::group(['middleware'=>['auth']],function (){
         Route::get('document/{id}/edit',[DocumentController::class,'edit']);
         Route::post('document/{id}',[DocumentController::class,'update']);
         Route::get('document/delete/{id}',[DocumentController::class,'delete']);
+
+        Route::get('designation',[DesignationController::class,'index']);
+        Route::get('designation/create',[DesignationController::class,'create']);
+        Route::post('designation',[DesignationController::class,'store']);
+        Route::get('designation/{id}',[DesignationController::class,'show']);
+        Route::get('designation/{id}/edit',[DesignationController::class,'edit']);
+        Route::post('designation/{id}',[DesignationController::class,'update']);
+        Route::get('designation/delete/{id}',[DesignationController::class,'delete']);
+
+        Route::get('team_period',[TeamPeriodController::class,'index']);
+        Route::get('team_period/create',[TeamPeriodController::class,'create']);
+        Route::post('team_period',[TeamPeriodController::class,'store']);
+        Route::get('team_period/{id}',[TeamPeriodController::class,'show']);
+        Route::get('team_period/{id}/edit',[TeamPeriodController::class,'edit']);
+        Route::post('team_period/{id}',[TeamPeriodController::class,'update']);
+        Route::get('team_period/delete/{id}',[TeamPeriodController::class,'delete']);
+
+        Route::get('team',[TeamController::class,'index']);
+        Route::get('team/create',[TeamController::class,'create']);
+        Route::post('team',[TeamController::class,'store']);
+        Route::get('team/{id}',[TeamController::class,'show']);
+        Route::get('team/{id}/edit',[TeamController::class,'edit']);
+        Route::post('team/{id}',[TeamController::class,'update']);
+        Route::get('team/delete/{id}',[TeamController::class,'delete']);
 
         Route::get('change_password',[AccountController::class,'change_password_form']);
         Route::post('change_password',[AccountController::class,'update_password']);

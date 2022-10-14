@@ -277,6 +277,46 @@
                         </a>
                     </li>
 
+                    <li class="nav-item sidebar-nav-item">
+                        <a href="{{url('admin/designation')}}" class="nav-link {{(Request::segment(2) == 'designation') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
+                            <i class="fas fa-newspaper pl-4" aria-hidden="true"></i>
+                            <p id="accordion">
+                                <!-- <button class="btn btn-link p-2 w-80" data-toggle="collapse" data-target="#collapseNews" aria-expanded="true" aria-controls="collapseNews" id="headingNews">
+                                    News
+                                </button> -->
+                                <button class="btn btn-link p-2 w-80">
+                                    Designation
+                                </button>
+                            </p>
+                        </a>
+                    </li>
+
+                    <!-- <li class="nav-item sidebar-nav-item">
+                        <a href="{{url('admin/team_period')}}" class="nav-link {{(Request::segment(2) == 'team_period') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
+                            <i class="fas fa-newspaper pl-4" aria-hidden="true"></i>
+                            <p id="accordion">
+                                
+                                <button class="btn btn-link p-2 w-80">
+                                    Team Period
+                                </button>
+                            </p>
+                        </a>
+                    </li> -->
+
+                    <li class="nav-item sidebar-nav-item">
+                        <a href="{{url('admin/team')}}" class="nav-link {{(Request::segment(2) == 'team') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
+                            <i class="fas fa-newspaper pl-4" aria-hidden="true"></i>
+                            <p id="accordion">
+                                <!-- <button class="btn btn-link p-2 w-80" data-toggle="collapse" data-target="#collapseNews" aria-expanded="true" aria-controls="collapseNews" id="headingNews">
+                                    News
+                                </button> -->
+                                <button class="btn btn-link p-2 w-80">
+                                    Teams
+                                </button>
+                            </p>
+                        </a>
+                    </li>
+
                     
 
                     <li class="nav-item sidebar-nav-item">
@@ -287,7 +327,7 @@
                                     News
                                 </button> -->
                                 <button class="btn btn-link p-2 w-80">
-                                    Guidelines
+                                    Information Desk
                                 </button>
                             </p>
                             <!-- <div id="collapseNews" class="collapse collapse-sidebar mt-2" aria-labelledby="headingNews" data-parent="#accordion">

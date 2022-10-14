@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\NoticeController;
 use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\GuidelineController;
 use App\Http\Controllers\Api\DocumentController;
+use App\Http\Controllers\Api\TeamController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,5 +59,6 @@ Route::group(['namespace' => 'Api' ,'prefix' => 'v1','middleware' => ['jwt.verif
     Route::get('project/{id}', [ProjectController::class,'show']);
     Route::get('/guidelines', [GuidelineController::class, 'index']);
     Route::get('/document', [DocumentController::class, 'index']);
+    Route::get('/team', [TeamController::class, 'index']);
 
 });

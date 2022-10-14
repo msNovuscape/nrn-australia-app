@@ -50,6 +50,7 @@ return [
         '6' => 'Northern Territory',
         '7' => 'Australian Capital Territory',
         '8' => 'New South Wales'
+        
     ],
     'countries' =>[
         '1'=> 'Australia',
@@ -91,7 +92,8 @@ return [
         '10' => 'payment_slip',
         '11' => 'notice',
         '12' => 'project',
-        '13' => 'document'
+        '13' => 'document',
+        '14' => 'team'
     ],
     'course_types'=>[
         '1' =>'Upcoming Courses',
@@ -124,6 +126,17 @@ return [
         '6'=> 'About',
         '7' => 'Faq'
     ],
+
+    'team_types' => [
+        '1' => 'Board Of directors',
+
+        '2' => 'ICC/SCC/NCC',
+
+        '3' =>  'NCC Youth',
+
+        '4' =>  'NCC Women'
+    ],
+
     'file_dir'=>'storage_new',
     'domain_suffix' =>'np',
     'per_page' =>10,
