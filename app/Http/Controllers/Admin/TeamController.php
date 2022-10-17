@@ -18,7 +18,7 @@ class TeamController extends Controller
 
     public function index()
     {
-        $teams = Team::where('status', 1);
+        $teams = Team::where('status', 1)->orderBy('id', 'desc');
 
         if (\request('full_name')) {
             $key = \request('full_name');
@@ -48,7 +48,7 @@ class TeamController extends Controller
                 'designation' => 'required',
                 'period' => 'required',
                 'full_name' => 'required',
-                'state' => 'required',
+                'state' => 'required_if:team_type,==,2,3,4,5',
                 'image' => 'file|mimes:jpeg,png,jpg',
         ]);
 
@@ -69,7 +69,7 @@ class TeamController extends Controller
         }
         $requestData['designation_id'] = $request->designation;
         $requestData['period_id'] = $request->period;
-        $requestData['state_id'] = $request->state;
+        $requestData['state_id'] = ($request['team_type'] == 1) ? null : $request->state;
         $team = Team::create($requestData);
         if ($team) {
             Session::flash('success', 'Team successfully created');
@@ -83,14 +83,14 @@ class TeamController extends Controller
     public function show($id)
     {
         $team =Team::findorfail($id);
-        return view($this->view.'show',compact('team'));
+        return view($this->view.'show', compact('team'));
     }
 
     public function edit($id){
-        $team =Team::findorfail($id);
-        $designations = Designation::where('status',1)->get();
-        $teamPeriods = Period::where('status',1)->get();
-        return view($this->view.'edit',compact('team','designations','teamPeriods'));
+        $team = Team::findorfail($id);
+        $designations = Designation::where('status', 1)->get();
+        $teamPeriods = Period::where('status', 1)->get();
+        return view($this->view.'edit', compact('team', 'designations', 'teamPeriods'));
     }
 
     public function update(Request $request, $id){
@@ -103,7 +103,7 @@ class TeamController extends Controller
                 'designation' => 'required',
                 'period' => 'required',
                 'full_name' => 'required',
-                'state' => 'required',
+                'state' => 'required_if:team_type,==,2,3,4,5',
                 'image' => 'file|mimes:jpeg,png,jpg',
         ]);
 
@@ -124,7 +124,7 @@ class TeamController extends Controller
         }
         $requestData['designation_id'] = $request['designation'];
         $requestData['period_id'] = $request['period'];
-        $requestData['state_id'] = $request['state'];
+        $requestData['state_id'] = ($request['team_type'] == 1) ? null : $request['state'];
         $setting->fill($requestData);
         $setting->save();
         

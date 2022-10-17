@@ -33,7 +33,7 @@
                                     <select name="team_type" class="form-control" id="team_type" required onchange="hideState(this.value)">
                                         <option value="" selected disabled>Please select team type</option>
                                         @foreach(config('custom.team_types') as $in => $val)
-                                            <option value="{{$in}}" @if(old('status') == $in) selected @endif >{{$val}}</option>
+                                            <option value="{{$in}}" @if(old('team_type') == $in) selected @endif >{{$val}}</option>
                                         @endforeach
 
                                     </select>
@@ -134,13 +134,13 @@
                     // console.error( error );
                 } );
 
-                // function hideState(team_type){
-                //     if(team_type == 1){
-                //         $('#state-div').hide();
-                //     }else{
-                //         $('#state-div').show();
-                //     }
-                // }
+                function hideState(team_type){
+                    if(team_type == 1){
+                        $('#state-div').hide();
+                    }else{
+                        $('#state-div').show();
+                    }
+                }
 
                 
                 

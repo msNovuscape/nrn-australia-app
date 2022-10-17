@@ -53,6 +53,7 @@
                                     </select>
                                 </div>
                             </div>
+                            @if($team->state_id !== null)
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Select State <span style="color: red">*</span> </label>
@@ -61,13 +62,10 @@
                                     @foreach(config('custom.states') as $in => $val)
                                             <option value="{{$in}}"{{($team->state_id == $in) ? 'selected' :  '' }}>{{$val}}</option>
                                      @endforeach
-                                    
-
-
-
                                     </select>
                                 </div>
                             </div>
+                            @endif
                             <div class="col-md-6" >
                                 <div class="form-group" >
                                     <label class="w-100">Full Name <span style="color: red";> * </span></label>
@@ -77,7 +75,6 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label> Image <span style="color: red";> * </span></label>
-                                    <input type="file" class="form-control"   name="image" value="{{old('image')}}">
                                     <br>
                                     <span >
                                         <img src="{{url($team->image ?? '' )}}" alt="N/A" style="width: 100px;">

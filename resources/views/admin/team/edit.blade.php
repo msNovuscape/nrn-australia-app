@@ -30,12 +30,11 @@
                         <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Select Type <span style="color: red">*</span> </label>
-                                    <select name="team_type" class="form-control" id="type" required>
+                                    <select name="team_type" class="form-control" id="type" onchange="hideState(this.value)" required>
                                         <option value="" selected disabled>Please select team type</option>
                                         @foreach(config('custom.team_types') as $in => $val)
                                             <option value="{{$in}}" @if($team->team_type == $in) selected @endif >{{$val}}</option>
                                         @endforeach
-
                                     </select>
                                 </div>
                             </div>
@@ -63,7 +62,7 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6" id = "state-div">
                                 <div class="form-group">
                                     <label>Select State <span style="color: red">*</span> </label>
                                     <select name="state" class="form-control" id="type" required>
@@ -125,7 +124,24 @@
 ClassicEditor
                 .create( document.querySelector( '#body1' ) )
             
-      
+                function hideState(team_type){
+                    if(team_type == 1){
+                        $('#state-div').hide();
+                    }else{
+                        $('#state-div').show();
+                    }
+                }
+
+                document.addEventListener( 'DOMContentLoaded', function() {
+                    if($('#type').val() == 1){
+                        $('#state-div').hide();
+                    }
+                } );
+
+
+
+
+
        
 
     </script>
