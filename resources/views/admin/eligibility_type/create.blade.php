@@ -28,10 +28,10 @@
                         {!! Form::open(['url' => '/admin/eligibility_types', 'class' => 'form-horizontal', 'method'=> 'POST','files' => true]) !!}
                         <div class="row">
 
-                            <div class="col-md-6" >
+                            <div class="col-md-12" >
                                 <div class="form-group" >
                                     <label class="w-100">Title <span style="color: red";> * </span></label>
-                                    <textarea name="title" class="summernote_class w-100 form-control" rows="4" required >{{old('title')}}</textarea>
+                                    <textarea name="title" id = "title" required >{{old('title')}}</textarea>
                                 </div>
                             </div>
 
@@ -59,7 +59,7 @@
                         </div>
                         <div class="row create-button">
                             <div class="col-sm-10 col-md-12">
-                                <button type="submit" class="btn btn-create">Create</button>
+                                <button type="submit" class="btn btn-create">Submit</button>
                             </div>
                         </div>
                         {!! Form::close() !!}
@@ -71,10 +71,12 @@
 @endsection
 @section('script')
     <script>
-        $(document).ready(function() {
-            $('.summernote_class').summernote()
-
-        })
+            ClassicEditor
+                .create( document.querySelector( '#title' ) )
+                .catch( error => {
+                    // console.error( error );
+                } );
+      
 
     </script>
 @endsection

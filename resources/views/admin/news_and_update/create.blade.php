@@ -25,7 +25,7 @@
 
                     <div class="card-header">
                         <h3 class="card-title">Create News</h3>
-                        <a href="{{url('admin/news')}}" class="back-button btn-create">Back</a>
+                        <a href="{{url('admin/news')}}" class="back-button btn-green">List</a>
                     </div>
 
                     <div class="card-body pt-0">
@@ -47,7 +47,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label> Excerpt <span style="color: red";> * </span></label>
+                                    <label> Short Description <span style="color: red";> * </span></label>
                                     <input type="text" class="form-control"   name="excerpt" value="{{old('excerpt')}}" required>
                                 </div>
                             </div>
@@ -76,7 +76,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label> Publish Date <span style="color: red";> * </span></label>
-                                    <input type="text" class="form-control getDate"   name="publish_date" value="{{old('publish_date')}}" required>
+                                    <input type="date" class="form-control getDate"   name="publish_date" value="{{old('publish_date')}}" required>
                                 </div>
                             </div>
                             <div class="col-md-6">

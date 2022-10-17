@@ -75,6 +75,7 @@ return [
         '1'=>'Service',
         '2'=>'Academy',
     ],
+
     'faqs_types' =>[
         '1' => 'Service',
         '2' => 'Academy'
@@ -128,13 +129,15 @@ return [
     ],
 
     'team_types' => [
-        '1' => 'Board Of directors',
+        '1' => 'ICC',
 
-        '2' => 'ICC/SCC/NCC',
+        '2' => 'NCC',
 
-        '3' =>  'NCC Youth',
+        '3' => 'SCC',
 
-        '4' =>  'NCC Women'
+        '4' =>  'NCC Youth',
+
+        '5' =>  'NCC Women'
     ],
 
     'file_dir'=>'storage_new',

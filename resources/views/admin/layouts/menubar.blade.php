@@ -24,11 +24,11 @@
                         <a class="btn dropdown-toggle"  href="#" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img src="{{url('admin/images/bell-icon.png')}}" alt="image-notification">
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="#">Notification 1</a>
                             <a class="dropdown-item" href="#">Notification 2</a>
                             <a class="dropdown-item" href="#">Notification 3</a>
-                        </div>
+                        </div> -->
                     </div>
                 </li>
                 <li class="nav-profile d-flex dropdown-export-menu mx-3">

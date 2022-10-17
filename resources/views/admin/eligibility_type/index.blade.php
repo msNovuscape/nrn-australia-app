@@ -31,10 +31,10 @@
                             <div class="card-body">
                                 @include('success.success')
                                 @include('errors.error')
-                                <form id="search" class="search-form">
+                                <!-- <form id="search" class="search-form">
                                     <div class="row">
                                         <div class="input-group input-group-sm mb-3 table-search col-md-3">
-                                            <input type="search"  name="title" class="form-control ds-input" placeholder="Author name / Heading " aria-label="Small" aria-describedby="inputGroup-sizing-sm" onchange="filterList()">
+                                            <input type="search"  name="title" class="form-control ds-input" placeholder="Title" aria-label="Small" aria-describedby="inputGroup-sizing-sm" onchange="filterList()">
                                         </div>
                                         <div class="input-group input-group-sm mb-3 table-search col-md-3">
                                             <select name="status" class="form-control ds-input" onchange="filterList()">
@@ -45,7 +45,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                </form>
+                                </form> -->
                                 <table class="table table-bordered">
                                     <thead>
                                     <tr>

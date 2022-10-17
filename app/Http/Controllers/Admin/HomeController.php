@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use App\Models\Member;
+use App\Models\News;
+use App\Models\Notice;
 use Request;
 
 class HomeController extends Controller
@@ -13,8 +16,17 @@ class HomeController extends Controller
     public function indexAdmin()
     {
 
-        if(Auth::check()){
-            return view('admin.member.membership');
+        if (Auth::check()) {
+        $pendingMembers = Member::where('membership_status_id', 1)->count();
+        $verifiedMembers = Member::where('membership_status_id', 2)->count();
+        $rejectedMembers = Member::where('membership_status_id', 3)->count();
+        $reapplyMembers = Member::where('membership_status_id', 4)->count();
+        $news = News::where('status', 1)->get();
+        $notices = Notice::where('status', 1)->get();
+            return view(
+                'admin.index',
+                compact('pendingMembers', 'verifiedMembers', 'rejectedMembers', 'reapplyMembers', 'news', 'notices')
+            );
         }
 
         return view('admin.login');

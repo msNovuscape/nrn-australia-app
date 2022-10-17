@@ -20,7 +20,7 @@
                 <div class="card card-default">
                     <div class="card-header">
                         <h3 class="card-title">Update Eligibilty Type</h3>
-                        <a href="{{url('admin/eligibility_types')}}" class="back-button">back</a>
+                        <a href="{{url('admin/eligibility_types')}}" class="back-button">List</a>
                     </div>
                     <div class="card-body">
                         @include('success.success')
@@ -31,7 +31,7 @@
                         <div class="col-md-12" >
                                 <div class="form-group" >
                                     <label>Title <span style="color: red";> * </span></label>
-                                    <textarea name="title" class="summernote_class" rows="5" required style="height: 658px;" >{{$setting->title}}</textarea>
+                                    <textarea name="title" id="title" rows="5" required style="height: 658px;" >{{$setting->title}}</textarea>
                                 </div>
                             </div>
 
@@ -64,10 +64,12 @@
 @endsection
 @section('script')
     <script>
-        $(document).ready(function() {
-            $('.summernote_class').summernote()
-
-        })
+        ClassicEditor
+                .create( document.querySelector( '#title' ) )
+                .catch( error => {
+                    // console.error( error );
+                } );
+      
 
     </script>
 @endsection

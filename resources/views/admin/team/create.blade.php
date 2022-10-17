@@ -30,7 +30,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Select Type <span style="color: red">*</span> </label>
-                                    <select name="team_type" class="form-control" id="type" required>
+                                    <select name="team_type" class="form-control" id="team_type" required onchange="hideState(this.value)">
                                         <option value="" selected disabled>Please select team type</option>
                                         @foreach(config('custom.team_types') as $in => $val)
                                             <option value="{{$in}}" @if(old('status') == $in) selected @endif >{{$val}}</option>
@@ -58,15 +58,18 @@
                                     <select name="designation" class="form-control" id="type" required>
                                         <option value="" selected disabled>Please select designation</option>
                                         @foreach($designations as $designation)
-                                            <option value="{{$designation->id}}" @if(old('designation') == $designation->id) selected @endif >{{$designation->title}}</option>
+                                            <option
+                                            value="{{$designation->id}}" @if(old('designation') == $designation->id)
+                                            selected @endif >{{$designation->title}}
+                                           </option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6" id = "state-div">
                                 <div class="form-group">
                                     <label>Select State <span style="color: red">*</span> </label>
-                                    <select name="state" class="form-control" id="type" required>
+                                    <select name="state" class="form-control" id="type">
                                         <option value="" selected disabled>Please select state</option>
                                         <option value = "0" @if(old('state') == '0') selected @endif>All Australia</option>
                                         @foreach(config('custom.states') as $in => $val)
@@ -130,6 +133,16 @@
                 .catch( error => {
                     // console.error( error );
                 } );
+
+                // function hideState(team_type){
+                //     if(team_type == 1){
+                //         $('#state-div').hide();
+                //     }else{
+                //         $('#state-div').show();
+                //     }
+                // }
+
+                
                 
     </script>
 @endsection

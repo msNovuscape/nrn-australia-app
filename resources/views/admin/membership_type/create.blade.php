@@ -21,7 +21,7 @@
 
                     <div class="card-header">
                         <h3 class="card-title">Create Membership Type</h3>
-                        <a href="{{url('admin/membership_types')}}" class="back-button btn-create">back</a>
+                        <a href="{{url('admin/membership_types')}}" class="back-button btn-create">List</a>
                     </div>
 
                     <div class="card-body pt-0">
@@ -97,7 +97,7 @@
 
                         <div class="row create-button">
                             <div class="col-sm-10 col-md-12">
-                                <button type="submit" class="btn btn-create">Create</button>
+                                <button type="submit" class="btn btn-create">Submit</button>
                             </div>
                         </div>
                         {!! Form::close() !!}

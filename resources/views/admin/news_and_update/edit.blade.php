@@ -24,7 +24,7 @@
                 <div class="card card-default">
                     <div class="card-header">
                         <h3 class="card-title">Edit News</h3>
-                        <a href="{{url('admin/news')}}" class="back-button btn-green">Back</a>
+                        <a href="{{url('admin/news')}}" class="back-button btn-green">List</a>
 
                     </div>
                     <div class="card-body">
@@ -79,7 +79,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label> Publish Date <span style="color: red";> * </span></label>
-                                    <input type="text" class="form-control getDate"   name="publish_date" value="{{$setting->publish_date}}" required>
+                                    <input type="date" class="form-control getDate"   name="publish_date" value="{{$setting->publish_date}}" required>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -104,7 +104,7 @@
                         </div>
                         <div class="form-group row create-button">
                             <div class="col-sm-10 col-md-12">
-                                <button type="submit" class="btn btn-green" onclick="validateForm()">Update</button>
+                                <button type="submit" class="btn btn-create" onclick="validateForm()">Update</button>
                             </div>
                         </div>
                         {!! Form::close() !!}
