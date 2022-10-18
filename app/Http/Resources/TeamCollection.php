@@ -5,6 +5,7 @@ namespace App\Http\Resources;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 use App\Models\Designation;
 use App\Models\Period;
+use App\Models\Setting;
 
 class TeamCollection extends ResourceCollection
 {
@@ -19,10 +20,12 @@ class TeamCollection extends ResourceCollection
     {
         $categories = Designation::has('teams')->get();
         $periods = Period::has('teams')->orderBy('from_date','desc')->get();
+        $settings = Setting::where('status', 1)->get();
         return [
             'teams' => $this->collection,
             'designations' => DesignationResource::collection($categories),
             'periods' => PeriodResource::collection($periods),
+            'settings' => SettingResource::collection($settings),
             // 'states' => config('custom.states')
             
         ];
