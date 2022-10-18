@@ -11,10 +11,10 @@ class Project extends Model
 
     public function nrn_project()
     {
-        return $this->hasOne(NrnaProject::class,'project_id');
+        return $this->hasOne(NrnaProject::class, 'project_id');
     }
     public function third_party_project()
     {
-        return $this->hasOne(ThirdPartyProject::class,'project_id');
+        return $this->hasOne(ThirdPartyProject::class, 'project_id');
     }
 }

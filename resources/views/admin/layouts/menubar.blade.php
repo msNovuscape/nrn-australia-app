@@ -319,8 +319,6 @@
                         </a>
                     </li>
 
-                    
-
                     <li class="nav-item sidebar-nav-item">
                         <a href="{{url('admin/guidelines')}}" class="nav-link {{(Request::segment(2) == 'guidelines') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
                             <i class="fas fa-newspaper pl-4" aria-hidden="true"></i>

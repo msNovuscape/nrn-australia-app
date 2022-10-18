@@ -19,7 +19,7 @@ class TeamResource extends JsonResource
         
         return [
             'id' => $this->id,
-            'image' => url($this->image),
+            'image' => $this->image ? url($this->image) : null,
             'full_name' => $this->full_name,
             'state' => intval($this->state_id),
             'team_type' => intval($this->team_type),
