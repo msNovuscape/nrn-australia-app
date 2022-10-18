@@ -12,7 +12,7 @@ class TeamController extends ApiBaseController
     
     public function index()
     {
-        $settings = Team::where('status', 1)->orderBy('id', 'desc')->get();
+        $settings = Team::where('status', 1)->orderBy('designation_id', 'asc')->get();
         return new TeamCollection($settings);
     }
 

@@ -18,12 +18,12 @@ class TeamCollection extends ResourceCollection
      public static $wrap = '';
     public function toArray($request)
     {
-        $categories = Designation::has('teams')->get();
-        $periods = Period::has('teams')->orderBy('from_date','desc')->get();
+        $designations = Designation::has('teams')->get();
+        $periods = Period::has('teams')->orderBy('from_date', 'desc')->get();
         $settings = Setting::where('status', 1)->get();
         return [
             'teams' => $this->collection,
-            'designations' => DesignationResource::collection($categories),
+            'designations' => DesignationResource::collection($designations),
             'periods' => PeriodResource::collection($periods),
             'settings' => SettingResource::collection($settings),
             // 'states' => config('custom.states')
