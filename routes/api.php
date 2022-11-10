@@ -16,6 +16,7 @@ use App\Http\Controllers\Api\ProjectController;
 use App\Http\Controllers\Api\GuidelineController;
 use App\Http\Controllers\Api\DocumentController;
 use App\Http\Controllers\Api\TeamController;
+use App\Http\Controllers\Api\FirebaseController;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,9 +35,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::group(['namespace' => 'Api' ,'prefix' => 'v1'], function() {
-    Route::post('/register', [RegisterController::class, 'register']);
+    Route::post('/register', [RegisterController::class, 'register'])->name('register');
+    Route::get('/register', [RegisterController::class, 'get_register'])->name('get_register');
     Route::post('/login', [LoginController::class, 'login']);
-    Route::post('send-reset-link', [ResetPasswordController::class,'send_link']);
+    Route::post('/send-reset-link', [ResetPasswordController::class,'send_link']);
+Route::post('/login/firebase',[FirebaseController::class,'lookup']);
+
 
 });
 

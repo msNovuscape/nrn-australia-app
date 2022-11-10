@@ -143,4 +143,5 @@ return [
     'file_dir'=>'storage_new',
     'domain_suffix' =>'np',
     'per_page' =>10,
+    'firebase_api_key' => 'AIzaSyDmFDHzCunGxo2IB8v00i0QmOlDs60-Y64',
 ];

@@ -174,7 +174,7 @@
                         </div>
                         <div class="news-content d-flex justify-content-between">
                             @php $featured_news = $news->where('type',1);
-                                $newtime = strtotime($news->first()->created_at);
+                                $newtime = strtotime($news->first()->created_at ?? '');
                                 $date_time = date('M d, Y',$newtime);
                             @endphp
                             @if($featured_news->isNotEmpty())

@@ -18,7 +18,34 @@ class RegisterController extends ApiBaseController
         $this->register = $register;
     }
     public function register(CreateRegisterRequest $request){
+        // dd($request->all());
         
+        $response = $this->sendResponse($this->register->store($request->all()),'Registered Successfully');
+        $data = $response->getData('data')['success'];
+        $credentials = $request->only('email', 'password');
+
+        if($data){
+            try {
+                if (! $token = JWTAuth::attempt($credentials)) {
+                    return $this->sendError('Credentials are not valid','401');
+                }
+            } catch (JWTException $e) {
+            return $credentials;
+                return response()->json([
+                        'success' => false,
+                        'message' => 'Could not create token.',
+                    ], 500);
+            }
+            return response()->json([
+                'success' => true,
+                'token' => $token,
+            ],200);
+        }else{
+            $code = 404;
+            return $this->sendError('Something went wrong',$code);
+        }
+    }
+    public function get_register(Request $request){
         $response = $this->sendResponse($this->register->store($request->all()),'Registered Successfully');
         $data = $response->getData('data')['success'];
         $credentials = $request->only('email', 'password');
