@@ -23,7 +23,7 @@ class ResetPasswordController extends Controller
      if(Password::RESET_LINK_SENT === $status){
       return response()->json(['success' => true],200);
      }
-     return response()->json(['success' => true],200);
+     return response()->json(['success' => false],200);
         
     // if($user->isEmpty()){
     //     return response()->json(['success' => true],200);
