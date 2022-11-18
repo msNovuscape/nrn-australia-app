@@ -9,10 +9,14 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Member;
 use App\Models\News;
 use App\Models\Notice;
-use Request;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    public function test_image(){
+        
+    }
+
     public function indexAdmin()
     {
 
@@ -39,7 +43,7 @@ class HomeController extends Controller
         }
         return view('admin.login');
     }
-    public function postLogin()
+    public function postLogin(Request $request)
     {
         $this->validate(request(),[
             'email'=>'required',

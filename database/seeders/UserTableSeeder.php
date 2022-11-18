@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class UserTableSeeder extends Seeder
@@ -16,10 +16,13 @@ class UserTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'full_name' => 'Admin',
+        $user = User::create([
+            'full_name' => 'Super Admin',
             'email' => 'admin@admin.com',
             'password' => Hash::make('password'),
+            'is_admin' => true,
+            'is_super_admin' => true,
         ]);
+        $user->assignRole('Super Admin');
     }
 }

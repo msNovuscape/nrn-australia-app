@@ -194,25 +194,25 @@
                     </div>
                     <div class="d-flex">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="membership_status_id" id="verify" value="2" {{($member->membership_status_id == 2) ? 'checked' : ''}}>
+                            <input class="form-check-input" type="radio" name="membership_status_id" id="verify" value="2" {{($member->president_status_id == 2) ? 'checked' : ''}}>
                             <label class="form-check-label" for="exampleRadios1">
                                 Verify
                             </label>
                         </div>
                         <div class="form-check mx-4">
-                            <input class="form-check-input" type="radio" name="membership_status_id" id="pending" value="1" {{($member->membership_status_id == 1) ? 'checked' : ''}}>
+                            <input class="form-check-input" type="radio" name="membership_status_id" id="pending" value="1" {{($member->president_status_id == 1) ? 'checked' : ''}}>
                             <label class="form-check-label" for="exampleRadios2">
                                 Pending
                             </label>
                         </div>
                         <div class="form-check mx-4">
-                            <input class="form-check-input" type="radio" name="membership_status_id" id="rejected" value="3" {{($member->membership_status_id == 3) ? 'checked' : ''}}>
+                            <input class="form-check-input" type="radio" name="membership_status_id" id="rejected" value="3" {{($member->president_status_id == 3) ? 'checked' : ''}}>
                             <label class="form-check-label" for="exampleRadios3">
                                 Rejected
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="membership_status_id" id="reapply" value="4" {{($member->membership_status_id == 4) ? 'checked' : ''}}>
+                            <input class="form-check-input" type="radio" name="membership_status_id" id="reapply" value="4" {{($member->president_status_id == 4) ? 'checked' : ''}}>
                             <label class="form-check-label" for="exampleRadios3">
                                 Reapply
                             </label>
@@ -226,6 +226,54 @@
                                 <h3>Documents</h3>
                                 <h6>Documents submitted by members</h6>
                             </div>
+                            @if($member->membership_status_id !== 2)
+                            @role('President')
+                            <div class="verification-block mb-4">
+                                    <div class="document-verify">
+                                        <h3>Verification By General Secretary</h3>
+                                    </div>
+                                    <form class="gsForm" id="gs-form" action="" method="post">
+                                        <input type="hidden" value="{{$member->id}}" name = "member_id"/>
+                                        <div class="d-flex">
+                                            <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="document_status_id_new" id="verify" value="2" {{($member->document_status_id == 2) ? 'checked' : ''}}>
+                                                <label class="form-check-label" for="exampleRadios1">
+                                                    Verified
+                                                </label>
+                                            </div>
+                                            <div class="form-check mx-4">
+                                                <input data-bs-toggle="modal" data-bs-target="#exampleModal" class="form-check-input" type="radio" name="document_status_id_new" id="document_status_id_new" value="1" {{$member->document_status_id == 1 ? 'checked' : ''}}>
+                                                <label class="form-check-label" for="exampleRadios2">
+                                                    Make Pending
+                                                </label>
+                                            </div>
+                                        </div>
+                                    <!-- Comment Modal -->
+                                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel">Change <span>General Secretary Verification</span></h5>
+                                                        <button type="button" class="icon-close-btn" data-bs-dismiss="modal" aria-label="Close"><i class="fas fa-times-circle"></i></button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                    <div class="mb-3">
+                                                        <label for="comment_for_general_secretary" class="form-label">Please specifiy the reason.</label>
+                                                        <textarea class="form-control" name  = "comment_for_general_secretary" id="comment_for_general_secretary" rows="3"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn close-btn" data-bs-dismiss="modal">Close</button>
+                                                        <button type="submit" id = "gs-form-submit" class="btn ctm-primarybtn">Save</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                    <!-- End of Comment Modal -->
+                            </div>
+                            @endrole
+                            @endif
                             <div class="card p-4 ml-1">
                             <div class="profile-detail">
                                 <div class="row">
@@ -238,6 +286,7 @@
                                     <div class="col-md-3">
                                         <input type="date" id="dob" name="identification_expiry_date" class="w-100 form-control birthday-input" value = "{{$member->member_document->identification_expiry_date}}">
                                     </div>
+                                    @if($member->membership_status_id !== 2)
                                     <div class="col-md-4 detail-left">
                                         <a target = "_blank" href="{{url($member->member_document->identification_image)}}" class="d-flex">
                                             <div class="profile-icon mr-2">
@@ -246,6 +295,7 @@
                                             <p>View Documents</p>
                                         </a>
                                     </div>
+                                    @endif
                                 </div>
                                 <div class="row">
                                     <div class="col-md-5 d-flex detail-left">
@@ -257,6 +307,7 @@
                                     <div class="col-md-3">
                                         <input type="date" id="dob" name="proof_of_residency_expiry_date" class="w-100 form-control birthday-input" value = "{{$member->member_document->proof_of_residency_expiry_date}}">
                                     </div>
+                                    @if($member->membership_status_id !== 2)
                                     <div class="col-md-4 detail-left">
                                         <a target = "_blank" href="{{url($member->member_document->proof_of_residency_image)}}" class="d-flex">
                                             <div class="profile-icon mr-2">
@@ -265,6 +316,7 @@
                                             <p>View Documents</p>
                                         </a>
                                     </div>
+                                    @endif
                                 </div>
                                 </div>
                                 
@@ -275,6 +327,53 @@
                                 <h3>Payment Details</h3>
                                 <h6>Payment details made by member</h6>
                             </div>
+                            @if($member->membership_status_id !== 2)
+                            @role('President')
+                            <div class="verification-block mb-4">
+                                    <div class="document-verify">
+                                        <h3>Verification By Treasurer</h3>
+                                    </div>
+                                    
+                                        <div class="d-flex">
+                                            <div class="form-check">
+                                            <input class="form-check-input" type="radio" name="payment_status_id_new" id="verify" value="2" {{($member->payment_status_id == 2) ? 'checked' : ''}}>
+                                                <label class="form-check-label" for="exampleRadios1">
+                                                    Verified
+                                                </label>
+                                            </div>
+                                            <div class="form-check mx-4">
+                                                <input data-bs-toggle="modal" data-bs-target="#exampleModal2" class="form-check-input" type="radio" name="payment_status_id_new" id="payment_status_id" value="1" {{$member->payment_status_id == 1 ? 'checked' : ''}}>
+                                                <label class="form-check-label" for="exampleRadios2">
+                                                    Make Pending
+                                                </label>
+                                            </div>
+                                        </div>
+                                    <!-- Comment Modal -->
+                                        <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="exampleModalLabel">Change <span>Treasurer verification</span></h5>
+                                                    <button type="button" class="icon-close-btn" data-bs-dismiss="modal" aria-label="Close"><i class="fas fa-times-circle"></i></button>
+                                                </div>
+                                                    <div class="modal-body">
+                                                        <div class="mb-3">
+                                                            <label for="commentArea" class="form-label">Please specifiy the reason.</label>
+                                                            <textarea class="form-control" name = "comment_for_treasurer" id="comment_for_treasurer" rows="3"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn close-btn" data-bs-dismiss="modal">Close</button>
+                                                            <button type="submit" id ="treasurer-form-submit" class="btn ctm-primarybtn">Save changes</button>
+                                                        </div>
+                                                    </div>
+                                            </div>
+                                        </div>
+
+                                    <!-- End of Comment Modal -->
+                            </div>
+                            @endrole
+                            @endif
                             <div class="card p-4 ml-1">
                                 <div class="profile-detail">
                                     <!-- <div class="row">
@@ -352,6 +451,7 @@
                                             <p>{{$member->member_payment->amount}}</p>
                                         </div>
                                     </div>
+                                    @if($member->membership_status_id !== 2)
                                     <div class="row">
                                         <div class="col-md-4 d-flex detail-left">
                                             <p>Payment Slip</p>
@@ -362,6 +462,7 @@
                                             </div>
                                         </div>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -395,6 +496,54 @@
             });    
         }
     }
+
+    $('#treasurer-form-submit').on('click', function(e) {
+    e.preventDefault();
+    $.ajax({
+        type: "POST",
+        url: "{{ url('admin/members/update_status/president') }}",
+        data: $('form.treasurerForm').serialize(),
+        success: function(response) {
+            Swal.fire({
+                    title: 'Success!!',
+                    text: (response.msg),
+                    icon: 'success'
+                })
+                .then(function(){ 
+                    $('#exampleModal2').modal('hide');
+                    window.location = response.redirect_url;
+                })
+        },
+        error: function() {
+            alert('Error');
+        }
+    });
+    return false;
+});
+
+$('#gs-form-submit').on('click', function(e) {
+    e.preventDefault();
+    $.ajax({
+        type: "POST",
+        url: "{{ url('admin/members/update_status/president') }}",
+        data: $('form.gsForm').serialize(),
+        success: function(response) {
+            Swal.fire({
+                    title: 'Success!!',
+                    text: (response.msg),
+                    icon: 'success'
+                })
+                .then(function(){ 
+                    $('#exampleModal').modal('hide');
+                    window.location = response.redirect_url;
+                })
+        },
+        error: function() {
+            alert('Error');
+        }
+    });
+    return false;
+});
     
 </script>
 

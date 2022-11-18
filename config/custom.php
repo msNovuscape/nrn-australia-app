@@ -10,10 +10,29 @@ return [
         '3'=>'Rejected',
         '4' => 'Reapply',
     ],
+    'treasurer_membership_status' =>[
+        '1'=> 'Pending',
+        '2'=> 'Verified',
+        '5'=>'Rejected',
+        '6' => 'Reapply',
+    ],
+    'general_secretary_membership_status' =>[
+        '2'=> 'Pending',
+        '3'=> 'Verified',
+        '7'=>'Rejected',
+        '8' => 'Reapply',
+    ],
+    'president_membership_status' =>[
+        '3'=> 'Pending',
+        '4'=> 'Verified',
+        '11'=>'Rejected',
+        '12' => 'Reapply',
+    ],
     'payment_status' =>[
         '1'=> 'Pending',
         '2'=> 'Verified',
         '3'=>'Rejected',
+        '4'=>'Reapply'
     ],
     'news_types' =>[
         '1'=> 'NRNA',

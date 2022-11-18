@@ -176,6 +176,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class, 
+        Spatie\Permission\PermissionServiceProvider::class,
 
     ],
 

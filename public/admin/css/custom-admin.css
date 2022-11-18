@@ -773,6 +773,59 @@ label:not(.form-check-label):not(.custom-file-label) {
     font-size: 22px;
     font-weight: 600;
 }
+.verification-block{
+    margin:0px 0px 20px 20px;
+}
+/* Modal CSS */
+.modal-header{
+    background: #5B5FC7;
+    color:#fff;
+}
+.modal-footer{
+    background: #FBFBFB;
+}
+.ctm-primarybtn{
+    background-color: #5b5fc7;
+    border-color: #4347be;
+    color:#fff;
+}
+.ctm-primarybtn:hover, .close-btn:hover{
+    transition: all 300ms ease-in-out;
+    color:#e9eaff;
+}
+.ctm-primarybtn:hover{
+    background-color:#4347be;
+}
+.close-btn{
+    background-color: #5e61ae;
+    border-color: #5e61ae;
+    color:#fff;
+}
+.icon-close-btn{
+        box-sizing: content-box;
+        border:none;
+        display: flex;
+        color: #fff;
+        font-size: 18px;
+        background: transparent
+}
+.icon-close-btn i{
+    color:#bdc0fb;
+}
+.icon-close-btn i:hover{
+    color:#fff;
+}
+.close-btn:hover{
+    background-color: #4f5298;
+    border-color: #5e61ae;
+}
+.payment-verify h3, .document-verify h3{
+    color: #212529;
+}
+.verification-block .modal-body label{
+    font-size: 18px;
+    color: #5b5fc7;
+}
 
 .members-info-row h6 {
     font-size: 17px;

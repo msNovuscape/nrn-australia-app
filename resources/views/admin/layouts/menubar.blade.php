@@ -37,7 +37,7 @@
                             <img src="http://localhost/ams/public/images/profile.jpg" alt="image">
                         </div>
                         <div class="nav-profile-text">
-                            <p class="mb-1">Admin</p>
+                            <p class="mb-1">{{auth()->user()->full_name}}</p>
                         </div>
                     </a>
                     <div class="">
@@ -52,7 +52,7 @@
                                 <a class="" href="#"></a>
                                 <li>
                                     <a class="" href="#"></a>
-                                    <a href="logout">Logout</a>
+                                    <a href="{{url('admin/logout')}}">Logout</a>
                                 </li>
                                 <li>
                                     <a href="{{url('admin/change_password')}}">Change Password</a>
@@ -88,6 +88,19 @@
             <!-- Sidebar Menu -->
             <nav class="">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    @if(auth()->user()->hasRole('Super Admin'))
+                    <li class="nav-item sidebar-nav-item">
+                        <a href="{{url('admin/users')}}" class="nav-link {{(Request::segment(2) == 'users') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
+                            <i class="fa fa-cog pl-4" aria-hidden="true"></i>
+                            <p id="accordion">
+                                <button class="btn btn-link p-2 w-80">
+                                  Users Management
+                                </button>
+                            </p>
+                        </a>
+                    </li>
+                    @endif
+
                     <li class="nav-item sidebar-nav-item">
                         <a href="{{url('admin/settings')}}" class="nav-link {{(Request::segment(2) == 'settings') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
                             <i class="fa fa-cog pl-4" aria-hidden="true"></i>
@@ -228,6 +241,7 @@
                                             <li><a href="{{url('admin/members/pending')}}"><i class="fas fa-ellipsis-h collapse-icon"></i>Pending Members</a></li>
                                             <li><a href="{{url('admin/members/verified')}}"><i class="fas fa-check collapse-icon"></i>Verified Members</a></li>
                                             <li><a href="{{url('admin/members/rejected')}}"><i class="fas fa-times collapse-icon"></i>Rejected Members</a></li>
+                                            <li><a href="{{url('admin/members/reapply')}}"><i class="fas fa-times collapse-icon"></i>Reapply Members</a></li>
                                         </ul>
                                     </div>
                                 </div>

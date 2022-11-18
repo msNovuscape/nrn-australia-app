@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 @section('content')
 
-   
+  
     <div class="main-panel">
         <div class="content-wrapper content-wrapper-bg">
             <div class="row">
@@ -36,7 +36,6 @@
                                                     <i class="far fa-user"></i>
                                                 </span>
                                             </div>
-
                                             <div class="col-md-10">
                                                 <select class="form-select w-100" aria-label="Default select example" id="membership_type" name="membership_type_id">
                                                     <option selected="" value = "" disabled="">Search member type</option>
@@ -183,24 +182,28 @@
                                                                 <td>{{$member->email}}</td>
                                                                 <td>{{config('custom.states')[$member->state_id]}}</td>
                                                                 <td>{{$member->membership_type->name}}</td>
-                                                                <td class="{{$membership_status}} status"><i class="fas fa-@if($membership_status == 'verified')check @elseif ($membership_status == 'rejected')times @elseif($membership_status == 'pending')ellipsis-h @elsereapply  @endif  "></i>{{config('custom.membership_status')[$member->membership_status_id]}}</td>
+                                                                <td class="{{$membership_status}} status"><i class="fas fa-@if($membership_status == 'verified')check @elseif ($membership_status == 'rejected')times @elseif($membership_status == 'pending')ellipsis-h @elsereapply  @endif  "></i>{{ucfirst($membership_status)}}</td>
                                                                 <td class="action-icons">
                                                                     <ul class="icon-button d-flex">
+                                                                        @if(auth()->user()->hasRole('President'))
                                                                         <li>
                                                                             <a href="{{url('admin/members/edit/'.$member->id)}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="edit">
                                                                                 <i class="fas fa-pencil-alt"></i>
                                                                             </a>
                                                                         </li>
+                                                                        @endif
                                                                         <li>
                                                                             <a href="{{url('admin/members/show/'.$member->id)}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="show">
                                                                                 <i class="fas fa-eye"></i>
                                                                             </a>
                                                                         </li>
+                                                                        @if(auth()->user()->hasRole('President'))
                                                                         <li>
                                                                             <a href="{{url('admin/members/delete/'.$member->id)}}" onclick = "confirm('Are you sure want to delete the member permanently?')" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="delete">
                                                                                 <i class="fas fa-trash"></i>
                                                                             </a>
                                                                         </li>
+                                                                        @endif
                                                                     </ul>
                                                                 </td>
                                                             </tr>

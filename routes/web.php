@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\DocumentController;
 use App\Http\Controllers\Admin\DesignationController;
 use App\Http\Controllers\Admin\TeamPeriodController;
 use App\Http\Controllers\Admin\TeamController;
+use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ResetPasswordController;
 
 
@@ -35,19 +36,30 @@ use App\Http\Controllers\ResetPasswordController;
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('login', [HomeAdminController::class,'getLogin'])->name('login');
 Route::post('login', [HomeAdminController::class,'postLogin']);
 
 Route::get('reset-password/{token}/{email}',[ResetPasswordController::class, 'reset_form'])->name('password.reset');
 Route::post('reset-password',[ResetPasswordController::class, 'reset_password']);
+Route::get('/images/{d_name}/{year}/{month}/{date}/{file_name}',[HomeAdminController::class,'test_image']);
 
 Route::group(['middleware'=>['auth']],function (){
-
     //routes for admin
     Route::group(['prefix'=>'admin','middleware' => ['auth']],function (){
-
+        
         Route::get('/index', [HomeAdminController::class,'indexAdmin']);
         Route::get('logout', [HomeAdminController::class,'getLogout']);
+
+        Route::group(['middleware' => ['can:manage_users']],function (){
+            Route::get('users',[UserController::class,'index']);
+            Route::get('users/create',[UserController::class,'create']);
+            Route::post('users',[UserController::class,'store']);
+            Route::get('users/{id}',[UserController::class,'show']);
+            Route::get('users/{id}/edit',[UserController::class,'edit']);
+            Route::post('users/{id}',[UserController::class,'update']);
+            Route::get('users/delete/{id}',[UserController::class,'delete']);
+        });
 
         Route::get('settings',[SettingController::class,'index']);
         Route::get('settings/create',[SettingController::class,'create']);
@@ -86,6 +98,8 @@ Route::group(['middleware'=>['auth']],function (){
         Route::get('members/{membership_status}',[MemberController::class,'index']);
         Route::get('members/show/{id}/',[MemberController::class,'show']);
         Route::post('members/update_status',[MemberController::class,'update_status']);
+        Route::post('members/update_status/finance',[MemberController::class,'update_status_by_finance']);
+        Route::post('members/update_status/president',[MemberController::class,'update_status_by_president']);
         Route::post('members/{id}',[MemberController::class,'update']);
         Route::get('members/edit/{id}',[MemberController::class,'edit']);
         Route::get('members/delete/{id}',[MemberController::class,'delete']);
