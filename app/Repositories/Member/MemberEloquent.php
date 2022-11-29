@@ -55,7 +55,7 @@ class MemberEloquent implements MemberRepository
             if(!is_null($member)){
                 $memberImage = $member->image ?? null;
                 if(!is_null($memberImage)){
-                    $path = public_path().parse_url($memberImage->image)['path'];
+                    $path = public_path().parse_url($memberImage)['path'];
                     unlink($path);
                 }
             }
