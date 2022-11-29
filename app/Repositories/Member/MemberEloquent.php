@@ -61,12 +61,13 @@ class MemberEloquent implements MemberRepository
             // }
             
             $attributes['image'] = $this->model->saveImage($attributes['image'],'profile_image');
+            $attributes['membership_status_id'] = 1;
         }
 
 
         $data = $this->model->updateOrCreate([
             'id' => $id,
-            'membership_status_id' => 1
+            
         ],$attributes);
         
         if(!is_null($member)){
