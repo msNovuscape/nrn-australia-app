@@ -65,7 +65,8 @@ class MemberEloquent implements MemberRepository
 
 
         $data = $this->model->updateOrCreate([
-            'id' => $id
+            'id' => $id,
+            'membership_status_id' => 1
         ],$attributes);
         
         if(!is_null($member)){
