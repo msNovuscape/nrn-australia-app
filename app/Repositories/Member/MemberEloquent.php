@@ -64,15 +64,15 @@ class MemberEloquent implements MemberRepository
             $attributes['membership_status_id'] = 1;
         }
 
-
         $data = $this->model->updateOrCreate([
+            
             'id' => $id,
             
         ],$attributes);
         
         if(!is_null($member)){
-            $this->member_document->delete();
-            $this->member_payment->delete();
+            $member->member_document()->delete();
+            $member->member_payment()->delete();
         }
         $identification_image = $this->model->saveImage($attributes['identification_image'],'identification_image');
         $proof_of_residency_image = $this->model->saveImage($attributes['proof_of_residency_image'],'proof_of_residency_image');
