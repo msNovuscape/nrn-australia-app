@@ -42,14 +42,15 @@ class UserController extends Controller
             'role' => 'required',
         ]);
         $request['is_admin'] = true;
-        $request['password'] = Hash::make($request['password']);
+        $password_without_hash = $request['password'];
+        $request['password'] = Hash::make($password_without_hash);
         $user = User::create($request->all());
         if($user){
-
             $email_data = array(
                 'name' => $user['full_name'],
                 'email' => $user['email'],
-                'url'  => url('admin/change_password')
+                'password' => $password_without_hash,
+                'url'  => url('/login')
             );
         $role = Role::find($request->role)->name;
         $user->assignRole($role);

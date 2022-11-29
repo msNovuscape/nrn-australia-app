@@ -41,26 +41,37 @@ class MemberEloquent implements MemberRepository
 
     public function store($attributes)
     {
-        $member_id = isset($attributes['user_id']) ? $attributes['user_id'] : 0;
+        
+        $id = isset($attributes['id']) ? $attributes['id'] : 0;
+        $user_id = $attributes['user_id'];
         $attributes['first_name'] = ucfirst($attributes['first_name']);
         $attributes['last_name'] = ucfirst($attributes['last_name']);
         $attributes['middle_name'] = isset($attributes['middle_name']) ? ucfirst($attributes['middle_name']) : null;
 
+        $member = (new Member())->where('user_id', $user_id)->first();
+        
         if(isset($attributes['image'])){
-            $memberImage = (new Member())->where('user_id', $member_id)->first()->image ?? null;
-            if(!empty($memberImage)){
-                $path = public_path().parse_url($memberImage->image)['path'];
-                unlink($path);
+
+            if(!is_null($member)){
+                $memberImage = $member->image ?? null;
+                if(!is_null($memberImage)){
+                    $path = public_path().parse_url($memberImage->image)['path'];
+                    unlink($path);
+                }
             }
+            
             $attributes['image'] = $this->model->saveImage($attributes['image'],'profile_image');
-            // return (new EmployeeImage())->create($attributes);
         }
 
 
         $data = $this->model->updateOrCreate([
-            'user_id' => $member_id
+            'id' => $id
         ],$attributes);
         
+        if(!is_null($member)){
+            $this->member_document->delete();
+            $this->member_payment->delete();
+        }
         $identification_image = $this->model->saveImage($attributes['identification_image'],'identification_image');
         $proof_of_residency_image = $this->model->saveImage($attributes['proof_of_residency_image'],'proof_of_residency_image');
         $payment_slip = $this->model->saveImage($attributes['payment_slip'],'payment_slip');

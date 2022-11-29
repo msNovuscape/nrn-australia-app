@@ -34,11 +34,12 @@ class MemberController extends ApiBaseController
     }
    public function store(CreateMemberRequest $request){
     // GET user token    
-    $currentUser = JWTAuth::parseToken()->authenticate();
    
+    $currentUser = JWTAuth::parseToken()->authenticate();
+
     // Get user id
     $userId = $currentUser['id'];
-
+    
     // Get request body
     $requestBody = $request->all();
 
@@ -46,10 +47,12 @@ class MemberController extends ApiBaseController
     $requestBody['user_id'] = $userId;
 
     return $this->sendResponse($this->member->store($requestBody),'Member Registered Successfully');
+    
    }
 
    public function index(){
     // GET user token    
+    
     $currentUser = JWTAuth::parseToken()->authenticate();
    
     // Get user id
@@ -100,6 +103,7 @@ class MemberController extends ApiBaseController
 
    public function member_config(){
 
+        
         $eligibility_types = EligibilityType::where('status',1)->get();
         $membership_types = MembershipType::where('status',1)->get();
   
@@ -117,5 +121,9 @@ class MemberController extends ApiBaseController
 
 
 
+   }
+
+   public function test(){
+       dd('ok');
    }
 }
