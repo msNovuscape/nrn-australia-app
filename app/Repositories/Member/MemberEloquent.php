@@ -52,14 +52,13 @@ class MemberEloquent implements MemberRepository
         
         if(isset($attributes['image'])){
 
-            if(!is_null($member)){
-                $memberImage = $member->image ?? null;
-                if(!is_null($memberImage)){
-                    $path = url($memberImage);
-                
-                    unlink($path);
-                }
-            }
+            // if(!is_null($member)){
+            //     $memberImage = $member->image ?? null;
+            //     if(!is_null($memberImage)){
+            //         $path = url($memberImage);
+            //         unlink($path);
+            //     }
+            // }
             
             $attributes['image'] = $this->model->saveImage($attributes['image'],'profile_image');
         }
