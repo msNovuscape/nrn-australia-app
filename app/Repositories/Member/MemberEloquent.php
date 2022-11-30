@@ -69,8 +69,8 @@ class MemberEloquent implements MemberRepository
             
             $attributes['image'] = $this->model->saveImage($attributes['image'],'profile_image');
             $attributes['payment_status_id'] = 1;
-            $attributes['document_status_id'] = null;
-            $attributes['president_status_id'] = null;
+            $attributes['document_status_id'] = 1;
+            $attributes['president_status_id'] = 1;
             $attributes['membership_status_id'] = 1;
         }
 
@@ -81,6 +81,7 @@ class MemberEloquent implements MemberRepository
         ],$attributes);
         
         if(!is_null($member)){
+
             $member->member_document()->delete();
             $member->member_payment()->delete();
         }
