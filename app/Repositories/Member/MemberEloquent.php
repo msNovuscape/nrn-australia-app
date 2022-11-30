@@ -57,6 +57,7 @@ class MemberEloquent implements MemberRepository
                 $memberImage = $member->image ?? null;
                 if(!is_null($memberImage)){
                     $path = URL::to($memberImage);
+                    dd($path);
                     unlink($path);
                 }
             }
@@ -103,7 +104,7 @@ class MemberEloquent implements MemberRepository
     }
 
     public function destroy($id)
-    
+
     {
         return $this->find($id)->delete();
     }
