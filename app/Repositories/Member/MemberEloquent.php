@@ -6,7 +6,7 @@ namespace App\Repositories\Member;
 use App\Models\Member;
 use App\Models\MemberDocument;
 use App\Models\MemberPayment;
-use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\URL;
 
 class MemberEloquent implements MemberRepository
 {
@@ -62,15 +62,15 @@ class MemberEloquent implements MemberRepository
             if(!is_null($member)){
                 $memberImage = $member->image ?? null;
                 if(!is_null($memberImage)){
-                    $path = url($memberImage);
+                    $path = URL::to($memberImage);
                     unlink($path);
                 }
             }
             
             $attributes['image'] = $this->model->saveImage($attributes['image'],'profile_image');
             $attributes['payment_status_id'] = 1;
-            $attributes['document_status_id'] = 1;
-            $attributes['president_status_id'] = 1;
+            $attributes['document_status_id'] = null;
+            $attributes['president_status_id'] = null;
             $attributes['membership_status_id'] = 1;
         }
 
@@ -81,7 +81,7 @@ class MemberEloquent implements MemberRepository
         ],$attributes);
         
         if(!is_null($member)){
-
+            
             $member->member_document()->delete();
             $member->member_payment()->delete();
         }
