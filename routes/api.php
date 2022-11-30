@@ -49,7 +49,6 @@ Route::group(['namespace' => 'Api' ,'prefix' => 'v1','middleware' => ['jwt.verif
     Route::get('/membership_type', [MembershipTypeController::class, 'index']);
     Route::post('/member', [MemberController::class, 'store']);
     Route::get('/member', [MemberController::class, 'index']);
-    Route::post('/member', [MemberController::class, 'reapply']);
     Route::get('/member/config', [MemberController::class, 'member_config']);
     Route::get('/member/{phone}', [MemberController::class, 'check_phone']);
     Route::post('/member/send-email/', [EmailVerifyController::class, 'send_mail']);
