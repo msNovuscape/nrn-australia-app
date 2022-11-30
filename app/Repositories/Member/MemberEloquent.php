@@ -7,6 +7,7 @@ use App\Models\Member;
 use App\Models\MemberDocument;
 use App\Models\MemberPayment;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\File;
 
 class MemberEloquent implements MemberRepository
 {
@@ -57,8 +58,7 @@ class MemberEloquent implements MemberRepository
                 $memberImage = $member->image ?? null;
                 if(!is_null($memberImage)){
                     $path = URL::to($memberImage);
-                    dd($path);
-                    unlink($path);
+                    File::delete($path);
                 }
             }
             
