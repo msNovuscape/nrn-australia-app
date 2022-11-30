@@ -18,6 +18,7 @@ class MemberController extends ApiBaseController
 
     public function __construct(MemberRepository $member)
     {
+       
         $this->member = $member;
         try{
             $this->user = JWTAuth::parseToken()->authenticate();
@@ -46,9 +47,15 @@ class MemberController extends ApiBaseController
     // Add user_id for this member
     $requestBody['user_id'] = $userId;
 
+
     return $this->sendResponse($this->member->store($requestBody),'Member Registered Successfully');
     
    }
+
+//    public function reapply(){
+    
+
+//    }
 
    public function index(){
     // GET user token    
@@ -115,15 +122,12 @@ class MemberController extends ApiBaseController
             }
          $membership_type['eligibilities'] = $eligibilities;
 
-
         }
         return response()->json(['eligibility_types' => $eligibility_types,'membership_types' => $membership_types,],200);
 
-
-
    }
 
-   public function test(){
-       dd('ok');
-   }
+   
+
+   
 }
