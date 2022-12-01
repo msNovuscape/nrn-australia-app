@@ -31,4 +31,9 @@ class Setting extends Model
 //      slug is generated
         return $string;
     }
+
+    public function setting_image_alt(){
+            
+            return $this->hasOne(SettingImageAlt::class,'setting_id');
+    }
 }

@@ -129,6 +129,9 @@ class SettingController extends Controller
                 );
 
                 if($request->hasFile('value')){
+                    if (is_file(public_path().'/'.$setting->value) && file_exists(public_path().'/'.$setting->value)){
+                        unlink(public_path().'/'.$setting->value);
+                    }
                     $extension = \request()->file('value')->getClientOriginalExtension();
                     $image_folder_type = array_search('setting',config('custom.image_folders')); //for image saved in folder
                     $count = rand(100,999);
@@ -136,6 +139,7 @@ class SettingController extends Controller
                     $image_path = $out_put_path[0];
                     $setting->value = $image_path;
                 }
+                
             }
 
 
@@ -148,8 +152,8 @@ class SettingController extends Controller
         }
         $setting->save();
         if(\request('image_alt')){
-            if($setting->setting_alt){
-                $image_alt = $setting->setting_alt;
+            if($setting->setting_image_alt){
+                $image_alt = $setting->setting_image_alt;
                 $image_alt->setting_id = $setting->id;
                 $image_alt->image_alt = \request('image_alt');
                 $image_alt->save();

@@ -90,8 +90,8 @@
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label>Image Alt</label>
-                                                @if($setting->setting_alt)
-                                                    <input type="text" class="form-control" id="inputPassword4"  name="image_alt" value="{{$setting->setting_alt->image_alt}}">
+                                                @if($setting->setting_image_alt()->count() > 0)
+                                                    <input type="text" class="form-control" id="inputPassword4"  name="image_alt" value="{{$setting->setting_image_alt->image_alt}}">
                                                 @else
                                                     <input type="text" class="form-control" id="inputPassword4"  name="image_alt" >
                                                 @endif

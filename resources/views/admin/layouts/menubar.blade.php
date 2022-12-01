@@ -34,7 +34,7 @@
                 <li class="nav-profile d-flex dropdown-export-menu mx-3">
                     <a class="d-flex" href="#">
                         <div class="nav-profile-img">
-                            <img src="http://localhost/ams/public/images/profile.jpg" alt="image">
+                            <img src="{{url('frontend/')}}/profile.jpg" alt="image">
                         </div>
                         <div class="nav-profile-text">
                             <p class="mb-1">{{auth()->user()->full_name}}</p>
