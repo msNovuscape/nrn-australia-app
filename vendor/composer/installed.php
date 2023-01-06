@@ -5,7 +5,7 @@
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => 'b384665c1c2c649664e2b2660d88eb6de0d7d61e',
+        'reference' => '85ba316793cdaf5e4a3e672132352eeb63491fdc',
         'name' => 'laravel/laravel',
         'dev' => true,
     ),
@@ -174,6 +174,15 @@
             'aliases' => array(),
             'reference' => 'f7948baaa0330277c729714910336383286305da',
             'dev_requirement' => true,
+        ),
+        'firebase/php-jwt' => array(
+            'pretty_version' => 'v6.3.2',
+            'version' => '6.3.2.0',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../firebase/php-jwt',
+            'aliases' => array(),
+            'reference' => 'ea7dda77098b96e666c5ef382452f94841e439cd',
+            'dev_requirement' => false,
         ),
         'fruitcake/laravel-cors' => array(
             'pretty_version' => 'v2.2.0',
@@ -436,7 +445,7 @@
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => 'b384665c1c2c649664e2b2660d88eb6de0d7d61e',
+            'reference' => '85ba316793cdaf5e4a3e672132352eeb63491fdc',
             'dev_requirement' => false,
         ),
         'laravel/sail' => array(

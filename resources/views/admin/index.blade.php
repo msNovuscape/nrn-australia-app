@@ -187,7 +187,7 @@
                             </a>
                             @endif
                             <div class="news-right">
-                                @foreach($news->where('type','!=',1) as $single_news)
+                                @foreach($news->where('type','!=',1)->take(2) as $single_news)
                                 <a href="/" class="news-right-primary">
                                     <div class="news-right-img">
                                         <img src="{{url($single_news->image)}}" class="w-100"/>
@@ -195,7 +195,6 @@
                                     <p>{{$single_news->title}}</p>
                                 </a>
                                 @endforeach
-                             
                             </div>
                         </div>
                     </div>

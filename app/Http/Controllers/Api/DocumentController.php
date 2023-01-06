@@ -16,5 +16,6 @@ class DocumentController extends ApiBaseController
         return new DocumentCollection($settings);
     }
 
+    
 
 }
