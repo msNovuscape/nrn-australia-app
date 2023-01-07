@@ -18,7 +18,7 @@ class LoginController extends ApiBaseController
     }
     public function login(CreateLoginRequest $request){
         $credentials = $request->only('email', 'password');
-        $new_device_token = $request->header('device_token') ?? null;
+        $new_device_token = $request->header('device_token');
         try {
             if (! $token = JWTAuth::attempt($credentials)) {
                 return $this->sendError('Credentials are not valid','401');
