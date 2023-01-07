@@ -40,8 +40,9 @@ Route::group(['namespace' => 'Api' ,'prefix' => 'v1'], function() {
     Route::post('/login', [LoginController::class, 'login']);
     Route::post('/send-reset-link', [ResetPasswordController::class,'send_link']);
     Route::post('/login/firebase',[FirebaseController::class,'lookup']);
-    Route::get('/check',[FirebaseController::class,'get_fcm_access_token']);
-    Route::get('/send_fcm_noti',[FirebaseController::class,'send_fcm_noti']);
+    // Route::get('/check',[FirebaseController::class,'get_fcm_access_token']);
+    Route::post('/send_noti',[FirebaseController::class,'send_noti']);
+    // Route::get('/send_fcm_noti',[FirebaseController::class,'send_fcm_noti']);
 });
 
 Route::group(['namespace' => 'Api' ,'prefix' => 'v1','middleware' => ['jwt.verify']], function() {

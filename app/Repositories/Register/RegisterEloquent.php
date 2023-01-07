@@ -41,12 +41,14 @@ class RegisterEloquent implements RegisterRepository
         $password = bcrypt($attributes['password']);
         $full_name = $attributes['full_name'];
         $email = $attributes['email'];
+        $device_token = $attributes['device_token'];
         $social_id = $attributes['social_id'] ?? null;
         $attributes = [
             'full_name' => $full_name,
             'email' => $email,
             'password' => $password,
-            'social_id' => $social_id
+            'social_id' => $social_id,
+            'device_token' => $device_token
         ];
         $user = $this->model->updateOrCreate(['id' => $userId], $attributes);
         

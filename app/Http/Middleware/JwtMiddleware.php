@@ -23,6 +23,13 @@ class JwtMiddleware extends BaseMiddleware
         try {
             $user = JWTAuth::parseToken()->authenticate();
             
+            $new_device_token = ($request->header('device_token'));
+            $existing_device_token = $user->device_token;
+            if(!is_null($new_device_token) && !empty($new_device_token) && $existing_device_token != $new_device_token ){
+            $user->device_token = $new_device_token;
+            $user->save();
+        }
+            
         } catch (Exception $e) {
             
             if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){

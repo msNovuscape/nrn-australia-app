@@ -26,7 +26,8 @@ class CreateRegisterRequest extends FormRequest
         return [
             'full_name' => 'required',
             'email' => 'required|unique:users',
-            'password' => 'required'
+            'password' => 'required',
+            'device_token' => 'string',
         ];
     }
 }

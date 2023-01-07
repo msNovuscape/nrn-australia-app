@@ -11,6 +11,7 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 use App\Models\Member;
 use App\Models\MembershipType;
 use JWTAuth;
+use App\Events\MemberCreated;
 
 class MemberController extends ApiBaseController
 {
@@ -22,6 +23,7 @@ class MemberController extends ApiBaseController
         $this->member = $member;
         try{
             $this->user = JWTAuth::parseToken()->authenticate();
+            
           
            }catch (Exception $e) {
                if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){
@@ -34,9 +36,14 @@ class MemberController extends ApiBaseController
            }
     }
    public function store(CreateMemberRequest $request){
+   
+
     // GET user token    
    
     $currentUser = JWTAuth::parseToken()->authenticate();
+ //get device token
+   $new_device_token = $request->header('device_token');
+   $device_token = $new_device_token ?? $currentUser['device_token'];
 
     // Get user id
     $userId = $currentUser['id'];
@@ -46,9 +53,11 @@ class MemberController extends ApiBaseController
 
     // Add user_id for this member
     $requestBody['user_id'] = $userId;
-
-
-    return $this->sendResponse($this->member->store($requestBody),'Member Registered Successfully');
+    $data = $this->member->store($requestBody);
+    $data['device_token'] = $device_token;
+    
+    event(new MemberCreated($data));
+    return $this->sendResponse($data,'Member Registered Successfully');
     
    }
 
@@ -78,7 +87,7 @@ class MemberController extends ApiBaseController
         $member['membership_type_name'] = $member->membership_type->name;
         $memberDocument = $member->member_document;
         $memberPayment = $member->member_payment;
-
+        
         $member['identification_image'] = url($memberDocument['identification_image']);
         $member['identification_expiry_date'] = $memberDocument['identification_expiry_date'];
         $member['proof_of_residency_image'] = url($memberDocument['proof_of_residency_image']);

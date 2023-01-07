@@ -10,6 +10,7 @@ use App\Models\MembershipType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
  use Carbon\Carbon;
+ use App\Events\MemberVerified;
 
 class MemberController extends Controller
 {
@@ -92,7 +93,7 @@ class MemberController extends Controller
 
 
     public function update(Request $request, $id){   //only for president
-
+        
         $setting =Member::findorfail($id);
 
         $this->validate(\request(), [
@@ -181,6 +182,9 @@ class MemberController extends Controller
             $setting->member_document->update(['identification_expiry_date' => $requestData['identification_expiry_date'],'proof_of_residency_expiry_date' => $requestData['proof_of_residency_expiry_date']]);
             // $setting->member_document->update($requestData);
             $setting->member_payment->update($requestData);
+            if($setting->membership_status_id == 2){
+             event(new MemberVerified($setting));
+            }
         }
 
         Session::flash('success','Member succesffuly updated.');
@@ -191,7 +195,7 @@ class MemberController extends Controller
     
 
     public function update_status(Request $request){//not used currently
-      
+        
         $id = $request->id;
         $status = $request->membership_status_id;
         $setting = Member::findorfail($id);
@@ -231,7 +235,7 @@ class MemberController extends Controller
     }
 
     public function update_status_by_finance(Request $request){
-
+        
         $id = $request->id;
         $status = $request->membership_status_id;
         $roleName = auth()->user()->roles->first()->name;
@@ -293,6 +297,8 @@ class MemberController extends Controller
                         $setting->membership_expiry_date = $dt->addYears($year);
                     }
                     $setting->membership_status_id = 2;
+
+                    event(new MemberVerified($setting));
                 }
                 if($status == 1){
                     $setting->membership_status_id = 1;
@@ -341,7 +347,7 @@ class MemberController extends Controller
     }
 
     public function update_status_by_president(Request $request){
-
+        dd('usbp');
         $member_id = $request['member_id'];
         $member = Member::findorfail($member_id);
         $document_status_id = $request['document_status_id'];

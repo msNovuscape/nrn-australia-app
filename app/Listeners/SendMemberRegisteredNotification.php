@@ -1,163 +1,99 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Listeners;
 
-use App\Http\Controllers\Controller;
-use App\Http\Controllers\ApiBaseController;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Queue\InteractsWithQueue;
+use App\Events\MemberCreated;
 use Illuminate\Support\Facades\Http;
-use App\Models\User;
-use App\Repositories\Register\RegisterRepository;
-use Tymon\JWTAuth\Exceptions\JWTException;
-use JWTAuth;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
+use Illuminate\Http\Request;
 
 
-class FirebaseController extends ApiBaseController
+class SendMemberRegisteredNotification
 {
-    private $register;
-
-    public function __construct(RegisterRepository $register)
+    /**
+     * Create the event listener.
+     *
+     * @return void
+     */
+    public function __construct()
     {
-        $this->register = $register;
+        //
     }
 
-    public function lookup(Request $request){
-        $userToken = $request->idToken;
-        if(is_null($userToken)){
-            return response()->json(['msg' => 'User Token Found'],404);
-        }
-        $firebase_api_key = config('custom.firebase_api_key');
+    /**
+     * Handle the event.
+     *
+     * @param  object  $event
+     * @return void
+     */
+    public function handle(MemberCreated $event)
+    {
+        // $response = Http::post('Api/v1/send_noti', [
+        //     'device_token' => $event->member->device_token,
+        //     'title' => 'NRNA Registration',
+        //     'body' => 'Congratulations! Your are registered. Soon we will verify you.'
+        // ]);
 
-        $lookup_url = 'https://identitytoolkit.googleapis.com/v1/accounts:lookup?key='.$firebase_api_key;
-        // dd($lookup_url);
+        $device_token =  $event->member->device_token;
+       $body = 'NRNA Registration';
+       $title = 'Congratulations! Your are registered. Soon we will verify you.';
+       $access_token = $this->get_fcm_access_token();
+        if(!is_null($access_token) && !empty($access_token)){
+            $headers = array('Content-Type: application/json','Authorization: Bearer ' .$access_token); 
+            $data = ['message' => [
 
-        $postInput = [
-            'idToken' => $userToken,
-        ];
-  
-        $headers = [
-            'X-header' => 'value'
-        ];
-  
-        $response = Http::withHeaders($headers)->post($lookup_url, $postInput);
-  
-        $statusCode = $response->status();
-        if($statusCode !== 200){
-            return response()->json(['msg','Firebase Token Invalid'],422);
-        }
-        $responseBody = json_decode($response->getBody(), true);
-        // if($responseBody['error']['code'] !== 200){
+                'token' => $device_token,
+                 'notification' => [
+                     'body' => $body,
+                     'title' => $title
+                 ]
+            ]
+                 ];
+            {
 
-        // }
-        $email = $responseBody['users'][0]['email'];
-        $socialId = $responseBody['users'][0]['localId'];
-        $displayName = $responseBody['users'][0]['displayName'];
-        $user = User::where('social_id',$socialId)->get(); // look for users table with firebase local id
-        if($user->count() > 0 ){ //if  found using localId
-            return $this->login($user->first());
-        } 
-        $user = User::where('email', $email)->get();
-        if($user->count() > 0){ 
-            $requestData['social_id'] = $socialId;
-            $user->first()->fill($requestData);
-            $user->first()->save();
-            return $this->login($user->first());
-         }else{
-             $password = $this->generateRandomString();
-             $request['email'] = $email;
-             $request['password'] = $password;
-             $request['full_name'] = $displayName;
-             $request['social_id'] = $socialId;
-             $request['hasUserAgreed'] = true;
-
-            $return = $this->get_register($request);
-            return $return;
-
-             // return redirect()->route('get_register',['email' => $email,'password' => $password,'full_name' => $displayName,'social_id' => $socialId]);
-            //  $new_user = new User();
-
-
-         }
-        
-
-    }
-
-    public function generateRandomString($length = 10) {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-        $charactersLength = strlen($characters);
-        $randomString = '';
-        for ($i = 0; $i < $length; $i++) {
-            $randomString .= $characters[rand(0, $charactersLength - 1)];
-        }
-        return $randomString;
-    }
-
-    public function get_register($request){
-        $response = $this->sendResponse($this->register->store($request->all()),'Registered Successfully');
-        $data = $response->getData('data')['success'];
-        $credentials = $request->only('email', 'password');
-        // $request['password'] = bcrypt($request['password']);
-        // $user = User::create($request->all());
-        // dd($user['password']);
-        // $response = $this->sendResponse($this->register->store($attributes),'Registered Successfully');
-        // $data = $response->getData('data')['success'];
-        // $check = $request->only('email', 'password');
-
-        // dd($check);
-        if($data){
-            try {
-                if (! $token = JWTAuth::attempt($credentials)) {
-                    return $this->sendError('Credentials are not valid','401');
-                }
-            } catch (JWTException $e) {
-            // return $attributes;
+             }
+            $ch = curl_init(); 
+            curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/v1/projects/nrna-australia/messages:send');
+            curl_setopt($ch, CURLOPT_POST, true);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data)); 
+            $response = curl_exec($ch);
+            curl_close($ch);
+            $obj =   json_decode($response);
+            $name =  $obj->name;
+            if(isset($name) && !empty($name)){
+                return response()->json([
+                    'success' => true,
+                    'msg' => 'Notification send',
+                ],200);
+            }else{
+                return response()->json([
+                    'success' => false,
+                    'msg' => 'Bad request. Name cannot be retrieved',
+                ],400);
+            }
+             
+        }else{
             return response()->json([
                 'success' => false,
-                'message' => 'Could not create token.',
-            ], 500);
-            }
-            // dd($token);
-            return response()->json([
-                'success' => true,
-                'token' => $token,
-            ],200);
-        }else{
-            $code = 404;
-            return $this->sendError('Something went wrong',$code);
+                'msg' => 'Failed to get fcm access token',
+            ],401);
         }
-    }
+        
 
-    public function login($user){
-        // $credentials = $request->only('email');
-        // dd($credentials);
-        try {
-            if (! $token = JWTAuth::fromUser($user)) {
-                return $this->sendError('Credentials are not valid','401');
-            }
-        } catch (JWTException $e) {
-    	// return $credentials;
-            return response()->json([
-                	'success' => false,
-                	'message' => 'Could not create token.',
-                ], 500);
-        }
-        return response()->json([
-            'success' => true,
-            'token' => $token,
-        ],200);
-        // $response = $this->sendResponse($this->login->login($request->all()),'Loggedin Successfully');
-        // $data = $response->getData('data')['data'];
-        // if($data){
-        //     return $response;
-
-        // }else{
-        //     $code = 402;
-        //     return $this->sendError('Email or password donot matched',$code);
+        // Check the response status code
+        // if ($response->successful()) {
+        //     return true;
+        // } else {
+        //     return false;
         // }
+        // Send a welcome email to the member
+        // Mail::to($event->member->email)->send(new WelcomeEmail);
     }
-
     public function get_fcm_access_token(){
 
         // Replace these with your own values
@@ -194,9 +130,7 @@ class FirebaseController extends ApiBaseController
     return $jwt;
    }
 
-   public function send_fcm_noti($access_token,$device_token, $notification_title, $notification_body){
-
-   }
+   
 
     public function send_noti(Request $request){
        $device_token =  $request['device_token'];
@@ -247,9 +181,4 @@ class FirebaseController extends ApiBaseController
         }
     }
 
-
-    
-    
-    
- 
 }

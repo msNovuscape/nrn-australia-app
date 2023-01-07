@@ -9,8 +9,7 @@ class ApiBaseController extends Controller
 {
     public function sendResponse($data, $message, $code = 200)
     {
-        
-       
+                
         return response()->json([
             'success' => true,
             'data' => $data->get(),

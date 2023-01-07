@@ -18,9 +18,10 @@ class RegisterController extends ApiBaseController
         $this->register = $register;
     }
     public function register(CreateRegisterRequest $request){
-        // dd($request->all());
-        
-        $response = $this->sendResponse($this->register->store($request->all()),'Registered Successfully');
+        $validatedData = $request->validated();
+        $device_token = $request->header('device_token') ?? null;
+        $validatedData['device_token'] = $device_token;
+        $response = $this->sendResponse($this->register->store($validatedData),'Registered Successfully');
         $data = $response->getData('data')['success'];
         $credentials = $request->only('email', 'password');
 
