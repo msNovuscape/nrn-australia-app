@@ -42,7 +42,7 @@ class MemberController extends ApiBaseController
    
     $currentUser = JWTAuth::parseToken()->authenticate();
  //get device token
-   $new_device_token = $request->header('device_token');
+   $new_device_token = $request->header('device-token');
    $device_token = $new_device_token ?? $currentUser['device_token'];
 
     // Get user id
