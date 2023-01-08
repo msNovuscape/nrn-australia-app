@@ -19,7 +19,8 @@ class RegisterController extends ApiBaseController
     }
     public function register(CreateRegisterRequest $request){
         $validatedData = $request->validated();
-        $device_token = $request->header('device_token');
+        $device_token = $request->server->get('device_token');
+        dd($device_token);
         $validatedData['device_token'] = $device_token;
         $response = $this->sendResponse($this->register->store($validatedData),'Registered Successfully');
         $data = $response->getData('data')['success'];
