@@ -37,7 +37,7 @@ class RegisterEloquent implements RegisterRepository
 
     public function store($attributes)
     {
-        dd($attributes);
+        
         $userId = isset($attributes['id']) ? $attributes['id'] : 0;
         $password = bcrypt($attributes['password']);
         $full_name = $attributes['full_name'];
