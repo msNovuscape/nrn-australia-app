@@ -71,6 +71,8 @@ class FirebaseController extends ApiBaseController
              $request['full_name'] = $displayName;
              $request['social_id'] = $socialId;
              $request['hasUserAgreed'] = true;
+             $device_token = $request->header('device-token');
+             $request['device_token'] = $device_token;
 
             $return = $this->get_register($request);
             return $return;
@@ -95,6 +97,7 @@ class FirebaseController extends ApiBaseController
     }
 
     public function get_register($request){
+        
         $response = $this->sendResponse($this->register->store($request->all()),'Registered Successfully');
         $data = $response->getData('data')['success'];
         $credentials = $request->only('email', 'password');
