@@ -37,11 +37,12 @@ class RegisterEloquent implements RegisterRepository
 
     public function store($attributes)
     {
+        dd($attributes);
         $userId = isset($attributes['id']) ? $attributes['id'] : 0;
         $password = bcrypt($attributes['password']);
         $full_name = $attributes['full_name'];
         $email = $attributes['email'];
-        $device_token = $attributes['device-token'];
+        $device_token = $attributes['device_token'];
         $social_id = $attributes['social_id'] ?? null;
         $attributes = [
             'full_name' => $full_name,
