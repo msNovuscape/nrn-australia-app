@@ -99,16 +99,18 @@
                                                         </a>
                                             </td> -->
 
-                                            <td class="action-icons d-flex justify-content-center">
-                                                <a href="{{url('admin/settings/'.$setting->id)}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="view">
-                                                    <i class="fas fa-folder"></i>
-                                                </a>
-                                                <a href="{{url('admin/settings/'.$setting->id.'/edit')}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="edit">
-                                                    <i class="fas fa-pencil-alt"></i>
-                                                </a>
-                                                <a href="{{url('admin/settings/'.$setting->id.'/delete')}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="delete" onclick="return confirm('Are you sure you want to delete?');">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
+                                            <td class="text-center">
+                                                <div class="action-icons d-flex justify-content-center">
+                                                    <a href="{{url('admin/settings/'.$setting->id)}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="view">
+                                                        <i class="fas fa-folder"></i>
+                                                    </a>
+                                                    <a href="{{url('admin/settings/'.$setting->id.'/edit')}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="edit">
+                                                        <i class="fas fa-pencil-alt"></i>
+                                                    </a>
+                                                    <a href="{{url('admin/settings/'.$setting->id.'/delete')}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="delete" onclick="return confirm('Are you sure you want to delete?');">
+                                                        <i class="fas fa-trash"></i>
+                                                    </a>
+                                                </div>
                                             </td>
                                             
                                         </tr>

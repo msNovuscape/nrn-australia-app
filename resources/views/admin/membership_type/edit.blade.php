@@ -37,11 +37,17 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Select Eligibility Type <span style="color: red">*</span> </label>
-                                    <select  class="form-control"  id="inputPassword3" name="eligibility_type_ids[]" multiple required>
+                                    {{-- <select  class="form-control"  id="inputPassword3" name="eligibility_type_ids[]" multiple required>
                                         @foreach($eligibility_types as $eligibility_type)
                                             <option {{$setting->eligibility_types->contains($eligibility_type->id) ? 'selected' : ''}} value = "{{$eligibility_type->id}}">{{$eligibility_type->title}}</option>
                                         @endforeach
-                                    </select>
+                                    </select> --}}
+                                    @foreach($eligibility_types as $eligibility_type)
+                                        <div class="form-check mt-2">
+                                            <input class="form-check-input mt-2" type="checkbox" id="" name = "eligibility_type_ids[]" value="{{$eligibility_type->id}}" {{$setting->eligibility_types->contains($eligibility_type->id) ? 'checked' : ''}}>
+                                            <label class="form-check-label px-2" for="">{{$eligibility_type->title}}</label>
+                                        </div>
+                                    @endforeach
                                 </div>
                             </div>
 

@@ -1263,3 +1263,10 @@ label:not(.form-check-label):not(.custom-file-label) {
 .select-block p {
     margin-bottom: 0;
 }
+.gallery-images-div{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+.gallery-images{
+    padding: 20px;
+}

@@ -64,14 +64,15 @@
                                             <td class="text-center">{{$user->email}}</td>
                                             <td class="text-center">{{$user->roles->first()->name}}</td>
                                           
-                                            <td class="d-flex justify-content-center action-icons">
-                                            
-                                                <a href="{{url('admin/users/'.$user->id.'/edit')}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="edit">
-                                                    <i class="fas fa-pencil-alt"></i>
-                                                </a>
-                                                <a href="{{url('admin/users/delete/'.$user->id)}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="delete" onclick="return confirm('Are you sure want to delete?')">
-                                                    <i class="fas fa-trash"></i>
-                                                </a>
+                                            <td class="text-center">
+                                                <div class="d-flex justify-content-center action-icons">
+                                                    <a href="{{url('admin/users/'.$user->id.'/edit')}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="edit">
+                                                        <i class="fas fa-pencil-alt"></i>
+                                                    </a>
+                                                    <a href="{{url('admin/users/delete/'.$user->id)}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="delete" onclick="return confirm('Are you sure want to delete?')">
+                                                        <i class="fas fa-trash"></i>
+                                                    </a>
+                                                </div>
                                             </td>
 
                                         </tr>

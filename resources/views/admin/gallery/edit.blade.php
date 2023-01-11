@@ -45,15 +45,19 @@
                                     <input type="date" class="form-control getDate"   name="date" value="{{$setting->date}}" required>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group col-md-12">
                                     <b>Images:</b>
-                                    @foreach($setting->gallery_images as $image)
-                                    <span>
-                                        <a href="{{url($image->image)}}" target="_blank">
-                                            <img src="{{url($image->image)}}" alt="">
-                                        </a>
-                                    </span>
-                                    @endforeach
+                                    <div class="gallery-images-div">
+                                        @foreach($setting->gallery_images as $image)
+                                        <span>
+                                            <a href="{{url($image->image)}}" target="_blank">
+                                                <div class="gallery-images">
+                                                    <img src="{{url($image->image)}}" class="img-fluid" alt="">
+                                                </div>
+                                            </a>
+                                        </span>
+                                        @endforeach
+                                    </div>
                                 </div>
                                 <div class="col-md-6">
                                 <div class="form-group">

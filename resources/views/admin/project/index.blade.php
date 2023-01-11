@@ -81,13 +81,15 @@
                                             <td class="text-center"> {{config('custom.status')[$setting->status]}}</td>
 
 
-                                            <td class="d-flex justify-content-center action-icons">
-                                                <a href="{{url('admin/projects/'.$setting->id)}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="view">
-                                                    <i class="fas fa-folder"></i>
-                                                </a>
-                                                <a href="{{url('admin/projects/'.$setting->id.'/edit')}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="edit">
-                                                    <i class="fas fa-pencil-alt"></i>
-                                                </a>
+                                            <td class="text-center">
+                                                <div class="d-flex justify-content-center action-icons">
+                                                    <a href="{{url('admin/projects/'.$setting->id)}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="view">
+                                                        <i class="fas fa-folder"></i>
+                                                    </a>
+                                                    <a href="{{url('admin/projects/'.$setting->id.'/edit')}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="edit">
+                                                        <i class="fas fa-pencil-alt"></i>
+                                                    </a>
+                                                </div>
                                             </td>
                                         </tr>
                                     @endforeach

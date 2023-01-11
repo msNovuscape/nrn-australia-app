@@ -91,7 +91,7 @@
                     @if(auth()->user()->hasRole('Super Admin'))
                     <li class="nav-item sidebar-nav-item">
                         <a href="{{url('admin/users')}}" class="nav-link {{(Request::segment(2) == 'users') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
-                            <i class="fa fa-cog pl-4" aria-hidden="true"></i>
+                            <i class="fas fa-users-cog pl-4" aria-hidden="true"></i>
                             <p id="accordion">
                                 <button class="btn btn-link p-2 w-80">
                                   Users Management
@@ -171,7 +171,7 @@
 
                     <li class="nav-item sidebar-nav-item">
                         <a href="{{url('admin/gallery')}}" class="nav-link {{(Request::segment(2) == 'gallery') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
-                            <i class="fas fa-newspaper pl-4" aria-hidden="true"></i>
+                            <i class="fas fa-images pl-4" aria-hidden="true"></i>
                             <p id="accordion">
                                 <!-- <button class="btn btn-link p-2 w-80" data-toggle="collapse" data-target="#collapseNews" aria-expanded="true" aria-controls="collapseNews" id="headingNews">
                                     News
@@ -194,7 +194,7 @@
 
                     <li class="nav-item sidebar-nav-item">
                         <a href="{{url('admin/notices')}}" class="nav-link {{(Request::segment(2) == 'notices') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
-                            <i class="fas fa-newspaper pl-4" aria-hidden="true"></i>
+                            <i class="fas fa-exclamation-circle pl-4" aria-hidden="true"></i>
                             <p id="accordion">
                                 <!-- <button class="btn btn-link p-2 w-80" data-toggle="collapse" data-target="#collapseNews" aria-expanded="true" aria-controls="collapseNews" id="headingNews">
                                     News
@@ -216,7 +216,7 @@
                     </li>
                     <li class="nav-item sidebar-nav-item">
                         <a href="{{url('admin/projects')}}" class="nav-link {{(Request::segment(2) == 'projects') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
-                            <i class="fas fa-newspaper pl-4" aria-hidden="true"></i>
+                            <i class="fas fa-tasks pl-4" aria-hidden="true"></i>
                             <p id="accordion">
                                 <!-- <button class="btn btn-link p-2 w-80" data-toggle="collapse" data-target="#collapseNews" aria-expanded="true" aria-controls="collapseNews" id="headingNews">
                                     News
@@ -253,7 +253,7 @@
 
                     <li class="nav-item sidebar-nav-item">
                         <a href="{{url('admin/period')}}" class="nav-link {{(Request::segment(2) == 'period') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
-                            <i class="fas fa-newspaper pl-4" aria-hidden="true"></i>
+                            <i class="fas fa-business-time pl-4" aria-hidden="true"></i>
                             <p id="accordion">
                                 <!-- <button class="btn btn-link p-2 w-80" data-toggle="collapse" data-target="#collapseNews" aria-expanded="true" aria-controls="collapseNews" id="headingNews">
                                     News
@@ -267,7 +267,7 @@
 
                     <li class="nav-item sidebar-nav-item">
                         <a href="{{url('admin/document_category')}}" class="nav-link {{(Request::segment(2) == 'document_category') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
-                            <i class="fas fa-newspaper pl-4" aria-hidden="true"></i>
+                            <i class="fas fa-file-alt pl-4" aria-hidden="true"></i>
                             <p id="accordion">
                                 <!-- <button class="btn btn-link p-2 w-80" data-toggle="collapse" data-target="#collapseNews" aria-expanded="true" aria-controls="collapseNews" id="headingNews">
                                     News
@@ -281,7 +281,7 @@
 
                     <li class="nav-item sidebar-nav-item">
                         <a href="{{url('admin/document')}}" class="nav-link {{(Request::segment(2) == 'document') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
-                            <i class="fas fa-newspaper pl-4" aria-hidden="true"></i>
+                            <i class="fas fa-file-word pl-4" aria-hidden="true"></i>
                             <p id="accordion">
                                 <!-- <button class="btn btn-link p-2 w-80" data-toggle="collapse" data-target="#collapseNews" aria-expanded="true" aria-controls="collapseNews" id="headingNews">
                                     News
@@ -295,7 +295,7 @@
 
                     <li class="nav-item sidebar-nav-item">
                         <a href="{{url('admin/designation')}}" class="nav-link {{(Request::segment(2) == 'designation') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
-                            <i class="fas fa-newspaper pl-4" aria-hidden="true"></i>
+                            <i class="fas fa-user-tag pl-4" aria-hidden="true"></i>
                             <p id="accordion">
                                 <!-- <button class="btn btn-link p-2 w-80" data-toggle="collapse" data-target="#collapseNews" aria-expanded="true" aria-controls="collapseNews" id="headingNews">
                                     News
@@ -321,7 +321,7 @@
 
                     <li class="nav-item sidebar-nav-item">
                         <a href="{{url('admin/team')}}" class="nav-link {{(Request::segment(2) == 'team') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
-                            <i class="fas fa-newspaper pl-4" aria-hidden="true"></i>
+                            <i class="fas fa-users pl-4" aria-hidden="true"></i>
                             <p id="accordion">
                                 <!-- <button class="btn btn-link p-2 w-80" data-toggle="collapse" data-target="#collapseNews" aria-expanded="true" aria-controls="collapseNews" id="headingNews">
                                     News
@@ -335,7 +335,7 @@
 
                     <li class="nav-item sidebar-nav-item">
                         <a href="{{url('admin/guidelines')}}" class="nav-link {{(Request::segment(2) == 'guidelines') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
-                            <i class="fas fa-newspaper pl-4" aria-hidden="true"></i>
+                            <i class="fas fa-info-circle pl-4" aria-hidden="true"></i>
                             <p id="accordion">
                                 <!-- <button class="btn btn-link p-2 w-80" data-toggle="collapse" data-target="#collapseNews" aria-expanded="true" aria-controls="collapseNews" id="headingNews">
                                     News

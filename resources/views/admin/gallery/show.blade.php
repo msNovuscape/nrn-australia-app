@@ -31,30 +31,36 @@
                     <div class="card-body">
                        
                     <div class="col-md-4">
-                                <div class="form-group">
-                                    <b>Event Title:</b>
-                                    {{$setting->title}}
-                                </div>
-                                <div class="form-group">
-                                    <b>Event Date:</b>
-                                    {{$setting->date}}
-                                </div>
+                        <div class="form-group">
+                            <b>Event Title:</b>
+                            {{$setting->title}}
+                        </div>
+                        <div class="form-group">
+                            <b>Event Date:</b>
+                            {{$setting->date}}
+                        </div>
+                    </div>
 
-                                <div class="form-group">
-                                    <b>Images:</b>
-                                    @foreach($setting->gallery_images as $image)
-                                    <span>
-                                        <a href="{{url($image->image)}}" target="_blank">
-                                            <img src="{{url($image->image)}}" alt="">
-                                        </a>
-                                    </span>
-                                    @endforeach
-                                </div>
-                                <div class="form-group">
-                                    <b>Created Date:</b>
-                                    {{$setting->created_at}}
-                                </div>
-                            </div>
+                    <div class="form-group">
+                        <b>Images:</b>
+                        <div class="gallery-images-div">
+                            @foreach($setting->gallery_images as $image)
+                            <span>
+                                <a href="{{url($image->image)}}" target="_blank">
+                                    <div class="gallery-images">
+                                        <img src="{{url($image->image)}}" class="img-fluid" alt="">
+                                    </div>
+                                </a>
+                            </span>
+                            @endforeach
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <b>Created Date:</b>
+                            {{$setting->created_at}}
+                        </div>
+                    </div>
                       
                     </div>
 
