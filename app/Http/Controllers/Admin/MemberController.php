@@ -185,19 +185,19 @@ class MemberController extends Controller
             // $setting->member_document->update($requestData);
             $setting->member_payment->update($requestData);
             if($setting->membership_status_id == 2){
-                dispatch(function() use ($setting) {
+                // dispatch(function() use ($setting) {
                   event(new MemberVerified($setting));
-                });
+                // });
             }
             if($setting->membership_status_id == 3){
-                dispatch(function() use ($setting) {
+                // dispatch(function() use ($setting) {
                   event(new MemberRejected($setting));
-                });
+                // });
             }
             if($setting->membership_status_id == 4){
-                dispatch(function() use ($setting) {
+                // dispatch(function() use ($setting) {
                   event(new MemberReapply($setting));
-                });
+                // });
             }
         }
 
@@ -260,9 +260,9 @@ class MemberController extends Controller
             $setting->membership_status_id = 3;
             $setting->status = false;
             $setting->rejected_reason = $request['rejected_reason'];
-            dispatch(function() use ($setting) {
+            // dispatch(function() use ($setting) {
                 event(new MemberRejected($setting));
-            });
+            // });
 
         }
         if($status == 4){
@@ -270,9 +270,9 @@ class MemberController extends Controller
             $setting->membership_status_id = 4;
             $setting->status = false;
             $setting->reapply_reason = $request['reapply_reason'];
-            dispatch(function() use ($setting) {
+            // dispatch(function() use ($setting) {
                 event(new MemberReapply($setting));
-            });
+            // });
         }
         if($roleName == 'Treasurer'){
 
@@ -316,9 +316,9 @@ class MemberController extends Controller
                         $setting->membership_expiry_date = $dt->addYears($year);
                     }
                     $setting->membership_status_id = 2;
-                    dispatch(function() use ($setting) {
+                    // dispatch(function() use ($setting) {
                       event(new MemberVerified($setting));
-                    });
+                    // });
                 }
                 if($status == 1){
                     $setting->membership_status_id = 1;
@@ -367,7 +367,7 @@ class MemberController extends Controller
     }
 
     public function update_status_by_president(Request $request){
-        dd('usbp');
+        // dd('usbp');
         $member_id = $request['member_id'];
         $member = Member::findorfail($member_id);
         $document_status_id = $request['document_status_id'];

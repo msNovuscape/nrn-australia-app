@@ -44,7 +44,6 @@ class MemberController extends ApiBaseController
  //get device token
    $new_device_token = $request->header('device-token');
    $device_token = $new_device_token ?? $currentUser['device_token'];
-
     // Get user id
     $userId = $currentUser['id'];
     
