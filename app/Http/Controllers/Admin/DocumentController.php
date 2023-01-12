@@ -127,9 +127,9 @@ class DocumentController extends Controller
             $extension = $request->file('image')->getClientOriginalExtension();
             $image_folder_type = array_search('document',config('custom.image_folders')); //for image saved in folder
             $count = rand(100,999);
-            $out_put_path = User::save_image($request->file('image'),$extension,$count,$image_folder_type);
-            $image_path1 = $out_put_path;
-            $requestData['image'] = $image_path1;
+            $out_put_path1 = User::save_image($request->file('image'),$extension,$count,$image_folder_type);
+            $image_path = is_array($out_put_path1) ? $out_put_path1[0] : $out_put_path1 ;
+            $requestData['image'] = $image_path;
 
             if (is_file(public_path().'/'.$setting->image) && file_exists(public_path().'/'.$setting->image)){
                 unlink(public_path().'/'.$setting->image);
