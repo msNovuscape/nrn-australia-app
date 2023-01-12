@@ -77,8 +77,8 @@
                                     <input type = "file" value = "{{old('image')}}" name="image" class="form-control" rows="4"/>
                                 </div>
                                 <span>
-                                        <a href="{{url($setting->image)}}" target="_blank">
-                                            <img src="{{url($setting->image)}}" alt="">
+                                        <a href="{{url($setting->image ?? '')}}" target="_blank">
+                                            <img src="{{url($setting->image ?? '')}}" alt="">
                                         </a>
                                     </span>
                             </div>
