@@ -18,6 +18,7 @@ use Exception;
 use App\Models\Member;
 use App\Models\Setting;
 use App\Repositories\News\NewsRepository;
+use Sentry;
 
 class HomeController extends ApiBaseController
 {
@@ -41,8 +42,10 @@ class HomeController extends ApiBaseController
         $this->news = $news;
 
      }
+     
    public function index(Request $request){
       // GET user token
+      
       $currentUser = JWTAuth::parseToken()->authenticate();
 
       // Get user id
@@ -55,20 +58,21 @@ class HomeController extends ApiBaseController
 
       $isMember = !(is_null($member) || empty($member));
 
-
-//      $news = $this->sendResponse($this->news->all($request->all()), 'News fetched successfully');
-      $news = News::where('status',1)->get();
-      $notice = Notice::where('status',1)->get();
-      $settings = Setting::where('status',1)->get();
-       return response()->json([
-            'sliders' => [
-               url('/Carousal.png'),
-           url('/Carousal.png'),
-           url('/Carousal.png'),
-           url('/Carousal.png'),
-           url('/Carousal.png'),
-           url('/Carousal.png')
-               ],
+     
+        $news = News::where('status',1)->get();
+        $notice = Notice::where('status',1)->get();
+        $settings = Setting::where('status',1)->get();
+        
+      
+    return response()->json([
+        'sliders' => [
+        url('/Carousal.png'),
+        url('/Carousal.png'),
+        url('/Carousal.png'),
+        url('/Carousal.png'),
+        url('/Carousal.png'),
+        url('/Carousal.png')
+        ],
             'news' => NewsResource::collection($news),
             'notices' => null,
             'user' => $currentUser,
@@ -77,6 +81,6 @@ class HomeController extends ApiBaseController
             'settings' => SettingResource::collection($settings),
             'member_image' => $isMember ? url($member->image) : '',
 
-        ], 200);
+    ], 200);
     }
 }

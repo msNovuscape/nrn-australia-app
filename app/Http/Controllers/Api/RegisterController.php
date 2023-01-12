@@ -57,7 +57,6 @@ class RegisterController extends ApiBaseController
                     return $this->sendError('Credentials are not valid','401');
                 }
             } catch (JWTException $e) {
-            return $credentials;
                 return response()->json([
                         'success' => false,
                         'message' => 'Could not create token.',

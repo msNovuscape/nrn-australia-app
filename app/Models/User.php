@@ -61,6 +61,7 @@ class User extends Authenticatable implements JWTSubject
 
     public static function makeDirectory($image_folder_type)
     {
+   
 //        $image_folder_type = 1;
         $year = date("Y");
         $month = date("m");
@@ -163,6 +164,7 @@ class User extends Authenticatable implements JWTSubject
             return $directory = 'images/payment_slip/' . $year . '/' . $month . '/' . $day . '/';
         }
         if(config('custom.image_folders')[$image_folder_type] == 'document') {
+            
             if (!is_dir(public_path() . '/images/document/' . $year . '/' . $month . '/' . $day)) {
                 mkdir(public_path() . '/images/document/' . $year . '/' . $month . '/' . $day, 0755, true);
             }

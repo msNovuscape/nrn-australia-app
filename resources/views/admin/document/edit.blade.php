@@ -73,6 +73,18 @@
 
                             <div class="col-md-6" >
                                 <div class="form-group" >
+                                    <label class="w-100">Image <span style="color: red";> * </span></label>
+                                    <input type = "file" value = "{{old('image')}}" name="image" class="form-control" rows="4"/>
+                                </div>
+                                <span>
+                                        <a href="{{url($setting->image)}}" target="_blank">
+                                            <img src="{{url($setting->image)}}" alt="">
+                                        </a>
+                                    </span>
+                            </div>
+
+                            <div class="col-md-6" >
+                                <div class="form-group" >
                                     <label class="w-100">Publish Date</label>
                                     <input type = "date" value = "{{$setting->publish_date}}" name="publish_date" class="form-control" rows="4" required/>
                                 </div>

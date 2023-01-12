@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Http;
 use Firebase\JWT\JWT;
 use Firebase\JWT\Key;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Mail;
 
 
 class SendMemberRegisteredNotification
@@ -31,13 +33,40 @@ class SendMemberRegisteredNotification
      */
     public function handle(MemberCreated $event)
     {
-        // $response = Http::post('Api/v1/send_noti', [
-        //     'device_token' => $event->member->device_token,
-        //     'title' => 'NRNA Registration',
-        //     'body' => 'Congratulations! Your are registered. Soon we will verify you.'
-        // ]);
+        dispatch(function() use ($event) {
 
-        $device_token =  $event->member->device_token;
+              $user_id =  $event->member->user_id;
+              $user = User::find($user_id);
+
+              $data['full_name'] = $user->full_name;
+              $data['email'] = $user->email;
+              $member_email = $event->member->email;
+              $name = $event->member->first_name;
+
+              if($data['email'] == $event->member->email){
+                Mail::send('member_register_email', $data, function ($message) use ($member_email,$name) {
+                    $message->to($member_email, $name)
+                    ->subject('NRNA Registration');
+                });
+              }else
+              {
+                Mail::send('member_register_email', $data, function ($message) use ($user,$member_email,$name) {
+                    $message->to($member_email,$name);
+                    $message->cc($user->email, $user->full_name)
+                    ->subject('NRNA Registration');
+                });
+              }
+
+              
+            //   Mail::send('member_register_email', $data, function ($message) use ($user,$member_email,$name) {
+            //     $message->to($member_email,$name);
+            //     $message->cc($user->email, $user->full_name)
+            //     ->subject('NRNA Registration');
+            // });
+        });
+
+       $device_token =  $event->member->device_token;
+      
        $body = 'NRNA Registration';
        $title = 'Congratulations! Your are registered. Soon we will verify you.';
        $access_token = $this->get_fcm_access_token();
@@ -132,53 +161,53 @@ class SendMemberRegisteredNotification
 
    
 
-    public function send_noti(Request $request){
-       $device_token =  $request['device_token'];
-       $body = $request['body'];
-       $title = $request['title'];
-       $access_token = $this->get_fcm_access_token();
-        if(!is_null($access_token) && !empty($access_token)){
-            $headers = array('Content-Type: application/json','Authorization: Bearer ' .$access_token); 
-            $data = ['message' => [
+    // public function send_noti(Request $request){
+    //    $device_token =  $request['device_token'];
+    //    $body = $request['body'];
+    //    $title = $request['title'];
+    //    $access_token = $this->get_fcm_access_token();
+    //     if(!is_null($access_token) && !empty($access_token)){
+    //         $headers = array('Content-Type: application/json','Authorization: Bearer ' .$access_token); 
+    //         $data = ['message' => [
 
-                'token' => $device_token,
-                 'notification' => [
-                     'body' => $body,
-                     'title' => $title
-                 ]
-            ]
-                 ];
-            {
+    //             'token' => $device_token,
+    //              'notification' => [
+    //                  'body' => $body,
+    //                  'title' => $title
+    //              ]
+    //         ]
+    //              ];
+    //         {
 
-             }
-            $ch = curl_init(); 
-            curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/v1/projects/nrna-australia/messages:send');
-            curl_setopt($ch, CURLOPT_POST, true);
-            curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data)); 
-            $response = curl_exec($ch);
-            curl_close($ch);
-            $obj =   json_decode($response);
-            $name =  $obj->name;
-            if(isset($name) && !empty($name)){
-                return response()->json([
-                    'success' => true,
-                    'msg' => 'Notification send',
-                ],200);
-            }else{
-                return response()->json([
-                    'success' => false,
-                    'msg' => 'Bad request. Name cannot be retrieved',
-                ],400);
-            }
+    //          }
+    //         $ch = curl_init(); 
+    //         curl_setopt($ch, CURLOPT_URL, 'https://fcm.googleapis.com/v1/projects/nrna-australia/messages:send');
+    //         curl_setopt($ch, CURLOPT_POST, true);
+    //         curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+    //         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    //         curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($data)); 
+    //         $response = curl_exec($ch);
+    //         curl_close($ch);
+    //         $obj =   json_decode($response);
+    //         $name =  $obj->name;
+    //         if(isset($name) && !empty($name)){
+    //             return response()->json([
+    //                 'success' => true,
+    //                 'msg' => 'Notification send',
+    //             ],200);
+    //         }else{
+    //             return response()->json([
+    //                 'success' => false,
+    //                 'msg' => 'Bad request. Name cannot be retrieved',
+    //             ],400);
+    //         }
              
-        }else{
-            return response()->json([
-                'success' => false,
-                'msg' => 'Failed to get fcm access token',
-            ],401);
-        }
-    }
+    //     }else{
+    //         return response()->json([
+    //             'success' => false,
+    //             'msg' => 'Failed to get fcm access token',
+    //         ],401);
+    //     }
+    // }
 
 }

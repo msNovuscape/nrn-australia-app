@@ -44,6 +44,7 @@ class DocumentController extends Controller
         $this->validate(\request(), [
                 'title' => 'required',
                 'file' => 'required|file|mimes:pdf',
+                'image' => 'file|mimes:jpeg,png,jpg',
                 'status' => 'required',
                 'document_category' => 'required',
                 'period' => 'required'
@@ -57,9 +58,17 @@ class DocumentController extends Controller
             $image_folder_type = array_search('document',config('custom.image_folders')); //for image saved in folder
             $count = rand(100,999);
             $out_put_path = User::save_image($request->file('file'),$extension,$count,$image_folder_type);
-            $image_path1 = $out_put_path;
+            $image_path1 = is_array($out_put_path) ? $out_put_path[0] : $out_put_path ;;
             $requestData['file'] = $image_path1;
             
+        }
+        if($request->hasFile('image')){
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $image_folder_type = array_search('document',config('custom.image_folders')); //for image saved in folder
+            $count = rand(100,999);
+            $out_put_path1 = User::save_image($request->file('image'),$extension,$count,$image_folder_type);
+            $image_path = is_array($out_put_path1) ? $out_put_path1[0] : $out_put_path1 ;
+            $requestData['image'] = $image_path;
         }
         $setting = Document::create($requestData);
         Session::flash('success','Document successfully created');
@@ -87,6 +96,7 @@ class DocumentController extends Controller
         $this->validate(\request(), [
             'title' => 'required',
             'file' => 'file|mimes:pdf',
+            'image' => 'file|mimes:jpeg,png,jpg',
             'status' => 'required',
             'document_category' => 'required',
             'period' => 'required'
@@ -110,6 +120,19 @@ class DocumentController extends Controller
 
             if (is_file(public_path().'/'.$setting->file) && file_exists(public_path().'/'.$setting->file)){
                 unlink(public_path().'/'.$setting->file);
+            }
+            
+        }
+        if($request->hasFile('image')){
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $image_folder_type = array_search('document',config('custom.image_folders')); //for image saved in folder
+            $count = rand(100,999);
+            $out_put_path = User::save_image($request->file('image'),$extension,$count,$image_folder_type);
+            $image_path1 = $out_put_path;
+            $requestData['image'] = $image_path1;
+
+            if (is_file(public_path().'/'.$setting->image) && file_exists(public_path().'/'.$setting->image)){
+                unlink(public_path().'/'.$setting->image);
             }
             
         }

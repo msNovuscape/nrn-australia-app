@@ -4,6 +4,10 @@ namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
+use Sentry\Laravel\Integration;
+use Sentry;
+use Symfony\Component\HttpKernel\Exception\HttpResponseException;
+
 
 class Handler extends ExceptionHandler
 {
@@ -35,7 +39,21 @@ class Handler extends ExceptionHandler
     public function register()
     {
         $this->reportable(function (Throwable $e) {
-            //
+            $this->reportable(function (Throwable $e) {
+                Integration::captureUnhandledException($e);
+            });
+            
+        });
+        $this->reportable(function (\PDOException $e) {
+            Sentry::captureException($e);
+        });
+        $this->reportable(function (Throwable $exception) {
+            
+        });
+       
+        $this->renderable(function (\Tymon\JWTAuth\Exceptions\JWTException $e) {
+            Sentry::captureException($e);
         });
     }
+    
 }
