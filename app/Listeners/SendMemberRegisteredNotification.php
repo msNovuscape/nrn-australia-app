@@ -44,16 +44,17 @@ class SendMemberRegisteredNotification
               $name = $event->member->first_name;
 
               if($data['email'] == $event->member->email){
+                $data['full_name'] = $name; 
                 Mail::send('member_register_email', $data, function ($message) use ($member_email,$name) {
                     $message->to($member_email, $name)
-                    ->subject('NRNA Registration');
+                    ->subject('New Membership Acknowledgment');
                 });
               }else
               {
                 Mail::send('member_register_email', $data, function ($message) use ($user,$member_email,$name) {
                     $message->to($member_email,$name);
                     $message->cc($user->email, $user->full_name)
-                    ->subject('NRNA Registration');
+                    ->subject('New Membership Acknowledgment');
                 });
               }
 
@@ -63,12 +64,11 @@ class SendMemberRegisteredNotification
             //     $message->cc($user->email, $user->full_name)
             //     ->subject('NRNA Registration');
             // });
-        });
 
-       $device_token =  $event->member->device_token;
+            $device_token =  $event->member->device_token;
       
-       $body = 'NRNA Registration';
-       $title = 'Congratulations! Your are registered. Soon we will verify you.';
+       $body = 'Congratulations';
+       $title = 'Your membership registration has been successfully completed. Soon we will verify you.';
        $access_token = $this->get_fcm_access_token();
         if(!is_null($access_token) && !empty($access_token)){
             $headers = array('Content-Type: application/json','Authorization: Bearer ' .$access_token); 
@@ -112,16 +112,9 @@ class SendMemberRegisteredNotification
                 'msg' => 'Failed to get fcm access token',
             ],401);
         }
-        
+        });
 
-        // Check the response status code
-        // if ($response->successful()) {
-        //     return true;
-        // } else {
-        //     return false;
-        // }
-        // Send a welcome email to the member
-        // Mail::to($event->member->email)->send(new WelcomeEmail);
+       
     }
     public function get_fcm_access_token(){
 

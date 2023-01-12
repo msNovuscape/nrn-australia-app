@@ -36,6 +36,7 @@ use App\Http\Controllers\ResetPasswordController;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('mycron', [HomeAdminController::class,'mycron'])->name('mycron');
 
 Route::get('login', [HomeAdminController::class,'getLogin'])->name('login');
 Route::post('login', [HomeAdminController::class,'postLogin']);

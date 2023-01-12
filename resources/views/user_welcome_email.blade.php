@@ -1,8 +1,7 @@
-Hello {{ $full_name }},<br><br>
+Dear {{ $full_name }},<br><br>
 
-Your are registered to NRNA App.
-You can now login anytime with your credentials.<br><br>
+Your account was successfully created. Now, you can log in to your account. <br><br>
 
 
-Thank You,<br>
+Thanks for Signing Up!<br>
 NRNA

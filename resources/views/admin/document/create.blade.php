@@ -67,8 +67,8 @@
                             </div>
                             <div class="col-md-6" >
                                 <div class="form-group" >
-                                    <label class="w-100">Image <span style="color: red";> * </span></label>
-                                    <input type = "file" value = "{{old('image')}}" name="image" class="form-control" rows="4" required/>
+                                    <label class="w-100">Image <span style="color: red";></span></label>
+                                    <input type = "file" value = "{{old('image')}}" name="image" class="form-control" rows="4"/>
                                 </div>
                             </div>
                             <div class="col-md-6" >

@@ -1,8 +1,9 @@
 Hello {{ $full_name }},<br><br>
 
-Your are registered to NRNA App.
-You can now login anytime with your credentials.<br><br>
+Thank you for your membership registration. <br><br>
+Please be advised that your application has been received, and the documents you have provided are under review. We will get back to you with the outcome at the earliest possible.
+<br><br>
 
 
-Thank You,<br>
+Stay Connected!<br>
 NRNA

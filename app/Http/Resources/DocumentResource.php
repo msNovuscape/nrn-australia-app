@@ -20,7 +20,7 @@ class DocumentResource extends JsonResource
         return [
             'id' => $this->id,
             'file' => url($this->file),
-            'image' => url($this->image),
+            'image' => is_null($this->image) ? null : url($this->image),
             'publish_date' => $this->publish_date,
             'title' => $this->title,
             'document_category' =>  new DocumentCategoryResource($this->document_category),

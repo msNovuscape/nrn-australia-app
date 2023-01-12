@@ -10,11 +10,12 @@ use App\Models\Member;
 use App\Models\News;
 use App\Models\Notice;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 
 class HomeController extends Controller
 {
-    public function test_image(){
-        
+    public function mycron(){
+        Artisan::call('queue:listen');
     }
 
     public function indexAdmin()
