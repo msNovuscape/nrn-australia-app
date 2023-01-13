@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>NRN | Australia</title>
-
+    <link rel="icon" href="{{url('admin/icons/favicon-image.png')}}">
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     {{--    {{ Html::favicon(\App\Models\Setting::where('slug','favicon')->first()->value) }}--}}
@@ -42,6 +42,7 @@
 @yield('style')
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
+    
 
 @include('admin.layouts.menubar')
 @yield('content')

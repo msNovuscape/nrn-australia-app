@@ -233,10 +233,10 @@ body:not(.sidebar-mini-md):not(.sidebar-mini-xs):not(.layout-top-nav) .main-head
     border-bottom: none;
 }
 
-.extratech-logo {
+/* .extratech-logo {
     width: 200px;
     background: #fcfcfc;
-}
+} */
 
 .nav-link i {
     color: #fff;

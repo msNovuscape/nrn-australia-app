@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>ExtraTech</title>
+    <title>NRNA | Australia</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -28,7 +28,7 @@
     <div class="card card-outline card-primary">
         <div class="card-header text-center">
             <a href="" class="h1">
-                <img class="extratech-logo w-100" src="{{url(\App\Models\Setting::where('slug','logo')->first()->value ?? '')}}" alt="Insert Logo from Settings">
+                <img class="extratech-logo img-fluid" src="{{url(\App\Models\Setting::where('slug','logo')->first()->value ?? '')}}" alt="Insert Logo from Settings">
             </a>
         </div>
         <div class="card-body">
