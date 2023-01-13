@@ -5,7 +5,7 @@
     <section class="content p-0">
         <div class="container-fluid">
         @include('success.success')
-                        @include('errors.error')
+        @include('errors.error')
         {!! Form::open(['url' => '/admin/members/'.$member->id, 'class' => 'form-horizontal', 'method'=> 'POST','files' => true]) !!}
             @csrf
             <div class="row members-info-row">
@@ -474,7 +474,7 @@
                     </div>
                 </div>
             </div> 
-            {!! Form::close() !!}    
+        {!! Form::close() !!}    
         </div>
     </section>
 </div>
@@ -512,7 +512,7 @@
                 .then(function(){ 
                     $('#exampleModal2').modal('hide');
                     window.location = response.redirect_url;
-                })
+            })
         },
         error: function() {
             alert('Error');
