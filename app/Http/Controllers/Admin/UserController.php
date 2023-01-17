@@ -39,10 +39,13 @@ class UserController extends Controller
             'status' => 'required',
             'email' => 'required',
             'password' => 'required',
+            
             'role' => 'required',
+            'state' => 'required_if:role,==,3',
         ]);
         $request['is_admin'] = true;
         $password_without_hash = $request['password'];
+        $request['state_id'] = $request['state'] ?? null;
         $request['password'] = Hash::make($password_without_hash);
         $user = User::create($request->all());
         if($user){
@@ -78,10 +81,12 @@ class UserController extends Controller
                 'status' => 'required',
                 'email' => 'required',
                 'role' => 'required',
+                'state' => 'required_if:role,==,3',
         ]);
 
         $requestData = $request->all();
         $requestData['is_admin'] = true;
+        $requestData['state_id'] = $request['state'];
         $user = User::findorfail($id);
         $user->fill($requestData);
         $user->save();

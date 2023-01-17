@@ -32,9 +32,10 @@
                                 <div class="profile-icon mr-1">
                                     <img src="{{url('admin/images/pending-icon.png')}}" alt="">
                                 </div>
-                                @if(auth()->user()->hasRole('General Secretary') )
+                                @if(auth()->user()->hasRole('State Coordinator') )
                                 @php $status = config('custom.membership_status')[$member->document_status_id] ; @endphp
-                                @elseif(auth()->user()->hasRole('President'))
+                      
+                                @elseif(auth()->user()->hasRole('President') || auth()->user()->hasRole('General Secretary') )
                                 @php $status = config('custom.membership_status')[$member->president_status_id]; @endphp
                                 @else
 
@@ -161,25 +162,25 @@
                     </div>
                     <div class="d-flex">
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="membership_status_id" id="exampleRadios1" value=@role('Treasurer')'2'@endrole @role('General Secretary')'2'@endrole @role('President')'2'@endrole {{$status == 'Verified' ? 'checked' : ''}}>
+                            <input class="form-check-input" type="radio" name="membership_status_id" id="exampleRadios1" value=@role('Treasurer')'2'@endrole @role('State Coordinator')'2'@endrole @role('General Secretary')'2'@endrole @role('President')'2'@endrole {{$status == 'Verified' ? 'checked' : ''}}>
                             <label class="form-check-label" for="exampleRadios1">
                             {{$status == 'Verified' ? 'Verified' : 'Verify'}}
                             </label>
                         </div>
                         <div class="form-check mx-4">
-                            <input class="form-check-input" type="radio" name="membership_status_id" id="exampleRadios2" value=@role('Treasurer')'1'@endrole @role('General Secretary')'1'@endrole @role('President')'1'@endrole {{$status == 'Pending' ? 'checked' : ''}}>
+                            <input class="form-check-input" type="radio" name="membership_status_id" id="exampleRadios2" value=@role('Treasurer')'1'@endrole @role('State Coordinator')'1'@endrole @role('General Secretary')'1'@endrole @role('President')'1'@endrole {{$status == 'Pending' ? 'checked' : ''}}>
                             <label class="form-check-label" for="exampleRadios2">
                                 Pending
                             </label>
                         </div>
                         <div class="form-check mx-4">
-                            <input class="form-check-input" type="radio" name="membership_status_id" id="exampleRadios3" value=@role('Treasurer')'3'@endrole @role('General Secretary')'3'@endrole @role('President')'3'@endrole {{$status == 'Rejected' ? 'checked' : ''}}>
+                            <input class="form-check-input" type="radio" name="membership_status_id" id="exampleRadios3" value=@role('Treasurer')'3'@endrole @role('State Coordinator')'3'@endrole @role('General Secretary')'3'@endrole @role('President')'3'@endrole {{$status == 'Rejected' ? 'checked' : ''}}>
                             <label class="form-check-label" for="exampleRadios3">
                                 Rejected
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="membership_status_id" id="exampleRadios3" value=@role('Treasurer')'4'@endrole @role('General Secretary')'4'@endrole @role('President')'4'@endrole {{$status == 'Reapply' ? 'checked' : ''}}>
+                            <input class="form-check-input" type="radio" name="membership_status_id" id="exampleRadios3" value=@role('Treasurer')'4'@endrole @role('State Coordinator')'4'@endrole @role('President')'4'@endrole {{$status == 'Reapply' ? 'checked' : ''}}>
                             <label class="form-check-label" for="exampleRadios3">
                                 Reapply
                             </label>
@@ -189,17 +190,17 @@
                 <div class="col-md-6">
                     
                     <div class="row">
-                    @hasanyrole('General Secretary|President')
+                    @hasanyrole('State Coordinator|General Secretary|President')
                         <div class="col-md-12">
                             <div class="ml-1">
                                 <h3>Documents</h3>
                                 <h6>Documents submitted by members</h6>
                             </div>
                             @if($member->membership_status_id !== 2)
-                                @role('President')
+                            @role('President')
                                 <div class="verification-block mb-4">
                                         <div class="document-verify">
-                                            <h3>Verification By General Secretary</h3>
+                                            <h3>Verification By State Coordinator</h3>
                                         </div>
                                         <form class="gsForm" id="gs-form" action="" method="post">
                                             <input type="hidden" value="{{$member->id}}" name = "member_id"/>
@@ -293,7 +294,7 @@
                             </div>
                         </div>
                     @endhasanyrole   
-                    @hasanyrole('Treasurer|President')
+                    @hasanyrole('Treasurer|President|General Secretary')
                         <div class="col-md-12 mt-4">
                             <div class="ml-1">
                                 <h3>Payment Details</h3>

@@ -14,7 +14,8 @@ use App\Models\Member;
 class MemberReapply
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
+    public $member;
+    
     /**
      * Create a new event instance.
      *

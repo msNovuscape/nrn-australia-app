@@ -64,6 +64,7 @@ class MemberEloquent implements MemberRepository
             
             $attributes['image'] = $this->model->saveImage($attributes['image'],'profile_image');
             $attributes['payment_status_id'] = 1;
+            // $attributes['sc_status_id'] = null;
             $attributes['document_status_id'] = null;
             $attributes['president_status_id'] = null;
             $attributes['membership_status_id'] = 1;

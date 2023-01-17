@@ -31,7 +31,7 @@
                                 <div class="form-group">
 
                                     <label>Select Role <span style="color: red">*</span> </label>
-                                    <select name="role" class="form-control" id="role" required onchange="hideState(this.value)">
+                                    <select name="role" onchange = "hideState(this.value)" class="form-control" id="role" required onchange="hideState(this.value)">
                                         <option value="" selected disabled>Please select role for user</option>
                                         @foreach($roles as $val)
                                             <option value="{{$val['id']}}" @if(old('role') == $val['id']) selected @endif >{{$val['name']}}</option>
@@ -39,6 +39,18 @@
 
                                     </select>
                                 </div>
+                            </div>
+                            <div class="col-md-6" id = "state-div">
+                                        <div class="form-group">
+                                            <label>State</label>
+                                            <select name="state" class="form-control" id="type">
+                                                <option value="" selected disabled>Please select state</option>
+                                                @foreach(config('custom.states') as $in => $val)
+                                                    <option value="{{$in}}" @if(old('state') == $in) selected @endif>{{$val}}</option>
+                                                @endforeach
+
+                                            </select>
+                                        </div>
                             </div>
                             <div class="col-md-6" >
                                 <div class="form-group" >
@@ -68,7 +80,6 @@
                                         @foreach(config('custom.status') as $in => $val)
                                             <option value="{{$in}}" @if(old('status') == $in) selected @endif >{{$val}}</option>
                                         @endforeach
-
                                     </select>
                                 </div>
                             </div>
@@ -101,12 +112,13 @@
                 .catch( error => {
                     // console.error( error );
                 } );
-
-                function hideState(team_type){
-                    if(team_type == 1){
-                        $('#state-div').hide();
-                    }else{
+                $('#state-div').hide();
+                function hideState(role){
+                    
+                    if(role == 3){
                         $('#state-div').show();
+                    }else{
+                        $('#state-div').hide();
                     }
                 }
 

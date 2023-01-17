@@ -27,7 +27,7 @@ class EventServiceProvider extends ServiceProvider
         'App\Events\MemberRejected' => [
             'App\Listeners\SendMemberRejectedNotification',
         ],
-        'App\Events\MemberReappply' => [
+        'App\Events\MemberReapply' => [
             'App\Listeners\SendMemberReapplyNotification',
         ],
         'App\Events\UserRegistered' => [

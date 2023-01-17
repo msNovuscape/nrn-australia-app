@@ -21,9 +21,9 @@
             <ul class="navbar-nav d-flex align-items-center">
                 <li class="dropdown-export-menu">
                     <div class="dropdown">
-                        <a class="btn dropdown-toggle"  href="#" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <!-- <a class="btn dropdown-toggle"  href="#" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img src="{{url('admin/images/bell-icon.png')}}" alt="image-notification">
-                        </a>
+                        </a> -->
                         <!-- <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <a class="dropdown-item" href="#">Notification 1</a>
                             <a class="dropdown-item" href="#">Notification 2</a>
@@ -33,9 +33,9 @@
                 </li>
                 <li class="nav-profile d-flex dropdown-export-menu mx-3">
                     <a class="d-flex" href="#">
-                        <div class="nav-profile-img">
+                        <!-- <div class="nav-profile-img">
                             <img src="{{url('frontend/')}}/profile.jpg" alt="image">
-                        </div>
+                        </div> -->
                         <div class="nav-profile-text">
                             <p class="mb-1">{{auth()->user()->full_name}}</p>
                         </div>

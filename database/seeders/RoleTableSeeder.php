@@ -17,6 +17,7 @@ class RoleTableSeeder extends Seeder
     {
         $superAdminRole = Role::create(['name' => 'Super Admin']);
         $financeRole = Role::create(['name' => 'Treasurer']);
+        $financeRole = Role::create(['name' => 'State Coordinator']);
         $financeRole = Role::create(['name' => 'General Secretary']);
         $financeRole = Role::create(['name' => 'President']);
 

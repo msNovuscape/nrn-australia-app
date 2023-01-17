@@ -40,6 +40,19 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="col-md-6" id = "state-div">
+                                <div class="form-group">
+                                    <label>State <span style="color: red">*</span> </label>
+                                    <select name="state" class="form-control" id="type" required>
+                                        <option value="" selected disabled>Please select state</option>
+                                        @foreach(config('custom.states') as $in => $val)
+                                            <option value="{{$in}}" @if($user->state_id == $in) selected @endif>{{$val}}</option>
+                                        @endforeach
+
+                                    </select>
+                                </div>
+                            </div>
+
                             <div class="col-md-6" >
                                 <div class="form-group" >
                                     <label class="w-100">Name <span style="color: red";> * </span></label>
@@ -99,16 +112,15 @@
 ClassicEditor
                 .create( document.querySelector( '#body1' ) )
             
-                function hideState(team_type){
-                    if(team_type == 1){
-                        $('#state-div').hide();
-                    }else{
+                function hideState(role){
+                    if(role == 3){
                         $('#state-div').show();
+                    }else{
+                        $('#state-div').hide();
                     }
                 }
-
                 document.addEventListener( 'DOMContentLoaded', function() {
-                    if($('#type').val() == 1){
+                    if($('#role').val() != 3){
                         $('#state-div').hide();
                     }
                 } );

@@ -24,15 +24,28 @@ class MemberController extends Controller
     {
         $roleName = auth()->user()->roles->first()->name;
         $membership_status_config = ucfirst($membership_status);
-        if($roleName == 'General Secretary'){
+        if($roleName == 'State Coordinator'){
+            $state_id = auth()->user()->state_id;
+            $index = array_search($membership_status_config,config('custom.membership_status'));
+            $setting = Member::orderBy('id','desc')->where([
+                'state_id' => $state_id,
+                'payment_status_id' => array_search('Verified',config('custom.membership_status')),
+                'document_status_id' =>  $index
+            ]);
+        }
+
+        elseif($roleName == 'General Secretary'){
             $index = array_search($membership_status_config,config('custom.membership_status'));
             
             $setting = Member::orderBy('id','desc')->where([
                 'payment_status_id' => array_search('Verified',config('custom.membership_status')),
-                'document_status_id' =>  $index
+                'document_status_id' =>  array_search('Verified',config('custom.membership_status')),
+                'president_status_id' => $index,
+                'membership_status_id' => $index
                  ]);
         }
         elseif($roleName == 'President'){
+
             $index = array_search($membership_status_config,config('custom.membership_status'));
             $setting = Member::orderBy('id','desc')->where([
                 'payment_status_id' => array_search('Verified',config('custom.membership_status')),
@@ -41,6 +54,7 @@ class MemberController extends Controller
                  'membership_status_id' => $index
                  ]);
         }else{
+
             $index = array_search($membership_status_config,config('custom.payment_status'));
             
             $setting = Member::orderBy('id','desc')->where([
@@ -69,7 +83,6 @@ class MemberController extends Controller
             $key = \request('state_id');
             $settings = $setting->where('state_id',$key);
         }
-        
         $membership_types = MembershipType::where('status',1)->get();
         $settings = $setting->paginate($per_page);
         return view($this->view.'index',compact('settings','membership_types','membership_status'));
@@ -275,7 +288,6 @@ class MemberController extends Controller
             // });
         }
         if($roleName == 'Treasurer'){
-
             $setting->payment_status_id = $status;
 
             if($status == 2){
@@ -285,17 +297,27 @@ class MemberController extends Controller
             }
             
         }
-        if($roleName == 'General Secretary'){
-
+        if($roleName == 'State Coordinator'){
             $setting->document_status_id = $status;
 
             if($status == 2){
                 $setting->president_status_id = 1;
+                // $setting->gs_status_id = 1;
                 $setting->comment_for_general_secretary = null;
             }
+            
         }
-        if($roleName == 'President'){
+        // if($roleName == 'General Secretary'){
 
+            // $setting->gs_status_id = $status;
+
+            // if($status == 2){
+            //     $setting->president_status_id = 2;
+            //     // $setting->membership_status_id = 2;
+            //     $setting->comment_for_general_secretary = null;
+            // }
+        // }
+        if($roleName == 'President' || $roleName == 'General Secretary'){
                 $previous_status = $setting->president_status_id;
                 // $previous_image = $setting->image;
                 $setting->president_status_id = $status; 
@@ -316,8 +338,9 @@ class MemberController extends Controller
                         $setting->membership_expiry_date = $dt->addYears($year);
                     }
                     $setting->membership_status_id = 2;
+                    event(new MemberVerified($setting));
                     // dispatch(function() use ($setting) {
-                      event(new MemberVerified($setting));
+                      
                     // });
                 }
                 if($status == 1){
@@ -376,7 +399,7 @@ class MemberController extends Controller
         if(!is_null($document_status_id) && $document_status_id == 1){
             $member->document_status_id = 1;
             $member->comment_for_general_secretary = $request['comment_for_general_secretary'];
-            $msg = 'Verification status from General Secretary changed to pending.';
+            $msg = 'Verification status from State Coordinator changed to pending.';
         }
 
         if(!is_null($payment_status_id) && $payment_status_id == 1){
