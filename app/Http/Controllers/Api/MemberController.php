@@ -54,8 +54,8 @@ class MemberController extends ApiBaseController
     $requestBody['user_id'] = $userId;
     $data = $this->member->store($requestBody);
     $data['device_token'] = $device_token;
-    
     event(new MemberCreated($data));
+    
     return $this->sendResponse($data,'Member Registered Successfully');
     
    }

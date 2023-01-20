@@ -33,7 +33,7 @@ class SendMemberRegisteredNotification
      */
     public function handle(MemberCreated $event)
     {
-        // dispatch(function() use ($event) {
+        dispatch(function() use ($event) {
 
               $user_id =  $event->member->user_id;
               $user = User::find($user_id);
@@ -112,7 +112,7 @@ class SendMemberRegisteredNotification
                 'msg' => 'Failed to get fcm access token',
             ],401);
         }
-        // });
+    });
 
        
     }

@@ -9,9 +9,10 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use App\Models\Member;
 
-class MemberVerified
+class MemberVerified implements ShouldQueue
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 

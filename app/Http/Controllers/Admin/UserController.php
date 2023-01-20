@@ -48,6 +48,7 @@ class UserController extends Controller
         $request['state_id'] = $request['state'] ?? null;
         $request['password'] = Hash::make($password_without_hash);
         $user = User::create($request->all());
+        
         if($user){
             $email_data = array(
                 'name' => $user['full_name'],
