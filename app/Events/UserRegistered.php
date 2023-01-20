@@ -25,6 +25,7 @@ class UserRegistered implements ShouldQueue
     {
         
         $this->user = $user;
+        
     }
 
     /**

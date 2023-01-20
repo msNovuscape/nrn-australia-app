@@ -55,9 +55,9 @@ class RegisterEloquent implements RegisterRepository
         $user = $this->model->updateOrCreate(['id' => $userId], $attributes);
         
         if ($user) {
-            // dispatch(function() use ($user) {
+             dispatch(function() use ($user) {
              event(new UserRegistered($user));
-            // });
+             });
             return $user;
         }
         return false;   
