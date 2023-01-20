@@ -33,9 +33,9 @@
                 </li>
                 <li class="nav-profile d-flex dropdown-export-menu mx-3">
                     <a class="d-flex" href="#">
-                        <!-- <div class="nav-profile-img">
-                            <img src="{{url('frontend/')}}/profile.jpg" alt="image">
-                        </div> -->
+                        <div class="nav-profile-img">
+                            <img src="{{url('admin/images/image-profile.png')}}" alt="image">
+                        </div>
                         <div class="nav-profile-text">
                             <p class="mb-1">{{auth()->user()->full_name}}</p>
                         </div>
@@ -227,7 +227,8 @@
                             </p>
                         </a>
                     </li>
-
+                    @if(auth()->user()->hasRole('Super Admin'))
+                    @else
                     <li class="nav-item sidebar-nav-item" >
                         <a href="#" class="nav-link {{(Request::segment(2) == 'members') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100" id="mySettingsBtn" onclick=iconClick()>
                             <i class="fas fa-users pl-4" aria-hidden="true"></i>
@@ -248,6 +249,7 @@
                             </p>
                         </a>
                     </li>
+                    @endif
 
                     
 
