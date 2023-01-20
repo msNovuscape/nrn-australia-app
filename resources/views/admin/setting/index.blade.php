@@ -71,7 +71,7 @@
                                             @if($setting->type == array_search('Image',config('custom.setting_types')))
                                                 <td>
                                                     <a href="{{url($setting->value)}}" target="_blank">
-                                                        <img src="{{url($setting->value)}}" alt="">
+                                                        <img src="{{url($setting->value)}}" class = "img-fluid" alt="">
                                                     </a>
                                                 </td>
                                             @else
