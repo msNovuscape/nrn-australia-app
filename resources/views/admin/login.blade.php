@@ -57,12 +57,12 @@
                 </div>
                 <div class="row mt-4">
                     <div class="col-8">
-                        <div class="icheck-primary">
-                            <input type="checkbox" id="remember">
+                        <a href="{{route('admin.forget_password')}}">
+                            <!-- <input type="checkbox" id="remember"> -->
                             <label for="remember">
-                                Remember Me
+                                Forget Password?
                             </label>
-                        </div>
+                        </a>
                     </div>
                     <!-- /.col -->
                     <div class="col-4">

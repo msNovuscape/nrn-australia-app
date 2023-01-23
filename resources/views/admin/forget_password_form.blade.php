@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>NRNA Admin | Reset Password Form</title>
+    <title>NRNA Admin | Forget Password</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -32,34 +32,42 @@
             </a>
         </div>
         <div class="card-body">
-            <p class="login-box-msg">Password reset form</p>
+            <p class="login-box-msg">Enter your registered email. A password reset link will be sent to your registered email.</p>
 
             @include('errors.error')
             @include('success.success')
-            <form action="{{url('reset-password')}}" style = "align:center" method="post">
-                            @csrf
-                            <div class="ps-form--review" >
-                                <h2 class="ps-form__title">Reset Password</h2>
-                                <div class="flash-message">
-                                @include('success.success')
-                               @include('errors.error')
-                                        </div>
-                                <div class="ps-form__group" >
-                                    <label class="ps-form__label">New password *</label>
-                                    <input class="form-control ps-form__input" type="password" name = 'password' required>
-                                </div>
-                                <div class="ps-form__group" >
-                                    <label class="ps-form__label">Confirm New password *</label>
-                                    <input class="form-control ps-form__input" type="password" name = 'password_confirmation' required>
-                                </div>
-                                <input type = "hidden" name = "token" value = "{{$token}}">
-                                <input type = "hidden" name = "email" value = "{{$email}}">
-                                
-                                <div class="ps-form__submit">
-                                    <button class="ps-btn ps-btn--lblue btn btn-create btn-block">Submit</button>
-                                </div>
-                            </div>
-                    </form>
+            <form method="POST" action="{{ route('admin.send_reset_link') }}">
+                @csrf
+                <div class="input-group mb-3 login-icon">
+                    <input type="email" name="email" class="form-control" placeholder="Email" required>
+                    <div class="input-group-append">
+                        <div class="input-group-text ">
+                            <span class="fas fa-envelope"></span>
+                        </div>
+                    </div>
+
+                </div>
+              
+                <div class="row mt-4">
+                
+                    <!-- /.col -->
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-create btn-block">Submit</button>
+                    </div>
+
+                    <div class="col-6">
+                        <a href="{{route('login')}}">
+                            <!-- <input type="checkbox" id="remember"> -->
+                            <label for="remember">
+                                Proceed to login
+                            </label>
+                        </a>
+                    </div>
+
+                    
+                    <!-- /.col -->
+                </div>
+            </form>
 
 
         </div>

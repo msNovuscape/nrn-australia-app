@@ -62,7 +62,6 @@
                                     </thead>
                                     <tbody>
                                     @foreach($settings as $setting)
-
                                         <tr>
                                             <th scope="row">{{$loop->iteration}}</th>
                                             <td class="text-center">{{$setting->key}}</td>

@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\DesignationController;
 use App\Http\Controllers\Admin\TeamPeriodController;
 use App\Http\Controllers\Admin\TeamController;
 use App\Http\Controllers\Admin\UserController;
+use App\Http\Controllers\Admin\ForgetPasswordController;
 use App\Http\Controllers\ResetPasswordController;
 
 
@@ -40,6 +41,9 @@ Route::get('mycron', [HomeAdminController::class,'mycron'])->name('mycron');
 
 Route::get('login', [HomeAdminController::class,'getLogin'])->name('login');
 Route::post('login', [HomeAdminController::class,'postLogin']);
+
+Route::get('admin/forget_password',[ForgetPasswordController::class, 'forget_password'])->name('admin.forget_password');
+Route::post('admin/forget_password',[ForgetPasswordController::class, 'send_reset_link'])->name('admin.send_reset_link');
 
 Route::get('reset-password/{token}/{email}',[ResetPasswordController::class, 'reset_form'])->name('password.reset');
 Route::post('reset-password',[ResetPasswordController::class, 'reset_password']);

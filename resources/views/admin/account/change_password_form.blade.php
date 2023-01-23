@@ -59,7 +59,12 @@
                                 </div>
                             </div>
                         </div>
-
+                        <a href="{{route('admin.forget_password')}}">
+                            <!-- <input type="checkbox" id="remember"> -->
+                            <label for="remember">
+                                Forget Password?
+                            </label>
+                        </a>
                         <div class="row create-button">
                             <div class="col-sm-10 col-md-12">
                                 <button type="submit" class="btn btn-create">Create</button>
