@@ -2,6 +2,9 @@
 @section('content')
 
 <div class="content-wrapper p-4 content-wrapper-mi">
+    {{--start loader--}}
+    <div class="loader loader-default" id="loader"></div>
+    {{--end loader--}}
     <div class="d-flex justify-content-end">
         <img src="{{url('admin/images/edit-icon.png')}}" href="{{url('admin/members/edit/'.$member->id)}}" alt="">
     </div>
@@ -34,7 +37,7 @@
                                 </div>
                                 @if(auth()->user()->hasRole('State Coordinator') )
                                 @php $status = config('custom.membership_status')[$member->document_status_id] ; @endphp
-                      
+
                                 @elseif(auth()->user()->hasRole('President') || auth()->user()->hasRole('General Secretary') )
                                 @php $status = config('custom.membership_status')[$member->president_status_id]; @endphp
                                 @else
@@ -188,7 +191,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    
+
                     <div class="row">
                     @hasanyrole('State Coordinator|General Secretary|President')
                         <div class="col-md-12">
@@ -239,7 +242,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                        </form>    
+                                        </form>
 
                                         <!-- End of Comment Modal -->
                                 </div>
@@ -290,10 +293,10 @@
                                         @endif
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
-                    @endhasanyrole   
+                    @endhasanyrole
                     @hasanyrole('Treasurer|President|General Secretary')
                         <div class="col-md-12 mt-4">
                             <div class="ml-1">
@@ -343,7 +346,7 @@
                                                     </div>
                                             </div>
                                         </div>
-                                    </form>    
+                                    </form>
 
                                     <!-- End of Comment Modal -->
                             </div>
@@ -398,7 +401,7 @@
                                 </div>
                             </div>
                         </div>
-                    @endhasanyrole    
+                    @endhasanyrole
                     </div>
                 </div>
             </div>
@@ -424,6 +427,7 @@ $('input[type=radio][name=membership_status_id]').change(function() {
     var membership_status_id = this.value;
     var id = "<?php echo $member->id; ?>";
     if (isOk) {
+        start_loader();
         $.ajax({
          url: "/admin/members/update_status/finance",
          type: "POST",
@@ -447,21 +451,22 @@ $('input[type=radio][name=membership_status_id]').change(function() {
                 // if(response.membership_status_id == 4){
                 //     element.innerHTML = 'Reapply';
                 // }
+                end_loader();
                 Swal.fire({
                     title: 'Success!!',
                     text: (response.msg),
                     icon: 'success'
                 })
-                .then(function(){ 
+                .then(function(){
    location.reload();
    })
                 // location.reload();
          }
 
 
-         
-       })  ;  
-     }    
+
+       })  ;
+     }
 });
 
 $('#treasurer-form-submit').on('click', function(e) {
@@ -476,7 +481,7 @@ $('#treasurer-form-submit').on('click', function(e) {
                     text: (response.msg),
                     icon: 'success'
                 })
-                .then(function(){ 
+                .then(function(){
                     $('#exampleModal2').modal('hide');
                     window.location = response.redirect_url;
                 })
@@ -500,7 +505,7 @@ $('#gs-form-submit').on('click', function(e) {
                     text: (response.msg),
                     icon: 'success'
                 })
-                .then(function(){ 
+                .then(function(){
                     $('#exampleModal').modal('hide');
                     window.location = response.redirect_url;
                 })
