@@ -37,12 +37,12 @@
             'url': '{{url("")}}'
         }
     </script>
-    
+
 
 @yield('style')
 </head>
 <body class="hold-transition sidebar-mini layout-fixed">
-    
+
 
 @include('admin.layouts.menubar')
 @yield('content')
@@ -61,6 +61,7 @@
 {!! Html::script('admin/plugins/summernote/summernote-bs4.min.js') !!}
 {!! Html::script('admin/dist/js/adminlte.js') !!}
 {!! Html::script('admin/dist/js/demo.js') !!}
+
 
 <!-- for multiselect -->
 {!! Html::script('plugins/multiple-select-1.5.2/dist/multiple-select.min.js') !!}
