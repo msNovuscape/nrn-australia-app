@@ -48,7 +48,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label> Excerpt <span style="color: red";> * </span></label>
-                                    <input type="text" class="form-control"   name="excerpt" value="{{old('excerpt')}}">
+                                    <textarea class="form-control" name="excerpt" rows="4" value="{{old('excerpt')}}"></textarea>
                                 </div>
                             </div>
                             <!-- <div class="col-md-6">
@@ -101,7 +101,7 @@
                             </div>
                         </div>
                         {!! Form::close() !!}
-                        
+
                     </div>
                 </div>
             </div>
