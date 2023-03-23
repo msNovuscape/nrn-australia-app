@@ -1,7 +1,7 @@
 @extends('admin.layouts.app')
 @section('content')
 
-  
+
     <div class="main-panel">
         <div class="content-wrapper content-wrapper-bg">
             <div class="row">
@@ -15,7 +15,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="col-md-12 filter-btnwrap mt-4">
                         @include('success.success')
                                 @include('errors.error')
@@ -49,7 +49,7 @@
                                                     <i class="fas fa-sort-down"></i>
                                                 </span>
                                             </div>
-                                        </div> 
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-md-3 w-100">
@@ -73,11 +73,11 @@
                                                     <i class="fas fa-sort-down"></i>
                                                 </span>
                                             </div>
-                                        </div> 
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- <div class="col-md-1 d-flex">
-       
+
                                     <div class="d-flex align-items-center">
                                         <p class="m-0">
                                             Show
@@ -117,11 +117,11 @@
                                                             Export.csv
                                                         </a>
                                                     </li>
-                                                    <li>
+                                                    {{-- <li>
                                                         <a href="#">
                                                             Export.pdf
                                                         </a>
-                                                    </li>
+                                                    </li> --}}
                                                 </ul>
                                             </div>
                                         </div>
@@ -213,7 +213,7 @@
                                                             </tr>
                                                             @endforelse
                                                             <!-- <tr>
-                                                              
+
                                                                 <td class="pl-2">2</td>
                                                                 <td class="d-flex">
                                                                     <img src="{{url('admin/images/image-profile.png')}}" alt="">
@@ -247,7 +247,7 @@
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                              
+
                                                                 <td class="pl-2">3</td>
                                                                 <td class="d-flex">
                                                                     <img src="{{url('admin/images/image-profile.png')}}" alt="">
@@ -282,6 +282,9 @@
                                                             </tr> -->
                                                         </tbody>
                                                     </table>
+                                                    <div style="margin-top: 10px;">
+                                                        {!! $settings->links() !!}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -301,7 +304,7 @@
     <script>
         function submitFilter(){
 
-        
+
         var state = document.getElementById("state");
         var state_id = state.value ;
 

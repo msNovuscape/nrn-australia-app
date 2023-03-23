@@ -4,6 +4,9 @@
 @endsection
 @section('content')
     <div class="content-wrapper">
+        @if(auth()->user()->hasRole('Super Admin'))
+    </br>
+        @else
         <section class="content-header p-4">
             <div class="container-fluid">
                 <div class="row mb-2">
@@ -17,6 +20,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="row g-4">
                     <div class="col-md-3">
 
@@ -88,8 +92,10 @@
                         </div>
                     </div>
                 </div>
+
             </div>
         </section>
+        @endif
         <!-- <section class="content-team p-4">
             <div class="team-header">
                 <div class="team-desc">
@@ -229,7 +235,7 @@
                                 </div>
                             </a>
                             @endforeach
-                       
+
                         </div>
                     </div>
                 </div>
