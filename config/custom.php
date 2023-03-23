@@ -69,7 +69,7 @@ return [
         '6' => 'Northern Territory',
         '7' => 'Australian Capital Territory',
         '8' => 'New South Wales'
-        
+
     ],
     'countries' =>[
         '1'=> 'Australia',
@@ -161,6 +161,6 @@ return [
 
     'file_dir'=>'storage_new',
     'domain_suffix' =>'np',
-    'per_page' =>10,
+    'per_page' =>20,
     'firebase_api_key' => 'AIzaSyDmFDHzCunGxo2IB8v00i0QmOlDs60-Y64',
 ];

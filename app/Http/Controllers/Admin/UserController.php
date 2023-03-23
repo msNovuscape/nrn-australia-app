@@ -39,7 +39,7 @@ class UserController extends Controller
             'status' => 'required',
             'email' => 'required',
             'password' => 'required',
-            
+
             'role' => 'required',
             'state' => 'required_if:role,==,3',
         ]);
@@ -48,7 +48,7 @@ class UserController extends Controller
         $request['state_id'] = $request['state'] ?? null;
         $request['password'] = Hash::make($password_without_hash);
         $user = User::create($request->all());
-        
+
         if($user){
             $email_data = array(
                 'name' => $user['full_name'],
@@ -97,7 +97,7 @@ class UserController extends Controller
 
         Session::flash('success','User successfully updated.');
         return redirect($this->redirect);
-        
+
 
 
     }
