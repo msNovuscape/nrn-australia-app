@@ -19,12 +19,12 @@ class MemberController extends ApiBaseController
 
     public function __construct(MemberRepository $member)
     {
-       
+
         $this->member = $member;
         try{
             $this->user = JWTAuth::parseToken()->authenticate();
-            
-          
+
+
            }catch (Exception $e) {
                if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){
                    return response()->json(['status' => 'Token is Invalid'],401);
@@ -36,17 +36,17 @@ class MemberController extends ApiBaseController
            }
     }
    public function store(CreateMemberRequest $request){
-   
 
-    // GET user token    
-   
+
+    // GET user token
+
     $currentUser = JWTAuth::parseToken()->authenticate();
- //get device token
+    //get device token
    $new_device_token = $request->header('device-token');
    $device_token = $new_device_token ?? $currentUser['device_token'];
     // Get user id
     $userId = $currentUser['id'];
-    
+
     // Get request body
     $requestBody = $request->all();
 
@@ -55,27 +55,27 @@ class MemberController extends ApiBaseController
     $data = $this->member->store($requestBody);
     $data['device_token'] = $device_token;
     event(new MemberCreated($data));
-    
+
     return $this->sendResponse($data,'Member Registered Successfully');
-    
+
    }
 
 //    public function reapply(){
-    
+
 
 //    }
 
    public function index(){
-    // GET user token    
-    
+    // GET user token
+
     $currentUser = JWTAuth::parseToken()->authenticate();
-   
+
     // Get user id
     $userId = $currentUser['id'];
 
     // Find member using user id
     $member = Member::where('user_id', $userId)->first();
-    
+
 
     if(is_null($member) || empty($member) ){
         return response()->json(null, 404);
@@ -86,7 +86,7 @@ class MemberController extends ApiBaseController
         $member['membership_type_name'] = $member->membership_type->name;
         $memberDocument = $member->member_document;
         $memberPayment = $member->member_payment;
-        
+
         $member['identification_image'] = url($memberDocument['identification_image']);
         $member['identification_expiry_date'] = $memberDocument['identification_expiry_date'];
         $member['proof_of_residency_image'] = url($memberDocument['proof_of_residency_image']);
@@ -118,10 +118,10 @@ class MemberController extends ApiBaseController
 
    public function member_config(){
 
-        
+
         $eligibility_types = EligibilityType::where('status',1)->get();
         $membership_types = MembershipType::where('status',1)->get();
-  
+
         foreach($membership_types as $membership_type){
         $eligibilities = [];
             $eligibilitess = $membership_type->eligibility_types;
@@ -135,7 +135,7 @@ class MemberController extends ApiBaseController
 
    }
 
-   
 
-   
+
+
 }
