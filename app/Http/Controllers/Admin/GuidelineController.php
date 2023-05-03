@@ -35,19 +35,19 @@ class GuidelineController extends Controller
 
     public function create()
     {
-        
+
         return view($this->view . 'create');
     }
 
     public function store(Request $request)
-    {       
+    {
             $this->validate(\request(), [
                 'title' => 'required',
                 'description' => 'required',
                 'status' => 'required',
             ]);
         $requestData = $request->all();
-        $requestData['description'] = strip_tags($request['description']);
+        $requestData['description'] = $request['description'];
         $setting = Guideline::create($requestData);
         Session::flash('success','Guideline successfully created');
         return redirect($this->redirect);
@@ -68,21 +68,21 @@ class GuidelineController extends Controller
 
 //        dd(\request()->all());
         $setting =Guideline::findorfail($id);
-        
+
         $this->validate(\request(), [
             'title' => 'required',
             'description' => 'required',
             'status' => 'required',
         ]);
 
-        
+
 
 
         $requestData = $request->all();
-        $requestData['description'] = strip_tags($request['description']);
+        $requestData['description'] = $request['description'];
         $setting->fill($requestData);
         $setting->save();
-        
+
         Session::flash('success','Guideline succesffuly edited.');
         return redirect($this->redirect);
 
@@ -90,11 +90,11 @@ class GuidelineController extends Controller
 
     public function delete($id){
         $setting=Guideline::findorfail($id);
-        
+
         if($setting->delete()){
             Session::flash('success','Guideline is deleted !');
             return redirect($this->redirect);
         }
-        
+
     }
 }
