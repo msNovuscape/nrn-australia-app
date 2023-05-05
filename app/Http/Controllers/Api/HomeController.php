@@ -65,7 +65,7 @@ class HomeController extends ApiBaseController
         $news = News::where('status',1)->get();
         $notice = Notice::where('status',1)->get();
         $settings = Setting::where('status',1)->get();
-        $sliders = Slider::where('status',1)->orderBy('order','asc')->get();
+        // $sliders = Slider::where('status',1)->orderBy('order','asc')->get();
 
 
         return response()->json([
