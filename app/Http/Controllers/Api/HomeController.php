@@ -71,9 +71,9 @@ class HomeController extends ApiBaseController
         return response()->json([
                 // 'sliders' => SliderResource::collection($sliders),
                 'sliders' => [
-                    url('/Carousal.png'),
-                    url('/Carousal1.png'),
-                    url('/Carousal2.png'),
+                    url('/carousel1.png'),
+                    url('/carousel2.png'),
+                    url('/carousel3.png'),
                     ],
                 'news' => NewsResource::collection($news),
                 'notices' => null,
