@@ -196,7 +196,7 @@
                                 @foreach($news->where('type','!=',1)->take(2) as $single_news)
                                 <a href="/" class="news-right-primary">
                                     <div class="news-right-img">
-                                        <img src="{{url($single_news->image)}}" class="w-100"/>
+                                        <img src="{{url($single_news->image ?? '')}}" class="w-100"/>
                                     </div>
                                     <p>{{$single_news->title}}</p>
                                 </a>
@@ -220,7 +220,7 @@
                             @foreach($notices as $notice)
                             <a href="/" class="notice-card">
                                 <div class="notice-img">
-                                    <img src="{{url($notice->image)}}" class="w-100"/>
+                                    <img src="{{url($notice->image ?? '')}}" class="w-100"/>
                                 </div>
                                 <div class="notice-card-title">
                                     <h2>Cultural Parade - Nepal Festival Brisbane 2018</h2>

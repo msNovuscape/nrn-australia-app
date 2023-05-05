@@ -65,5 +65,6 @@ Route::group(['namespace' => 'Api' ,'prefix' => 'v1','middleware' => ['jwt.verif
     Route::get('/guidelines', [GuidelineController::class, 'index']);
     Route::get('/document', [DocumentController::class, 'index']);
     Route::get('/team', [TeamController::class, 'index']);
+    Route::post('user-delete', [HomeController::class, 'userDelete']);
 
 });

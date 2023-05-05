@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\AccountController;
 use App\Http\Controllers\Admin\GalleryController;
 use App\Http\Controllers\Admin\NoticeController;
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\GuidelineController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\DocumentCategoryController;
@@ -52,7 +53,7 @@ Route::get('/images/{d_name}/{year}/{month}/{date}/{file_name}',[HomeAdminContro
 Route::group(['middleware'=>['auth']],function (){
     //routes for admin
     Route::group(['prefix'=>'admin','middleware' => ['auth']],function (){
-        
+
         Route::get('/index', [HomeAdminController::class,'indexAdmin']);
         Route::get('logout', [HomeAdminController::class,'getLogout']);
 
@@ -73,6 +74,14 @@ Route::group(['middleware'=>['auth']],function (){
         Route::get('settings/{id}/edit',[SettingController::class,'edit']);
         Route::post('settings/{id}',[SettingController::class,'update']);
         Route::get('settings/{id}/delete',[SettingController::class,'delete']);
+
+        Route::get('sliders',[SliderController::class,'index']);
+        Route::get('sliders/create',[SliderController::class,'create']);
+        Route::post('sliders',[SliderController::class,'store']);
+        Route::get('sliders/{id}',[SliderController::class,'show']);
+        Route::get('sliders/{id}/edit',[SliderController::class,'edit']);
+        Route::post('sliders/{id}',[SliderController::class,'update']);
+        Route::get('sliders/{id}/delete',[SliderController::class,'delete']);
 
         Route::get('news',[NewsAndUpdateController::class,'index']);
         Route::get('news/create',[NewsAndUpdateController::class,'create']);

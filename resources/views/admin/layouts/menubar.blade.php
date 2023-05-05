@@ -79,7 +79,7 @@
                     <p>Non-Resident Nepali Association</p>
                 </span>
             </div>
-            
+
         </a>
 
         <!-- Sidebar -->
@@ -112,6 +112,17 @@
                         </a>
                     </li>
 
+                    <li class="nav-item sidebar-nav-item">
+                        <a href="{{url('admin/sliders')}}" class="nav-link {{(Request::segment(2) == 'sliders') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
+                            <i class="fa fa-cog pl-4" aria-hidden="true"></i>
+                            <p id="accordion">
+                                <button class="btn btn-link p-2 w-80">
+                                 Sliders
+                                </button>
+                            </p>
+                        </a>
+                    </li>
+
                     <!-- <li class="nav-item">
                         <a href="{{url('admin/sliders')}}" class="nav-link {{(Request::segment(2) == 'sliders') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
                             <i class="fas fa-sliders-h pl-4" aria-hidden="true"></i>
@@ -134,7 +145,7 @@
                             </p>
                         </a>
                     </li>
-                
+
                     <li class="nav-item sidebar-nav-item">
                         <a href="{{url('admin/membership_types')}}" class="nav-link {{(Request::segment(2) == 'membership_types') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
                             <i class="fas fa-user-tag pl-4" aria-hidden="true"></i>
@@ -251,7 +262,7 @@
                     </li>
                     @endif
 
-                    
+
 
                     <li class="nav-item sidebar-nav-item">
                         <a href="{{url('admin/period')}}" class="nav-link {{(Request::segment(2) == 'period') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
@@ -313,7 +324,7 @@
                         <a href="{{url('admin/team_period')}}" class="nav-link {{(Request::segment(2) == 'team_period') ? 'active' : ''}} p-3 mb-0 sidebar-nav-link w-100">
                             <i class="fas fa-newspaper pl-4" aria-hidden="true"></i>
                             <p id="accordion">
-                                
+
                                 <button class="btn btn-link p-2 w-80">
                                     Team Period
                                 </button>
@@ -455,7 +466,7 @@
                                 </div>
                         </div>
                     </li> -->
-<!-- 
+<!--
                     <li class="nav-item nav-item-dropdown">
                         <div class="accordion" id="accordionExample">
                             <div class="card acc-card">
@@ -521,7 +532,7 @@
                             </p>
                         </a>
                     </li> -->
-                    
+
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->
@@ -537,7 +548,7 @@
         });
         function iconClick() {
             console.log('click')
-             var x = document.getElementById('icon-toggle-settings');    
+             var x = document.getElementById('icon-toggle-settings');
             x.classList.toggle("fa-angle-right");
         }
     </script>
@@ -553,7 +564,7 @@
 <!-- ./wrapper -->
 
 
-    
+
 
 
 

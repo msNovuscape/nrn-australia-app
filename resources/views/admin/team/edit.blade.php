@@ -27,7 +27,7 @@
                         @include('errors.error')
                         {!! Form::open(['url' => '/admin/team/'.$team->id, 'class' => 'form-horizontal', 'method'=> 'POST','files' => true]) !!}
                         <div class="row">
-                        <div class="col-md-6">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Select Type <span style="color: red">*</span> </label>
                                     <select name="team_type" class="form-control" id="type" onchange="hideState(this.value)" required>
@@ -106,7 +106,7 @@
                             </div>
 
                         </div>
-                        
+
                         <div class="form-group row create-button">
                             <div class="col-sm-10 col-md-12">
                                 <button type="submit" class="btn btn-primary">Update</button>
@@ -123,7 +123,7 @@
     <script>
 ClassicEditor
                 .create( document.querySelector( '#body1' ) )
-            
+
                 function hideState(team_type){
                     if(team_type == 1){
                         $('#state-div').hide();
@@ -142,7 +142,7 @@ ClassicEditor
 
 
 
-       
+
 
     </script>
 @endsection

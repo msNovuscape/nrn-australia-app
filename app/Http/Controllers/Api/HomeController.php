@@ -6,8 +6,11 @@ use App\Http\Controllers\ApiBaseController;
 use App\Http\Resources\NewsResource;
 use App\Http\Resources\NoticeResource;
 use App\Http\Resources\SettingResource;
+use App\Http\Resources\SliderResource;
+use App\Models\DailyCount;
 use App\Models\News;
 use App\Models\Notice;
+use App\Models\Slider;
 use Illuminate\Http\Request;
 use App\Repositories\Login\LoginRepository;
 use Illuminate\Support\Facades\Auth;
@@ -42,10 +45,10 @@ class HomeController extends ApiBaseController
         $this->news = $news;
 
      }
-     
+
    public function index(Request $request){
       // GET user token
-      
+
       $currentUser = JWTAuth::parseToken()->authenticate();
 
       // Get user id
@@ -58,29 +61,41 @@ class HomeController extends ApiBaseController
 
       $isMember = !(is_null($member) || empty($member));
 
-     
+
         $news = News::where('status',1)->get();
         $notice = Notice::where('status',1)->get();
         $settings = Setting::where('status',1)->get();
-        
-      
-    return response()->json([
-        'sliders' => [
-        url('/Carousal.png'),
-        url('/Carousal.png'),
-        url('/Carousal.png'),
-        url('/Carousal.png'),
-        url('/Carousal.png'),
-        url('/Carousal.png')
-        ],
-            'news' => NewsResource::collection($news),
-            'notices' => null,
-            'user' => $currentUser,
-            'isMember'=> $isMember,
-            'notice' => NoticeResource::collection($notice),
-            'settings' => SettingResource::collection($settings),
-            'member_image' => $isMember ? url($member->image) : '',
+        $sliders = Slider::where('status',1)->orderBy('order','asc')->get();
 
-    ], 200);
+
+        return response()->json([
+                'sliders' => SliderResource::collection($sliders),
+                'news' => NewsResource::collection($news),
+                'notices' => null,
+                'user' => $currentUser,
+                'isMember'=> $isMember,
+                'notice' => NoticeResource::collection($notice),
+                'settings' => SettingResource::collection($settings),
+                'member_image' => $isMember ? url($member->image) : '',
+
+        ], 200);
+    }
+
+    public function userDelete()
+    {
+
+        $user = Auth::user();
+        $count = DailyCount::dailyCount();
+        $user->email_deleted = $user->email;
+        $user->email = 'deleted_' . $count->count . '_' . $user->email;
+        $user->deleted_date = date('Y-m-d H:i:s');
+        $user->is_deleted = 2; //for deleting user
+        $user->status = 2; //for deleting user
+        $user->device_token = null;
+        $user->save();
+        return response()->json([
+            'message' => 'User has been deleted!',
+            'status' => 'ok'
+        ], 200);
     }
 }
