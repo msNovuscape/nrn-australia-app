@@ -149,9 +149,9 @@
                     // console.error( error );
                 } );
         }
-        $(document).ready(function() {
-            $('.summernote_class').summernote()
-        })
+        // $(document).ready(function() {
+        //     $('.summernote_class').summernote()
+        // })
 
         function validateForm(){
             $('#body1').removeAttr('required');

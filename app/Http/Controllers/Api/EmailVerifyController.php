@@ -11,15 +11,24 @@ class EmailVerifyController extends Controller
 {
    public function send_mail(Request $request){
     $code = random_int(100000, 999999);
-    VerifyUser::create([
-        'code' => $code,
-        'email' => $request->email
-      ]);
+    $exist = VerifyUser::where('email',$request->email)->first();
+    if($exist->count() > 0){
+        $exist->update([
+            'code' => $code,
 
-      Mail::send('email.email_verification', ['code' => $code], function($message) use($request){
+        ]);
+    }else{
+        VerifyUser::create([
+            'code' => $code,
+            'email' => $request->email
+          ]);
+    }
+
+
+    Mail::send('email.email_verification', ['code' => $code], function($message) use($request){
         $message->to($request->email);
         $message->subject('Email Verification Code');
-    });  
+    });
 
     return response()->json([
         'success' => true,
@@ -27,7 +36,7 @@ class EmailVerifyController extends Controller
    }
 
    public function verify(Request $request){
-       
+
        $email = $request->email;
        $code = $request->code;
 
@@ -44,7 +53,7 @@ class EmailVerifyController extends Controller
             $success = true;
             $msg = "Your email is verified";
            }
-           
+
        }
        return response()->json([
         'success' => $success,
@@ -64,7 +73,7 @@ class EmailVerifyController extends Controller
         return response()->json([
             'is_verified' => $verified == 1 ? true :false,
            ]);
-       
+
    }
 
 }

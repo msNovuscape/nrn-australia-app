@@ -2,7 +2,7 @@
     <div class="col-md-12 my_section" >
         <div class="form-group" >
             <label>Description <span style="color: red";> * </span></label>
-            <textarea name="description" id="body1" rows="5" class="form-control" required>{!! $setting->nrn_notice->description !!}</textarea>
+            <textarea name="description" id="body4" rows="5" class="form-control" required>{!! $setting->nrn_notice->description !!}</textarea>
         </div>
     </div>
     <div class="col-md-4 my_section" >
@@ -38,13 +38,13 @@
     <div class="col-md-6 my_section" >
         <div class="form-group">
             <label>Seo Description </label>
-            <textarea id="body2" rows="5" class="form-control" name="seo_description">{!! $setting->nrn_notice->seo_description !!}</textarea>
+            <textarea id="body5" rows="5" class="form-control" name="seo_description">{!! $setting->nrn_notice->seo_description !!}</textarea>
         </div>
     </div>
     <div class="col-md-6 my_section" >
         <div class="form-group">
             <label>Meta Keyword</label>
-            <textarea id="body3" rows="5" class="form-control" name="meta_keyword" >{!! $setting->nrn_notice->meta_keyword !!}</textarea>
+            <textarea id="body6" rows="5" class="form-control" name="meta_keyword" >{!! $setting->nrn_notice->meta_keyword !!}</textarea>
         </div>
     </div>
 @else

@@ -42,12 +42,12 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label> Image <span style="color: red";> * </span></label>
-                                    <input type="file" class="form-control"   name="image" value="{{old('image')}}">
+                                    <input type="file" class="form-control"   name="image" value="{{old('image')}}" required>
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label> Excerpt <span style="color: red";> * </span></label>
+                                    <label> Short Description <span style="color: red";> * </span></label>
                                     <textarea class="form-control" name="excerpt" rows="4" value="{{old('excerpt')}}"></textarea>
                                 </div>
                             </div>

@@ -38,7 +38,7 @@
                                     <input type="text" class="form-control"  id="inputPassword3" name="title" value="{{$setting->title}}" required>
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label> Image <span style="color: red";> * </span></label>
@@ -51,8 +51,8 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label> Excerpt <span style="color: red";> * </span></label>
-                                    <input type="text" class="form-control"   name="excerpt" value="{{$setting->excerpt}}" required>
+                                    <label> Short Description <span style="color: red";> * </span></label>
+                                    <textarea class="form-control" name="excerpt" rows="4">{{$setting->excerpt}}</textarea>
                                 </div>
                             </div>
                             <!-- <div class="col-md-6">
@@ -156,15 +156,50 @@
                 .catch( error => {
                     // console.error( error );
                 } );
+                ClassicEditor
+                .create( document.querySelector( '#body4' ) )
+                .catch( error => {
+                    // console.error( error );
+                } );
+                ClassicEditor
+                .create( document.querySelector( '#body5' ) )
+                .catch( error => {
+                    // console.error( error );
+                } );
+                ClassicEditor
+                .create( document.querySelector( '#body6' ) )
+                .catch( error => {
+                    // console.error( error );
+                } );
+
         }
         $(document).ready(function() {
-            $('.summernote_class').summernote()
+            ClassicEditor
+                .create( document.querySelector( '#body3' ) )
+                .catch( error => {
+                    // console.error( error );
+                } );
+                ClassicEditor
+                .create( document.querySelector( '#body4' ) )
+                .catch( error => {
+                    // console.error( error );
+                } );
+                ClassicEditor
+                .create( document.querySelector( '#body5' ) )
+                .catch( error => {
+                    // console.error( error );
+                } );
+                ClassicEditor
+                .create( document.querySelector( '#body6' ) )
+                .catch( error => {
+                    // console.error( error );
+                } );
         })
 
         function validateForm(){
-            $('#body1').removeAttr('required');
-            $('#body2').removeAttr('required');
-            $('#body3').removeAttr('required');
+            $('#body4').removeAttr('required');
+            $('#body5').removeAttr('required');
+            $('#body6').removeAttr('required');
         }
     </script>
 

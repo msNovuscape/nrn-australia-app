@@ -155,15 +155,45 @@
                 .catch( error => {
                     // console.error( error );
                 } );
+                ClassicEditor
+                .create( document.querySelector( '#body4' ) )
+                .catch( error => {
+                    // console.error( error );
+                } );
+                ClassicEditor
+                .create( document.querySelector( '#body5' ) )
+                .catch( error => {
+                    // console.error( error );
+                } );
+                ClassicEditor
+                .create( document.querySelector( '#body6' ) )
+                .catch( error => {
+                    // console.error( error );
+                } );
+
         }
         $(document).ready(function() {
-            $('.summernote_class').summernote()
+            ClassicEditor
+                .create( document.querySelector( '#body4' ) )
+                .catch( error => {
+                    // console.error( error );
+                } );
+                ClassicEditor
+                .create( document.querySelector( '#body5' ) )
+                .catch( error => {
+                    // console.error( error );
+                } );
+                ClassicEditor
+                .create( document.querySelector( '#body6' ) )
+                .catch( error => {
+                    // console.error( error );
+                } );
         })
 
         function validateForm(){
-            $('#body1').removeAttr('required');
-            $('#body2').removeAttr('required');
-            $('#body3').removeAttr('required');
+            $('#body4').removeAttr('required');
+            $('#body5').removeAttr('required');
+            $('#body6').removeAttr('required');
         }
     </script>
 
