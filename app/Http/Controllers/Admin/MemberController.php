@@ -26,6 +26,7 @@ class MemberController extends Controller
         $membership_status_config = ucfirst($membership_status);
         if($roleName == 'State Coordinator'){
             $state_id = auth()->user()->state_id;
+            //  dd(auth()->user());
             $index = array_search($membership_status_config,config('custom.membership_status'));
             $setting = Member::orderBy('id','desc')->where([
                 'state_id' => $state_id,
@@ -36,7 +37,7 @@ class MemberController extends Controller
 
         elseif($roleName == 'General Secretary'){
             $index = array_search($membership_status_config,config('custom.membership_status'));
-            
+
             $setting = Member::orderBy('id','desc')->where([
                 'payment_status_id' => array_search('Verified',config('custom.membership_status')),
                 'document_status_id' =>  array_search('Verified',config('custom.membership_status')),
@@ -56,18 +57,18 @@ class MemberController extends Controller
         }else{
 
             $index = array_search($membership_status_config,config('custom.payment_status'));
-            
+
             $setting = Member::orderBy('id','desc')->where([
                                      'payment_status_id' =>  $index,
                                       ]);
         }
 
-        $per_page = config('custom.per_page');    
+        $per_page = config('custom.per_page');
         if($index == false){
             Session::flash('error','Membership not found.');
             return redirect($this->redirect);
         }
-    
+
         // $setting = Member::orderBy('id','desc')->where('status_id',$index);
         if(isset($_GET['search_key'])){
             $key = \request('search_key');
@@ -108,7 +109,7 @@ class MemberController extends Controller
 
 
     public function update(Request $request, $id){   //only for president
-        
+
         $setting =Member::findorfail($id);
 
         $this->validate(\request(), [
@@ -148,7 +149,7 @@ class MemberController extends Controller
         }else{
             $requestData['last_name'] = $splitName['1'];
         }
-        
+
         $previous_status = $setting->president_status_id;
         $requestData['president_status_id']  = $requestData['membership_status_id'];
         //check for verififed status and update issued and expiry date accordingly
@@ -193,7 +194,7 @@ class MemberController extends Controller
 
         //update child table member_document and member_payment
         if($setting->save()){
-          
+
             $setting->member_document->update(['identification_expiry_date' => $requestData['identification_expiry_date'],'proof_of_residency_expiry_date' => $requestData['proof_of_residency_expiry_date']]);
             // $setting->member_document->update($requestData);
             $setting->member_payment->update($requestData);
@@ -219,10 +220,10 @@ class MemberController extends Controller
 
     }
 
-    
+
 
     public function update_status(Request $request){//not used currently
-        
+
         $id = $request->id;
         $status = $request->membership_status_id;
         $setting = Member::findorfail($id);
@@ -262,7 +263,7 @@ class MemberController extends Controller
     }
 
     public function update_status_by_finance(Request $request){
-        
+
         $id = $request->id;
         $status = $request->membership_status_id;
         $roleName = auth()->user()->roles->first()->name;
@@ -295,7 +296,7 @@ class MemberController extends Controller
                 $setting->document_status_id = 1;
                 $setting->comment_for_treasurer = null;
             }
-            
+
         }
         if($roleName == 'State Coordinator'){
             $setting->document_status_id = $status;
@@ -305,7 +306,7 @@ class MemberController extends Controller
                 // $setting->gs_status_id = 1;
                 $setting->comment_for_general_secretary = null;
             }
-            
+
         }
         // if($roleName == 'General Secretary'){
 
@@ -320,8 +321,8 @@ class MemberController extends Controller
         if($roleName == 'President' || $roleName == 'General Secretary'){
                 $previous_status = $setting->president_status_id;
                 // $previous_image = $setting->image;
-                $setting->president_status_id = $status; 
-            
+                $setting->president_status_id = $status;
+
                 if($previous_status !== 2 && $status == 2){
                     $dt = Carbon::now();
                     $year = $setting->membership_type->expiration_years;
@@ -338,9 +339,9 @@ class MemberController extends Controller
                         $setting->membership_expiry_date = $dt->addYears($year);
                     }
                     $setting->membership_status_id = 2;
-                    event(new MemberVerified($setting));
                     // dispatch(function() use ($setting) {
-                      
+                        event(new MemberVerified($setting));
+
                     // });
                 }
                 if($status == 1){
@@ -382,7 +383,7 @@ class MemberController extends Controller
             unlink($path);
         }
         if($setting->delete()){
-            
+
             Session::flash('success','Member successfully deleted !');
             return redirect()->back();
         }

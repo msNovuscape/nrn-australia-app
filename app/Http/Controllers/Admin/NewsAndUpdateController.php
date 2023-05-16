@@ -266,15 +266,21 @@ class NewsAndUpdateController extends Controller
 
     public function delete($id){
         $setting=News::findorfail($id);
-        if($setting->news_and_update_points->count() > 0){
-            $setting->news_and_update_points()->delete();
+        if($setting->third_party_news){
+            $setting->third_party_news()->delete();
         }
+        if($setting->nrn_news){
+            $setting->nrn_news()->delete();
+        }
+        // if($setting->news_and_update_points->count() > 0){
+        //     $setting->news_and_update_points()->delete();
+        // }
         if($setting->delete()){
             if (is_file(public_path().'/'.$setting->image) && file_exists(public_path().'/'.$setting->image)){
                 unlink(public_path().'/'.$setting->image);
             }
         }
-        Session::flash('success','Blog is deleted !');
+        Session::flash('success','News is successfully deleted !');
         return redirect($this->redirect);
     }
 

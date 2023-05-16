@@ -52,30 +52,33 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-3 w-100">
-                                    <div class="input-group w-100">
-                                        <div class="row w-100">
-                                            <div class="col-md-1">
-                                                <span>
-                                                    <i class="far fa-user"></i>
-                                                </span>
-                                            </div>
-                                            <div class="col-md-10">
-                                                <select class="form-select w-100" aria-label="Default select example" id="state">
-                                                    <option selected="" value = "" disabled="">Select State</option>
-                                                    @foreach(config('custom.states') as $in => $val)
-                                                        <option value="{{$in}}" @if(old('states') == $in) selected @endif >{{$val}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="col-md-1">
-                                                <span class="d-flex justify-content-end">
-                                                    <i class="fas fa-sort-down"></i>
-                                                </span>
+                                @if(!auth()->user()->hasRole('State Coordinator'))
+                                    <div class="col-md-3 w-100">
+                                        <div class="input-group w-100">
+                                            <div class="row w-100">
+                                                <div class="col-md-1">
+                                                    <span>
+                                                        <i class="far fa-user"></i>
+                                                    </span>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <select class="form-select w-100" aria-label="Default select example" id="state">
+                                                        <option selected="" value = "" disabled="">Select State</option>
+                                                        @foreach(config('custom.states') as $in => $val)
+                                                            <option value="{{$in}}" @if(old('states') == $in) selected @endif >{{$val}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-1">
+                                                    <span class="d-flex justify-content-end">
+                                                        <i class="fas fa-sort-down"></i>
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                @endif
+
                                 <!-- <div class="col-md-1 d-flex">
 
                                     <div class="d-flex align-items-center">
@@ -95,7 +98,7 @@
                                         </div>
                                     </div>
                                 </div> -->
-                                <div class="col-md-1">
+                                {{-- <div class="col-md-1">
                                     <div class="export-button">
                                         <div class="dropdown-export">
                                             <button type="submit" onclick="submitFilter();" class="student-btn d-flex">
@@ -117,16 +120,16 @@
                                                             Export.csv
                                                         </a>
                                                     </li>
-                                                    {{-- <li>
+                                                    <li>
                                                         <a href="#">
                                                             Export.pdf
                                                         </a>
-                                                    </li> --}}
+                                                    </li>
                                                 </ul>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
+                                </div> --}}
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-12 stretch-card mt-4">
@@ -173,7 +176,7 @@
                                                                 </td> -->
                                                                 <td class="pl-2">{{$loop->iteration}}</td>
                                                                 <td class="d-flex">
-                                                                    <img src="{{url($member->image)}}" alt="">
+                                                                    <img src="{{url($member->image ?? '/admin/images/no-image.png')}}" alt="">
                                                                     <div class="d-flex flex-column name-table">
                                                                         <p>{{$member->first_name. ($member->middle_name ? ' '.$member->middle_name.' '.$member->last_name : ' '.$member->last_name)}}</p>
                                                                         <p>{{$member->nrna_code}}</p>

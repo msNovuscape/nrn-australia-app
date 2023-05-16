@@ -66,7 +66,7 @@
                                         <tr>
                                             <th scope="row">{{$loop->iteration}}</th>
                                             <th scope="row" class="text-center">{{strip_tags($setting->title)}}</th>
-                                            
+
                                             <td class="text-center">{{$setting->date}}</td>
                                             <td class="text-center"> {{config('custom.status')[$setting->status]}}</td>
 
@@ -78,6 +78,9 @@
                                                     </a>
                                                     <a href="{{url('admin/gallery/'.$setting->id.'/edit')}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="edit">
                                                         <i class="fas fa-pencil-alt"></i>
+                                                    </a>
+                                                    <a href="{{url('admin/gallery/delete/'.$setting->id)}}" class="btn btn-sm" data-bs-toggle="tooltip" data-bs-placement="top" title="delete" onclick="return confirm('Are you sure want to delete?')">
+                                                        <i class="fas fa-trash"></i>
                                                     </a>
                                                 </div>
                                             </td>

@@ -50,8 +50,8 @@ class HomeController extends Controller
                 $reapplyMembers = Member::where('membership_status_id', 4)->count();
             }
 
-        $news = News::where('status', 1)->get();
-        $notices = Notice::where('status', 1)->get();
+        $news = News::where('status', 1)->orderBy('created_at', 'desc')->get();
+        $notices = Notice::where('status', 1)->orderBy('created_at', 'desc')->get();
             return view(
                 'admin.index',
                 compact('pendingMembers', 'verifiedMembers', 'rejectedMembers', 'reapplyMembers', 'news', 'notices')

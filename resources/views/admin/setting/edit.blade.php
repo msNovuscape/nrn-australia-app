@@ -88,14 +88,14 @@
                                                     </a>
                                                 </span>
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            {{-- <div class="form-group col-md-6">
                                                 <label>Image Alt</label>
                                                 @if($setting->setting_image_alt()->count() > 0)
                                                     <input type="text" class="form-control" id="inputPassword4"  name="image_alt" value="{{$setting->setting_image_alt->image_alt}}">
                                                 @else
                                                     <input type="text" class="form-control" id="inputPassword4"  name="image_alt" >
                                                 @endif
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     @endif
 

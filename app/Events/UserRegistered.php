@@ -15,7 +15,7 @@ use App\Models\User;
 class UserRegistered implements ShouldQueue
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
+    public $user;
     /**
      * Create a new event instance.
      *
@@ -23,9 +23,9 @@ class UserRegistered implements ShouldQueue
      */
     public function __construct(User $user)
     {
-        
+
         $this->user = $user;
-        
+
     }
 
     /**

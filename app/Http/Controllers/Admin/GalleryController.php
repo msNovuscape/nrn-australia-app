@@ -17,7 +17,7 @@ class GalleryController extends Controller
 
     public function index()
     {
-        $settings = Gallery::where('status',1)->orderBy('id','DESC');
+        $settings = Gallery::orderBy('id','DESC');
 
         if(\request('title')){
             $key = \request('title');
@@ -46,7 +46,7 @@ class GalleryController extends Controller
                 'date' => 'required|date',
             ]);
 
-            
+
         $requestData = $request->all();
         if(isset($image_path1)){
             $requestData['image'] = $image_path1;
@@ -62,7 +62,7 @@ class GalleryController extends Controller
             $setting->date = $requestData['date'];
             $setting->title = $requestData['title'];
             $setting->save();
-            
+
             if($request->hasFile('images')){
                 foreach($request->file('images') as $imagefile) {
                 $extension = $imagefile->getClientOriginalExtension();
@@ -74,9 +74,9 @@ class GalleryController extends Controller
                 $gallery_image->gallery_id = $setting->id;
                 $gallery_image->image = $image_path1;
                 $gallery_image->save();
-                
+
                 }
-                
+
             }
             DB::commit();
         }
@@ -103,8 +103,6 @@ class GalleryController extends Controller
     }
 
     public function update(Request $request, $id){
-
-        //        dd(\request()->all());
                 $setting =Gallery::findorfail($id);
                     $this->validate(\request(), [
                         'title' => 'required',
@@ -113,16 +111,16 @@ class GalleryController extends Controller
                         // 'images' => 'required',
                         // 'slider_image' => 'required|file|mimes:jpeg,png,jpg'
                     ]);
-        
-        
+
+
                 $requestData = $request->all();
                 // $requestData['slug'] = Setting::create_slug($requestData['keyword']);
-                
+
                 $setting->fill($requestData);
                 if($setting->save()){
-                    
+
                     if($request->hasFile('images')){
-                        
+
                         foreach($setting->gallery_images as $gallery){
                             if (is_file(url($gallery->image)) && file_exists(url($gallery->image))){
                                 unlink(url($gallery->image));
@@ -136,37 +134,41 @@ class GalleryController extends Controller
                             $count = rand(100,999);
                             $out_put_path = User::save_image($imagefile,$extension,$count,$image_folder_type);
                             $image_path1 = $out_put_path[0];
-                            
-                            
+
+
                             $gallery_image = new GalleryImage();
                             $gallery_image->gallery_id = $id;
                             $gallery_image->image = $image_path1;
                             $gallery_image->save();
-                        
+
                         }
-                        
+
                     }
-                   
- 
-                        
+
+
+
                 }
-        
+
                 Session::flash('success','Gallery succesffuly edited.');
                 return redirect($this->redirect);
-        
+
             }
 
             public function delete($id){
+
                 $setting=Gallery::findorfail($id);
                 if($setting->gallery_images->count() > 0){
+
+                    foreach($setting->gallery_images as $image){
+                        if (is_file(public_path().'/'.$image->image) && file_exists(public_path().'/'.$image->image)){
+                            unlink(public_path().'/'.$image->image);
+                        }
+                    }
                     $setting->gallery_images()->delete();
                 }
-                if($setting->delete()){
-                    if (is_file(public_path().'/'.$setting->image) && file_exists(public_path().'/'.$setting->image)){
-                        unlink(public_path().'/'.$setting->image);
-                    }
-                }
-                Session::flash('success','Gallery is deleted !');
+                $setting->delete();
+
+                Session::flash('success','Gallery is successfully deleted !');
                 return redirect($this->redirect);
             }
 }

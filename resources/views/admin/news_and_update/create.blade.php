@@ -48,7 +48,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label> Short Description <span style="color: red";> * </span></label>
-                                    <textarea class="form-control" name="excerpt" rows="4" value="{{old('excerpt')}}"></textarea>
+                                    <textarea class="form-control" name="excerpt" rows="4" value="{{old('excerpt')}}" required></textarea>
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -110,7 +110,7 @@
 @endsection
 @section('script')
     <script>
-
+        getNewsType();
         function getNewsType() {
             var news_type = $('#news_type').val();
             start_loader();

@@ -87,7 +87,7 @@
                                     <input type="file" class="form-control"   name="image" value="{{old('image')}}">
                                     <br>
                                     <span >
-                                        <img src="{{url($team->image ?? '' )}}" alt="N/A" style="width: 100px;">
+                                        <img src="{{url($team->image ?? '/admin/images/no-image.png' )}}" alt="N/A" style="width: 100px;">
                                     </span>
                                 </div>
                             </div>

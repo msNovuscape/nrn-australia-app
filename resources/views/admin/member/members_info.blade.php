@@ -19,7 +19,7 @@
                     <div class="card p-4 mr-1">
                         <div class="d-flex">
                             <div class="profile-image mr-4">
-                                <img src="{{url($member->image)}}" alt="">
+                                <img src="{{url($member->image ?? '/admin/images/no-image.png')}}" alt="">
                             </div>
                             <div class="profile-name d-flex flex-column">
                                 <p>{{$member->first_name. ($member->middle_name ? ' '.$member->middle_name.' '.$member->last_name : ' '.$member->last_name)}}</p>
@@ -423,50 +423,96 @@ $.ajaxSetup({
         }
     });
 $('input[type=radio][name=membership_status_id]').change(function() {
-    var isOk = confirm('Are u sure want to change the status?');
+    // var isOk = confirm('Are u sure want to change the status?');
     var membership_status_id = this.value;
     var id = "<?php echo $member->id; ?>";
-    if (isOk) {
-        start_loader();
-        $.ajax({
-         url: "/admin/members/update_status/finance",
-         type: "POST",
-         data: {
-            membership_status_id: membership_status_id,
-            id: id
-         },
-         success: function (response) {
-                // var element = document.getElementById("member_status");
-                // if(response.membership_status_id == 1){
-                //     element.innerHTML = 'Pending';
-                // }
-                // if(response.membership_status_id == 2)
-                // {
-                //     element.innerHTML = 'Verfied';
-                // }
-                // if(response.membership_status_id == 3){
-                //     element.innerHTML = 'Rejected';
-                // }
-
-                // if(response.membership_status_id == 4){
-                //     element.innerHTML = 'Reapply';
-                // }
-                end_loader();
-                Swal.fire({
-                    title: 'Success!!',
-                    text: (response.msg),
-                    icon: 'success'
+    // var isOk = false;
+    Swal.fire({
+                    title: 'Confirmation required!!',
+                    text: 'Are you sure want to change the status?',
+                    // showDenyButton: true,
+  showCancelButton: true,
+                    // icon: 'success'
                 })
-                .then(function(){
-   location.reload();
-   })
-                // location.reload();
-         }
+                .then(function(result){
+                    if(result.isConfirmed){
+                        start_loader();
+                        $.ajax({
+                            url: "/admin/members/update_status/finance",
+                            type: "POST",
+                            data: {
+                                membership_status_id: membership_status_id,
+                                id: id
+                            },
+                            success: function (response) {
+                                    end_loader();
+                                    Swal.fire({
+                                        title: 'Success!!',
+                                        text: (response.msg),
+                                        icon: 'success'
+                                    })
+                                    .then(function(){
+                                        location.reload();
+
+                                    })
+                                    // location.reload();
+                            },
+                            error: function (response) {
+                                end_loader();
+                                    Swal.fire({
+                                        title: 'Denied!!',
+                                        text: 'Something went wrong. Please try again!',
+                                        icon: 'error'
+                                    })
+                                    .then(function(){
+                                        location.reload();
+
+                                    })
+                            }
 
 
 
-       })  ;
-     }
+                        })  ;
+                    }else{
+                        end_loader();
+                                    Swal.fire({
+                                        title: 'Cancelled!!',
+                                        text: 'Status update is cancelled!',
+                                         icon: 'error'
+                                    })
+                                    .then(function(){
+                                        location.reload();
+
+                                    })
+                    }
+                })
+
+    // if (isOk) {
+        // start_loader();
+        // $.ajax({
+        //  url: "/admin/members/update_status/finance",
+        //  type: "POST",
+        //  data: {
+        //     membership_status_id: membership_status_id,
+        //     id: id
+        //  },
+        //  success: function (response) {
+        //         end_loader();
+        //         Swal.fire({
+        //             title: 'Success!!',
+        //             text: (response.msg),
+        //             icon: 'success'
+        //         })
+        //         .then(function(){
+        //           location.reload();
+        //         })
+        //         // location.reload();
+        //   }
+
+
+
+        // })  ;
+    //  }
 });
 
 $('#treasurer-form-submit').on('click', function(e) {

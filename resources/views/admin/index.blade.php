@@ -184,7 +184,7 @@
                                 $date_time = date('M d, Y',$newtime);
                             @endphp
                             @if($featured_news->isNotEmpty())
-                            <a href="/" class="left-news">
+                            <a href="{{ url('admin/news/'.$featured_news->first()->id ) }}" class="left-news">
                                 <div class="left-news-image">
                                     <img src="{{url($featured_news->first()->image ?? '')}}" class="w-100"/>
                                 </div>
@@ -194,7 +194,7 @@
                             @endif
                             <div class="news-right">
                                 @foreach($news->where('type','!=',1)->take(2) as $single_news)
-                                <a href="/" class="news-right-primary">
+                                <a href="{{ url('admin/news/'.$single_news->id ) }}" class="news-right-primary">
                                     <div class="news-right-img">
                                         <img src="{{url($single_news->image ?? '')}}" class="w-100"/>
                                     </div>
@@ -218,7 +218,7 @@
                         </div>
                         <div class="notice-cards">
                             @foreach($notices as $notice)
-                            <a href="/" class="notice-card">
+                            <a href="{{ url('admin/notices/'.$notice->id) }}" class="notice-card">
                                 <div class="notice-img">
                                     <img src="{{url($notice->image ?? '')}}" class="w-100"/>
                                 </div>

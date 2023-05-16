@@ -20,7 +20,7 @@ class NoticeController extends Controller
 
     public function index()
     {
-        $settings = Notice::where('status',1)->orderBy('id','DESC');
+        $settings = Notice::orderBy('id','DESC');
 
         if(\request('title')){
             $key = \request('title');
@@ -268,7 +268,7 @@ class NoticeController extends Controller
                         $returnHTML = view($this->view.'third_party_notice')->render();// or method that you prefere to return data + RENDER is the key here
                     }
                 }
-        
+
                 return response()->json( array('success' => true, 'html'=>$returnHTML) );
             }
 }

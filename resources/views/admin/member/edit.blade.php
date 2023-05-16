@@ -21,7 +21,7 @@
                                     <div class="col-md-3">
                                             <div class="image-upload d-flex">
                                                 <div id="img-preview" class="profile-image">
-                                                    <img src="{{url($member->image)}}" alt="">
+                                                    <img src="{{url($member->image ?? '/admin/images/no-image.png')}}" alt="">
                                                 </div>
                                                 <input type="file" accept="image/*" id="choose-file" name="image" />
                                                 <label for="choose-file" class="profile-icon ml-2">
@@ -319,7 +319,7 @@
                                     @endif
                                 </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                         <div class="col-md-12 mt-4">
@@ -333,7 +333,7 @@
                                     <div class="document-verify">
                                         <h3>Verification By Treasurer</h3>
                                     </div>
-                                    
+
                                         <div class="d-flex">
                                             <div class="form-check">
                                             <input class="form-check-input" type="radio" name="payment_status_id_new" id="verify" value="2" {{($member->payment_status_id == 2) ? 'checked' : ''}}>
@@ -473,8 +473,8 @@
                         <button>Submit</button>
                     </div>
                 </div>
-            </div> 
-        {!! Form::close() !!}    
+            </div>
+        {!! Form::close() !!}
         </div>
     </section>
 </div>
@@ -493,7 +493,7 @@
             fileReader.addEventListener("load", function () {
             imgPreview.style.display = "block";
             imgPreview.innerHTML = '<img src="' + this.result + '" />';
-            });    
+            });
         }
     }
 
@@ -509,7 +509,7 @@
                     text: (response.msg),
                     icon: 'success'
                 })
-                .then(function(){ 
+                .then(function(){
                     $('#exampleModal2').modal('hide');
                     window.location = response.redirect_url;
             })
@@ -533,7 +533,7 @@ $('#gs-form-submit').on('click', function(e) {
                     text: (response.msg),
                     icon: 'success'
                 })
-                .then(function(){ 
+                .then(function(){
                     $('#exampleModal').modal('hide');
                     window.location = response.redirect_url;
                 })
@@ -544,7 +544,7 @@ $('#gs-form-submit').on('click', function(e) {
     });
     return false;
 });
-    
+
 </script>
 
 @endsection

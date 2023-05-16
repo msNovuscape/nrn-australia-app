@@ -15,11 +15,12 @@ class UserController extends Controller
     protected $redirect = 'admin/users';
 
     public function index(){
-        $users = User::where(['is_admin' => true,'is_super_admin' => false])->orderBy('id','DESC')->get();
+        $users = User::where(['is_admin' => true,'is_super_admin' => false])->orderBy('id','DESC');
         if(\request('full_name')){
             $key = \request('full_name');
-            $settings = $users->where('full_name','like','%'.$key.'%');
+            $users = $users->where('full_name','like','%'.$key.'%');
         }
+        $users = $users->get();
         // if(\request('status')){
         //     $key = \request('status');
         //     $settings = $users->where('status',$key);
@@ -37,7 +38,7 @@ class UserController extends Controller
         $this->validate(\request(), [
             'full_name' => 'required',
             'status' => 'required',
-            'email' => 'required',
+            'email' => 'required|email',
             'password' => 'required',
 
             'role' => 'required',
@@ -58,6 +59,7 @@ class UserController extends Controller
             );
         $role = Role::find($request->role)->name;
         $user->assignRole($role);
+        // dd($user);
         Mail::send('admin.welcome_email', $email_data, function ($message) use ($email_data) {
             $message->to($email_data['email'], $email_data['name'])
             ->subject('Welcome to NRNA Admin Panel');

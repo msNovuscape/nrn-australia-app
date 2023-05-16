@@ -91,7 +91,7 @@ Route::group(['middleware'=>['auth']],function (){
         Route::get('news/{id}/edit',[NewsAndUpdateController::class,'edit']);
         Route::get('news_type/{news_type}/{news_id}',[NewsAndUpdateController::class,'getNewsDomEdit']);
         Route::post('news/{id}',[NewsAndUpdateController::class,'update']);
-        Route::get('news/delete/{id}',[NewsAndUpdateController::class,'delete']);
+        Route::get('news/{id}/delete',[NewsAndUpdateController::class,'delete']);
 
         Route::get('membership_types',[MembershipTypeController::class,'index']);
         Route::get('membership_types/create',[MembershipTypeController::class,'create']);

@@ -116,10 +116,10 @@
                     '</div>'+
                     '</div>'+
                     '<div class="col-md-6" id="image">'+
-                    '<div class="form-group">'+
-                    '<label>Image alt</label>'+
-                    '<input type="text" class="form-control" id="inputPassword4"  name="image_alt">'+
-                    '</div>'+
+                    // '<div class="form-group">'+
+                    // '<label>Image alt</label>'+
+                    // '<input type="text" class="form-control" id="inputPassword4"  name="image_alt">'+
+                    // '</div>'+
                     '</div>';
                 $('#value_section').append(html);
             }

@@ -64,7 +64,7 @@
                                             <td class="text-center">{{$team->full_name}}</td>
                                             <td class="text-center">
                                                 <a href="{{url($team->image ?? '')}}" target="_blank">
-                                                    <img src="{{url($team->image ?? '')}}" alt="N/A" style="width: 100px;">
+                                                    <img src="{{url($team->image ?? '/admin/images/no-image.png')}}" alt="N/A" style="width: 100px;">
 
                                                 </a>
                                             </td>

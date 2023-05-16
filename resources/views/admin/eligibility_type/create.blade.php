@@ -31,7 +31,7 @@
                             <div class="col-md-12" >
                                 <div class="form-group" >
                                     <label class="w-100">Title <span style="color: red";> * </span></label>
-                                    <textarea name="title" id = "title" required >{{old('title')}}</textarea>
+                                    <textarea name="title" id = "title">{{old('title')}}</textarea>
                                 </div>
                             </div>
 
@@ -76,7 +76,7 @@
                 .catch( error => {
                     // console.error( error );
                 } );
-      
+
 
     </script>
 @endsection

@@ -15,7 +15,7 @@ use App\Models\Member;
 class MemberRejected implements ShouldQueue
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
+    public $member;
     /**
      * Create a new event instance.
      *
@@ -23,7 +23,7 @@ class MemberRejected implements ShouldQueue
      */
     public function __construct(Member $member)
     {
-        
+
         $this->member = $member;
     }
 

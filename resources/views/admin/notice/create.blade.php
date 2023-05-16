@@ -110,7 +110,7 @@
 @endsection
 @section('script')
     <script>
-
+    getNewsType();
         function getNewsType() {
             var news_type = $('#news_type').val();
             start_loader();

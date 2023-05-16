@@ -61,7 +61,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label> Email <span style="color: red";> * </span></label>
-                                    <input type="text" class="form-control"   name="email" value="{{old('email')}}">
+                                    <input type="email" class="form-control"   name="email" value="{{old('email')}}">
                                 </div>
                             </div>
 
@@ -114,7 +114,7 @@
                 } );
                 $('#state-div').hide();
                 function hideState(role){
-                    
+
                     if(role == 3){
                         $('#state-div').show();
                     }else{
@@ -122,8 +122,8 @@
                     }
                 }
 
-                
-                
+
+
     </script>
 @endsection
 

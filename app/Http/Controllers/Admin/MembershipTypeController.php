@@ -46,6 +46,7 @@ class MembershipTypeController extends Controller
                 'name' => 'required',
                 'amount' => 'required',
                 'status' => 'required',
+                'eligibility_type_ids' => 'required',
             ]);
         $requestData = $request->all();
 
@@ -77,6 +78,7 @@ class MembershipTypeController extends Controller
             'name' => 'required',
             'amount' => 'nullable',
             'status' => 'required',
+            'eligibility_type_ids' => 'required',
         ]);
 
 
