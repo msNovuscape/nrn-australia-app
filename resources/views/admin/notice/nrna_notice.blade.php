@@ -2,7 +2,7 @@
     <div class="col-md-12 my_section" >
         <div class="form-group" >
             <label>Description <span style="color: red";> * </span></label>
-            <textarea name="description" id="body4" rows="5" class="form-control" required>{!! $setting->nrn_notice->description !!}</textarea>
+            <textarea name="description" id="body4" rows="5" class="form-control">{!! $setting->nrn_notice->description !!}</textarea>
         </div>
     </div>
     <div class="col-md-4 my_section" >
@@ -51,7 +51,7 @@
     <div class="col-md-12 my_section" >
         <div class="form-group" >
             <label>Description <span style="color: red";> * </span></label>
-            <textarea name="description" id="body1" rows="5" class="form-control" required>{{old('description')}}</textarea>
+            <textarea name="description" id="body1" rows="5" class="form-control">{{old('description')}}</textarea>
         </div>
     </div>
     <div class="col-md-4 my_section" >

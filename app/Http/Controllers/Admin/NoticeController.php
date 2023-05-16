@@ -231,9 +231,13 @@ class NoticeController extends Controller
 
             public function delete($id){
                 $setting=Notice::findorfail($id);
-                if($setting->gallery_images->count() > 0){
-                    $setting->gallery_images()->delete();
+                if($setting->third_party_notice){
+                    $setting->third_party_notice()->delete();
                 }
+                if($setting->nrn_notice){
+                    $setting->nrn_notice()->delete();
+                }
+
                 if($setting->delete()){
                     if (is_file(public_path().'/'.$setting->image) && file_exists(public_path().'/'.$setting->image)){
                         unlink(public_path().'/'.$setting->image);

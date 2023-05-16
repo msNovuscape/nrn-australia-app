@@ -236,12 +236,19 @@ class ProjectController extends Controller
                 // if($setting->gallery_images->count() > 0){
                 //     $setting->gallery_images()->delete();
                 // }
+                if($setting->third_party_project){
+                    $setting->third_party_project()->delete();
+                }
+                if($setting->nrn_project){
+                    $setting->nrn_project()->delete();
+                }
+
                 if($setting->delete()){
                     if (is_file(public_path().'/'.$setting->image) && file_exists(public_path().'/'.$setting->image)){
                         unlink(public_path().'/'.$setting->image);
                     }
                 }
-                Session::flash('success','Project is deleted !');
+                Session::flash('success','Project is successfully deleted !');
                 return redirect($this->redirect);
             }
 
@@ -271,7 +278,7 @@ class ProjectController extends Controller
                         $returnHTML = view($this->view.'third_party_project')->render();// or method that you prefere to return data + RENDER is the key here
                     }
                 }
-        
+
                 return response()->json( array('success' => true, 'html'=>$returnHTML) );
             }
 }
