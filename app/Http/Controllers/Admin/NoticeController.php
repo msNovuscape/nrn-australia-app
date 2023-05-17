@@ -151,6 +151,7 @@ class NoticeController extends Controller
 
 
         $requestData = $request->all();
+        // dd($requestData);
         if(isset($image_path1)){
             $requestData['image'] = $image_path1;
         }
@@ -167,7 +168,7 @@ class NoticeController extends Controller
                 $setting->status = $requestData['status'];
                 $setting->publish_date = $requestData['publish_date'];
                 $setting->title = $requestData['title'];
-                // $setting->type = $requestData['type'];
+                $setting->type = $requestData['type'];
                 $setting->save();
                 if($setting->notice_type == array_search('NRNA',config('custom.notice_types'))){
                     $nrn_notice = $setting->nrn_notice;
@@ -194,11 +195,14 @@ class NoticeController extends Controller
                 }
                 $setting->notice_type = $requestData['notice_type'];
                 $setting->excerpt = $requestData['excerpt'];
-                $setting->image = $requestData['image'];
+                if(isset($requestData['image'])){
+                    $setting->image = $requestData['image'];
+
+                }
                 $setting->status = $requestData['status'];
                 $setting->publish_date = $requestData['publish_date'];
                 $setting->title = $requestData['title'];
-                $setting->type = $requestData['type'];
+                // $setting->type = $requestData['type'];
                 $setting->save();
                 if($setting->notice_type == array_search('NRNA',config('custom.notice_types'))){
                     $nrn_notice = new NrnaNotice();

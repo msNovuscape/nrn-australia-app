@@ -12,9 +12,10 @@ class EmailVerifyController extends Controller
    public function send_mail(Request $request){
     $code = random_int(100000, 999999);
     $exist = VerifyUser::where('email',$request->email)->first();
-    if($exist->count() > 0){
+    if($exist && $exist->count() > 0){
         $exist->update([
             'code' => $code,
+            'is_verify' => false
 
         ]);
     }else{
