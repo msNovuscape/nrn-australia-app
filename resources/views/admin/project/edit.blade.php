@@ -38,7 +38,7 @@
                                     <input type="text" class="form-control"  id="inputPassword3" name="title" value="{{$setting->title}}" required>
                                 </div>
                             </div>
-                            
+
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label> Image <span style="color: red";> * </span></label>
@@ -51,7 +51,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label> Excerpt <span style="color: red";> * </span></label>
+                                    <label> Short Description <span style="color: red";> * </span></label>
                                     <input type="text" class="form-control"   name="excerpt" value="{{$setting->excerpt}}" required>
                                 </div>
                             </div>
@@ -120,7 +120,7 @@
 
         function getProjectType() {
             var project_type = $('#project_type').val();
-           
+
             var project_id = '<?php echo $setting->id ; ?>';
             start_loader();
             $.ajax({

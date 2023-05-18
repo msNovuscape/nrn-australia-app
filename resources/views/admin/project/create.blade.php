@@ -47,7 +47,7 @@
                             </div>
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label> Excerpt <span style="color: red";> * </span></label>
+                                    <label> Short Description <span style="color: red";> * </span></label>
                                     <input type="text" class="form-control"   name="excerpt" value="{{old('excerpt')}}">
                                 </div>
                             </div>
@@ -101,7 +101,7 @@
                             </div>
                         </div>
                         {!! Form::close() !!}
-                        
+
                     </div>
                 </div>
             </div>

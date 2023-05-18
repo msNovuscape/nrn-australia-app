@@ -221,6 +221,7 @@ class NewsAndUpdateController extends Controller
                     $third_party_news->save();
                 }
             }else{
+
                 if($setting->nrn_news){
                     $setting->nrn_news->delete();
                 }
@@ -229,7 +230,10 @@ class NewsAndUpdateController extends Controller
                 }
                 $setting->news_type = $requestData['news_type'];
                 $setting->excerpt = $requestData['excerpt'];
-                $setting->image = $requestData['image'];
+                if(isset($requestData['image'])){
+                    $setting->image = $requestData['image'];
+                }
+
                 $setting->status = $requestData['status'];
                 $setting->publish_date = $requestData['publish_date'];
                 $setting->title = $requestData['title'];
