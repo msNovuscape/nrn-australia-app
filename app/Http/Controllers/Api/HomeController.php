@@ -62,8 +62,8 @@ class HomeController extends ApiBaseController
       $isMember = !(is_null($member) || empty($member));
 
 
-        $news = News::where('status',1)->get();
-        $notice = Notice::where('status',1)->get();
+        $news = News::where('status',1)->orderBy('id','desc')->get();
+        $notice = Notice::where('status',1)->orderBy('id','desc')->get();
         $settings = Setting::where('status',1)->get();
         // $sliders = Slider::where('status',1)->orderBy('order','asc')->get();
 
